@@ -1,0 +1,68 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import MediaPlaceholder from '../../components/MediaPlaceholder.astro';
+import { indexMedia } from '../../data/index-media';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+export async function getStaticPaths() {
+  const collections = await getCollection('collections');
+  return collections.map((collection) => ({
+    params: { slug: collection.data.slug },
+    props: { collection },
+  }));
+}
+
+interface Props {
+  collection: CollectionEntry<'collections'>;
+}
+
+const { collection } = Astro.props as Props;
+const { Content } = await render(collection);
+const products = await getCollection('products');
+const productsBySlug = new Map(products.map((product) => [product.data.slug, product]));
+const collectionProducts = collection.data.productSlugs
+  .map((slug) => productsBySlug.get(slug))
+  .filter((product): product is CollectionEntry<'products'> => Boolean(product));
+const collectionMedia = collection.data.slug === 'pla' ? indexMedia.categoriasFilamentosPla : null;
+---
+
+<SiteLayout
+  title={`${collection.data.title} – Print3x`}
+  description={collection.data.seoDescription ?? undefined}
+  sourceUrl={collection.data.sourceUrl}
+  sourceRetrieved={collection.data.sourceRetrieved}
+>
+  <article class="collection-page page-width">
+    <header class="collection-page__header">
+      <p class="collection-page__eyebrow">Colección histórica</p>
+      <h1>{collection.data.title}</h1>
+    </header>
+
+    <div class="collection-page__hero">
+      <MediaPlaceholder
+        media={collectionMedia}
+        width={collectionMedia?.width ?? 1500}
+        height={collectionMedia?.height ?? 750}
+        loading="eager"
+      />
+    </div>
+
+    <div class="collection-page__body"><Content /></div>
+
+    <section aria-labelledby="collection-products-title">
+      <h2 id="collection-products-title">Productos</h2>
+      <div class="collection-page__grid">
+        {collectionProducts.map((product) => (
+          <a class="collection-product-card" href={`/products/${product.data.slug}`}>
+            <MediaPlaceholder media={null} width={4} height={5} />
+            <span class="collection-product-card__title">{product.data.title}</span>
+            <span class="collection-product-card__status">
+              {product.data.availability === 'unavailable' ? 'No disponible' : 'Registro histórico'}
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </article>
+</SiteLayout>

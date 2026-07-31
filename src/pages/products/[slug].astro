@@ -1,0 +1,90 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import MediaPlaceholder from '../../components/MediaPlaceholder.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+
+  return products.map((product) => ({
+    params: { slug: product.data.slug },
+    props: { product },
+  }));
+}
+
+interface Props {
+  product: CollectionEntry<'products'>;
+}
+
+const { product } = Astro.props as Props;
+const { Content } = await render(product);
+const { data } = product;
+const formatPrice = (value: number | null) =>
+  value === null
+    ? null
+    : new Intl.NumberFormat('es-CL', {
+        style: 'currency',
+        currency: 'CLP',
+        maximumFractionDigits: 0,
+      }).format(value);
+const historicalPrice = formatPrice(data.historicalPriceCLP);
+const historicalPriceMax = formatPrice(data.historicalPriceMaxCLP);
+
+const dimensions = (value: string) => {
+  const match = value.match(/(\d+)\s+x\s+(\d+)/);
+  return match
+    ? { width: Number(match[1]), height: Number(match[2]) }
+    : { width: 1000, height: 1000 };
+};
+---
+
+<SiteLayout
+  title={`${data.title} – Print3x`}
+  description={data.seoDescription ?? undefined}
+  sourceUrl={data.sourceUrl}
+  sourceRetrieved={data.sourceRetrieved}
+>
+  <article class="product-page page-width">
+    <header class="product-page__header">
+      <p class="product-page__eyebrow">{data.productType}</p>
+      <h1>{data.title}</h1>
+      <p class="product-page__status">Escaparate histórico · Sin compra en línea</p>
+    </header>
+
+    <div class="product-page__layout">
+      <section class="product-page__gallery" aria-label={`Galería de ${data.title}`}>
+        {data.media.map((item, index) => {
+          const size = dimensions(item.expectedDimensions);
+          return (
+            <figure class="product-page__media">
+              <MediaPlaceholder media={null} width={size.width} height={size.height} />
+              <figcaption>
+                Media pendiente · {index + 1} de {data.media.length}
+              </figcaption>
+            </figure>
+          );
+        })}
+      </section>
+
+      <div class="product-page__content">
+        <div class="product-page__historical-data" aria-label="Datos históricos">
+          <p><strong>Estado:</strong> {data.availability === 'unavailable' ? 'No disponible' : 'Registro histórico'}</p>
+          {historicalPrice && (
+            <p>
+              <strong>Precio histórico observado:</strong>{' '}
+              {historicalPrice}{historicalPriceMax ? ` – ${historicalPriceMax}` : ''}
+            </p>
+          )}
+          {data.historicalCompareAtPriceCLP !== null && (
+            <p><strong>Precio comparativo histórico:</strong> {formatPrice(data.historicalCompareAtPriceCLP)}</p>
+          )}
+        </div>
+
+        <div class="product-page__body">
+          <Content />
+        </div>
+      </div>
+    </div>
+  </article>
+</SiteLayout>

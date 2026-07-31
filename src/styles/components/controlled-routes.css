@@ -1,0 +1,61 @@
+.controlled-route {
+  padding-top: 1rem;
+  padding-bottom: 7rem;
+}
+
+.controlled-route__panel {
+  max-width: 82rem;
+  margin: 0 auto;
+  padding: 2.4rem;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.12);
+  border-radius: var(--text-boxes-radius);
+  background: rgb(var(--color-background-2));
+}
+
+.controlled-route__panel h1 {
+  margin-top: 0;
+}
+
+.controlled-route__form {
+  max-width: 72rem;
+  margin: 3rem auto 0;
+}
+
+.controlled-route__status {
+  min-height: 2.2rem;
+  margin: 1rem 0;
+}
+
+.controlled-route__results {
+  margin: 2rem 0 0;
+  padding-left: 2rem;
+}
+
+.controlled-route__notice {
+  margin: 2rem 0 0;
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+.policy-source {
+  margin: 0 0 3rem;
+  color: rgba(var(--color-foreground), 0.65);
+  font-size: 1.3rem;
+}
+
+.policy-source a {
+  overflow-wrap: anywhere;
+}
+
+.policy-content {
+  white-space: pre-line;
+}
+
+.policy-content p {
+  margin: 0 0 2rem;
+}
+
+@media screen and (max-width: 749px) {
+  .controlled-route__panel {
+    padding: 1.8rem;
+  }
+}

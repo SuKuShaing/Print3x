@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import MediaPlaceholder from '../../components/MediaPlaceholder.astro';
+import { indexMedia } from '../../data/index-media';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+const collections = await getCollection('collections');
+const collectionOrder = ['pla', 'impresoras-3d'];
+const collectionsBySlug = new Map(collections.map((collection) => [collection.data.slug, collection]));
+const orderedCollections = collectionOrder.flatMap((slug) => {
+  const collection = collectionsBySlug.get(slug);
+  return collection ? [collection] : [];
+});
+---
+
+<SiteLayout title="Colecciones – Print3x">
+  <article class="collection-page page-width">
+    <header class="collection-page__header">
+      <p class="collection-page__eyebrow">Print3x</p>
+      <h1>Colecciones</h1>
+    </header>
+    <div class="collection-page__grid collection-page__grid--collections">
+      {orderedCollections.map((collection) => (
+        <a class="collection-product-card" href={`/collections/${collection.data.slug}`}>
+          <MediaPlaceholder
+            media={collection.data.slug === 'pla' ? indexMedia.categoriasFilamentosPla : null}
+            width={collection.data.slug === 'pla' ? indexMedia.categoriasFilamentosPla.width : 1500}
+            height={collection.data.slug === 'pla' ? indexMedia.categoriasFilamentosPla.height : 750}
+            class="collection-index__media"
+          />
+          <span class="collection-product-card__title">{collection.data.title}</span>
+          <span class="collection-product-card__status">Ver colección histórica</span>
+        </a>
+      ))}
+    </div>
+  </article>
+</SiteLayout>

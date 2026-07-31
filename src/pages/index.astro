@@ -1,0 +1,203 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import MediaPlaceholder from '../components/MediaPlaceholder.astro';
+import { indexMedia } from '../data/index-media';
+
+const slides = [
+  {
+    media: indexMedia.hero1,
+    heading: 'Filamentos para Impresión 3D',
+    subheading: '',
+    href: '/collections/pla',
+    buttonLabel: 'Ver colección',
+    alignment: 'middle-left',
+    textAlignment: 'left',
+    mobileTextAlignment: 'left',
+    colorScheme: 'background-2',
+    width: indexMedia.hero1.width,
+    height: indexMedia.hero1.height,
+  },
+  {
+    media: indexMedia.hero2,
+    heading: 'Aprender Impresión 3D',
+    subheading: '',
+    href: '/blogs/curso_impresion_3d',
+    buttonLabel: 'Ir 😎',
+    alignment: 'middle-center',
+    textAlignment: 'center',
+    mobileTextAlignment: 'center',
+    colorScheme: 'background-1',
+    width: indexMedia.hero2.width,
+    height: indexMedia.hero2.height,
+  },
+  {
+    media: indexMedia.hero3,
+    heading: 'Filamentos Impresión 3D',
+    subheading: '',
+    href: '/collections/pla',
+    buttonLabel: 'Ver colección',
+    alignment: 'middle-right',
+    textAlignment: 'left',
+    mobileTextAlignment: 'left',
+    colorScheme: 'background-2',
+    width: indexMedia.hero3.width,
+    height: indexMedia.hero3.height,
+  },
+  {
+    media: indexMedia.hero4,
+    heading: 'Impresora 3D',
+    subheading: 'Impresora 3D profesional Axis One',
+    href: '/products/axis-one',
+    buttonLabel: 'Ver impresora',
+    alignment: 'middle-center',
+    textAlignment: 'center',
+    mobileTextAlignment: 'left',
+    colorScheme: 'background-2',
+    width: indexMedia.hero4.width,
+    height: indexMedia.hero4.height,
+  },
+] as const;
+
+const commitments = [
+  'Filamentos Estandarizados',
+  'Color Homogéneo en los filamentos',
+  'Te ayudamos con tips para mejorar',
+  'Cualquier problema nos avisas y respondemos',
+] as const;
+---
+
+<SiteLayout
+  title="Filamentos PLA Print3x e Impresoras 3D profesionales ✔️"
+  description="Filamentos PLA Print3x e Impresoras 3D profesionales."
+>
+  <article class="homepage">
+    <h1 class="visually-hidden">Filamentos PLA Print3x e Impresoras 3D profesionales</h1>
+    <section
+      class="homepage__slideshow slideshow banner banner--medium color-background-2"
+      data-p3x-slider
+      data-p3x-slider-mode="slideshow"
+      data-p3x-slider-loop="true"
+      data-p3x-slider-keyboard="true"
+      data-p3x-slider-autoplay="5000"
+      aria-label="Slideshow about our brand"
+      tabindex="0"
+    >
+      <div id="homepage-slides" class="homepage__slides" aria-live="polite" aria-atomic="true">
+        {slides.map((slide, index) => (
+          <div
+            class:list={[
+              'homepage__slide',
+              'slideshow__slide',
+              'grid__item',
+              'grid--1-col',
+              'slider__slide',
+              `color-${slide.colorScheme}`,
+            ]}
+            data-p3x-slide
+            data-p3x-slide-active={index === 0 ? true : undefined}
+            aria-hidden={index === 0 ? 'false' : 'true'}
+            aria-label={`${index + 1} / ${slides.length}`}
+            role="group"
+          >
+            <div class="homepage__slide-media banner__media media">
+              <MediaPlaceholder
+                media={slide.media}
+                width={slide.width}
+                height={slide.height}
+                class="homepage__slide-placeholder"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchpriority={index === 0 ? 'high' : undefined}
+              />
+            </div>
+            <div class:list={['homepage__slide-content', 'banner__content', `banner__content--${slide.alignment}`, 'page-width']}>
+              <div class:list={['homepage__slide-box', 'slideshow__text', 'banner__box', 'content-container', 'gradient', `slideshow__text--${slide.textAlignment}`, `slideshow__text-mobile--${slide.mobileTextAlignment}`]}>
+                <h2 class="banner__heading inline-richtext h2">{slide.heading}</h2>
+                {slide.subheading && (
+                  <div class="banner__text rte">
+                    <p>{slide.subheading}</p>
+                  </div>
+                )}
+                <div class="banner__buttons">
+                  <a class="button button--secondary" href={slide.href}>{slide.buttonLabel}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="homepage__slider-controls slideshow__controls slider-buttons" aria-label="Controles del slideshow">
+        <button type="button" class="slider-button slider-button--prev" data-p3x-slider-prev aria-label="Slide anterior">
+          <span aria-hidden="true">‹</span>
+        </button>
+        <div class="slider-counter slider-counter--dots" data-p3x-slider-status>
+          <span class="visually-hidden">Slide actual</span>
+          <span>1 / {slides.length}</span>
+        </div>
+        <div class="homepage__slider-dots" aria-label="Seleccionar slide">
+          {slides.map((_, index) => (
+            <button
+              type="button"
+              class="slider-counter__link slider-counter__link--dots"
+              data-p3x-slider-to={index}
+              aria-label={`Ir al slide ${index + 1} de ${slides.length}`}
+              aria-controls="homepage-slides"
+            >
+              <span class="dot" aria-hidden="true"></span>
+            </button>
+          ))}
+        </div>
+        <button type="button" class="slider-button slider-button--next" data-p3x-slider-next aria-label="Slide siguiente">
+          <span aria-hidden="true">›</span>
+        </button>
+        <button
+          type="button"
+          class="slideshow__autoplay slider-button"
+          data-p3x-slider-toggle
+          data-p3x-slider-pause-label="Pausar slideshow"
+          data-p3x-slider-resume-label="Reanudar slideshow"
+          aria-label="Pausar slideshow"
+          aria-pressed="false"
+        >
+          <span data-p3x-slider-toggle-label>Pausar slideshow</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="homepage__section homepage__collections page-width" aria-labelledby="homepage-collections-title">
+      <div class="homepage__section-heading">
+        <h2 id="homepage-collections-title">Categorías de nuestros productos</h2>
+      </div>
+      <div class="homepage__collection-grid">
+        <a class="homepage__collection-card" href="/collections/pla">
+          <MediaPlaceholder
+            media={indexMedia.categoriasFilamentosPla}
+            width={indexMedia.categoriasFilamentosPla.width}
+            height={indexMedia.categoriasFilamentosPla.height}
+            class="homepage__collection-media"
+            loading="lazy"
+          />
+          <h3>Filamentos PLA ✔️</h3>
+        </a>
+        <a class="homepage__collection-card" href="/collections/impresoras-3d">
+          <MediaPlaceholder media={null} width={1} height={1} class="homepage__collection-media" />
+          <h3>Impresoras 3D y superficies</h3>
+        </a>
+      </div>
+    </section>
+
+    <section class="homepage__commitments color-inverse" aria-labelledby="homepage-commitments-title">
+      <div class="page-width">
+        <h2 id="homepage-commitments-title">Nuestros Compromisos</h2>
+        <ul class="homepage__commitment-grid" role="list">
+          {commitments.map((commitment) => (
+            <li class="homepage__commitment">
+              <MediaPlaceholder media={null} width={1} height={1} class="homepage__commitment-media" />
+              <h3>{commitment}</h3>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </article>
+</SiteLayout>

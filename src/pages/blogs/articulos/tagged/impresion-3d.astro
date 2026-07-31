@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+
+const articles = (await getCollection('articles'))
+  .filter((article) => article.data.blog === 'articulos')
+  .filter((article) => article.data.tags.includes('impresion-3d'));
+---
+
+<SiteLayout title={'Artículos – tagged "Impresión 3D" – Print3x'} noIndex>
+  <article class="editorial-page page-width">
+    <header class="editorial-page__header">
+      <p class="editorial-page__eyebrow">Artículos</p>
+      <h1>Artículos</h1>
+      <p>Etiqueta: Impresión 3D</p>
+    </header>
+    <div class="editorial-index__grid">
+      {articles.map((article) => (
+        <a class="editorial-card" href={`/blogs/${article.data.blog}/${article.data.slug}`}>
+          <div class="editorial-card__content">
+            <h2>{article.data.title}</h2>
+            {article.data.seo?.description && <p>{article.data.seo.description}</p>}
+            <span class="editorial-card__link">Leer artículo</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </article>
+</SiteLayout>

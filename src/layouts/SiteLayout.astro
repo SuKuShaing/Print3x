@@ -1,0 +1,76 @@
+---
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/components/accordion.css';
+import '../styles/components/banner.css';
+import '../styles/components/card.css';
+import '../styles/components/deferred-media.css';
+import '../styles/components/image-with-text.css';
+import '../styles/components/modal.css';
+import '../styles/components/slider.css';
+import '../styles/components/slideshow.css';
+import '../styles/components/media-placeholder.css';
+import '../styles/components/product.css';
+import '../styles/components/collection.css';
+import '../styles/components/header.css';
+import '../styles/components/footer.css';
+import '../styles/components/controlled-routes.css';
+import '../styles/components/homepage.css';
+import '../styles/components/editorial.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  noIndex?: boolean;
+  sourceUrl?: string;
+  sourceRetrieved?: string;
+  socialImage?: string;
+}
+
+const { title, description, noIndex = false, sourceUrl, sourceRetrieved, socialImage } = Astro.props;
+const canonicalPath = Astro.url.pathname === '/index.html'
+  ? '/'
+  : Astro.url.pathname.replace(/\.html$/, '');
+const siteBase = Astro.site ?? Astro.url;
+const canonical = new URL(canonicalPath, siteBase).toString();
+const productionBuild = import.meta.env.PUBLIC_SITE_ENV === 'production';
+const effectiveNoIndex = noIndex || !productionBuild;
+const resolvedSocialImage = new URL(socialImage ?? '/images/social-placeholder.svg', siteBase).toString();
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#ce1870" />
+    <meta name="robots" content={effectiveNoIndex ? 'noindex, nofollow' : 'index, follow'} />
+    {description && <meta name="description" content={description} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CL" />
+    <meta property="og:title" content={title} />
+    <meta property="og:url" content={canonical} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:image" content={resolvedSocialImage} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={resolvedSocialImage} />
+    {sourceUrl && <meta name="source" content={sourceUrl} />}
+    {sourceRetrieved && <meta name="source-retrieved" content={sourceRetrieved} />}
+  </head>
+  <body>
+    <a class="skip-to-content-link visually-hidden" href="#MainContent">Ir al contenido principal</a>
+    <Header />
+    <main id="MainContent" role="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <script src="../scripts/print3x-ui.ts"></script>
+  </body>
+</html>

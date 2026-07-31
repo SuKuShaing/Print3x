@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((article) => ({
+    params: { blog: article.data.blog, slug: article.data.slug },
+    props: { article },
+  }));
+}
+
+interface Props {
+  article: CollectionEntry<'articles'>;
+}
+
+const { article } = Astro.props as Props;
+const { Content } = await render(article);
+const { data } = article;
+---
+
+<SiteLayout
+  title={data.seo?.title ?? `${data.title} – Print3x`}
+  description={data.seo?.description}
+  noIndex={data.seo?.noIndex ?? false}
+  sourceUrl={data.sourceUrl}
+  sourceRetrieved={data.sourceRetrieved}
+>
+  <article class="editorial-page editorial-article page-width">
+    <header class="editorial-page__header">
+      <p class="editorial-page__eyebrow"><a href={`/blogs/${data.blog}`}>{data.blog}</a></p>
+      <h1>{data.title}</h1>
+    </header>
+    <div class="editorial-page__body rte">
+      <Content />
+    </div>
+    <p class="editorial-article__back"><a href={`/blogs/${data.blog}`}>Regresar al blog</a></p>
+  </article>
+</SiteLayout>

@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const query = Astro.url.searchParams.get('q') ?? '';
+const [products, collections, pages, blogs, articles] = await Promise.all([
+  getCollection('products'),
+  getCollection('collections'),
+  getCollection('pages'),
+  getCollection('blogs'),
+  getCollection('articles'),
+]);
+const searchIndex = JSON.stringify([
+  ...products.map(({ data }) => ({
+    title: data.title,
+    url: `/products/${data.slug}`,
+    text: [data.productType, ...data.tags].join(' '),
+  })),
+  ...collections.map(({ data }) => ({
+    title: data.title,
+    url: `/collections/${data.slug}`,
+    text: data.seoDescription ?? '',
+  })),
+  ...pages.map(({ data }) => ({
+    title: data.title,
+    url: `/pages/${data.slug}`,
+    text: data.seo?.description ?? '',
+  })),
+  ...blogs.map(({ data }) => ({
+    title: data.title,
+    url: `/blogs/${data.slug}`,
+    text: data.seo?.description ?? '',
+  })),
+  ...articles.map(({ data }) => ({
+    title: data.title,
+    url: `/blogs/${data.blog}/${data.slug}`,
+    text: data.seo?.description ?? data.tags.join(' '),
+  })),
+]).replace(/</g, '\\u003c');
+---
+
+<SiteLayout title="Buscar – Print3x" noIndex>
+  <section class="controlled-route page-width page-margin" aria-labelledby="search-title">
+    <div class="controlled-route__panel">
+      <h1 id="search-title">Buscar</h1>
+      <p>Busca en el contenido local disponible de Print3x.</p>
+
+      <div data-p3x-search data-p3x-search-index="#print3x-search-index" class="controlled-route__form">
+        <form data-p3x-search-form data-p3x-local-form action="/search" method="get" role="search">
+          <label class="form__label" for="SearchInput">Buscar en Print3x</label>
+          <div class="field">
+            <input
+              id="SearchInput"
+              class="field__input"
+              type="search"
+              name="q"
+              value={query}
+              placeholder="Buscar"
+              autocomplete="off"
+              data-p3x-search-input
+              aria-controls="SearchResults"
+              aria-expanded="false"
+            />
+            <button class="field__button" type="submit" aria-label="Buscar">Buscar</button>
+          </div>
+          <button class="link" type="reset" data-p3x-search-reset>Limpiar búsqueda</button>
+        </form>
+
+        <p class="controlled-route__notice">El índice local contiene el contenido aprobado disponible en este escaparate.</p>
+        <p class="controlled-route__status" data-p3x-search-status aria-live="polite"></p>
+        <p class="controlled-route__notice" data-p3x-search-empty hidden>
+          No hay resultados locales disponibles para esta búsqueda.
+        </p>
+        <ul id="SearchResults" class="controlled-route__results" data-p3x-search-results></ul>
+
+        <script id="print3x-search-index" type="application/json" is:inline set:html={searchIndex}></script>
+      </div>
+    </div>
+  </section>
+</SiteLayout>

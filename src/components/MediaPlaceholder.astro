@@ -1,0 +1,54 @@
+---
+import type { MediaReference } from '../data/types';
+
+interface Props {
+  media: MediaReference;
+  /** Expected block dimensions are required for null and pending media. */
+  width: number;
+  height: number;
+  class?: string;
+  loading?: 'eager' | 'lazy';
+  decoding?: 'async' | 'auto' | 'sync';
+  fetchpriority?: 'high' | 'low' | 'auto';
+}
+
+const {
+  media,
+  width,
+  height,
+  class: className,
+  loading = 'lazy',
+  decoding = 'async',
+  fetchpriority,
+} = Astro.props;
+
+const mediaWidth = media?.width ?? width;
+const mediaHeight = media?.height ?? height;
+const mediaStatus = media?.status ?? 'pending';
+const mediaClass = mediaStatus === 'available'
+  ? 'media-placeholder--available'
+  : 'media-placeholder--pending';
+const ratioStyle = `--media-placeholder-ratio: ${mediaWidth} / ${mediaHeight};`;
+---
+
+<div
+  class:list={['media-placeholder', mediaClass, className]}
+  data-media-status={mediaStatus}
+  data-media-width={mediaWidth}
+  data-media-height={mediaHeight}
+  style={ratioStyle}
+  aria-hidden={mediaStatus === 'pending' ? 'true' : undefined}
+>
+  {media?.status === 'available' && (
+    <img
+      class="media-placeholder__image"
+      src={media.src}
+      alt={media.alt ?? ''}
+      width={mediaWidth}
+      height={mediaHeight}
+      loading={loading}
+      decoding={decoding}
+      fetchpriority={fetchpriority}
+    />
+  )}
+</div>

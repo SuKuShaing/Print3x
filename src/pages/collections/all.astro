@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import MediaPlaceholder from '../../components/MediaPlaceholder.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+const products = await getCollection('products');
+const sourceOrder = [
+  'filamento_pla_amarillo',
+  'filamento_pla_azul',
+  'filamento_pla_blanco',
+  'filamento_pla_celeste',
+  'filamento_pla_oro',
+  'filamento_pla_gris',
+  'filamento_pla_negro',
+  'pla_rojo',
+  'pla_pantera_rosa',
+  'filamento_pla_transparente',
+  'filamento_pla_verde',
+  'axis-one',
+  'padi-superficie-de-impresion',
+];
+const productsBySlug = new Map(products.map((product) => [product.data.slug, product]));
+const orderedProducts = sourceOrder.flatMap((slug) => {
+  const product = productsBySlug.get(slug);
+  return product ? [product] : [];
+});
+---
+
+<SiteLayout title="Productos – Print3x">
+  <article class="collection-page page-width">
+    <header class="collection-page__header">
+      <p class="collection-page__eyebrow">Escaparate histórico</p>
+      <h1>Productos</h1>
+    </header>
+    <div class="collection-page__grid">
+      {orderedProducts.map((product) => (
+        <a class="collection-product-card" href={`/products/${product.data.slug}`}>
+          <MediaPlaceholder media={null} width={4} height={5} />
+          <span class="collection-product-card__title">{product.data.title}</span>
+          <span class="collection-product-card__status">
+            {product.data.availability === 'unavailable' ? 'No disponible' : 'Registro histórico'}
+          </span>
+        </a>
+      ))}
+    </div>
+  </article>
+</SiteLayout>

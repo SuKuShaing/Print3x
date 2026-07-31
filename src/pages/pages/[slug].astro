@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map((page) => ({
+    params: { slug: page.data.slug },
+    props: { page },
+  }));
+}
+
+interface Props {
+  page: CollectionEntry<'pages'>;
+}
+
+const { page } = Astro.props as Props;
+const { Content } = await render(page);
+const { data } = page;
+---
+
+<SiteLayout
+  title={data.seo?.title ?? `${data.title} – Print3x`}
+  description={data.seo?.description}
+  noIndex={data.seo?.noIndex ?? false}
+  sourceUrl={data.sourceUrl}
+  sourceRetrieved={data.sourceRetrieved}
+>
+  <article class="editorial-page page-width">
+    <header class="editorial-page__header">
+      <p class="editorial-page__eyebrow">Print3x</p>
+      <h1>{data.title}</h1>
+    </header>
+    <div class="editorial-page__body rte">
+      <Content />
+    </div>
+  </article>
+</SiteLayout>

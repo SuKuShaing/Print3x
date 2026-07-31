@@ -1,0 +1,40 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { policies, policySlugs, type PolicySlug } from '../../data/policies';
+
+export function getStaticPaths() {
+  return policySlugs.map((slug) => ({
+    params: { slug },
+    props: { policy: policies[slug] },
+  }));
+}
+
+const { policy } = Astro.props as { policy: (typeof policies)[PolicySlug] };
+const paragraphs = policy.contentStatus === 'available' ? policy.content.trim().split(/\n\n+/) : [];
+---
+
+<SiteLayout
+  title={`${policy.title} – Print3x`}
+  description="Contenido legal histórico pendiente de revisión para el escaparate estático."
+  noIndex
+  sourceUrl={policy.sourceUrl}
+  sourceRetrieved={policy.sourceRetrieved}
+>
+  <article class="controlled-route page-width page-margin" aria-labelledby="policy-title">
+    <div class="controlled-route__panel rte rte-width">
+      <h1 id="policy-title">{policy.title}</h1>
+      <p class="policy-source">
+        Fuente textual: <a href={policy.sourceUrl}>{policy.sourceUrl}</a>.
+        Contenido disponible al {policy.sourceRetrieved}.
+      </p>
+      <p class="controlled-route__notice">Este contenido conserva una versión histórica y no habilita compras, cuentas ni pagos en este sitio estático.</p>
+      <div class="policy-content">
+        {policy.contentStatus === 'pending' ? (
+          <p>Contenido pendiente de una fuente pública; no se publica texto legal nuevo.</p>
+        ) : (
+          paragraphs.map((paragraph) => <p>{paragraph}</p>)
+        )}
+      </div>
+    </div>
+  </article>
+</SiteLayout>

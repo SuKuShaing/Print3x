@@ -1,0 +1,15 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [
+    ".astro/types.d.ts",
+    "src/**/*",
+    "astro.config.mjs"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "zip_theme_shopify_estable",
+    "Imagenes_de_la_web",
+    ".playwright-mcp"
+  ]
+}

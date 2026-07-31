@@ -1,0 +1,102 @@
+.collection-page {
+  padding-bottom: 6rem;
+  padding-top: 4rem;
+}
+
+.collection-page__header {
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.14);
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+}
+
+.collection-page__header h1 {
+  margin: 0;
+}
+
+.collection-page__eyebrow {
+  color: rgb(var(--color-base-accent-1));
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.8rem;
+  text-transform: uppercase;
+}
+
+.collection-page__hero {
+  margin-bottom: 3rem;
+}
+
+.collection-page__hero .media-placeholder {
+  border-radius: var(--media-radius);
+}
+
+.collection-page__body {
+  margin: 0 auto 4rem;
+  max-width: 78rem;
+}
+
+.collection-page__body > :first-child {
+  margin-top: 0;
+}
+
+.collection-page__grid {
+  display: grid;
+  gap: var(--grid-desktop-horizontal-spacing);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.collection-page__grid--collections {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.collection-product-card {
+  color: inherit;
+  display: block;
+  text-decoration: none;
+}
+
+.collection-product-card .media-placeholder {
+  border-radius: var(--collection-card-corner-radius);
+}
+
+.collection-page__grid:not(.collection-page__grid--collections) .media-placeholder {
+  aspect-ratio: 4 / 5;
+}
+
+.collection-page__grid--collections .media-placeholder {
+  aspect-ratio: 4 / 5;
+}
+
+.collection-product-card:hover .collection-product-card__title,
+.collection-product-card:focus-visible .collection-product-card__title {
+  text-decoration: underline;
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.2em;
+}
+
+.collection-product-card__title,
+.collection-product-card__status {
+  display: block;
+}
+
+.collection-product-card__title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-top: 1.2rem;
+}
+
+.collection-product-card__status {
+  color: rgba(var(--color-foreground), 0.68);
+  margin-top: 0.5rem;
+}
+
+@media screen and (max-width: 749px) {
+  .collection-page {
+    padding-bottom: 4rem;
+    padding-top: 2.4rem;
+  }
+
+  .collection-page__grid,
+  .collection-page__grid--collections {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

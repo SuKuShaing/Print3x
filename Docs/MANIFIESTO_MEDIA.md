@@ -1,0 +1,269 @@
+# Manifiesto de media, fuentes y placeholders
+
+**Fuente Shopify:** `zip_theme_shopify_estable/`  
+**Fuente local:** `Imagenes_de_la_web/`  
+**Fecha de inspeccion:** 2026-07-29  
+**Estado:** cinco roles del index confirmados e integrados; el favicon usa un placeholder SVG local porque el recurso Shopify activo no tiene copia local confirmada. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
+
+## Resumen de conteos
+
+| Categoria | Conteo | Alcance |
+|---|---:|---|
+| Imagenes locales entregadas | 5 | Los cinco archivos existentes en `Imagenes_de_la_web/index/`. |
+| Recursos `shopify://shop_images` unicos globales | 85 | Union de templates y `config/settings_data.json`. |
+| Ocurrencias globales de referencias Shopify | 93 | Incluye repeticiones entre templates y configuracion. |
+| Recursos distintos identificados en templates | 81 | Conteo de nombres unicos dentro de templates; el registro de ejecucion lo denomina referencias de templates. |
+| Videos externos unicos | 13 | URLs YouTube encontradas en templates; algunas aparecen mas de una vez. |
+| Fuentes Futura locales | 0 | La configuracion activa pide `futura_n4`, pero no hay archivos de fuente locales entregados. |
+| Logo local confirmado | 0 | El logo activo sigue siendo una referencia `shopify://`. |
+| Favicon local confirmado | 0 | El favicon de identidad activo sigue sin copia local; `/favicon.svg` es solo un placeholder técnico para evitar un 404. |
+| Imagen social local confirmada | 0 | `/images/social-placeholder.svg` es un placeholder técnico; no reemplaza una imagen social de marca aprobada. |
+
+La suma de 81 recursos distintos de templates y 4 referencias de configuracion da 85 recursos unicos globales. Las 93 ocurrencias no deben reducirse a 85 al migrar: una misma referencia puede usarse en varias paginas o bloques.
+
+## Imagenes locales verificadas
+
+Las dimensiones y el peso se obtuvieron leyendo los cinco archivos locales. El usuario confirmo que los cuatro `Hero_*.jpg` son las imagenes del hero del index y que `Categorias_1_filamentos_pla.jpg` es una imagen de coleccion del index. Esta confirmacion define el rol de uso, no una equivalencia con un nombre de imagen Shopify.
+
+| Archivo local | Ruta | Formato | Dimensiones | Peso | Uso confirmado | Alt | Equivalencia Shopify |
+|---|---|---|---:|---:|---|---|---|
+| `Hero_1.jpg` | `Imagenes_de_la_web/index/Hero_1.jpg` | JPEG | `2500 x 2500` | `3513757` bytes | `index`, hero 1; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Hero_2.jpg` | `Imagenes_de_la_web/index/Hero_2.jpg` | JPEG | `2500 x 1146` | `1452158` bytes | `index`, hero 2; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Hero_3.jpg` | `Imagenes_de_la_web/index/Hero_3.jpg` | JPEG | `1799 x 927` | `809984` bytes | `index`, hero 3; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Hero_4.jpg` | `Imagenes_de_la_web/index/Hero_4.jpg` | JPEG | `1799 x 927` | `604403` bytes | `index`, hero 4; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Categorias_1_filamentos_pla.jpg` | `Imagenes_de_la_web/index/Categorias_1_filamentos_pla.jpg` | JPEG | `1000 x 750` | `450549` bytes | `index` y tarjeta/hero de la colección PLA; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
+
+**Regla:** los cinco archivos tienen estado local `available` y rutas finales bajo `/images/index/`. Los cuatro heroes tienen uso `index`; `Categorias_1_filamentos_pla.jpg` tiene uso `index` y `collection` porque el usuario confirmó que es una imagen de colección. Ninguno se declara equivalente a `Cinco_hermosos...`, `Banner_2...`, `Banner_3...` u otra referencia Shopify sin evidencia de origen. Las otras 85 referencias Shopify siguen pendientes; esta confirmación no las convierte en disponibles.
+
+## Referencias Shopify unicas: 85
+
+La lista siguiente asigna cada recurso a una fuente principal para evitar duplicarlo en el inventario de 85. Las apariciones adicionales se detallan despues.
+
+Cada nombre listado corresponde a la referencia `shopify://shop_images/<nombre>`; se omite el prefijo repetido solo para mantener la matriz legible.
+
+### Configuracion activa: 4
+
+- `Banner_3_V2_-_Ligera.jpg`
+- `Favicon_73f39bdd-9378-4f51-9ccc-73019a4e9071.png`
+- `print3x_37f89bc9-34db-41c5-9279-6da27da882be.png`
+- `print3x_logos_de_seguridad_con_norton_8fe9c9fd-df41-4e2d-a6c9-7d0553b6820a.png`
+
+Fuente: `config/settings_data.json`. El logo y favicon estan activos, pero no tienen copia local confirmada.
+
+### `templates/article.calibracion_automatica.json`: 4
+
+- `Diagrama_de_Conexion.jpg`
+- `Miniatura_autoleveling_1.jpg`
+- `Miniatura_Autoleveling_2.jpg`
+- `Miniatura_Autoleveling_3.jpg`
+
+### `templates/article.config_repetierhost.json`: 1
+
+- `Minitura_configurar_Repetier.jpg`
+
+### `templates/article.meshmixer.json`: 5
+
+- `Base_y_Tip.jpg`
+- `Miniatura_guia.jpg`
+- `Miniatura_para_instalar_el_Meshmixer.jpg`
+- `Miniatura_soportes_en_arbol_con_meshmixer.jpg`
+- `Tip_Post_y_Base_Diameter.jpg`
+
+### `templates/article.openscad.json`: 1
+
+- `Miniatura_OpenSCAD_y_GPT4.jpg`
+
+### `templates/collection.coleccion-filamentos-pla.json`: 18
+
+- `1_75_mm_de_diametro_FF_-_Ligera.png`
+- `2_Extrusor_Tapado_Print3x.png`
+- `Badge-garantia-dorado.png`
+- `baja_hidrolisis.png`
+- `Biodegradable.png`
+- `Burbujas_en_el_filamento.png`
+- `Check.png`
+- `cientifico-mezclando-liquidos_1423-1805.png`
+- `Cinco_hermosos_Rollos_de_filamento_PLA_y_huevos_Print3x_Recortada_Grande_-_Ligera.jpg`
+- `Cuatro_Rollos_de_filamento_PLA_y_huevos_Print3x_98ce26f8-05da-4515-8597-dd08f45b0bdc.jpg`
+- `Dimensiones_del_Rollo_PLA.png`
+- `Emogiis.png`
+- `Emoji_hot_and_cold2.png`
+- `Filamento_PLA_roto_autoquiebre.png`
+- `Filamentos_Print3x.png`
+- `Nariz_de_gato.png`
+- `Reciclaje_Print3x.png`
+- `Sol_dibujo.png`
+
+### `templates/index.json`: 8
+
+- `Banner_2_v2_-_Ligera.jpg`
+- `Cinco_hermosos_Rollos_de_filamento_PLA_y_huevos_Print3x-HD.jpg`
+- `Cuatro_Rollos_de_filamento_PLA_y_huevos_Print3x-HD.jpg`
+- `icono_impresion-3d_print3x_printex_printec_print3c.png`
+- `icono_linea-de-meta_print3x_printex_printec_print3c.png`
+- `icono_mejor-vendido_print3x_printex_printec_print3c.png`
+- `La_impresion_3d_te_lleva_al_futuro_1.jpg`
+- `logo_carrete_filamento_print3x_printex_printec_print3c_2b02e2b7-6a94-4de0-b24b-bfc46183c487.png`
+
+### `templates/page.mejor_filamento.json`: 11
+
+- `Cambio_de_tono_filamento_PLA_Print3x_-_Ligera.jpg`
+- `Compracion_de_diametros_de_PLA.jpg`
+- `Filamento_PLA_con_diametro_mayor_al_dicho.jpg`
+- `Filamento_PLA_con_grumos.jpg`
+- `Filamento_roto_autoquiebre_-_Ligera.jpg`
+- `Grafico_de_distribucion_de_los_diametros_del_Filamento_PLA_a_lo_largo_con_margenes_con_tolerancia.jpg`
+- `Grafico_de_distribucion_de_los_valores_a_lo_largo_con_margenes.jpg`
+- `Hilos_o_voladisos_en_la_impresion_3D_-_Ligera.jpg`
+- `Huevo_Dorado_PLA_Print3x.jpg`
+- `Impresion_3D_con_burbujas_-_Ligera.jpg`
+- `Tolerancia_de_los_Filamento_PLA_2.jpg`
+
+### `templates/page.nosotros.json`: 1 recurso nuevo
+
+- `Toa_Diego_Seba_Pini_-_recortado.jpg`
+
+Los iconos y el logo de carrete de esta plantilla ya estan listados bajo `index` porque son referencias repetidas.
+
+### `templates/page.premios_y_historia.json`: 10
+
+- `Aparicion_en_el_diario_el_mercurio_Crea_en_3D_Print3x.jpg`
+- `Desafio_pais.jpg`
+- `Ganadores_despega_usach_Crea_en_3D_Print3x.jpg`
+- `Ganadores_en_Conrad_Waterloo_Crea_en_3D_Print3x.jpg`
+- `Ganadores_en_Stanford_Crea_en_3D_Print3x.jpg`
+- `maxresdefault_1.webp`
+- `maxresdefault.webp`
+- `Premios_Despega_Usach_Crea_en_3D_Print3x.jpg`
+- `Primera_Impresora_3D_Crea_en_3D_Print3x.jpg`
+- `Print3x_gana_la_competencia_de_Pitch.jpg`
+
+### `templates/product.impresora-axis-one.json`: 17
+
+- `Axis_One_300_mm_al_cubo.png`
+- `Capacitaciones.png`
+- `Chip_electrico.png`
+- `electricidad_rayo2.png`
+- `escudo.png`
+- `Flexibles22.png`
+- `impresion_3D_4.png`
+- `logo_Axis_One_cuadrado.png`
+- `OptoSensor4.png`
+- `Padi_-_Ligera.png`
+- `Pantalla2.png`
+- `Portada_video_Axis_One.jpg`
+- `rapidez-2.png`
+- `reparacion2.png`
+- `Sensor_con_ondas.jpg`
+- `Slic3r_3.png`
+- `Tensor3.png`
+
+### `templates/product.superficie-padi.json`: 5 recursos nuevos
+
+- `222.png`
+- `223_-_Ligera2.png`
+- `224_-_Ligera2.png`
+- `225_-_Ligera2.png`
+- `226_-_Ligera2.png`
+
+`Emoji_hot_and_cold2.png`, `Filamentos_Print3x.png` y `logo_Axis_One_cuadrado.png` ya estan contabilizados en otras fuentes.
+
+### Sin recurso nuevo en el conteo global
+
+`templates/list-collections.json` repite `Cinco_hermosos_Rollos_de_filamento_PLA_y_huevos_Print3x-HD.jpg`. Las referencias repetidas de `page.nosotros.json` y `product.superficie-padi.json` tambien se conservan en el conteo de ocurrencias, aunque no agregan nombres al conjunto de 85.
+
+## Ocurrencias por fuente
+
+Esta tabla mantiene el conteo de apariciones encontrado en cada archivo. Los recursos repetidos entre filas se cuentan una vez por cada aparicion, por eso la suma es 93 y no 85.
+
+| Fuente | Recursos distintos en el archivo | Ocurrencias |
+|---|---:|---:|
+| `config/settings_data.json` | 4 | 4 |
+| `templates/article.calibracion_automatica.json` | 4 | 4 |
+| `templates/article.config_repetierhost.json` | 1 | 1 |
+| `templates/article.meshmixer.json` | 5 | 5 |
+| `templates/article.openscad.json` | 1 | 1 |
+| `templates/collection.coleccion-filamentos-pla.json` | 18 | 18 |
+| `templates/index.json` | 8 | 8 |
+| `templates/list-collections.json` | 1 | 1 |
+| `templates/page.mejor_filamento.json` | 11 | 12 |
+| `templates/page.nosotros.json` | 4 | 4 |
+| `templates/page.premios_y_historia.json` | 10 | 10 |
+| `templates/product.impresora-axis-one.json` | 17 | 17 |
+| `templates/product.superficie-padi.json` | 8 | 8 |
+| **Total global** | **85 en la union** | **93** |
+
+Repeticiones relevantes:
+
+- `Filamento_PLA_con_diametro_mayor_al_dicho.jpg` aparece dos veces en `page.mejor_filamento.json`.
+- `Cinco_hermosos_Rollos_de_filamento_PLA_y_huevos_Print3x-HD.jpg` aparece en `index.json` y `list-collections.json`.
+- `icono_linea-de-meta...`, `icono_mejor-vendido...` y `logo_carrete...` se repiten entre `index.json` y `page.nosotros.json`.
+- `Emoji_hot_and_cold2.png` y `Filamentos_Print3x.png` se repiten entre la coleccion PLA y Padi.
+- `logo_Axis_One_cuadrado.png` se repite entre Axis One y Padi.
+
+## Proporciones y regla de placeholder
+
+No todas las referencias Shopify tienen dimensiones locales verificables. El placeholder debe seguir el contrato del bloque, no el nombre del archivo:
+
+| Bloque | Proporcion o comportamiento requerido | Regla |
+|---|---|---|
+| Slideshow de portada | Mantener la proporcion del recurso del slide y el recorte responsive configurado por el tema | No sustituir automaticamente por un `Hero_*.jpg`; si falta el original, reservar el mismo rectangulo. |
+| Tarjeta de coleccion | Mantener el ratio del card y `show_collection_image` | Reservar caja de imagen aunque el recurso falte. |
+| Tarjeta de producto | Mantener `image_ratio: portrait` donde lo define la coleccion | Usar placeholder portrait con `width` y `height` estables. |
+| Image with text | Mantener `height: adapt` y el lado de imagen definido por el bloque | No colapsar la seccion por ausencia de media. |
+| Galeria de producto | Mantener orden, miniaturas, `media_position: left` y area de zoom si procede | Placeholder por cada media faltante; no inventar una foto de producto. |
+| Video externo | Reservar area de cover y boton accesible | No descargar ni asignar miniaturas no verificadas. |
+| Imagen editorial | Preservar ancho de contenido y ratio de la imagen fuente si se conoce | Si no hay dimensiones, registrar pendiente antes de fijar un ratio arbitrario. |
+
+Las dimensiones conocidas de los cinco archivos locales pueden usarse para sus propios bloques cuando el contenido confirme el destino. No deben utilizarse para inferir equivalencias Shopify.
+
+## Prioridad de obtencion e integracion
+
+| Prioridad | Recursos | Motivo |
+|---|---|---|
+| P0 | Logo, favicon y Futura | Identidad global, head y similitud visual; actualmente no hay copias locales. |
+| P1 | Media de portada y categorias | Afecta la primera impresion y la geometria del home; los cinco archivos disponibles ya tienen rol del index confirmado por el usuario. |
+| P1 | Media de las 31 rutas de contenido del sitemap | Afecta producto, coleccion, paginas y articulos que concentran SEO. |
+| P2 | Media larga de la coleccion PLA y paginas tecnicas | Muchos bloques; requieren placeholders consistentes y orden estable. |
+| P2 | Galerias de Axis One, Padi y articulos del curso | Contenido historico con varias imagenes y videos externos. |
+| P3 | Media secundaria de premios, iconos repetidos y recursos no visibles en rutas aprobadas | Resolver despues de confirmar que la ruta se conserva. |
+
+## Videos externos: 13 unicos
+
+| Plantilla o fuente | URL externa | Uso |
+|---|---|---|
+| `article.calibracion_automatica.json` | `https://youtu.be/HSaMxLdqlrI` | Video de conexion de electronica. |
+| `article.calibracion_automatica.json` | `https://youtu.be/0v7mVu4zT-c` | Video adicional del articulo. |
+| `article.calibracion_automatica.json` | `https://youtu.be/LLit5ohZNTQ` | Video adicional del articulo. |
+| `article.config_repetierhost.json` | `https://youtu.be/ENIRcInoUVI` | Configuracion de Repetier Host. |
+| `article.meshmixer.json` | `https://youtu.be/bV8uAMO8r9o` | Instalacion de Meshmixer. |
+| `article.meshmixer.json` | `https://youtu.be/FUP4YUVHpK4` | Video del articulo. |
+| `article.meshmixer.json` | `https://youtu.be/SMMqAksHSOc` | Video del articulo. |
+| `article.openscad.json` | `https://youtu.be/TscVG74uTUA` | OpenSCAD y GPT4. |
+| `page.premios_y_historia.json` | `https://www.youtube.com/watch?v=xRHSvi9GFfE` | Mini documental; aparece en mas de un bloque. |
+| `page.premios_y_historia.json` | `https://youtu.be/6wg21oH6Pas?si=fXC5L7PXuhrYPWOZ` | Contenido historico. |
+| `page.premios_y_historia.json` | `https://youtu.be/aMgsiajRdcY` | Contenido historico. |
+| `page.premios_y_historia.json` | `https://youtu.be/BgAuIucQkG0?si=TS3oib75ANJ5lxrq` | Contenido historico. |
+| `product.impresora-axis-one.json` | `https://youtu.be/J-rV8g_5Te4` | Video de Axis One. |
+
+Se deben revisar disponibilidad, privacidad, miniaturas, carga externa, accesibilidad, consentimiento y comportamiento offline antes de conservarlos. El conteo de 13 es de URLs unicas, no de bloques de video.
+
+## Futura, logo y favicon
+
+- `type_header_font` y `type_body_font` son `futura_n4`.
+- No hay archivos Futura en `Imagenes_de_la_web/` ni un directorio de fuentes local entregado.
+- El logo activo es `print3x_37f89bc9-34db-41c5-9279-6da27da882be.png` y el favicon activo es `Favicon_73f39bdd-9378-4f51-9ccc-73019a4e9071.png`, ambos bajo `shopify://shop_images`.
+- No se deben fabricar versiones locales ni sustituir Futura por una fuente generica sin decision visual y de licencia.
+
+## Bloqueos de media
+
+1. No existe recurso local equivalente confirmado para 85 referencias Shopify unicas.
+2. No se puede mapear ningun `Hero_*.jpg` a una referencia Shopify solo por el nombre o la apariencia.
+3. Logo, favicon y fuentes Futura requieren entrega o decision de uso de CDN con licencia y disponibilidad.
+4. Las dimensiones esperadas de la mayoria de recursos Shopify no estan disponibles localmente; deben conservarse desde el metadata de origen o dejarse como placeholder pendiente.
+5. Videos, Drive, Autodesk, Wayback, redes y formularios son dependencias externas que necesitan una revision especifica.
+6. No se puede declarar que todas las referencias tienen destino final hasta que la matriz SEO confirme que la plantilla que las usa sigue publicada.
+
+## Criterio de aceptacion documental
+
+El manifiesto deja cada referencia con un nombre de origen, una fuente de uso, un estado local o un bloqueo, una regla de placeholder y una prioridad. La integracion de media continuara en etapas posteriores mediante nuevos archivos, placeholders o decisiones explicitas por dependencia.

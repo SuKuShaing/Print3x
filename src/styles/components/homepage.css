@@ -1,0 +1,296 @@
+.homepage {
+  overflow: hidden;
+}
+
+.homepage__slideshow {
+  isolation: isolate;
+}
+
+.homepage__slides {
+  display: flex;
+  min-width: 0;
+  width: 100%;
+}
+
+.homepage__slide {
+  display: none;
+  min-height: 34rem;
+  width: 100%;
+}
+
+.homepage__slide[data-p3x-slide-active] {
+  display: flex;
+}
+
+.homepage__slide-media {
+  background: rgb(var(--color-background-2));
+}
+
+.homepage__slide-media .media-placeholder {
+  height: 100%;
+  min-height: 34rem;
+}
+
+.homepage__slide-media .media-placeholder__image {
+  object-position: center;
+}
+
+.homepage__slide-content {
+  height: 100%;
+  min-height: 34rem;
+}
+
+.homepage__slide-box {
+  background: rgba(var(--color-base-background-2), 0.9);
+  color: rgb(var(--color-base-text));
+  max-width: 54.5rem;
+}
+
+.homepage__slide-box .banner__heading {
+  font-size: calc(var(--font-heading-scale) * 3rem);
+  margin-bottom: 1.2rem;
+}
+
+.homepage__slide-box .banner__text {
+  margin-bottom: 1.8rem;
+}
+
+.homepage__slider-controls {
+  align-items: center;
+  background: rgb(var(--color-background));
+  display: flex;
+  justify-content: center;
+  min-height: 5rem;
+  position: relative;
+  z-index: 3;
+}
+
+.homepage__slider-controls .slider-button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  min-height: 4.4rem;
+  min-width: 4.4rem;
+  padding: 0.8rem;
+}
+
+.homepage__slider-controls .slider-button span[aria-hidden='true'] {
+  font-size: 2.8rem;
+  line-height: 1;
+}
+
+.homepage__slider-controls .slider-button:hover {
+  color: rgb(var(--color-base-accent-1));
+}
+
+.homepage__slider-controls .slider-counter {
+  min-width: auto;
+  padding: 0 0.8rem;
+}
+
+.homepage__slider-dots {
+  display: flex;
+  align-items: center;
+}
+
+.homepage__slider-dots .slider-counter__link {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  min-height: 4.4rem;
+  min-width: 4.4rem;
+  padding: 0;
+}
+
+.homepage__slider-dots .slider-counter__link[aria-current='true'] .dot {
+  background-color: rgb(var(--color-base-text));
+}
+
+.homepage__slider-dots .dot {
+  border: 0.1rem solid rgba(var(--color-foreground), 0.5);
+  border-radius: 50%;
+  display: block;
+  height: 1rem;
+  width: 1rem;
+}
+
+.homepage__slider-controls .slideshow__autoplay {
+  border-left: 0.1rem solid rgba(var(--color-foreground), 0.12);
+  font-size: 1.2rem;
+  margin-left: 0.8rem;
+  min-width: 0;
+  padding-left: 1.2rem;
+  text-transform: uppercase;
+}
+
+.homepage__section {
+  padding-bottom: 4.5rem;
+  padding-top: 4.5rem;
+}
+
+.homepage__section-heading {
+  margin-bottom: 2.8rem;
+  text-align: center;
+}
+
+.homepage__section-heading h2,
+.homepage__commitments h2 {
+  margin: 0;
+}
+
+.homepage__collection-grid {
+  display: grid;
+  gap: var(--grid-desktop-horizontal-spacing);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.homepage__collection-card {
+  color: inherit;
+  display: block;
+  text-decoration: none;
+}
+
+.homepage__collection-card .media-placeholder {
+  aspect-ratio: 1;
+  border-radius: var(--collection-card-corner-radius);
+  margin-bottom: 1.5rem;
+}
+
+.homepage__collection-card h3 {
+  font-size: calc(var(--font-heading-scale) * 1.8rem);
+  margin: 0;
+  text-align: center;
+}
+
+.homepage__collection-card:hover h3,
+.homepage__collection-card:focus-visible h3 {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.homepage__commitments {
+  background: rgb(var(--color-base-text));
+  color: rgb(var(--color-base-background-1));
+  padding-bottom: 5rem;
+  padding-top: 4rem;
+}
+
+.homepage__commitments h2 {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.homepage__commitment-grid {
+  display: grid;
+  gap: var(--grid-desktop-horizontal-spacing);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.homepage__commitment {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.homepage__commitment-media {
+  background: transparent;
+  border-color: rgba(var(--color-base-background-1), 0.35);
+  margin-bottom: 1.8rem;
+  max-width: 10rem;
+}
+
+.homepage__commitment h3 {
+  color: inherit;
+  font-size: calc(var(--font-heading-scale) * 1.6rem);
+  margin: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .homepage__slide {
+    min-height: 56rem;
+  }
+
+  .homepage__slide-media .media-placeholder,
+  .homepage__slide-content {
+    min-height: 56rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .homepage__slider-controls {
+    display: grid;
+    grid-template-areas:
+      'previous counter next'
+      'dots dots dots'
+      'autoplay autoplay autoplay';
+    grid-template-columns: 4.4rem minmax(0, 1fr) 4.4rem;
+    row-gap: 0.4rem;
+  }
+
+  .homepage__slideshow .homepage__slide .homepage__slide-content .homepage__slide-box {
+    --color-foreground: var(--color-base-text);
+    background: rgb(var(--color-base-background-2));
+    color: rgb(var(--color-base-text));
+  }
+
+  .homepage__slider-controls [data-p3x-slider-prev] {
+    grid-area: previous;
+  }
+
+  .homepage__slider-controls .slider-counter {
+    grid-area: counter;
+    justify-self: center;
+  }
+
+  .homepage__slider-controls [data-p3x-slider-next] {
+    grid-area: next;
+  }
+
+  .homepage__slider-dots {
+    grid-area: dots;
+    justify-self: center;
+  }
+
+  .homepage__slider-controls .slideshow__autoplay {
+    grid-area: autoplay;
+    justify-self: center;
+    margin-left: 0;
+    position: static;
+  }
+
+  .homepage__section {
+    padding-bottom: 3.5rem;
+    padding-top: 3.5rem;
+  }
+
+  .homepage__collection-grid,
+  .homepage__commitment-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .homepage__commitments {
+    padding-bottom: 4rem;
+    padding-top: 3.5rem;
+  }
+
+  .homepage__commitment-grid {
+    gap: 2.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .homepage__slider-controls .slider-button,
+  .homepage__collection-card h3 {
+    transition: none;
+  }
+}

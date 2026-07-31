@@ -1,0 +1,471 @@
+---
+type MenuLink = {
+  label: string;
+  href: string;
+};
+
+type MenuItem =
+  | MenuLink
+  | {
+      label: string;
+      children: MenuLink[];
+    };
+
+type MenuGroup = {
+  label: string;
+  items: MenuItem[];
+};
+
+const pathname = Astro.url.pathname;
+
+const isActive = (href: string) => {
+  if (href === '/') return pathname === '/';
+  return pathname === href || pathname.startsWith(`${href}/`);
+};
+
+const itemIsActive = (item: MenuItem) =>
+  'href' in item ? isActive(item.href) : item.children.some((child) => isActive(child.href));
+
+const menuGroups: MenuGroup[] = [
+  {
+    label: 'Productos',
+    items: [
+      { label: 'Filamento PLA', href: '/collections/pla' },
+      { label: 'Impresora 3D Profesional Axis One', href: '/products/axis-one' },
+      { label: 'Superficie de impresión, Padi', href: '/products/padi-superficie-de-impresion' },
+    ],
+  },
+  {
+    label: 'Información',
+    items: [
+      { label: 'Academia i3D', href: '/blogs/curso_impresion_3d' },
+      {
+        label: 'De interes',
+        href: '/pages/como-determinar-cual-es-el-mejor-filamento-pla',
+      },
+      {
+        label: 'Blog',
+        children: [
+          {
+            label: 'Encuesta de Sistema operativo y software',
+            href: '/blogs/noticias/encuesta-sistema-operativo-y-software',
+          },
+          {
+            label: 'Diseños STL para imprimir esta navidad',
+            href: '/blogs/articulos/los-mejores-disenos-stl-para-imprimir-esta-navidad',
+          },
+          {
+            label: 'Regalos para el 14 de febrero',
+            href: '/blogs/articulos/regalos-originales-para-el-14-de-febrero-dia-del-amor-y-la-amistad',
+          },
+        ],
+      },
+      { label: 'Tarifas de envío', href: '/pages/tarifas-de-envio' },
+    ],
+  },
+  {
+    label: 'Nosotros',
+    items: [
+      { label: 'Nosotros', href: '/pages/nosotros' },
+      { label: 'Premios e Historia', href: '/pages/premios' },
+    ],
+  },
+];
+
+const groupIsActive = (group: MenuGroup) => group.items.some(itemIsActive);
+---
+
+<div class="section-header" data-sticky-type="on-scroll-up">
+  <div class="header-wrapper color-background-2 gradient">
+    <!-- Announcement bar intentionally stays disabled: both configured blocks are disabled. -->
+    <header class="header header--middle-center header--mobile-center page-width header--has-menu">
+      <div class="header-drawer">
+        <details id="Details-menu-drawer-container" class="menu-drawer-container">
+          <summary
+            class="header__icon header__icon--menu header__icon--summary link focus-inset"
+            aria-label="Abrir menú"
+            aria-controls="menu-drawer"
+          >
+            <span class="header__icon-state">
+              <svg class="icon icon-hamburger" aria-hidden="true" focusable="false">
+                <use href="#icon-hamburger"></use>
+              </svg>
+              <svg class="icon icon-close" aria-hidden="true" focusable="false">
+                <use href="#icon-close"></use>
+              </svg>
+            </span>
+          </summary>
+          <div id="menu-drawer" class="menu-drawer motion-reduce" tabindex="-1">
+            <div class="menu-drawer__inner-container">
+              <div class="menu-drawer__navigation-container">
+                <nav class="menu-drawer__navigation" aria-label="Navegación principal">
+                  <ul class="menu-drawer__menu has-submenu list-menu" role="list">
+                    {menuGroups.map((group, groupIndex) => (
+                      <li>
+                        <details
+                          id={`Details-menu-drawer-menu-item-${groupIndex + 1}`}
+                          class="menu-drawer__group"
+                        >
+                          <summary
+                            class={`menu-drawer__menu-item list-menu__item link link--text focus-inset${groupIsActive(group) ? ' menu-drawer__menu-item--active' : ''}`}
+                            aria-controls={`MenuDrawer-MenuList-${groupIndex + 1}`}
+                          >
+                            <span>{group.label}</span>
+                            <svg class="icon icon-caret" aria-hidden="true" focusable="false">
+                              <use href="#icon-caret"></use>
+                            </svg>
+                          </summary>
+                          <ul
+                            id={`MenuDrawer-MenuList-${groupIndex + 1}`}
+                            class="menu-drawer__submenu list-menu"
+                            role="list"
+                          >
+                            {group.items.map((item, itemIndex) => (
+                              <li>
+                                {'children' in item ? (
+                                  <details
+                                    id={`Details-menu-drawer-submenu-${groupIndex + 1}-${itemIndex + 1}`}
+                                    class="menu-drawer__nested"
+                                  >
+                                    <summary
+                                      class={`menu-drawer__menu-item list-menu__item link link--text focus-inset${itemIsActive(item) ? ' menu-drawer__menu-item--active' : ''}`}
+                                      aria-controls={`MenuDrawer-Submenu-${groupIndex + 1}-${itemIndex + 1}`}
+                                    >
+                                      <span>{item.label}</span>
+                                      <svg class="icon icon-caret" aria-hidden="true" focusable="false">
+                                        <use href="#icon-caret"></use>
+                                      </svg>
+                                    </summary>
+                                    <ul
+                                      id={`MenuDrawer-Submenu-${groupIndex + 1}-${itemIndex + 1}`}
+                                      class="menu-drawer__submenu menu-drawer__submenu--nested list-menu"
+                                      role="list"
+                                    >
+                                      {item.children.map((child) => (
+                                        <li>
+                                          <a
+                                            href={child.href}
+                                            class={`menu-drawer__menu-item list-menu__item link link--text focus-inset${isActive(child.href) ? ' menu-drawer__menu-item--active' : ''}`}
+                                            aria-current={isActive(child.href) ? 'page' : undefined}
+                                          >
+                                            {child.label}
+                                          </a>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </details>
+                                ) : (
+                                  <a
+                                    href={item.href}
+                                    class={`menu-drawer__menu-item list-menu__item link link--text focus-inset${isActive(item.href) ? ' menu-drawer__menu-item--active' : ''}`}
+                                    aria-current={isActive(item.href) ? 'page' : undefined}
+                                  >
+                                    {item.label}
+                                  </a>
+                                )}
+                              </li>
+                            ))}
+                          </ul>
+                        </details>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+                <div class="menu-drawer__utility-links">
+                  <a
+                    href="/customer_authentication/redirect"
+                    class="menu-drawer__account link focus-inset"
+                    aria-label="Cuenta, ruta controlada"
+                  >
+                    <svg class="icon icon-account" aria-hidden="true" focusable="false">
+                      <use href="#icon-account"></use>
+                    </svg>
+                    <span>Cuenta</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <div class="header__heading">
+        <a href="/" class="header__heading-link link link--text focus-inset" aria-label="Logo pendiente; ir al inicio de Print3x">
+          <span class="header__heading-logo-wrapper">
+            <span
+              class="header__heading-logo media-pending"
+              role="img"
+              aria-label="Logo Print3x pendiente; ancho previsto de 200 píxeles"
+            >
+              <span class="media-pending__label">Logo pendiente</span>
+            </span>
+          </span>
+        </a>
+      </div>
+
+      <nav class="header__inline-menu" aria-label="Navegación principal">
+        <ul class="list-menu list-menu--inline" role="list">
+          {menuGroups.map((group, groupIndex) => (
+            <li>
+              <header-menu class="header-menu">
+                <details id={`Details-HeaderMenu-${groupIndex + 1}`} class="header-menu__details">
+                  <summary
+                    class="header__menu-item list-menu__item link focus-inset"
+                    aria-controls={`HeaderMenu-MenuList-${groupIndex + 1}`}
+                  >
+                    <span class={groupIsActive(group) ? 'header__active-menu-item' : undefined}>{group.label}</span>
+                    <svg class="icon icon-caret" aria-hidden="true" focusable="false">
+                      <use href="#icon-caret"></use>
+                    </svg>
+                  </summary>
+                  <ul
+                    id={`HeaderMenu-MenuList-${groupIndex + 1}`}
+                    class="header__submenu list-menu list-menu--disclosure gradient caption-large motion-reduce global-settings-popup"
+                    role="list"
+                    tabindex="-1"
+                  >
+                    {group.items.map((item, itemIndex) => (
+                      <li>
+                        {'children' in item ? (
+                          <details
+                            id={`Details-HeaderSubMenu-${groupIndex + 1}-${itemIndex + 1}`}
+                            class="header-menu__nested"
+                          >
+                            <summary
+                              class={`header__menu-item list-menu__item link link--text focus-inset caption-large${itemIsActive(item) ? ' list-menu__item--active' : ''}`}
+                              aria-controls={`HeaderMenu-SubMenuList-${groupIndex + 1}-${itemIndex + 1}`}
+                            >
+                              <span>{item.label}</span>
+                              <svg class="icon icon-caret" aria-hidden="true" focusable="false">
+                                <use href="#icon-caret"></use>
+                              </svg>
+                            </summary>
+                            <ul
+                              id={`HeaderMenu-SubMenuList-${groupIndex + 1}-${itemIndex + 1}`}
+                              class="header__submenu list-menu motion-reduce"
+                              role="list"
+                              tabindex="-1"
+                            >
+                              {item.children.map((child) => (
+                                <li>
+                                  <a
+                                    href={child.href}
+                                    class={`header__menu-item list-menu__item link link--text focus-inset caption-large${isActive(child.href) ? ' list-menu__item--active' : ''}`}
+                                    aria-current={isActive(child.href) ? 'page' : undefined}
+                                  >
+                                    {child.label}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          </details>
+                        ) : (
+                          <a
+                            href={item.href}
+                            class={`header__menu-item list-menu__item link link--text focus-inset caption-large${isActive(item.href) ? ' list-menu__item--active' : ''}`}
+                            aria-current={isActive(item.href) ? 'page' : undefined}
+                          >
+                            <span>{item.label}</span>
+                          </a>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </header-menu>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="header__icons">
+        <a href="/search" class="header__icon header__search link focus-inset" aria-label="Buscar">
+          <svg class="icon icon-search" aria-hidden="true" focusable="false">
+            <use href="#icon-search"></use>
+          </svg>
+        </a>
+        <a
+          href="/customer_authentication/redirect"
+          class="header__icon header__icon--account link focus-inset"
+          aria-label="Cuenta, ruta controlada"
+        >
+          <svg class="icon icon-account" aria-hidden="true" focusable="false">
+            <use href="#icon-account"></use>
+          </svg>
+        </a>
+        <a href="/cart" class="header__icon header__icon--cart link focus-inset" aria-label="Carrito, ruta controlada">
+          <svg class="icon icon-cart-empty" aria-hidden="true" focusable="false">
+            <use href="#icon-cart"></use>
+          </svg>
+        </a>
+      </div>
+    </header>
+  </div>
+</div>
+
+<svg class="icon-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="icon-search" viewBox="0 0 18 19">
+    <path
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1.5"
+      d="m12.5 12.5 4.2 4.2M14 8A6 6 0 1 1 2 8a6 6 0 0 1 12 0Z"
+    ></path>
+  </symbol>
+  <symbol id="icon-close" viewBox="0 0 18 17">
+    <path
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-width="1.5"
+      d="m1 1 16 15M17 1 1 16"
+    ></path>
+  </symbol>
+  <symbol id="icon-hamburger" viewBox="0 0 18 18">
+    <path
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-width="1.5"
+      d="M1 4.5h16M1 9h16M1 13.5h16"
+    ></path>
+  </symbol>
+  <symbol id="icon-account" viewBox="0 0 18 18">
+    <circle cx="9" cy="5.5" r="3" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+    <path
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-width="1.5"
+      d="M2.5 16c.7-3 3-4.5 6.5-4.5s5.8 1.5 6.5 4.5"
+    ></path>
+  </symbol>
+  <symbol id="icon-cart" viewBox="0 0 24 24">
+    <path
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1.5"
+      d="M2.5 4h2l1.8 11h11.4l2.2-8H5.2M9 19.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm8 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+    ></path>
+  </symbol>
+  <symbol id="icon-caret" viewBox="0 0 10 6">
+    <path
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1.25"
+      d="m1 1 4 4 4-4"
+    ></path>
+  </symbol>
+</svg>
+
+<script>
+  const headerSection = document.querySelector('.section-header[data-sticky-type="on-scroll-up"]');
+
+  if (headerSection) {
+    const menuDetails = headerSection.querySelector<HTMLDetailsElement>('#Details-menu-drawer-container');
+    const menuSummary = menuDetails?.querySelector<HTMLElement>('summary');
+    const menuDrawer = menuDetails?.querySelector<HTMLElement>('.menu-drawer');
+    const desktopMenus = headerSection.querySelectorAll<HTMLDetailsElement>(
+      '.header__inline-menu > ul > li > header-menu > details',
+    );
+    let currentScrollTop = window.scrollY;
+    let headerBoundary = headerSection.getBoundingClientRect().bottom + window.scrollY;
+
+    const updateHeaderMetrics = () => {
+      const headerRect = headerSection.getBoundingClientRect();
+      document.documentElement.style.setProperty('--header-height', `${headerRect.height}px`);
+      headerBoundary = headerRect.bottom + window.scrollY;
+    };
+
+    const closeMenu = (restoreFocus = false) => {
+      if (!menuDetails?.open) return;
+      menuDetails.removeAttribute('open');
+      menuSummary?.setAttribute('aria-expanded', 'false');
+      headerSection.classList.remove('menu-open');
+      if (restoreFocus) menuSummary?.focus();
+    };
+
+    const closeDesktopMenus = () => {
+      desktopMenus.forEach((menu) => menu.removeAttribute('open'));
+    };
+
+    menuDetails?.addEventListener('toggle', () => {
+      const isOpen = menuDetails.open;
+      menuSummary?.setAttribute('aria-expanded', String(isOpen));
+      headerSection.classList.toggle('menu-open', isOpen);
+      if (isOpen) {
+        closeDesktopMenus();
+        requestAnimationFrame(() => menuDrawer?.querySelector<HTMLElement>('summary, a')?.focus());
+      }
+    });
+
+    menuDrawer?.addEventListener('click', (event) => {
+      if (event.target instanceof HTMLElement && event.target.closest('a')) {
+        closeMenu();
+      }
+    });
+
+    desktopMenus.forEach((menu) => {
+      menu.addEventListener('toggle', () => {
+        if (!menu.open) return;
+        desktopMenus.forEach((otherMenu) => {
+          if (otherMenu !== menu) otherMenu.removeAttribute('open');
+        });
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!(event.target instanceof Element)) return;
+      if (menuDetails?.open && !menuDetails.contains(event.target)) closeMenu();
+      if (!event.target.closest('.header__inline-menu')) closeDesktopMenus();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      if (menuDetails?.open) {
+        closeMenu(true);
+        return;
+      }
+
+      const openDesktopMenu = headerSection.querySelector<HTMLDetailsElement>('.header__inline-menu details[open]');
+      if (openDesktopMenu) {
+        openDesktopMenu.removeAttribute('open');
+        openDesktopMenu.querySelector<HTMLElement>('summary')?.focus();
+      }
+    });
+
+    const onScroll = () => {
+      const scrollTop = window.scrollY;
+      if (menuDetails?.open) {
+        currentScrollTop = scrollTop;
+        return;
+      }
+
+      if (scrollTop > currentScrollTop && scrollTop > headerBoundary) {
+        headerSection.classList.add('shopify-section-header-sticky', 'shopify-section-header-hidden');
+        headerSection.classList.remove('animate');
+      } else if (scrollTop < currentScrollTop && scrollTop > headerBoundary) {
+        headerSection.classList.add('shopify-section-header-sticky', 'animate');
+        headerSection.classList.remove('shopify-section-header-hidden');
+      } else if (scrollTop <= headerBoundary) {
+        headerSection.classList.remove(
+          'shopify-section-header-sticky',
+          'shopify-section-header-hidden',
+          'animate',
+        );
+      }
+
+      currentScrollTop = scrollTop;
+    };
+
+    updateHeaderMetrics();
+    window.addEventListener('resize', updateHeaderMetrics, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>

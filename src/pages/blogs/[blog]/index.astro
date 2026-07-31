@@ -1,0 +1,54 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+
+export async function getStaticPaths() {
+  const blogs = await getCollection('blogs');
+  return blogs.map((blog) => ({
+    params: { blog: blog.data.slug },
+    props: { blog },
+  }));
+}
+
+interface Props {
+  blog: CollectionEntry<'blogs'>;
+}
+
+const { blog } = Astro.props as Props;
+const { Content } = await render(blog);
+const { data } = blog;
+---
+
+<SiteLayout
+  title={data.seo?.title ?? `${data.title} – Print3x`}
+  description={data.seo?.description}
+  noIndex={data.seo?.noIndex ?? false}
+  sourceUrl={data.sourceUrl}
+  sourceRetrieved={data.sourceRetrieved}
+>
+  <article class="editorial-page page-width">
+    <header class="editorial-page__header">
+      <p class="editorial-page__eyebrow">Blog Print3x</p>
+      <h1>{data.title}</h1>
+    </header>
+    <div class="editorial-page__body rte"><Content /></div>
+    <section class="editorial-index" aria-labelledby="editorial-index-title">
+      <h2 id="editorial-index-title">{data.title}</h2>
+      <div class="editorial-index__grid">
+        {data.articles.map((article) => (
+          <a class="editorial-card" href={`/blogs/${data.slug}/${article.slug}`}>
+            {article.mediaSource && (
+              <div class="editorial-card__media media-placeholder media-placeholder--pending" data-media-status="pending" aria-hidden="true"></div>
+            )}
+            <div class="editorial-card__content">
+              <h3>{article.title}</h3>
+              {article.description && <p>{article.description}</p>}
+              <span class="editorial-card__link">Leer artículo</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  </article>
+</SiteLayout>
