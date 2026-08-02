@@ -47,11 +47,19 @@ No se modificaron `zip_theme_shopify_estable/`, `Imagenes_de_la_web/` ni DNS.
 ## Bloqueos y pendientes
 
 - Validar el comportamiento real de URLs limpias, `.html` y slash en Cloudflare Pages.
-- Logo de identidad, Futura, imagen social de marca y media Shopify faltante siguen pendientes.
+- Futura, favicon de identidad, imagen social de marca y media Shopify faltante siguen pendientes; el logo local se integró en la actualización del 2026-08-01.
 - Las policies conservan contenido legal histórico y requieren revisión antes de publicación.
-- `dist` pesa aproximadamente `8.03 MB`, principalmente por imágenes hero JPEG sin optimización adicional.
+- `dist` pesa aproximadamente `10.13 MB`, principalmente por imágenes hero y de categoría JPEG sin optimización adicional.
 - `alt` de imágenes entregadas sigue pendiente porque no existe texto aprobado en la fuente.
 
 ## Criterio de aceptación de Etapa 6 - Tarea 6.5
 
 Cumplido para preview: el candidato tiene SEO técnico, accesibilidad, performance, regresión visual y crawl auditados; no existen bloqueos críticos de uso; y los pendientes restantes están documentados antes de preparar Cloudflare Pages.
+
+## Actualización posterior de media
+
+**Fecha:** 2026-08-01
+
+La nueva entrega de media resolvió el pendiente del logo de identidad y los recursos principales adicionales del home. El favicon, Futura, la imagen social de marca, el alt revisado y la media Shopify restante continúan documentados como pendientes. También se corrigió la geometría del slideshow para que cada slide y su barra de controles ocupen el ancho completo en desktop y mobile.
+
+La actualización volvió a pasar `npm run check` con 0 errores, warnings y hints y `npm run build` con 42 páginas estáticas. La comprobación desde preview confirmó cargas `200` para los 11 recursos del home, cero errores de consola y cero overflow horizontal en viewport mobile.

@@ -59,10 +59,10 @@ const slides = [
 ] as const;
 
 const commitments = [
-  'Filamentos Estandarizados',
-  'Color Homogéneo en los filamentos',
-  'Te ayudamos con tips para mejorar',
-  'Cualquier problema nos avisas y respondemos',
+  { label: 'Filamentos Estandarizados', media: indexMedia.compromisoCarreteFilamento },
+  { label: 'Color Homogéneo en los filamentos', media: indexMedia.compromisoImpresion3d },
+  { label: 'Te ayudamos con tips para mejorar', media: indexMedia.compromisoLineaMeta },
+  { label: 'Cualquier problema nos avisas y respondemos', media: indexMedia.compromisoPulgarArriba },
 ] as const;
 ---
 
@@ -180,7 +180,13 @@ const commitments = [
           <h3>Filamentos PLA ✔️</h3>
         </a>
         <a class="homepage__collection-card" href="/collections/impresoras-3d">
-          <MediaPlaceholder media={null} width={1} height={1} class="homepage__collection-media" />
+          <MediaPlaceholder
+            media={indexMedia.categoriasImpresora3d}
+            width={indexMedia.categoriasImpresora3d.width}
+            height={indexMedia.categoriasImpresora3d.height}
+            class="homepage__collection-media"
+            loading="lazy"
+          />
           <h3>Impresoras 3D y superficies</h3>
         </a>
       </div>
@@ -190,10 +196,16 @@ const commitments = [
       <div class="page-width">
         <h2 id="homepage-commitments-title">Nuestros Compromisos</h2>
         <ul class="homepage__commitment-grid" role="list">
-          {commitments.map((commitment) => (
+          {commitments.map(({ label, media }) => (
             <li class="homepage__commitment">
-              <MediaPlaceholder media={null} width={1} height={1} class="homepage__commitment-media" />
-              <h3>{commitment}</h3>
+              <MediaPlaceholder
+                media={media}
+                width={media.width}
+                height={media.height}
+                class="homepage__commitment-media"
+                loading="lazy"
+              />
+              <h3>{label}</h3>
             </li>
           ))}
         </ul>

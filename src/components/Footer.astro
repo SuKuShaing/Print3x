@@ -1,5 +1,4 @@
 ---
-const currentYear = new Date().getFullYear();
 const pathname = Astro.url.pathname;
 
 // The source contact CTA is omitted because the route inventory records it as 404; no broken link or simulated contact flow is rendered.
@@ -22,7 +21,7 @@ const socialLinks = [
 
 <footer class="footer color-inverse gradient section-footer-padding">
   <div class="footer__content-top page-width">
-    <div class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet">
+    <div class="footer__blocks-wrapper grid grid--1-col grid--3-col-tablet">
       <div class="footer-block footer-block--menu grid__item">
         <h2 class="footer-block__heading inline-richtext">Politicas</h2>
         <ul class="footer-block__details-content list-unstyled list-menu">
@@ -131,7 +130,9 @@ const socialLinks = [
     <div class="footer__content-bottom-wrapper page-width footer__content-bottom-wrapper--center">
       <div class="footer__copyright caption">
         <small class="copyright__content">
-          &copy; {currentYear}, <a href="/">Print3x</a>
+          <a href="https://sanhueza.pro/" target="_blank" rel="noopener noreferrer">
+            página creada con ❤️ por Sebastián Sanhueza
+          </a>
         </small>
       </div>
     </div>

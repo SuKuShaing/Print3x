@@ -2,6 +2,8 @@
 
 .footer {
   border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  /* Reapply the inverse scheme to text inherited from body. */
+  color: rgba(var(--color-foreground), 0.75);
 }
 
 .footer:not(.color-background-1) {

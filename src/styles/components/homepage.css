@@ -3,6 +3,8 @@
 }
 
 .homepage__slideshow {
+  display: flex;
+  flex-direction: column;
   isolation: isolate;
 }
 
@@ -14,7 +16,9 @@
 
 .homepage__slide {
   display: none;
+  flex: 0 0 100%;
   min-height: 34rem;
+  max-width: none;
   width: 100%;
 }
 
@@ -62,6 +66,7 @@
   justify-content: center;
   min-height: 5rem;
   position: relative;
+  width: 100%;
   z-index: 3;
 }
 

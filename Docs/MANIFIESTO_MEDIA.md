@@ -3,19 +3,19 @@
 **Fuente Shopify:** `zip_theme_shopify_estable/`  
 **Fuente local:** `Imagenes_de_la_web/`  
 **Fecha de inspeccion:** 2026-07-29  
-**Estado:** cinco roles del index confirmados e integrados; el favicon usa un placeholder SVG local porque el recurso Shopify activo no tiene copia local confirmada. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
+**Estado:** once recursos locales entregados e integrados en el header, el index y la tarjeta de colecciones; el favicon usa un placeholder SVG local porque el recurso Shopify activo no tiene copia local confirmada. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
 
 ## Resumen de conteos
 
 | Categoria | Conteo | Alcance |
 |---|---:|---|
-| Imagenes locales entregadas | 5 | Los cinco archivos existentes en `Imagenes_de_la_web/index/`. |
+| Imagenes locales entregadas | 11 | Cinco archivos iniciales del index y seis recursos adicionales entregados por el usuario. |
 | Recursos `shopify://shop_images` unicos globales | 85 | Union de templates y `config/settings_data.json`. |
 | Ocurrencias globales de referencias Shopify | 93 | Incluye repeticiones entre templates y configuracion. |
 | Recursos distintos identificados en templates | 81 | Conteo de nombres unicos dentro de templates; el registro de ejecucion lo denomina referencias de templates. |
 | Videos externos unicos | 13 | URLs YouTube encontradas en templates; algunas aparecen mas de una vez. |
 | Fuentes Futura locales | 0 | La configuracion activa pide `futura_n4`, pero no hay archivos de fuente locales entregados. |
-| Logo local confirmado | 0 | El logo activo sigue siendo una referencia `shopify://`. |
+| Logo local confirmado | 1 | `Imagenes_de_la_web/Logo Print3x.png`, integrado en el header. No se declara equivalencia automatica con la referencia Shopify activa. |
 | Favicon local confirmado | 0 | El favicon de identidad activo sigue sin copia local; `/favicon.svg` es solo un placeholder técnico para evitar un 404. |
 | Imagen social local confirmada | 0 | `/images/social-placeholder.svg` es un placeholder técnico; no reemplaza una imagen social de marca aprobada. |
 
@@ -23,7 +23,7 @@ La suma de 81 recursos distintos de templates y 4 referencias de configuracion d
 
 ## Imagenes locales verificadas
 
-Las dimensiones y el peso se obtuvieron leyendo los cinco archivos locales. El usuario confirmo que los cuatro `Hero_*.jpg` son las imagenes del hero del index y que `Categorias_1_filamentos_pla.jpg` es una imagen de coleccion del index. Esta confirmacion define el rol de uso, no una equivalencia con un nombre de imagen Shopify.
+Las dimensiones y el peso se obtuvieron leyendo los once archivos locales. El usuario confirmo que los cuatro `Hero_*.jpg` son las imagenes del hero del index y que las imagenes de categorias e iconos corresponden a los bloques descritos en el pedido. Esta confirmacion define el rol de uso, no una equivalencia con un nombre de imagen Shopify.
 
 | Archivo local | Ruta | Formato | Dimensiones | Peso | Uso confirmado | Alt | Equivalencia Shopify |
 |---|---|---|---:|---:|---|---|---|
@@ -33,7 +33,18 @@ Las dimensiones y el peso se obtuvieron leyendo los cinco archivos locales. El u
 | `Hero_4.jpg` | `Imagenes_de_la_web/index/Hero_4.jpg` | JPEG | `1799 x 927` | `604403` bytes | `index`, hero 4; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
 | `Categorias_1_filamentos_pla.jpg` | `Imagenes_de_la_web/index/Categorias_1_filamentos_pla.jpg` | JPEG | `1000 x 750` | `450549` bytes | `index` y tarjeta/hero de la colección PLA; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
 
-**Regla:** los cinco archivos tienen estado local `available` y rutas finales bajo `/images/index/`. Los cuatro heroes tienen uso `index`; `Categorias_1_filamentos_pla.jpg` tiene uso `index` y `collection` porque el usuario confirmó que es una imagen de colección. Ninguno se declara equivalente a `Cinco_hermosos...`, `Banner_2...`, `Banner_3...` u otra referencia Shopify sin evidencia de origen. Las otras 85 referencias Shopify siguen pendientes; esta confirmación no las convierte en disponibles.
+### Recursos adicionales entregados y verificados
+
+| Archivo local | Ruta | Formato | Dimensiones | Peso | Uso confirmado | Alt | Equivalencia Shopify |
+|---|---|---|---:|---:|---|---|---|
+| `Logo Print3x.png` | `Imagenes_de_la_web/Logo Print3x.png` | PNG | `2362 x 433` | `55421` bytes | `header`, logo de identidad; confirmado por el usuario. | Pendiente; el header usa `alt` vacio y su enlace conserva el nombre de Print3x. | No asignada. |
+| `Categorias_2_impresora_3D_Axis_one.jpg` | `Imagenes_de_la_web/index/Categorias_2_impresora_3D_Axis_one.jpg` | JPEG | `4928 x 3264` | `2509141` bytes | `index`, categoria de impresoras; tambien tarjeta de `/collections`; confirmado por el nombre y el pedido del usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Nuestros_compromisos_icono_1_carrete_filamento.avif` | `Imagenes_de_la_web/index/Nuestros_compromisos_icono_1_carrete_filamento.avif` | AVIF | `150 x 150` | `5187` bytes | `index`, compromiso 1. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Nuestros_compromisos_icono_2_impresion-3d.avif` | `Imagenes_de_la_web/index/Nuestros_compromisos_icono_2_impresion-3d.avif` | AVIF | `150 x 150` | `2609` bytes | `index`, compromiso 2. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Nuestros_compromisos_icono_3_linea-de-meta.avif` | `Imagenes_de_la_web/index/Nuestros_compromisos_icono_3_linea-de-meta.avif` | AVIF | `150 x 150` | `6458` bytes | `index`, compromiso 3. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Nuestros_compromisos_icono_4_pulgar_arriba.avif` | `Imagenes_de_la_web/index/Nuestros_compromisos_icono_4_pulgar_arriba.avif` | AVIF | `150 x 150` | `6362` bytes | `index`, compromiso 4. | Pendiente: no se conserva texto no observado. | No asignada. |
+
+**Regla:** los once archivos tienen estado local `available`; los diez recursos del index usan rutas finales bajo `/images/index/` y el logo usa `/images/brand/logo-print3x.png`. Los cuatro heroes tienen uso `index`; las dos imagenes de categorias tienen uso `index` y `collection` como tarjetas; los cuatro iconos tienen uso `index` en compromisos. Ninguno se declara equivalente a `Cinco_hermosos...`, `Banner_2...`, `Banner_3...` u otra referencia Shopify sin evidencia de origen. Las otras 85 referencias Shopify siguen pendientes; esta confirmacion no las convierte en disponibles.
 
 ## Referencias Shopify unicas: 85
 
@@ -48,7 +59,7 @@ Cada nombre listado corresponde a la referencia `shopify://shop_images/<nombre>`
 - `print3x_37f89bc9-34db-41c5-9279-6da27da882be.png`
 - `print3x_logos_de_seguridad_con_norton_8fe9c9fd-df41-4e2d-a6c9-7d0553b6820a.png`
 
-Fuente: `config/settings_data.json`. El logo y favicon estan activos, pero no tienen copia local confirmada.
+Fuente: `config/settings_data.json`. El favicon activo no tiene copia local confirmada. El logo entregado esta integrado en el header, pero no se declara equivalente automatico a la referencia Shopify activa.
 
 ### `templates/article.calibracion_automatica.json`: 4
 
@@ -215,14 +226,14 @@ No todas las referencias Shopify tienen dimensiones locales verificables. El pla
 | Video externo | Reservar area de cover y boton accesible | No descargar ni asignar miniaturas no verificadas. |
 | Imagen editorial | Preservar ancho de contenido y ratio de la imagen fuente si se conoce | Si no hay dimensiones, registrar pendiente antes de fijar un ratio arbitrario. |
 
-Las dimensiones conocidas de los cinco archivos locales pueden usarse para sus propios bloques cuando el contenido confirme el destino. No deben utilizarse para inferir equivalencias Shopify.
+Las dimensiones conocidas de los once archivos locales pueden usarse para sus propios bloques cuando el contenido confirme el destino. No deben utilizarse para inferir equivalencias Shopify.
 
 ## Prioridad de obtencion e integracion
 
 | Prioridad | Recursos | Motivo |
 |---|---|---|
-| P0 | Logo, favicon y Futura | Identidad global, head y similitud visual; actualmente no hay copias locales. |
-| P1 | Media de portada y categorias | Afecta la primera impresion y la geometria del home; los cinco archivos disponibles ya tienen rol del index confirmado por el usuario. |
+| P0 | Favicon y Futura | Identidad global, head y similitud visual; el logo local ya fue integrado, pero el favicon y la fuente siguen pendientes. |
+| P1 | Media de portada y categorias | Afecta la primera impresion y la geometria del home; los once recursos locales ya tienen rol confirmado o documentado. |
 | P1 | Media de las 31 rutas de contenido del sitemap | Afecta producto, coleccion, paginas y articulos que concentran SEO. |
 | P2 | Media larga de la coleccion PLA y paginas tecnicas | Muchos bloques; requieren placeholders consistentes y orden estable. |
 | P2 | Galerias de Axis One, Padi y articulos del curso | Contenido historico con varias imagenes y videos externos. |
@@ -252,14 +263,14 @@ Se deben revisar disponibilidad, privacidad, miniaturas, carga externa, accesibi
 
 - `type_header_font` y `type_body_font` son `futura_n4`.
 - No hay archivos Futura en `Imagenes_de_la_web/` ni un directorio de fuentes local entregado.
-- El logo activo es `print3x_37f89bc9-34db-41c5-9279-6da27da882be.png` y el favicon activo es `Favicon_73f39bdd-9378-4f51-9ccc-73019a4e9071.png`, ambos bajo `shopify://shop_images`.
+- El logo activo historico es `print3x_37f89bc9-34db-41c5-9279-6da27da882be.png` y el favicon activo es `Favicon_73f39bdd-9378-4f51-9ccc-73019a4e9071.png`, ambos bajo `shopify://shop_images`. El archivo local `Logo Print3x.png` fue entregado por el usuario e integrado en el header sin declararlo equivalente por nombre.
 - No se deben fabricar versiones locales ni sustituir Futura por una fuente generica sin decision visual y de licencia.
 
 ## Bloqueos de media
 
 1. No existe recurso local equivalente confirmado para 85 referencias Shopify unicas.
 2. No se puede mapear ningun `Hero_*.jpg` a una referencia Shopify solo por el nombre o la apariencia.
-3. Logo, favicon y fuentes Futura requieren entrega o decision de uso de CDN con licencia y disponibilidad.
+3. El favicon y las fuentes Futura requieren entrega o decision de uso de CDN con licencia y disponibilidad; el logo local ya esta integrado, pero su equivalencia historica Shopify no esta probada.
 4. Las dimensiones esperadas de la mayoria de recursos Shopify no estan disponibles localmente; deben conservarse desde el metadata de origen o dejarse como placeholder pendiente.
 5. Videos, Drive, Autodesk, Wayback, redes y formularios son dependencias externas que necesitan una revision especifica.
 6. No se puede declarar que todas las referencias tienen destino final hasta que la matriz SEO confirme que la plantilla que las usa sigue publicada.

@@ -119,3 +119,42 @@ HTML estático. No se modificaron `zip_theme_shopify_estable/`,
 estáticas controladas, no hay flujos comerciales ni redirect externo de autenticación,
 y search/cart/auth están fuera del índice mediante `noindex`. El favicon, las URLs
 limpias de Cloudflare y productos/colecciones quedan para etapas posteriores.
+
+## Actualización posterior: visibilidad y atribución del footer
+
+**Etapa:** 2 - Tarea 2.3
+**Fecha de actualización:** 2026-08-02
+**Estado:** completada.
+
+Los textos de `Nuestra misión` y `Ayúdanos a mejorar` ya estaban presentes en el
+markup, pero heredaban el color calculado del `body` y quedaban prácticamente
+ocultos sobre el fondo inverso del footer. Se reaplicó el color del esquema
+`color-inverse` al componente para que ambos bloques sean legibles.
+
+La atribución final ahora muestra `página creada con ❤️ por Sebastián Sanhueza` y
+enlaza a `https://sanhueza.pro/` en una pestaña nueva con `noopener noreferrer`. Se
+retiró la atribución de Shopify y no se agregó ninguna funcionalidad externa.
+
+### Verificación independiente de la actualización
+
+- `npm run check`: 0 errores, 0 warnings y 0 hints.
+- `npm run build`: correcto; 42 páginas estáticas generadas.
+- Preview en `390px` y `1440px`: ambos textos son visibles, el enlace apunta a
+  `https://sanhueza.pro/` y no existe overflow horizontal.
+
+## Actualización posterior: tres columnas en desktop
+
+**Etapa:** 2 - Tarea 2.3
+**Fecha de actualización:** 2026-08-02
+**Estado:** completada.
+
+La grilla del footer usa ahora tres columnas desde `750px`: `Politicas`, `Nuestra
+misión` y `Ayúdanos a mejorar` quedan alineados en la misma fila. En mobile se
+mantiene el comportamiento apilado de una columna.
+
+### Verificación independiente
+
+- Preview a `1440px`: los tres bloques comparten la misma fila y tienen ancho equivalente.
+- Preview a `390px`: los tres bloques se apilan verticalmente y no existe overflow horizontal.
+- `npm run check`: 0 errores, 0 warnings y 0 hints.
+- `npm run build`: correcto; 42 páginas estáticas generadas.

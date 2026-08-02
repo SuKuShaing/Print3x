@@ -35,8 +35,8 @@ avisas y respondemos`.
 
 - Los cuatro slides usan `MediaPlaceholder` con `indexMedia.hero1` a `hero4` y los archivos locales `/images/index/Hero_1.jpg` a `/images/index/Hero_4.jpg`.
 - La tarjeta PLA de portada, `/collections` y el hero de `/collections/pla` usan `/images/index/Categorias_1_filamentos_pla.jpg`.
-- La tarjeta `Impresoras 3D y superficies` de portada y `/collections` conserva un placeholder cuadrado; la imagen fuente de la colección no está disponible localmente.
-- Los cuatro iconos de `Nuestros Compromisos` quedan como placeholders pendientes; no se copiaron iconos Shopify.
+- En la entrega original, la tarjeta `Impresoras 3D y superficies` de portada y `/collections` conservaba un placeholder cuadrado; la actualización posterior la reemplaza con la categoría Axis One entregada.
+- En la entrega original, los cuatro iconos de `Nuestros Compromisos` quedaban como placeholders pendientes; la actualización posterior los reemplaza con los cuatro archivos locales entregados.
 - El hero de `/collections/impresoras-3d`, todas las imágenes de producto y la galería de `/collections/all` quedan como placeholders portrait pendientes.
 - No se inventaron subtítulos, imágenes, precios, filtros, quick add, API ni acciones de compra.
 
@@ -144,3 +144,32 @@ Cumplido para la entrega de Tarea 3.4: las collections y rutas estáticas genera
 ### Criterio de aceptación de 3.5
 
 Cumplido: el build estático cubre las rutas implementadas, los recursos faltantes conservan placeholders y bloqueos explícitos, no hay dependencias Shopify ejecutables, la búsqueda local no realiza requests externos y la auditoría independiente final aprobó la etapa.
+
+## Actualización posterior: nueva entrega de media del home
+
+**Etapa:** 3 - Tareas 3.1 y 3.3
+**Fecha de actualización:** 2026-08-01
+**Estado:** completada con alt pendiente y media Shopify todavía faltante documentada.
+
+El usuario entregó seis recursos adicionales en `Imagenes_de_la_web/`: el logo, una segunda imagen de categoría y cuatro iconos de compromisos. Se copiaron a rutas estables de `public/` sin modificar los originales. El logo reemplaza el placeholder del header; la categoría Axis One reemplaza la segunda tarjeta del home y la tarjeta equivalente de `/collections`; los cuatro iconos reemplazan los placeholders de `Nuestros Compromisos`.
+
+La imagen del hero interno de `/collections/impresoras-3d` conserva su estado pendiente porque la fuente histórica registrada (`foto4_edited_-_Ligera.jpg`) es distinta del asset de categoría entregado. No se inventó una equivalencia entre ambos recursos.
+
+### Archivos de la actualización
+
+- Creados: `public/images/brand/logo-print3x.png`, `public/images/index/Categorias_2_impresora_3D_Axis_one.jpg`, cuatro archivos `public/images/index/Nuestros_compromisos_*.avif` y `src/data/site-media.ts`.
+- Modificados: `src/data/index-media.ts`, `src/components/Header.astro`, `src/pages/index.astro`, `src/pages/collections/index.astro`, `src/styles/components/header.css`, `src/styles/components/homepage.css` y `Docs/MANIFIESTO_MEDIA.md`.
+- No se modificaron `Imagenes_de_la_web/`, `zip_theme_shopify_estable/` ni DNS.
+
+### Verificación independiente de la actualización
+
+- Metadatos locales verificados con `node` y `sharp`: logo `2362 x 433`, categoría `4928 x 3264` e iconos `150 x 150`.
+- `npm run check`: 0 errores, 0 warnings y 0 hints.
+- `npm run build`: correcto; 42 páginas estáticas generadas.
+- Preview con `npm run preview -- --host 127.0.0.1`: las 11 imágenes del home cargan con sus dimensiones naturales y responden `200`.
+- La portada se comprobó en desktop y mobile; el slideshow ocupa el ancho completo, los controles quedan debajo y no existe overflow horizontal.
+- La consola del home no registra errores. `/collections` carga las dos imágenes de sus tarjetas.
+
+### Criterio de aceptación de la actualización
+
+Cumplido: logo, heroes, dos categorías e iconos de compromisos se sirven desde rutas locales estables; la geometría del home se conserva en desktop y mobile; los faltantes restantes mantienen placeholders y quedan documentados.

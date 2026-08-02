@@ -23,9 +23,9 @@ const orderedCollections = collectionOrder.flatMap((slug) => {
       {orderedCollections.map((collection) => (
         <a class="collection-product-card" href={`/collections/${collection.data.slug}`}>
           <MediaPlaceholder
-            media={collection.data.slug === 'pla' ? indexMedia.categoriasFilamentosPla : null}
-            width={collection.data.slug === 'pla' ? indexMedia.categoriasFilamentosPla.width : 1500}
-            height={collection.data.slug === 'pla' ? indexMedia.categoriasFilamentosPla.height : 750}
+            media={collection.data.slug === 'pla' ? indexMedia.categoriasFilamentosPla : indexMedia.categoriasImpresora3d}
+            width={collection.data.slug === 'pla' ? indexMedia.categoriasFilamentosPla.width : indexMedia.categoriasImpresora3d.width}
+            height={collection.data.slug === 'pla' ? indexMedia.categoriasFilamentosPla.height : indexMedia.categoriasImpresora3d.height}
             class="collection-index__media"
           />
           <span class="collection-product-card__title">{collection.data.title}</span>
