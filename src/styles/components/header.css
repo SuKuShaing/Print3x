@@ -5,6 +5,11 @@
   z-index: 3;
 }
 
+.section-header.menu-open {
+  position: sticky;
+  top: 0;
+}
+
 .shopify-section-header-sticky {
   position: sticky;
   top: 0;
@@ -146,6 +151,7 @@
 }
 
 .header__menu-item .icon-caret {
+  position: static;
   flex-shrink: 0;
   width: 1rem;
   height: 0.6rem;
@@ -307,8 +313,8 @@
 }
 
 .menu-drawer {
-  position: absolute;
-  top: 100%;
+  position: fixed;
+  top: var(--header-height, 7.2rem);
   left: 0;
   z-index: 3;
   width: calc(100vw - 4rem);
@@ -331,15 +337,29 @@
   transform: translateX(0);
 }
 
-.menu-drawer-container[open]::before {
+.menu-drawer-overlay {
   position: fixed;
   top: var(--header-height, 7.2rem);
   right: 0;
   bottom: 0;
   left: 0;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
   z-index: 2;
-  content: '';
   background: rgba(var(--color-foreground), 0.5);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  cursor: default;
+  transition: opacity var(--duration-default) ease, visibility var(--duration-default) ease;
+}
+
+.menu-drawer-container[open] > .menu-drawer-overlay {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .menu-drawer__inner-container,

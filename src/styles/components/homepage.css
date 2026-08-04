@@ -127,11 +127,16 @@
 
 .homepage__slider-controls .slideshow__autoplay {
   border-left: 0.1rem solid rgba(var(--color-foreground), 0.12);
-  font-size: 1.2rem;
   margin-left: 0.8rem;
-  min-width: 0;
-  padding-left: 1.2rem;
-  text-transform: uppercase;
+  min-width: 4.4rem;
+  padding: 0 0 0 0.6rem;
+  position: static;
+}
+
+.homepage__slider-controls .slideshow__autoplay .icon {
+  color: currentColor;
+  height: 1.2rem;
+  width: 0.8rem;
 }
 
 .homepage__section {
@@ -233,44 +238,13 @@
 
 @media screen and (max-width: 749px) {
   .homepage__slider-controls {
-    display: grid;
-    grid-template-areas:
-      'previous counter next'
-      'dots dots dots'
-      'autoplay autoplay autoplay';
-    grid-template-columns: 4.4rem minmax(0, 1fr) 4.4rem;
-    row-gap: 0.4rem;
+    padding-inline: 0.4rem;
   }
 
   .homepage__slideshow .homepage__slide .homepage__slide-content .homepage__slide-box {
     --color-foreground: var(--color-base-text);
     background: rgb(var(--color-base-background-2));
     color: rgb(var(--color-base-text));
-  }
-
-  .homepage__slider-controls [data-p3x-slider-prev] {
-    grid-area: previous;
-  }
-
-  .homepage__slider-controls .slider-counter {
-    grid-area: counter;
-    justify-self: center;
-  }
-
-  .homepage__slider-controls [data-p3x-slider-next] {
-    grid-area: next;
-  }
-
-  .homepage__slider-dots {
-    grid-area: dots;
-    justify-self: center;
-  }
-
-  .homepage__slider-controls .slideshow__autoplay {
-    grid-area: autoplay;
-    justify-self: center;
-    margin-left: 0;
-    position: static;
   }
 
   .homepage__section {

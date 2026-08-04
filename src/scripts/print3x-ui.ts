@@ -63,6 +63,7 @@ function setToggleLabel(toggle: HTMLElement, paused: boolean): void {
 
   toggle.setAttribute('aria-label', label);
   toggle.setAttribute('aria-pressed', String(paused));
+  toggle.classList.toggle('slideshow__autoplay--paused', paused);
 
   const visibleLabel = toggle.querySelector<HTMLElement>('[data-p3x-slider-toggle-label]');
   if (visibleLabel) visibleLabel.textContent = label;

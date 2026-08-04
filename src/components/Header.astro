@@ -87,6 +87,7 @@ const groupIsActive = (group: MenuGroup) => group.items.some(itemIsActive);
             class="header__icon header__icon--menu header__icon--summary link focus-inset"
             aria-label="Abrir menú"
             aria-controls="menu-drawer"
+            aria-expanded="false"
           >
             <span class="header__icon-state">
               <svg class="icon icon-hamburger" aria-hidden="true" focusable="false">
@@ -97,6 +98,7 @@ const groupIsActive = (group: MenuGroup) => group.items.some(itemIsActive);
               </svg>
             </span>
           </summary>
+          <button class="menu-drawer-overlay" type="button" aria-label="Cerrar menú"></button>
           <div id="menu-drawer" class="menu-drawer motion-reduce" tabindex="-1">
             <div class="menu-drawer__inner-container">
               <div class="menu-drawer__navigation-container">
@@ -374,6 +376,7 @@ const groupIsActive = (group: MenuGroup) => group.items.some(itemIsActive);
   if (headerSection) {
     const menuDetails = headerSection.querySelector<HTMLDetailsElement>('#Details-menu-drawer-container');
     const menuSummary = menuDetails?.querySelector<HTMLElement>('summary');
+    const menuOverlay = menuDetails?.querySelector<HTMLButtonElement>('.menu-drawer-overlay');
     const menuDrawer = menuDetails?.querySelector<HTMLElement>('.menu-drawer');
     const desktopMenus = headerSection.querySelectorAll<HTMLDetailsElement>(
       '.header__inline-menu > ul > li > header-menu > details',
@@ -392,7 +395,7 @@ const groupIsActive = (group: MenuGroup) => group.items.some(itemIsActive);
       menuDetails.removeAttribute('open');
       menuSummary?.setAttribute('aria-expanded', 'false');
       headerSection.classList.remove('menu-open');
-      if (restoreFocus) menuSummary?.focus();
+      if (restoreFocus) menuSummary?.focus({ preventScroll: true });
     };
 
     const closeDesktopMenus = () => {
@@ -408,6 +411,8 @@ const groupIsActive = (group: MenuGroup) => group.items.some(itemIsActive);
         requestAnimationFrame(() => menuDrawer?.querySelector<HTMLElement>('summary, a')?.focus());
       }
     });
+
+    menuOverlay?.addEventListener('click', () => closeMenu(true));
 
     menuDrawer?.addEventListener('click', (event) => {
       if (event.target instanceof HTMLElement && event.target.closest('a')) {

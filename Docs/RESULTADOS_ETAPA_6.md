@@ -63,3 +63,43 @@ Cumplido para preview: el candidato tiene SEO técnico, accesibilidad, performan
 La nueva entrega de media resolvió el pendiente del logo de identidad y los recursos principales adicionales del home. El favicon, Futura, la imagen social de marca, el alt revisado y la media Shopify restante continúan documentados como pendientes. También se corrigió la geometría del slideshow para que cada slide y su barra de controles ocupen el ancho completo en desktop y mobile.
 
 La actualización volvió a pasar `npm run check` con 0 errores, warnings y hints y `npm run build` con 42 páginas estáticas. La comprobación desde preview confirmó cargas `200` para los 11 recursos del home, cero errores de consola y cero overflow horizontal en viewport mobile.
+
+## Actualización posterior: flechas del menú principal
+
+**Etapa:** 6 - Tarea 6.3, remediación visual posterior
+**Fecha:** 2026-08-04
+**Estado:** Completada
+
+Se corrigió `src/styles/components/header.css` para que los iconos de flecha de `Productos`, `Información` y `Nosotros` usen el flujo flex normal del resumen, en lugar de la posición absoluta común de los `summary`. El menú móvil conserva sus reglas específicas.
+
+- `npm run check`: 0 errores, 0 warnings y 0 hints.
+- `npm run build`: correcto; 42 páginas estáticas generadas.
+- Preview local a `1440px`: las tres flechas quedaron después de sus textos con `9.9px` de separación computada.
+
+## Actualización posterior: cierre y scroll del menú móvil
+
+**Etapa:** 6 - Tarea 6.3, remediación visual posterior
+**Fecha:** 2026-08-04
+**Estado:** Completada
+
+Se reemplazó el overlay generado como pseudo-elemento por un botón real que cierra el menú al hacer click fuera del drawer. El drawer ahora permanece fijo bajo el header sticky mientras la página se desplaza por debajo; el foco vuelve al control sin cambiar la posición de scroll.
+
+- `npm run check`: 0 errores, 0 warnings y 0 hints.
+- `npm run build`: correcto; 42 páginas estáticas generadas.
+- Preview local a `390px` y `768px`: drawer y header permanecen visibles durante el scroll; click en el overlay cierra el menú y conserva `scrollY=600`.
+- Preview local a `1024px` y `1440px`: menú desktop activo y drawer móvil oculto.
+- Consola del preview: sin errores ni warnings.
+
+## Actualización posterior: controles del slideshow del hero
+
+**Etapa:** 6 - Tarea 6.3, remediación visual posterior
+**Fecha:** 2026-08-04
+**Estado:** Completada
+
+Se eliminó la exposición visual del contador `1 / 4`, se conservaron sus actualizaciones como estado accesible oculto y se reemplazó el texto de pausa por los iconos SVG de pausa/reproducción del tema Refresh. La barra conserva los cuatro puntos como indicador visual, mantiene el estado accesible del botón y se presenta en una sola fila en desktop y mobile.
+
+- `npm run check`: 0 errores, 0 warnings y 0 hints.
+- `npm run build`: correcto; 42 páginas estáticas generadas.
+- Preview local a `390px`, `768px`, `1024px` y `1440px`: controles en una sola fila, altura de `55px`, targets de `48.4px` y sin overflow horizontal.
+- Interacción: el botón muestra pausa mientras reproduce y reproducción al pausar; `aria-label` y `aria-pressed` cambian correctamente.
+- Consola del preview: sin errores ni warnings.
