@@ -95,8 +95,11 @@
     padding-top: 2.4rem;
   }
 
-  .collection-page__grid,
-  .collection-page__grid--collections {
+  .collection-page__grid:not(.collection-page__grid--collections) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .collection-page__grid--collections {
+    grid-template-columns: 1fr;
   }
 }
