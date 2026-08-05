@@ -103,3 +103,17 @@ Se eliminó la exposición visual del contador `1 / 4`, se conservaron sus actua
 - Preview local a `390px`, `768px`, `1024px` y `1440px`: controles en una sola fila, altura de `55px`, targets de `48.4px` y sin overflow horizontal.
 - Interacción: el botón muestra pausa mientras reproduce y reproducción al pausar; `aria-label` y `aria-pressed` cambian correctamente.
 - Consola del preview: sin errores ni warnings.
+
+## Actualización posterior: recuadro del hero debajo de la imagen en mobile
+
+**Etapa:** 6 - Tarea 6.3, remediación visual posterior
+**Fecha:** 2026-08-04
+**Estado:** Completada
+
+Se replicó el comportamiento `banner--mobile-bottom` de la sección `slideshow` de Shopify en el hero de Astro. En pantallas de hasta `749px`, la imagen vuelve al flujo normal, el recuadro pasa después de la imagen y su wrapper deja de imponer la altura mínima de `34rem`. Desktop conserva el recuadro superpuesto sobre la imagen.
+
+- `npm run check`: 0 errores, 0 warnings y 0 hints.
+- `npm run build`: correcto; 42 páginas estáticas generadas.
+- Preview local: en mobile la imagen termina exactamente donde comienza el recuadro, con `order: 2`, `position: relative` y sin overflow horizontal.
+- Preview local: en desktop el contenido conserva la superposición, el centrado y la altura visual del hero.
+- Consola del preview: sin errores ni warnings.
