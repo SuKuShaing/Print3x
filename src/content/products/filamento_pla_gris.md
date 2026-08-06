@@ -15,10 +15,10 @@ historicalPriceMaxCLP: null
 presentations: [Default Title]
 tags: ['1 kg', '1.75', '3D', Filamento, PLA]
 media:
-  - {status: pending, sourceReference: 'Producto endpoint media 1: FilamentoGrisPrint3xCaja_rolloyhuevo.jpg', use: 'Galería de producto', expectedDimensions: '1000 x 1000', aspectRatio: '1', reason: 'La imagen no está disponible en Imagenes_de_la_web.'}
-  - {status: pending, sourceReference: 'Producto endpoint media 2: FilamentoGrisPrint3xrolloyhuevo.jpg', use: 'Galería de producto', expectedDimensions: '1000 x 1000', aspectRatio: '1', reason: 'La imagen no está disponible en Imagenes_de_la_web.'}
-  - {status: pending, sourceReference: 'Producto endpoint media 3: FilamentoGrisPrint3xCajayrollo.jpg', use: 'Galería de producto', expectedDimensions: '1000 x 1000', aspectRatio: '1', reason: 'La imagen no está disponible en Imagenes_de_la_web.'}
-  - {status: pending, sourceReference: 'Producto endpoint media 4: HuevoGrisPLAPrint3x.jpg', use: 'Galería de producto', expectedDimensions: '1000 x 1000', aspectRatio: '1', reason: 'La imagen no está disponible en Imagenes_de_la_web.'}
+  - {status: pending, sourceReference: 'Producto endpoint media 1: FilamentoGrisPrint3xCaja_rolloyhuevo.jpg', use: 'Galería de producto', expectedDimensions: '1000 x 1000', aspectRatio: '1', reason: 'La imagen no está disponible entre los assets locales entregados.'}
+  - {status: pending, sourceReference: 'Producto endpoint media 2: FilamentoGrisPrint3xrolloyhuevo.jpg', use: 'Galería de producto', expectedDimensions: '1000 x 1000', aspectRatio: '1', reason: 'La imagen no está disponible entre los assets locales entregados.'}
+  - {status: pending, sourceReference: 'Producto endpoint media 3: FilamentoGrisPrint3xCajayrollo.jpg', use: 'Galería de producto', expectedDimensions: '1000 x 1000', aspectRatio: '1', reason: 'La imagen no está disponible entre los assets locales entregados.'}
+  - {status: pending, sourceReference: 'Producto endpoint media 4: HuevoGrisPLAPrint3x.jpg', use: 'Galería de producto', expectedDimensions: '1000 x 1000', aspectRatio: '1', reason: 'La imagen no está disponible entre los assets locales entregados.'}
 ---
 
 ## Descripción

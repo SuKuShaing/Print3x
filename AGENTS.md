@@ -24,7 +24,7 @@
 - `src/content/` contiene colecciones Astro para `products`, `collections`, `pages`, `blogs` y `articles`, validadas en `src/content.config.ts`.
 - `src/pages/` genera portada, productos, colecciones, paginas, blogs, articulos, policies, 404, busqueda, carrito, autenticacion, sitemap, robots y favicons.
 - `src/data/` contiene contratos estaticos, policies y el inventario de los cinco assets locales del index. `src/scripts/print3x-ui.ts` contiene solo interacciones visuales opt-in mediante `data-p3x-*`.
-- `src/styles/` adapta el sistema visual de Refresh; `public/images/index/` contiene los cinco archivos locales disponibles y `public/fonts/` no contiene Futura.
+- `src/styles/` adapta el sistema visual de Refresh; `src/assets/` contiene los once archivos locales disponibles y `public/fonts/` no contiene Futura.
 
 ## Seguimiento obligatorio
 
@@ -41,6 +41,7 @@
 - Genera rutas exclusivamente desde contenido aprobado. La existencia de `templates/*.json` no confirma una URL publica.
 - No inventes texto, metadata, datos, imagenes, alt ni precios. Los precios actuales en productos son historicos y deben permanecer etiquetados como tales.
 - Si falta media, conserva el bloque, su proporcion y dimensiones esperadas mediante `pending` o `MediaPlaceholder`; registra fuente, uso, proporcion y bloqueo en el contenido o en `Docs/MANIFIESTO_MEDIA.md`.
+- Regla obligatoria para toda imagen actual o futura: renderiza las imagenes de contenido mediante `<Picture>` de `astro:assets` para que pasen por la optimizacion, conversion de formato y variantes responsive de Astro. No escribas `<img>` directamente en la aplicacion; el `<img>` interno generado por `<Picture>` es la unica salida permitida.
 - No borres ni sobrescribas trabajo del usuario en `zip_theme_shopify_estable/` o `Imagenes_de_la_web/`.
 - No modifiques DNS, no canceles Shopify y no publiques en produccion sin autorizacion explicita. Shopify debe permanecer disponible hasta validar el reemplazo y el rollback.
 

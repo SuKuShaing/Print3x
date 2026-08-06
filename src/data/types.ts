@@ -1,3 +1,5 @@
+import type { ImageMetadata } from 'astro';
+
 /**
  * Contratos de contenido para el escaparate estatico de Print3x.
  *
@@ -25,14 +27,14 @@ export interface AvailableMediaAssetWithReviewedAlt extends MediaAssetBase {
   status: 'available';
   altStatus: 'reviewed';
   alt: string;
-  src: string;
+  src: ImageMetadata;
 }
 
 export interface AvailableMediaAssetWithPendingAlt extends MediaAssetBase {
   status: 'available';
   altStatus: 'pending';
   alt: null;
-  src: string;
+  src: ImageMetadata;
 }
 
 export type AvailableMediaAsset =

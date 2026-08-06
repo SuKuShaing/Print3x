@@ -1,9 +1,9 @@
 # Manifiesto de media, fuentes y placeholders
 
 **Fuente Shopify:** `zip_theme_shopify_estable/`  
-**Fuente local:** `Imagenes_de_la_web/`  
-**Fecha de inspeccion:** 2026-07-29  
-**Estado:** once recursos locales entregados e integrados en el header, el index y la tarjeta de colecciones; el favicon usa un placeholder SVG local porque el recurso Shopify activo no tiene copia local confirmada. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
+**Fuente local:** `src/assets/`
+**Fecha de inspeccion:** 2026-08-05
+**Estado:** once recursos locales entregados e integrados desde `src/assets` mediante `<Picture>` en el header, el index y las tarjetas de colecciones; el favicon usa un placeholder SVG local porque el recurso Shopify activo no tiene copia local confirmada. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
 
 ## Resumen de conteos
 
@@ -15,7 +15,7 @@
 | Recursos distintos identificados en templates | 81 | Conteo de nombres unicos dentro de templates; el registro de ejecucion lo denomina referencias de templates. |
 | Videos externos unicos | 13 | URLs YouTube encontradas en templates; algunas aparecen mas de una vez. |
 | Fuentes Futura locales | 0 | La configuracion activa pide `futura_n4`, pero no hay archivos de fuente locales entregados. |
-| Logo local confirmado | 1 | `Imagenes_de_la_web/Logo Print3x.png`, integrado en el header. No se declara equivalencia automatica con la referencia Shopify activa. |
+| Logo local confirmado | 1 | `src/assets/Logo Print3x.png`, integrado en el header. No se declara equivalencia automatica con la referencia Shopify activa. |
 | Favicon local confirmado | 0 | El favicon de identidad activo sigue sin copia local; `/favicon.svg` es solo un placeholder técnico para evitar un 404. |
 | Imagen social local confirmada | 0 | `/images/social-placeholder.svg` es un placeholder técnico; no reemplaza una imagen social de marca aprobada. |
 
@@ -27,24 +27,24 @@ Las dimensiones y el peso se obtuvieron leyendo los once archivos locales. El us
 
 | Archivo local | Ruta | Formato | Dimensiones | Peso | Uso confirmado | Alt | Equivalencia Shopify |
 |---|---|---|---:|---:|---|---|---|
-| `Hero_1.jpg` | `Imagenes_de_la_web/index/Hero_1.jpg` | JPEG | `2500 x 2500` | `3513757` bytes | `index`, hero 1; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
-| `Hero_2.jpg` | `Imagenes_de_la_web/index/Hero_2.jpg` | JPEG | `2500 x 1146` | `1452158` bytes | `index`, hero 2; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
-| `Hero_3.jpg` | `Imagenes_de_la_web/index/Hero_3.jpg` | JPEG | `1799 x 927` | `809984` bytes | `index`, hero 3; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
-| `Hero_4.jpg` | `Imagenes_de_la_web/index/Hero_4.jpg` | JPEG | `1799 x 927` | `604403` bytes | `index`, hero 4; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
-| `Categorias_1_filamentos_pla.jpg` | `Imagenes_de_la_web/index/Categorias_1_filamentos_pla.jpg` | JPEG | `1000 x 750` | `450549` bytes | `index` y tarjeta/hero de la colección PLA; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Hero_1.jpg` | `src/assets/index/Hero_1.jpg` | JPEG | `2500 x 2500` | `3513757` bytes | `index`, hero 1; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Hero_2.jpg` | `src/assets/index/Hero_2.jpg` | JPEG | `2500 x 1146` | `1452158` bytes | `index`, hero 2; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Hero_3.jpg` | `src/assets/index/Hero_3.jpg` | JPEG | `1799 x 927` | `809984` bytes | `index`, hero 3; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Hero_4.jpg` | `src/assets/index/Hero_4.jpg` | JPEG | `1799 x 927` | `604403` bytes | `index`, hero 4; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Categorias_1_filamentos_pla.jpg` | `src/assets/index/Categorias_1_filamentos_pla.jpg` | JPEG | `1000 x 750` | `450549` bytes | `index` y tarjeta/hero de la colección PLA; confirmado por el usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
 
 ### Recursos adicionales entregados y verificados
 
 | Archivo local | Ruta | Formato | Dimensiones | Peso | Uso confirmado | Alt | Equivalencia Shopify |
 |---|---|---|---:|---:|---|---|---|
-| `Logo Print3x.png` | `Imagenes_de_la_web/Logo Print3x.png` | PNG | `2362 x 433` | `55421` bytes | `header`, logo de identidad; confirmado por el usuario. | Pendiente; el header usa `alt` vacio y su enlace conserva el nombre de Print3x. | No asignada. |
-| `Categorias_2_impresora_3D_Axis_one.jpg` | `Imagenes_de_la_web/index/Categorias_2_impresora_3D_Axis_one.jpg` | JPEG | `4928 x 3264` | `2509141` bytes | `index`, categoria de impresoras; tambien tarjeta de `/collections`; confirmado por el nombre y el pedido del usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
-| `Nuestros_compromisos_icono_1_carrete_filamento.avif` | `Imagenes_de_la_web/index/Nuestros_compromisos_icono_1_carrete_filamento.avif` | AVIF | `150 x 150` | `5187` bytes | `index`, compromiso 1. | Pendiente: no se conserva texto no observado. | No asignada. |
-| `Nuestros_compromisos_icono_2_impresion-3d.avif` | `Imagenes_de_la_web/index/Nuestros_compromisos_icono_2_impresion-3d.avif` | AVIF | `150 x 150` | `2609` bytes | `index`, compromiso 2. | Pendiente: no se conserva texto no observado. | No asignada. |
-| `Nuestros_compromisos_icono_3_linea-de-meta.avif` | `Imagenes_de_la_web/index/Nuestros_compromisos_icono_3_linea-de-meta.avif` | AVIF | `150 x 150` | `6458` bytes | `index`, compromiso 3. | Pendiente: no se conserva texto no observado. | No asignada. |
-| `Nuestros_compromisos_icono_4_pulgar_arriba.avif` | `Imagenes_de_la_web/index/Nuestros_compromisos_icono_4_pulgar_arriba.avif` | AVIF | `150 x 150` | `6362` bytes | `index`, compromiso 4. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Logo Print3x.png` | `src/assets/Logo Print3x.png` | PNG | `2362 x 433` | `55421` bytes | `header`, logo de identidad; confirmado por el usuario. | Pendiente; el header usa `alt` vacio y su enlace conserva el nombre de Print3x. | No asignada. |
+| `Categorias_2_impresora_3D_Axis_one.jpg` | `src/assets/index/Categorias_2_impresora_3D_Axis_one.jpg` | JPEG | `4928 x 3264` | `2509141` bytes | `index`, categoria de impresoras; tambien tarjeta de `/collections`; confirmado por el nombre y el pedido del usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Nuestros_compromisos_icono_1_carrete_filamento.avif` | `src/assets/index/Nuestros_compromisos_icono_1_carrete_filamento.avif` | AVIF | `150 x 150` | `5187` bytes | `index`, compromiso 1. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Nuestros_compromisos_icono_2_impresion-3d.avif` | `src/assets/index/Nuestros_compromisos_icono_2_impresion-3d.avif` | AVIF | `150 x 150` | `2609` bytes | `index`, compromiso 2. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Nuestros_compromisos_icono_3_linea-de-meta.avif` | `src/assets/index/Nuestros_compromisos_icono_3_linea-de-meta.avif` | AVIF | `150 x 150` | `6458` bytes | `index`, compromiso 3. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Nuestros_compromisos_icono_4_pulgar_arriba.avif` | `src/assets/index/Nuestros_compromisos_icono_4_pulgar_arriba.avif` | AVIF | `150 x 150` | `6362` bytes | `index`, compromiso 4. | Pendiente: no se conserva texto no observado. | No asignada. |
 
-**Regla:** los once archivos tienen estado local `available`; los diez recursos del index usan rutas finales bajo `/images/index/` y el logo usa `/images/brand/logo-print3x.png`. Los cuatro heroes tienen uso `index`; las dos imagenes de categorias tienen uso `index` y `collection` como tarjetas; los cuatro iconos tienen uso `index` en compromisos. Ninguno se declara equivalente a `Cinco_hermosos...`, `Banner_2...`, `Banner_3...` u otra referencia Shopify sin evidencia de origen. Las otras 85 referencias Shopify siguen pendientes; esta confirmacion no las convierte en disponibles.
+**Regla:** los once archivos tienen estado local `available`; todos se importan desde `src/assets/` y Astro genera sus rutas optimizadas bajo `/_astro/`. Los cuatro heroes tienen uso `index`; las dos imagenes de categorias tienen uso `index` y `collection` como tarjetas; los cuatro iconos tienen uso `index` en compromisos. Ninguno se declara equivalente a `Cinco_hermosos...`, `Banner_2...`, `Banner_3...` u otra referencia Shopify sin evidencia de origen. Las otras 85 referencias Shopify siguen pendientes; esta confirmacion no las convierte en disponibles.
 
 ## Referencias Shopify unicas: 85
 
@@ -228,6 +228,10 @@ No todas las referencias Shopify tienen dimensiones locales verificables. El pla
 
 Las dimensiones conocidas de los once archivos locales pueden usarse para sus propios bloques cuando el contenido confirme el destino. No deben utilizarse para inferir equivalencias Shopify.
 
+## Optimizacion con Astro
+
+Los once archivos disponibles se importan desde `src/assets/` como metadata de imagen de Astro. `MediaPlaceholder.astro` y el logo del header usan `<Picture>` con fuentes `avif` y `webp`, fallback del formato original, `sizes` y variantes `srcset` para `390`, `768`, `1024` y `1440` px. Las variantes no amplian archivos que sean menores que cada breakpoint; los placeholders de media pendiente no se transforman ni se sustituyen.
+
 ## Prioridad de obtencion e integracion
 
 | Prioridad | Recursos | Motivo |
@@ -262,7 +266,7 @@ Se deben revisar disponibilidad, privacidad, miniaturas, carga externa, accesibi
 ## Futura, logo y favicon
 
 - `type_header_font` y `type_body_font` son `futura_n4`.
-- No hay archivos Futura en `Imagenes_de_la_web/` ni un directorio de fuentes local entregado.
+- No hay archivos Futura en `src/assets/` ni un directorio de fuentes local entregado.
 - El logo activo historico es `print3x_37f89bc9-34db-41c5-9279-6da27da882be.png` y el favicon activo es `Favicon_73f39bdd-9378-4f51-9ccc-73019a4e9071.png`, ambos bajo `shopify://shop_images`. El archivo local `Logo Print3x.png` fue entregado por el usuario e integrado en el header sin declararlo equivalente por nombre.
 - No se deben fabricar versiones locales ni sustituir Futura por una fuente generica sin decision visual y de licencia.
 

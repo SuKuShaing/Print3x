@@ -16,7 +16,7 @@ media:
     use: 'Imagen principal de la colección'
     expectedDimensions: '750 x pendiente'
     aspectRatio: 'pendiente'
-    reason: 'La imagen no está disponible en Imagenes_de_la_web.'
+    reason: 'La imagen no está disponible entre los assets locales entregados.'
 ---
 
 ## Descripción

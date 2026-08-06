@@ -1,4 +1,5 @@
 import type { AvailableMediaAsset } from './types';
+import logo from '../assets/Logo Print3x.png';
 
 type SiteMediaAsset = AvailableMediaAsset & {
   filename: string;
@@ -9,10 +10,10 @@ type SiteMediaAsset = AvailableMediaAsset & {
 export const siteMedia = {
   logo: {
     filename: 'Logo Print3x.png',
-    sourceFile: 'Imagenes_de_la_web/Logo Print3x.png',
-    src: '/images/brand/logo-print3x.png',
-    width: 2362,
-    height: 433,
+    sourceFile: 'src/assets/Logo Print3x.png',
+    src: logo,
+    width: logo.width,
+    height: logo.height,
     usage: 'header',
     status: 'available',
     alt: null,

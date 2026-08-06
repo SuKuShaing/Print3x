@@ -79,6 +79,10 @@
   display: inline-block;
 }
 
+.header__heading-logo-picture {
+  display: block;
+}
+
 .header__heading-logo {
   display: block;
   height: 4rem;

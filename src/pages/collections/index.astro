@@ -27,6 +27,7 @@ const orderedCollections = collectionOrder.flatMap((slug) => {
             width={collection.data.slug === 'pla' ? indexMedia.categoriasFilamentosPla.width : indexMedia.categoriasImpresora3d.width}
             height={collection.data.slug === 'pla' ? indexMedia.categoriasFilamentosPla.height : indexMedia.categoriasImpresora3d.height}
             class="collection-index__media"
+            sizes="(min-width: 750px) 50vw, 100vw"
           />
           <span class="collection-product-card__title">{collection.data.title}</span>
         </a>

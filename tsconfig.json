@@ -9,7 +9,6 @@
     "dist",
     "node_modules",
     "zip_theme_shopify_estable",
-    "Imagenes_de_la_web",
     ".playwright-mcp"
   ]
 }

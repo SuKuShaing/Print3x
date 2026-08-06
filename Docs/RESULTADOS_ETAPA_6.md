@@ -49,7 +49,7 @@ No se modificaron `zip_theme_shopify_estable/`, `Imagenes_de_la_web/` ni DNS.
 - Validar el comportamiento real de URLs limpias, `.html` y slash en Cloudflare Pages.
 - Futura, favicon de identidad, imagen social de marca y media Shopify faltante siguen pendientes; el logo local se integró en la actualización del 2026-08-01.
 - Las policies conservan contenido legal histórico y requieren revisión antes de publicación.
-- `dist` pesa aproximadamente `10.13 MB`, principalmente por imágenes hero y de categoría JPEG sin optimización adicional.
+- La medición de `dist` de esta revisión corresponde al estado previo a integrar `astro:assets`; las imágenes JPEG todavía no tenían optimización adicional.
 - `alt` de imágenes entregadas sigue pendiente porque no existe texto aprobado en la fuente.
 
 ## Criterio de aceptación de Etapa 6 - Tarea 6.5
@@ -117,3 +117,17 @@ Se replicó el comportamiento `banner--mobile-bottom` de la sección `slideshow`
 - Preview local: en mobile la imagen termina exactamente donde comienza el recuadro, con `order: 2`, `position: relative` y sin overflow horizontal.
 - Preview local: en desktop el contenido conserva la superposición, el centrado y la altura visual del hero.
 - Consola del preview: sin errores ni warnings.
+
+## Actualización posterior: optimización de media con Astro
+
+**Etapa:** 7 - Tarea 7.2, trabajo suplementario de media solicitado
+**Fecha:** 2026-08-05
+**Estado:** Completada con alt y media faltante documentados
+
+Los once assets locales ahora se importan desde `src/assets` y se renderizan con `<Picture>` desde `astro:assets`. El build genera fuentes AVIF, WebP y fallback con variantes responsive; la portada contiene 11 elementos `<picture>`, 22 fuentes y 33 `srcset`. La preview en `390px` y `1440px` confirmó que el hero, las tarjetas, el logo y los compromisos conservan sus cajas, que no hay overflow horizontal y que las imágenes seleccionan rutas `/_astro/`.
+
+- `npm run check`: 0 errores, 0 warnings y 0 hints.
+- `npm run build`: correcto; 42 páginas estáticas y 84 transformaciones de imagen generadas.
+- Preview local: `/` y `/collections` cargan los recursos optimizados; consola sin errores en las rutas comprobadas.
+- Se retiraron las copias duplicadas sin optimizar de `public/images`; los placeholders SVG técnicos permanecen en `public`.
+- El `alt` revisado, el favicon de identidad, Futura y las restantes referencias Shopify siguen pendientes según el manifiesto.

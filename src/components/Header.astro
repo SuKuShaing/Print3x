@@ -1,5 +1,9 @@
 ---
+import { Picture } from 'astro:assets';
 import { siteMedia } from '../data/site-media';
+
+const logoPictureWidth = 400;
+const logoPictureHeight = Math.round(logoPictureWidth * siteMedia.logo.height / siteMedia.logo.width);
 
 type MenuLink = {
   label: string;
@@ -196,14 +200,19 @@ const groupIsActive = (group: MenuGroup) => group.items.some(itemIsActive);
       <div class="header__heading">
         <a href="/" class="header__heading-link link link--text focus-inset" aria-label="Inicio de Print3x">
           <span class="header__heading-logo-wrapper">
-            <img
-              class="header__heading-logo"
+            <Picture
               src={siteMedia.logo.src}
+              formats={['avif', 'webp']}
+              fallbackFormat="png"
+              widths={[200, 400]}
+              sizes="200px"
               alt=""
-              width={siteMedia.logo.width}
-              height={siteMedia.logo.height}
+              class="header__heading-logo"
+              width={logoPictureWidth}
+              height={logoPictureHeight}
               loading="eager"
               decoding="async"
+              pictureAttributes={{ class: 'header__heading-logo-picture' }}
             />
           </span>
         </a>

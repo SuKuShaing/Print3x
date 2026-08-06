@@ -21,7 +21,7 @@ media:
     use: 'Galería principal de producto'
     expectedDimensions: '1024 x 1098'
     aspectRatio: '0.933'
-    reason: 'La imagen no está disponible en Imagenes_de_la_web.'
+    reason: 'La imagen no está disponible entre los assets locales entregados.'
   - status: pending
     sourceReference: 'Producto endpoint media 2: video YouTube J-rV8g_5Te4'
     use: 'Video de producto'
@@ -33,31 +33,31 @@ media:
     use: 'Galería de producto'
     expectedDimensions: '1024 x 1546'
     aspectRatio: '0.662'
-    reason: 'La imagen no está disponible en Imagenes_de_la_web.'
+    reason: 'La imagen no está disponible entre los assets locales entregados.'
   - status: pending
     sourceReference: 'Producto endpoint media 4: foto1_edited-Ligera.jpg'
     use: 'Galería de producto'
     expectedDimensions: '1024 x 1063'
     aspectRatio: '0.963'
-    reason: 'La imagen no está disponible en Imagenes_de_la_web.'
+    reason: 'La imagen no está disponible entre los assets locales entregados.'
   - status: pending
     sourceReference: 'Producto endpoint media 5: 7Print3x-Ligera.png'
     use: 'Galería de producto'
     expectedDimensions: '1024 x 991'
     aspectRatio: '1.033'
-    reason: 'La imagen no está disponible en Imagenes_de_la_web.'
+    reason: 'La imagen no está disponible entre los assets locales entregados.'
   - status: pending
     sourceReference: 'Producto endpoint media 6: 23print3x-Ligera.png'
     use: 'Galería de producto'
     expectedDimensions: '1024 x 995'
     aspectRatio: '1.029'
-    reason: 'La imagen no está disponible en Imagenes_de_la_web.'
+    reason: 'La imagen no está disponible entre los assets locales entregados.'
   - status: pending
     sourceReference: 'Producto endpoint media 7: 11print3x-Ligera.png'
     use: 'Galería de producto'
     expectedDimensions: '1024 x 1010'
     aspectRatio: '1.014'
-    reason: 'La imagen no está disponible en Imagenes_de_la_web.'
+    reason: 'La imagen no está disponible entre los assets locales entregados.'
 ---
 
 ## Descripción

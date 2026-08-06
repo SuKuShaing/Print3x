@@ -22,25 +22,25 @@ media:
     use: 'Galería principal de producto'
     expectedDimensions: '1152 x 768'
     aspectRatio: '1.5'
-    reason: 'La imagen no está disponible en Imagenes_de_la_web.'
+    reason: 'La imagen no está disponible entre los assets locales entregados.'
   - status: pending
     sourceReference: 'Producto endpoint media 2: DSC_0005.JPG-Ligera.jpg'
     use: 'Galería de producto'
     expectedDimensions: '1152 x 768'
     aspectRatio: '1.5'
-    reason: 'La imagen no está disponible en Imagenes_de_la_web.'
+    reason: 'La imagen no está disponible entre los assets locales entregados.'
   - status: pending
     sourceReference: 'Producto endpoint media 3: DSC_0009.JPG-Ligera.jpg'
     use: 'Galería de producto'
     expectedDimensions: '1152 x 768'
     aspectRatio: '1.5'
-    reason: 'La imagen no está disponible en Imagenes_de_la_web.'
+    reason: 'La imagen no está disponible entre los assets locales entregados.'
   - status: pending
     sourceReference: 'Producto endpoint media 4: DSC_0010.JPG-Ligera.jpg'
     use: 'Galería de producto'
     expectedDimensions: '1152 x 768'
     aspectRatio: '1.5'
-    reason: 'La imagen no está disponible en Imagenes_de_la_web.'
+    reason: 'La imagen no está disponible entre los assets locales entregados.'
 ---
 
 ## Descripción

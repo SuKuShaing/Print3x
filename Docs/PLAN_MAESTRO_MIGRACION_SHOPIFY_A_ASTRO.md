@@ -68,17 +68,17 @@ La apariencia y las clases utiles se pueden conservar; la logica comercial debe 
 La carpeta local de imagenes es:
 
 ```text
-Imagenes_de_la_web/
+src/assets/
 ```
 
 Por ahora hay estos recursos de la portada:
 
 ```text
-Imagenes_de_la_web/index/Hero_1.jpg
-Imagenes_de_la_web/index/Hero_2.jpg
-Imagenes_de_la_web/index/Hero_3.jpg
-Imagenes_de_la_web/index/Hero_4.jpg
-Imagenes_de_la_web/index/Categorias_1_filamentos_pla.jpg
+src/assets/index/Hero_1.jpg
+src/assets/index/Hero_2.jpg
+src/assets/index/Hero_3.jpg
+src/assets/index/Hero_4.jpg
+src/assets/index/Categorias_1_filamentos_pla.jpg
 ```
 
 El resto de fotografias se incorporara progresivamente. La implementacion debe tolerar que una imagen aun no exista y mostrar un espacio de media con la misma proporcion, `width`, `height` y comportamiento responsive previsto.
@@ -297,7 +297,7 @@ La migracion se considera completa cuando:
 
 ## 11. Pendientes para las siguientes sesiones
 
-- Completar la carpeta `Imagenes_de_la_web/`.
+- Completar la carpeta `src/assets/`.
 - Definir el repositorio y la estructura inicial del proyecto Astro.
 - Confirmar si se conservara Google Tag Manager y con que objetivo.
 - Resolver el comportamiento definitivo de `/cart`, `/search` y rutas de cliente.

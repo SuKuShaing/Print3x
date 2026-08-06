@@ -1,4 +1,5 @@
 ---
+import { Picture } from 'astro:assets';
 import type { MediaReference } from '../data/types';
 
 interface Props {
@@ -10,6 +11,8 @@ interface Props {
   loading?: 'eager' | 'lazy';
   decoding?: 'async' | 'auto' | 'sync';
   fetchpriority?: 'high' | 'low' | 'auto';
+  sizes?: string;
+  widths?: number[];
 }
 
 const {
@@ -20,6 +23,8 @@ const {
   loading = 'lazy',
   decoding = 'async',
   fetchpriority,
+  sizes = '100vw',
+  widths,
 } = Astro.props;
 
 const mediaWidth = media?.width ?? width;
@@ -29,6 +34,17 @@ const mediaClass = mediaStatus === 'available'
   ? 'media-placeholder--available'
   : 'media-placeholder--pending';
 const ratioStyle = `--media-placeholder-ratio: ${mediaWidth} / ${mediaHeight};`;
+const responsiveWidths = (widths ?? [390, 768, 1024, 1440])
+  .filter((candidate, index, values) => candidate <= mediaWidth && values.indexOf(candidate) === index)
+  .sort((a, b) => a - b);
+if (responsiveWidths.length === 0) {
+  responsiveWidths.push(mediaWidth);
+}
+const pictureWidth = responsiveWidths[responsiveWidths.length - 1] ?? mediaWidth;
+const pictureHeight = Math.round(pictureWidth * mediaHeight / mediaWidth);
+const fallbackFormat = media?.status === 'available' && ['jpeg', 'jpg'].includes(media.src.format)
+  ? media.src.format
+  : 'png';
 ---
 
 <div
@@ -40,15 +56,20 @@ const ratioStyle = `--media-placeholder-ratio: ${mediaWidth} / ${mediaHeight};`;
   aria-hidden={mediaStatus === 'pending' ? 'true' : undefined}
 >
   {media?.status === 'available' && (
-    <img
-      class="media-placeholder__image"
+    <Picture
       src={media.src}
+      formats={['avif', 'webp']}
+      fallbackFormat={fallbackFormat}
+      widths={responsiveWidths}
+      sizes={sizes}
       alt={media.alt ?? ''}
-      width={mediaWidth}
-      height={mediaHeight}
+      width={pictureWidth}
+      height={pictureHeight}
       loading={loading}
       decoding={decoding}
       fetchpriority={fetchpriority}
+      class="media-placeholder__image"
+      pictureAttributes={{ class: 'media-placeholder__picture' }}
     />
   )}
 </div>

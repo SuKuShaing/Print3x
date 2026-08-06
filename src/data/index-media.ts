@@ -1,4 +1,14 @@
 import type { AvailableMediaAsset } from './types';
+import categoriasFilamentosPla from '../assets/index/Categorias_1_filamentos_pla.jpg';
+import categoriasImpresora3d from '../assets/index/Categorias_2_impresora_3D_Axis_one.jpg';
+import compromisoCarreteFilamento from '../assets/index/Nuestros_compromisos_icono_1_carrete_filamento.avif';
+import compromisoImpresion3d from '../assets/index/Nuestros_compromisos_icono_2_impresion-3d.avif';
+import compromisoLineaMeta from '../assets/index/Nuestros_compromisos_icono_3_linea-de-meta.avif';
+import compromisoPulgarArriba from '../assets/index/Nuestros_compromisos_icono_4_pulgar_arriba.avif';
+import hero1 from '../assets/index/Hero_1.jpg';
+import hero2 from '../assets/index/Hero_2.jpg';
+import hero3 from '../assets/index/Hero_3.jpg';
+import hero4 from '../assets/index/Hero_4.jpg';
 
 export type IndexMediaKey =
   | 'hero1'
@@ -26,10 +36,10 @@ export type IndexMediaAsset = AvailableMediaAsset & {
 export const indexMedia = {
   hero1: {
     filename: 'Hero_1.jpg',
-    sourceFile: 'Imagenes_de_la_web/index/Hero_1.jpg',
-    src: '/images/index/Hero_1.jpg',
-    width: 2500,
-    height: 2500,
+    sourceFile: 'src/assets/index/Hero_1.jpg',
+    src: hero1,
+    width: hero1.width,
+    height: hero1.height,
     usage: 'index',
     uses: ['index'],
     status: 'available',
@@ -38,10 +48,10 @@ export const indexMedia = {
   },
   hero2: {
     filename: 'Hero_2.jpg',
-    sourceFile: 'Imagenes_de_la_web/index/Hero_2.jpg',
-    src: '/images/index/Hero_2.jpg',
-    width: 2500,
-    height: 1146,
+    sourceFile: 'src/assets/index/Hero_2.jpg',
+    src: hero2,
+    width: hero2.width,
+    height: hero2.height,
     usage: 'index',
     uses: ['index'],
     status: 'available',
@@ -50,10 +60,10 @@ export const indexMedia = {
   },
   hero3: {
     filename: 'Hero_3.jpg',
-    sourceFile: 'Imagenes_de_la_web/index/Hero_3.jpg',
-    src: '/images/index/Hero_3.jpg',
-    width: 1799,
-    height: 927,
+    sourceFile: 'src/assets/index/Hero_3.jpg',
+    src: hero3,
+    width: hero3.width,
+    height: hero3.height,
     usage: 'index',
     uses: ['index'],
     status: 'available',
@@ -62,10 +72,10 @@ export const indexMedia = {
   },
   hero4: {
     filename: 'Hero_4.jpg',
-    sourceFile: 'Imagenes_de_la_web/index/Hero_4.jpg',
-    src: '/images/index/Hero_4.jpg',
-    width: 1799,
-    height: 927,
+    sourceFile: 'src/assets/index/Hero_4.jpg',
+    src: hero4,
+    width: hero4.width,
+    height: hero4.height,
     usage: 'index',
     uses: ['index'],
     status: 'available',
@@ -74,10 +84,10 @@ export const indexMedia = {
   },
   categoriasFilamentosPla: {
     filename: 'Categorias_1_filamentos_pla.jpg',
-    sourceFile: 'Imagenes_de_la_web/index/Categorias_1_filamentos_pla.jpg',
-    src: '/images/index/Categorias_1_filamentos_pla.jpg',
-    width: 1000,
-    height: 750,
+    sourceFile: 'src/assets/index/Categorias_1_filamentos_pla.jpg',
+    src: categoriasFilamentosPla,
+    width: categoriasFilamentosPla.width,
+    height: categoriasFilamentosPla.height,
     usage: 'index',
     uses: ['index', 'collection'],
     status: 'available',
@@ -86,10 +96,10 @@ export const indexMedia = {
   },
   categoriasImpresora3d: {
     filename: 'Categorias_2_impresora_3D_Axis_one.jpg',
-    sourceFile: 'Imagenes_de_la_web/index/Categorias_2_impresora_3D_Axis_one.jpg',
-    src: '/images/index/Categorias_2_impresora_3D_Axis_one.jpg',
-    width: 4928,
-    height: 3264,
+    sourceFile: 'src/assets/index/Categorias_2_impresora_3D_Axis_one.jpg',
+    src: categoriasImpresora3d,
+    width: categoriasImpresora3d.width,
+    height: categoriasImpresora3d.height,
     usage: 'index',
     uses: ['index', 'collection'],
     status: 'available',
@@ -98,10 +108,10 @@ export const indexMedia = {
   },
   compromisoCarreteFilamento: {
     filename: 'Nuestros_compromisos_icono_1_carrete_filamento.avif',
-    sourceFile: 'Imagenes_de_la_web/index/Nuestros_compromisos_icono_1_carrete_filamento.avif',
-    src: '/images/index/Nuestros_compromisos_icono_1_carrete_filamento.avif',
-    width: 150,
-    height: 150,
+    sourceFile: 'src/assets/index/Nuestros_compromisos_icono_1_carrete_filamento.avif',
+    src: compromisoCarreteFilamento,
+    width: compromisoCarreteFilamento.width,
+    height: compromisoCarreteFilamento.height,
     usage: 'index',
     uses: ['index'],
     status: 'available',
@@ -110,10 +120,10 @@ export const indexMedia = {
   },
   compromisoImpresion3d: {
     filename: 'Nuestros_compromisos_icono_2_impresion-3d.avif',
-    sourceFile: 'Imagenes_de_la_web/index/Nuestros_compromisos_icono_2_impresion-3d.avif',
-    src: '/images/index/Nuestros_compromisos_icono_2_impresion-3d.avif',
-    width: 150,
-    height: 150,
+    sourceFile: 'src/assets/index/Nuestros_compromisos_icono_2_impresion-3d.avif',
+    src: compromisoImpresion3d,
+    width: compromisoImpresion3d.width,
+    height: compromisoImpresion3d.height,
     usage: 'index',
     uses: ['index'],
     status: 'available',
@@ -122,10 +132,10 @@ export const indexMedia = {
   },
   compromisoLineaMeta: {
     filename: 'Nuestros_compromisos_icono_3_linea-de-meta.avif',
-    sourceFile: 'Imagenes_de_la_web/index/Nuestros_compromisos_icono_3_linea-de-meta.avif',
-    src: '/images/index/Nuestros_compromisos_icono_3_linea-de-meta.avif',
-    width: 150,
-    height: 150,
+    sourceFile: 'src/assets/index/Nuestros_compromisos_icono_3_linea-de-meta.avif',
+    src: compromisoLineaMeta,
+    width: compromisoLineaMeta.width,
+    height: compromisoLineaMeta.height,
     usage: 'index',
     uses: ['index'],
     status: 'available',
@@ -134,10 +144,10 @@ export const indexMedia = {
   },
   compromisoPulgarArriba: {
     filename: 'Nuestros_compromisos_icono_4_pulgar_arriba.avif',
-    sourceFile: 'Imagenes_de_la_web/index/Nuestros_compromisos_icono_4_pulgar_arriba.avif',
-    src: '/images/index/Nuestros_compromisos_icono_4_pulgar_arriba.avif',
-    width: 150,
-    height: 150,
+    sourceFile: 'src/assets/index/Nuestros_compromisos_icono_4_pulgar_arriba.avif',
+    src: compromisoPulgarArriba,
+    width: compromisoPulgarArriba.width,
+    height: compromisoPulgarArriba.height,
     usage: 'index',
     uses: ['index'],
     status: 'available',
