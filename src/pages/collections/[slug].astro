@@ -3,6 +3,8 @@ import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import MediaPlaceholder from '../../components/MediaPlaceholder.astro';
 import { indexMedia } from '../../data/index-media';
+import { plaCollectionAccordionSections, plaCollectionDescription, plaCollectionFeatures } from '../../data/pla-collection';
+import { productMedia } from '../../data/product-media';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 
 export async function getStaticPaths() {
@@ -25,6 +27,15 @@ const collectionProducts = collection.data.productSlugs
   .map((slug) => productsBySlug.get(slug))
   .filter((product): product is CollectionEntry<'products'> => Boolean(product));
 const collectionMedia = collection.data.slug === 'pla' ? indexMedia.categoriasFilamentosPla : null;
+const isPla = collection.data.slug === 'pla';
+const formatPrice = (value: number | null) =>
+  value === null
+    ? null
+    : new Intl.NumberFormat('es-CL', {
+        style: 'currency',
+        currency: 'CLP',
+        maximumFractionDigits: 0,
+      }).format(value);
 ---
 
 <SiteLayout
@@ -33,36 +44,252 @@ const collectionMedia = collection.data.slug === 'pla' ? indexMedia.categoriasFi
   sourceUrl={collection.data.sourceUrl}
   sourceRetrieved={collection.data.sourceRetrieved}
 >
-  <article class="collection-page page-width">
-    <header class="collection-page__header">
-      <p class="collection-page__eyebrow">Colección histórica</p>
-      <h1>{collection.data.title}</h1>
-    </header>
+  {isPla ? (
+    <article class="collection-page collection-page--pla">
+      <section class="collection-hero collection-hero--with-image color-background-1" aria-labelledby="PlaCollectionTitle">
+        <div class="collection-hero__inner page-width">
+          <div class="collection-hero__text-wrapper">
+            <h1 class="collection-hero__title" id="PlaCollectionTitle">{collection.data.title}</h1>
+            <div class="collection-hero__description rte">
+              <p>{plaCollectionDescription}</p>
+            </div>
+          </div>
+          <div class="collection-hero__image-container media gradient">
+            <MediaPlaceholder
+              media={indexMedia.hero3}
+              width={indexMedia.hero3.width}
+              height={indexMedia.hero3.height}
+              loading="eager"
+              fetchpriority="high"
+              sizes="(min-width: 1200px) 550px, (min-width: 750px) calc(50vw - 65px), calc(100vw - 30px)"
+              class="collection-hero__image"
+            />
+          </div>
+        </div>
+      </section>
 
-    <div class="collection-page__hero">
-      <MediaPlaceholder
-        media={collectionMedia}
-        width={collectionMedia?.width ?? 1500}
-        height={collectionMedia?.height ?? 750}
-        loading="eager"
-      />
-    </div>
+      <section class="pla-products-section" aria-labelledby="pla-products-title">
+        <div class="page-width">
+          <h2 class="pla-products-section__title" id="pla-products-title">Impresion 3D Filamentos</h2>
+          <ul class="pla-product-grid grid grid--2-col-tablet-down grid--3-col-desktop" role="list">
+            {collectionProducts.map((product) => {
+              const media = productMedia[product.data.slug] ?? [];
+              const primary = media[0];
+              const secondary = media[1];
+              const primaryCardMedia = primary
+                ? { ...primary, alt: product.data.title, altStatus: 'reviewed' as const }
+                : null;
+              const secondaryCardMedia = secondary
+                ? { ...secondary, alt: '', altStatus: 'reviewed' as const }
+                : null;
+              const compareAtPrice = formatPrice(product.data.historicalCompareAtPriceCLP);
+              const price = formatPrice(product.data.historicalPriceCLP);
 
-    <div class="collection-page__body"><Content /></div>
+              return (
+                <li class="grid__item">
+                  <div class="card-wrapper product-card-wrapper underline-links-hover">
+                    <article class="pla-product-card card card--card card--media color-background-2">
+                      <div class="pla-product-card__media card__inner">
+                        <a
+                          class="pla-product-card__image-link"
+                          href={`/products/${product.data.slug}`}
+                          aria-label={product.data.title}
+                        >
+                          <MediaPlaceholder
+                            media={primaryCardMedia}
+                            width={primary?.width ?? 1000}
+                            height={primary?.height ?? 1000}
+                            class="pla-product-card__image pla-product-card__image--primary"
+                            sizes="(min-width: 1200px) 373px, (min-width: 750px) 33vw, 50vw"
+                          />
+                          <MediaPlaceholder
+                            media={secondaryCardMedia}
+                            width={secondary?.width ?? 1000}
+                            height={secondary?.height ?? 1000}
+                            class="pla-product-card__image pla-product-card__image--secondary"
+                            sizes="(min-width: 1200px) 373px, (min-width: 750px) 33vw, 50vw"
+                          />
+                        </a>
+                        <div class="pla-product-card__badge card__badge">
+                          <span class="badge badge--bottom-left color-background-2">Agotado</span>
+                        </div>
+                      </div>
+                      <div class="pla-product-card__body card__content">
+                        <div class="card__information">
+                          <h3 class="card__heading h5">
+                            <a class="full-unstyled-link" href={`/products/${product.data.slug}`}>
+                              {product.data.title}
+                            </a>
+                          </h3>
+                          <div class="card-information">
+                            <div class="price price--on-sale price--sold-out">
+                              <div class="price__container">
+                                <div class="price__sale">
+                                  <span class="visually-hidden">Precio habitual</span>
+                                  {compareAtPrice && <s class="price-item price-item--regular">{compareAtPrice}</s>}
+                                  <span class="visually-hidden">Precio de oferta</span>
+                                  {price && <span class="price-item price-item--sale price-item--last">{price}</span>}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="pla-product-card__quick-add quick-add">
+                          <button
+                            class="quick-add__submit button button--full-width button--secondary"
+                            type="button"
+                            disabled
+                            aria-label={`Agotado ${product.data.title}`}
+                          >
+                            <span>Agotado</span>
+                          </button>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
 
-    <section aria-labelledby="collection-products-title">
-      <h2 id="collection-products-title">Productos</h2>
-      <div class="collection-page__grid">
-        {collectionProducts.map((product) => (
-          <a class="collection-product-card" href={`/products/${product.data.slug}`}>
-            <MediaPlaceholder media={null} width={4} height={5} />
-            <span class="collection-product-card__title">{product.data.title}</span>
-            <span class="collection-product-card__status">
-              {product.data.availability === 'unavailable' ? 'No disponible' : 'Registro histórico'}
-            </span>
-          </a>
+      <section class="pla-features-intro color-accent-2 gradient" aria-labelledby="pla-features-title">
+        <div class="page-width">
+          <p class="caption-with-letter-spacing">Todas las caracteristicas del Mejor:</p>
+          <h2 class="hxl" id="pla-features-title">PLA</h2>
+        </div>
+      </section>
+
+      <div class="pla-features" aria-label="Características del filamento PLA">
+        {plaCollectionFeatures.map((feature, index) => (
+          <section class:list={[
+            'image-with-text',
+            'image-with-text--no-overlap',
+            'page-width',
+            'isolate',
+            'collapse-corners',
+            'pla-feature',
+            feature.imageWidth === 'small' ? 'pla-feature--small-image' : 'pla-feature--medium-image',
+          ]} aria-labelledby={`PlaFeature-${index + 1}`}>
+            <div
+              class:list={[
+                'image-with-text__grid',
+                'grid',
+                'grid--gapless',
+                'grid--1-col',
+                feature.imageWidth === 'small' ? 'grid--3-col-tablet' : 'grid--2-col-tablet',
+                feature.reverse && 'image-with-text__grid--reverse',
+              ]}
+            >
+              <div class:list={[
+                'image-with-text__media-item',
+                `image-with-text__media-item--${feature.imageWidth}`,
+                `image-with-text__media-item--${feature.contentPosition}`,
+                'grid__item',
+              ]}>
+                <div class="image-with-text__media image-with-text__media--adapt media global-media-settings color-background-1">
+                  <div
+                    class="pla-feature__media-frame"
+                    style={`--pla-feature-ratio: ${feature.expectedWidth} / ${feature.expectedHeight};`}
+                  >
+                    <MediaPlaceholder
+                      media={feature.media}
+                      width={feature.media.width ?? 1500}
+                      height={feature.media.height ?? 1000}
+                      loading="lazy"
+                      sizes="(min-width: 1200px) 550px, (min-width: 750px) 50vw, 100vw"
+                      class="pla-feature__media"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="image-with-text__text-item grid__item">
+                <div class:list={[
+                  'image-with-text__content',
+                  `image-with-text__content--${feature.contentPosition}`,
+                  'image-with-text__content--desktop-left',
+                  'image-with-text__content--mobile-left',
+                  'color-background-1',
+                  'content-container',
+                ]}>
+                  <h2 class="image-with-text__heading" id={`PlaFeature-${index + 1}`}>{feature.heading}</h2>
+                  <div class="image-with-text__text rte" set:html={feature.html} />
+                </div>
+              </div>
+            </div>
+          </section>
         ))}
       </div>
-    </section>
-  </article>
+
+      <div class="pla-collapsible-sections">
+        {plaCollectionAccordionSections.map((section, sectionIndex) => (
+          <section class="pla-collapsible color-background-1" aria-labelledby={`PlaAccordionSection-${sectionIndex + 1}`}>
+            <div class="collapsible-content collapsible-none-layout isolate page-width">
+              <div class="collapsible-content__wrapper">
+                <div class="collapsible-content-wrapper-narrow">
+                  <header class="collapsible-content__header">
+                    <p class="caption-with-letter-spacing">{section.caption}</p>
+                    <h2 class="collapsible-content__heading h1" id={`PlaAccordionSection-${sectionIndex + 1}`}>
+                      {section.heading}
+                    </h2>
+                  </header>
+                  <div class="pla-collapsible__rows">
+                    {section.rows.map((row) => (
+                      <div class="accordion">
+                        <details open={row.open}>
+                          <summary>
+                            <div class="summary__title">
+                              <h3 class="accordion__title inline-richtext h4">{row.heading}</h3>
+                            </div>
+                            <svg class="icon icon-caret" viewBox="0 0 10 6" aria-hidden="true" focusable="false">
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor" />
+                            </svg>
+                          </summary>
+                          <div class="accordion__content rte" role="region" set:html={row.html} />
+                        </details>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        ))}
+      </div>
+    </article>
+  ) : (
+    <article class="collection-page page-width">
+      <header class="collection-page__header">
+        <p class="collection-page__eyebrow">Colección histórica</p>
+        <h1>{collection.data.title}</h1>
+      </header>
+
+      <div class="collection-page__hero">
+        <MediaPlaceholder
+          media={collectionMedia}
+          width={collectionMedia?.width ?? 1500}
+          height={collectionMedia?.height ?? 750}
+          loading="eager"
+        />
+      </div>
+
+      <div class="collection-page__body"><Content /></div>
+
+      <section aria-labelledby="collection-products-title">
+        <h2 id="collection-products-title">Productos</h2>
+        <div class="collection-page__grid">
+          {collectionProducts.map((product) => (
+            <a class="collection-product-card" href={`/products/${product.data.slug}`}>
+              <MediaPlaceholder media={null} width={4} height={5} />
+              <span class="collection-product-card__title">{product.data.title}</span>
+              <span class="collection-product-card__status">
+                {product.data.availability === 'unavailable' ? 'No disponible' : 'Registro histórico'}
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+    </article>
+  )}
 </SiteLayout>

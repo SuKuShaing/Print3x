@@ -1,7 +1,10 @@
 ---
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
+import ProductGallery from '../../components/ProductGallery.astro';
 import MediaPlaceholder from '../../components/MediaPlaceholder.astro';
+import { plaProductDetails } from '../../data/pla-product-details';
+import { productMedia } from '../../data/product-media';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 
 export async function getStaticPaths() {
@@ -20,6 +23,9 @@ interface Props {
 const { product } = Astro.props as Props;
 const { Content } = await render(product);
 const { data } = product;
+const gallery = productMedia[data.slug] ?? data.media.map(() => null);
+const plaDetails = plaProductDetails[data.slug];
+const plaGallery = productMedia[data.slug];
 const formatPrice = (value: number | null) =>
   value === null
     ? null
@@ -30,6 +36,7 @@ const formatPrice = (value: number | null) =>
       }).format(value);
 const historicalPrice = formatPrice(data.historicalPriceCLP);
 const historicalPriceMax = formatPrice(data.historicalPriceMaxCLP);
+const historicalCompareAtPrice = formatPrice(data.historicalCompareAtPriceCLP);
 
 const dimensions = (value: string) => {
   const match = value.match(/(\d+)\s+x\s+(\d+)/);
@@ -45,46 +52,144 @@ const dimensions = (value: string) => {
   sourceUrl={data.sourceUrl}
   sourceRetrieved={data.sourceRetrieved}
 >
-  <article class="product-page page-width">
-    <header class="product-page__header">
-      <p class="product-page__eyebrow">{data.productType}</p>
-      <h1>{data.title}</h1>
-      <p class="product-page__status">Escaparate histórico · Sin compra en línea</p>
-    </header>
+  {plaDetails && plaGallery ? (
+    <article class="product-page product-page--storefront page-width">
+      <div class="product-page__layout product-page__layout--storefront">
+        <ProductGallery media={plaGallery} title={data.title} />
 
-    <div class="product-page__layout">
-      <section class="product-page__gallery" aria-label={`Galería de ${data.title}`}>
-        {data.media.map((item, index) => {
-          const size = dimensions(item.expectedDimensions);
-          return (
-            <figure class="product-page__media">
-              <MediaPlaceholder media={null} width={size.width} height={size.height} />
-              <figcaption>
-                Media pendiente · {index + 1} de {data.media.length}
-              </figcaption>
-            </figure>
-          );
-        })}
-      </section>
+        <div id="ProductInfo" class="product-page__info product-page__info--sticky">
+          <div class="product-page__title">
+            <h1>{data.title}</h1>
+          </div>
 
-      <div class="product-page__content">
-        <div class="product-page__historical-data" aria-label="Datos históricos">
-          <p><strong>Estado:</strong> {data.availability === 'unavailable' ? 'No disponible' : 'Registro histórico'}</p>
-          {historicalPrice && (
-            <p>
-              <strong>Precio histórico observado:</strong>{' '}
-              {historicalPrice}{historicalPriceMax ? ` – ${historicalPriceMax}` : ''}
-            </p>
-          )}
-          {data.historicalCompareAtPriceCLP !== null && (
-            <p><strong>Precio comparativo histórico:</strong> {formatPrice(data.historicalCompareAtPriceCLP)}</p>
-          )}
-        </div>
+          <div class="product-page__price price price--large price--on-sale price--sold-out" role="status">
+            <span class="visually-hidden">Precio de oferta</span>
+            {historicalCompareAtPrice && <s class="product-page__compare-price">{historicalCompareAtPrice}</s>}
+            {historicalPrice && <span class="product-page__sale-price">{historicalPrice}</span>}
+            <span class="badge product-page__sold-out-badge">Agotado</span>
+          </div>
 
-        <div class="product-page__body">
-          <Content />
+          <p class="product-page__tax caption">Iva incluido.</p>
+
+          <div class="product-page__quantity-field" data-p3x-quantity>
+            <label class="quantity__label form__label" for={`Quantity-${data.slug}`}>Cantidad</label>
+            <div class="quantity">
+              <button
+                class="quantity__button"
+                type="button"
+                data-p3x-quantity-decrease
+                aria-label={`Reducir cantidad para ${data.title}`}
+              >
+                <svg class="icon icon-minus" viewBox="0 0 10 2" aria-hidden="true" focusable="false">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M.5 1C.5.7.7.5 1 .5h8a.5.5 0 110 1H1A.5.5 0 01.5 1z" fill="currentColor" />
+                </svg>
+              </button>
+              <input
+                class="quantity__input"
+                type="number"
+                id={`Quantity-${data.slug}`}
+                min="1"
+                value="1"
+                inputmode="numeric"
+                aria-label="Cantidad"
+              />
+              <button
+                class="quantity__button"
+                type="button"
+                data-p3x-quantity-increase
+                aria-label={`Aumentar cantidad para ${data.title}`}
+              >
+                <svg class="icon icon-plus" viewBox="0 0 10 10" aria-hidden="true" focusable="false">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M1 4.51a.5.5 0 000 1h3.5l.01 3.5a.5.5 0 001-.01V5.5l3.5-.01a.5.5 0 00-.01-1H5.5L5.49.99a.5.5 0 00-1 .01v3.5l-3.5.01H1z" fill="currentColor" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <p class="product-page__inventory" role="status">Agotado</p>
+
+          <div class="product-page__form">
+            <button class="product-form__submit button button--full-width button--primary" type="button" disabled>
+              Agotado
+            </button>
+          </div>
+
+          <a class="product-popup-modal__button link product-page__shipping" href="/pages/tarifas-de-envio">
+            Valor del envío
+          </a>
         </div>
       </div>
-    </div>
-  </article>
+
+      <section class="product-page__accordions" data-p3x-accordion aria-labelledby={`ProductDetails-${data.slug}`}>
+        <div class="product-page__accordions-heading">
+          <p class="product-page__summary-label">Resumen de las:</p>
+          <h2 class="product-page__accordions-title h1" id={`ProductDetails-${data.slug}`}>{plaDetails.heading}</h2>
+        </div>
+
+        {plaDetails.accordions.map((item) => (
+          <div class="product__accordion accordion">
+            <details data-p3x-details>
+              <summary>
+                <div class="summary__title">
+                  <h3 class="accordion__title inline-richtext h4">{item.title}</h3>
+                </div>
+                <svg class="icon icon-caret" viewBox="0 0 10 6" aria-hidden="true" focusable="false">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor" />
+                </svg>
+              </summary>
+              <div class="accordion__content rte">
+                <p>{item.content}</p>
+              </div>
+            </details>
+          </div>
+        ))}
+      </section>
+    </article>
+  ) : (
+    <article class="product-page page-width">
+      <header class="product-page__header">
+        <p class="product-page__eyebrow">{data.productType}</p>
+        <h1>{data.title}</h1>
+        <p class="product-page__status">Escaparate histórico · Sin compra en línea</p>
+      </header>
+
+      <div class="product-page__layout">
+        <section class="product-page__gallery" aria-label={`Galería de ${data.title}`}>
+          {gallery.map((item, index) => {
+            const sourceMedia = data.media[index];
+            const size = sourceMedia
+              ? dimensions(sourceMedia.expectedDimensions)
+              : { width: item?.width ?? 1000, height: item?.height ?? 1000 };
+            return (
+              <figure class="product-page__media">
+                <MediaPlaceholder media={item} width={size.width} height={size.height} />
+                <figcaption>
+                  {item?.status === 'available' ? 'Imagen' : 'Media pendiente'} · {index + 1} de {gallery.length}
+                </figcaption>
+              </figure>
+            );
+          })}
+        </section>
+
+        <div class="product-page__content">
+          <div class="product-page__historical-data" aria-label="Datos históricos">
+            <p><strong>Estado:</strong> {data.availability === 'unavailable' ? 'No disponible' : 'Registro histórico'}</p>
+            {historicalPrice && (
+              <p>
+                <strong>Precio histórico observado:</strong>{' '}
+                {historicalPrice}{historicalPriceMax ? ` – ${historicalPriceMax}` : ''}
+              </p>
+            )}
+            {data.historicalCompareAtPriceCLP !== null && (
+              <p><strong>Precio comparativo histórico:</strong> {formatPrice(data.historicalCompareAtPriceCLP)}</p>
+            )}
+          </div>
+
+          <div class="product-page__body">
+            <Content />
+          </div>
+        </div>
+      </div>
+    </article>
+  )}
 </SiteLayout>

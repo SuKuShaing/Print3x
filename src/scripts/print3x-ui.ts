@@ -9,6 +9,7 @@ const READY_ATTRIBUTES = {
   details: 'data-p3x-details-ready',
   gallery: 'data-p3x-gallery-ready',
   media: 'data-p3x-media-ready',
+  quantity: 'data-p3x-quantity-ready',
   search: 'data-p3x-search-ready',
   share: 'data-p3x-share-ready',
   slider: 'data-p3x-slider-ready',
@@ -311,8 +312,15 @@ function setupGalleries(scope: ParentNode): void {
     const thumbnails = Array.from(gallery.querySelectorAll<HTMLElement>('[data-p3x-gallery-thumb]')).filter(
       (item) => item.closest('[data-p3x-gallery]') === gallery,
     );
+    const previousControls = Array.from(gallery.querySelectorAll<HTMLElement>('[data-p3x-gallery-prev]')).filter(
+      (control) => control.closest('[data-p3x-gallery]') === gallery,
+    );
+    const nextControls = Array.from(gallery.querySelectorAll<HTMLElement>('[data-p3x-gallery-next]')).filter(
+      (control) => control.closest('[data-p3x-gallery]') === gallery,
+    );
     const status = gallery.querySelector<HTMLElement>('[data-p3x-gallery-status]');
     const stacked = gallery.dataset.p3xGalleryDisplay === 'stacked';
+    const isMobileCarousel = () => window.matchMedia?.('(max-width: 749px)').matches ?? false;
     const modal = gallery.querySelector<HTMLElement>('[data-p3x-gallery-modal]');
     const nativeDialog = modal instanceof HTMLDialogElement ? modal : null;
     const nativeModal = nativeDialog !== null;
@@ -325,18 +333,20 @@ function setupGalleries(scope: ParentNode): void {
     let lastOpener: HTMLElement | null = null;
     let modalIsOpen = false;
 
-    const updateGallery = (id: string) => {
+    const updateGallery = (id: string, shouldScroll = true) => {
       const activeMedia = mediaById.get(id);
       if (!activeMedia) return;
 
       activeId = id;
       gallery.dataset.p3xGalleryActive = id;
 
+      const showAllMedia = stacked || isMobileCarousel();
+
       media.forEach((item) => {
         const active = item === activeMedia;
         item.toggleAttribute('data-p3x-gallery-active', active);
-        item.setAttribute('aria-hidden', String(!stacked && !active));
-        if (!stacked) item.hidden = !active;
+        item.setAttribute('aria-hidden', String(!showAllMedia && !active));
+        item.hidden = !showAllMedia && !active;
       });
 
       thumbnails.forEach((thumbnail) => {
@@ -346,11 +356,26 @@ function setupGalleries(scope: ParentNode): void {
       });
 
       const position = media.indexOf(activeMedia) + 1;
+      previousControls.forEach((control) => setControlDisabled(control, position === 1));
+      nextControls.forEach((control) => setControlDisabled(control, position === media.length));
       if (status) {
         status.setAttribute('role', 'status');
         status.setAttribute('aria-live', 'polite');
-        status.textContent = `${position} / ${media.length}`;
+        status.textContent = `${position} / de ${media.length}`;
       }
+
+      if (shouldScroll && isMobileCarousel()) {
+        activeMedia.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'start' });
+      }
+    };
+
+    const move = (direction: -1 | 1) => {
+      const currentIndex = media.findIndex((item) => getGalleryMediaId(item) === activeId);
+      const nextIndex = currentIndex + direction;
+      if (nextIndex < 0 || nextIndex >= media.length) return;
+
+      const nextId = getGalleryMediaId(media[nextIndex]);
+      if (nextId) updateGallery(nextId);
     };
 
     const finishClose = (restoreFocus: boolean) => {
@@ -421,7 +446,21 @@ function setupGalleries(scope: ParentNode): void {
       window.requestAnimationFrame(() => (closeButton ?? modalImage).focus());
     };
 
-    updateGallery(activeId);
+    updateGallery(activeId, false);
+
+    previousControls.forEach((control) => {
+      control.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (!control.hasAttribute('disabled') && control.getAttribute('aria-disabled') !== 'true') move(-1);
+      });
+    });
+
+    nextControls.forEach((control) => {
+      control.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (!control.hasAttribute('disabled') && control.getAttribute('aria-disabled') !== 'true') move(1);
+      });
+    });
 
     gallery.addEventListener('click', (event) => {
       if (!(event.target instanceof Element)) return;
@@ -447,6 +486,17 @@ function setupGalleries(scope: ParentNode): void {
 
     gallery.addEventListener('keydown', (event) => {
       if (!(event.target instanceof Element)) return;
+
+      if (event.target === gallery) {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          move(-1);
+        } else if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          move(1);
+        }
+        return;
+      }
 
       const thumbnail = event.target.closest<HTMLElement>('[data-p3x-gallery-thumb]');
       if (!thumbnail || thumbnail.closest('[data-p3x-gallery]') !== gallery) return;
@@ -553,6 +603,32 @@ function setupDetails(scope: ParentNode): void {
     }
 
     root.setAttribute(READY_ATTRIBUTES.details, '');
+  });
+}
+
+function setupQuantities(scope: ParentNode): void {
+  elementsInScope<HTMLElement>(scope, '[data-p3x-quantity]').forEach((root) => {
+    if (!markAsReady(root, READY_ATTRIBUTES.quantity)) return;
+
+    const input = root.querySelector<HTMLInputElement>('input[type="number"]');
+    const decrease = root.querySelector<HTMLButtonElement>('[data-p3x-quantity-decrease]');
+    const increase = root.querySelector<HTMLButtonElement>('[data-p3x-quantity-increase]');
+    if (!input) return;
+
+    const minimum = Number.parseInt(input.min || '1', 10) || 1;
+    const maximum = input.max ? Number.parseInt(input.max, 10) : Number.POSITIVE_INFINITY;
+
+    const sync = (value: number) => {
+      const nextValue = Math.min(maximum, Math.max(minimum, Number.isFinite(value) ? value : minimum));
+      input.value = String(nextValue);
+      if (decrease) decrease.disabled = nextValue <= minimum;
+      if (increase) increase.disabled = nextValue >= maximum;
+    };
+
+    sync(Number.parseInt(input.value, 10));
+    input.addEventListener('change', () => sync(Number.parseInt(input.value, 10)));
+    decrease?.addEventListener('click', () => sync(Number.parseInt(input.value, 10) - 1));
+    increase?.addEventListener('click', () => sync(Number.parseInt(input.value, 10) + 1));
   });
 }
 
@@ -781,6 +857,7 @@ export function initPrint3xUI(scope?: ParentNode): void {
   setupSliders(root);
   setupGalleries(root);
   setupDetails(root);
+  setupQuantities(root);
   setupDeferredMedia(root);
   setupSearch(root);
   setupShare(root);

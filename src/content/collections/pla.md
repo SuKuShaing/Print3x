@@ -64,4 +64,10 @@ La fuente declara que el material es reciclable y que la exposición prolongada 
 
 ## Productos de la colección
 
-La lista de productos conserva el orden observado en la página pública. Las imágenes individuales se mantienen pendientes hasta recibir recursos locales.
+La lista de productos conserva el orden observado en la página pública. La galería local de los 11 productos se integra desde `src/data/product-media.ts`; la equivalencia con los nombres históricos de Shopify permanece documentada por separado.
+
+## Media local incorporada para la ruta
+
+La referencia Shopify `2052425b5f.jpg` de la imagen principal original continúa pendiente porque no existe una copia local confirmada. Para esta implementación, el usuario confirmó el uso de `src/assets/index/Hero_3.jpg` como imagen visible del hero; este archivo no se declara equivalente a la referencia Shopify pendiente.
+
+Los 18 bloques editoriales de características usan los archivos disponibles en `src/assets/index-collections-pla/`. Sus proporciones históricas, orden, textos y usos están definidos en `src/data/pla-collection.ts`.

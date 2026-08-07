@@ -2,14 +2,14 @@
 
 **Fuente Shopify:** `zip_theme_shopify_estable/`  
 **Fuente local:** `src/assets/`
-**Fecha de inspeccion:** 2026-08-05
-**Estado:** once recursos locales entregados e integrados desde `src/assets` mediante `<Picture>` en el header, el index y las tarjetas de colecciones; el favicon usa un placeholder SVG local porque el recurso Shopify activo no tiene copia local confirmada. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
+**Fecha de inspeccion:** 2026-08-06
+**Estado:** 73 recursos locales entregados e integrados desde `src/assets` mediante `<Picture>`: 29 recursos del header, index y colecciones, mas 44 imagenes de galerias de productos PLA. El favicon usa un placeholder SVG local porque el recurso Shopify activo no tiene copia local confirmada. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
 
 ## Resumen de conteos
 
 | Categoria | Conteo | Alcance |
 |---|---:|---|
-| Imagenes locales entregadas | 11 | Cinco archivos iniciales del index y seis recursos adicionales entregados por el usuario. |
+| Imagenes locales entregadas e integradas | 73 | 29 recursos del header/index/colecciones y 44 imagenes nuevas de galerias PLA. |
 | Recursos `shopify://shop_images` unicos globales | 85 | Union de templates y `config/settings_data.json`. |
 | Ocurrencias globales de referencias Shopify | 93 | Incluye repeticiones entre templates y configuracion. |
 | Recursos distintos identificados en templates | 81 | Conteo de nombres unicos dentro de templates; el registro de ejecucion lo denomina referencias de templates. |
@@ -44,7 +44,54 @@ Las dimensiones y el peso se obtuvieron leyendo los once archivos locales. El us
 | `Nuestros_compromisos_icono_3_linea-de-meta.avif` | `src/assets/index/Nuestros_compromisos_icono_3_linea-de-meta.avif` | AVIF | `150 x 150` | `6458` bytes | `index`, compromiso 3. | Pendiente: no se conserva texto no observado. | No asignada. |
 | `Nuestros_compromisos_icono_4_pulgar_arriba.avif` | `src/assets/index/Nuestros_compromisos_icono_4_pulgar_arriba.avif` | AVIF | `150 x 150` | `6362` bytes | `index`, compromiso 4. | Pendiente: no se conserva texto no observado. | No asignada. |
 
-**Regla:** los once archivos tienen estado local `available`; todos se importan desde `src/assets/` y Astro genera sus rutas optimizadas bajo `/_astro/`. Los cuatro heroes tienen uso `index`; las dos imagenes de categorias tienen uso `index` y `collection` como tarjetas; los cuatro iconos tienen uso `index` en compromisos. Ninguno se declara equivalente a `Cinco_hermosos...`, `Banner_2...`, `Banner_3...` u otra referencia Shopify sin evidencia de origen. Las otras 85 referencias Shopify siguen pendientes; esta confirmacion no las convierte en disponibles.
+**Regla:** los 73 archivos integrados tienen estado local `available`; todos se importan desde `src/assets/` y Astro genera sus rutas optimizadas bajo `/_astro/`. Los cuatro heroes tienen uso `index`; `Hero_3.jpg` se usa además como hero visible de `/collections/pla` por confirmación del usuario. Las dos imagenes de categorias tienen uso `index` y `collection` como tarjetas; los cuatro iconos tienen uso `index` en compromisos; los 18 recursos editoriales de PLA tienen uso `collection`. Ninguno se declara equivalente a `2052425b5f.jpg`, `Cinco_hermosos...`, `Banner_2...`, `Banner_3...` u otra referencia Shopify sin evidencia de origen. Las otras 85 referencias Shopify siguen pendientes; esta confirmacion no las convierte en disponibles.
+
+### Galerias locales de productos PLA
+
+La entrega `src/assets/index-products-pla/` contiene cuatro archivos JPG por carpeta. El registro `src/data/product-media.ts` asocia cada carpeta con el slug historico aprobado y la ruta de producto usa todas las imagenes como galeria. La proporcion esperada es `1:1`, el estado local es `available` y el `alt` permanece pendiente de revision porque no fue entregado.
+
+| Ruta | Carpeta local | Imagenes | Proporcion | Estado |
+|---|---|---:|---:|---|
+| `/products/filamento_pla_amarillo` | `pla-amarillo` | 4 | `1:1` | `available` |
+| `/products/filamento_pla_azul` | `pla-azul` | 4 | `1:1` | `available` |
+| `/products/filamento_pla_blanco` | `pla-blanco` | 4 | `1:1` | `available` |
+| `/products/filamento_pla_celeste` | `pla-celeste` | 4 | `1:1` | `available` |
+| `/products/filamento_pla_gris` | `pla-gris` | 4 | `1:1` | `available` |
+| `/products/filamento_pla_negro` | `pla-negro` | 4 | `1:1` | `available` |
+| `/products/filamento_pla_oro` | `pla-dorado` | 4 | `1:1` | `available` |
+| `/products/filamento_pla_transparente` | `pla-transparente` | 4 | `1:1` | `available` |
+| `/products/filamento_pla_verde` | `pla-verde` | 4 | `1:1` | `available` |
+| `/products/pla_pantera_rosa` | `pla-rosado` | 4 | `1:1` | `available` |
+| `/products/pla_rojo` | `pla-rojo` | 4 | `1:1` | `available` |
+
+El estado `pending` que permanece en el frontmatter de estos productos describe la equivalencia de las referencias del endpoint historico; no representa la disponibilidad de estas galerias locales, que queda registrada como `available` en `product-media.ts`.
+
+### Bloques editoriales locales de la coleccion PLA
+
+La fuente de uso y orden es la ruta live `/collections/pla` y el template `templates/collection.coleccion-filamentos-pla.json`. Los archivos siguientes estan disponibles, se renderizan mediante `<Picture>` y conservan la proporcion esperada del bloque; el `alt` observado en el HTML live permanece sujeto a revisión editorial.
+
+| Archivo local | Uso | Proporcion esperada | Estado / bloqueo |
+|---|---|---:|---|
+| `1,75.webp` | Caracteristica: grosor del filamento | `1500:1011` | `available`; sin bloqueo de media |
+| `Cinco hermosos Rollos de filamento PLA y huevos Print3x Recortada Grande - Ligera.jpg` | Caracteristica: peso del rollo | `1500:1086` | `available`; sin bloqueo de media |
+| `Cuatro Rollos de filamento PLA y huevos Print3x.jpg` | Caracteristica: metros del rollo | `1500:1500` | `available`; sin bloqueo de media |
+| `cientifico-mezclando-liquidos_1423-1805_.webp` | Caracteristica: color homogeneo | `1500:999` | `available`; sin bloqueo de media |
+| `Extrusor_Tapado_Print3x.avif` | Caracteristica: anti-atascos | `1500:993` | `available`; sin bloqueo de media |
+| `Emoji_hot_and_cold2.webp` | Caracteristica: temperatura de extrusion | `1500:1169` | `available`; sin bloqueo de media |
+| `Burbujas_en_el_filamento.avif` | Caracteristica: cero burbujas | `1500:1080` | `available`; sin bloqueo de media |
+| `Check.webp` | Caracteristica: material no toxico | `1500:901` | `available`; sin bloqueo de media |
+| `Emogiis.webp` | Caracteristica: material inocuo | `1500:1099` | `available`; sin bloqueo de media |
+| `Filamento_PLA_roto_autoquiebre.webp` | Caracteristica: sin auto-quiebre | `1500:946` | `available`; sin bloqueo de media |
+| `Biodegradable.webp` | Caracteristica: biodegradabilidad | `1500:900` | `available`; sin bloqueo de media |
+| `makerbot_mp06591_10_pack_bundle_true_col.webp` | Caracteristica: filamento estandarizado | `1500:665` | `available`; sin bloqueo de media |
+| `Dimensiones del Rollo.jpg` | Caracteristica: dimensiones del rollo | `1500:1858` | `available`; sin bloqueo de media |
+| `18-04-2015-gato-olfatear.webp` | Caracteristica: ausencia de olor | `1500:1125` | `available`; sin bloqueo de media |
+| `lente2-20150919-161405.webp` | Caracteristica: proteccion UV | `1500:951` | `available`; sin bloqueo de media |
+| `recycling-304974_960_720.webp` | Caracteristica: reciclaje | `1500:876` | `available`; sin bloqueo de media |
+| `hidrolisis.webp` | Caracteristica: baja hidrolisis | `1500:735` | `available`; sin bloqueo de media |
+| `Badge-garantia-dorado.webp` | Caracteristica: garantia | `1500:1182` | `available`; sin bloqueo de media |
+
+La imagen principal Shopify `2052425b5f.jpg` sigue siendo `pending` en `src/content/collections/pla.md`; el uso de `Hero_3.jpg` es una decision local confirmada y no una equivalencia automatica.
 
 ## Referencias Shopify unicas: 85
 
@@ -230,15 +277,15 @@ Las dimensiones conocidas de los once archivos locales pueden usarse para sus pr
 
 ## Optimizacion con Astro
 
-Los once archivos disponibles se importan desde `src/assets/` como metadata de imagen de Astro. `MediaPlaceholder.astro` y el logo del header usan `<Picture>` con fuentes `avif` y `webp`, fallback del formato original, `sizes` y variantes `srcset` para `390`, `768`, `1024` y `1440` px. Las variantes no amplian archivos que sean menores que cada breakpoint; los placeholders de media pendiente no se transforman ni se sustituyen.
+Los 55 archivos disponibles se importan desde `src/assets/` como metadata de imagen de Astro. `MediaPlaceholder.astro`, las galerias de producto y el logo del header usan `<Picture>` con fuentes `avif` y `webp`, fallback del formato original, `sizes` y variantes `srcset` para `390`, `768`, `1024` y `1440` px. Las variantes no amplian archivos que sean menores que cada breakpoint; los placeholders de media pendiente no se transforman ni se sustituyen.
 
 ## Prioridad de obtencion e integracion
 
 | Prioridad | Recursos | Motivo |
 |---|---|---|
 | P0 | Favicon y Futura | Identidad global, head y similitud visual; el logo local ya fue integrado, pero el favicon y la fuente siguen pendientes. |
-| P1 | Media de portada y categorias | Afecta la primera impresion y la geometria del home; los once recursos locales ya tienen rol confirmado o documentado. |
-| P1 | Media de las 31 rutas de contenido del sitemap | Afecta producto, coleccion, paginas y articulos que concentran SEO. |
+| P1 | Media de portada y categorias | Afecta la primera impresion y la geometria del home; los 11 recursos iniciales y las 44 imagenes PLA ya tienen rol confirmado o documentado. |
+| P1 | Media de las 31 rutas de contenido del sitemap | Afecta producto, coleccion, paginas y articulos que concentran SEO; las 11 galerias PLA ya fueron integradas. |
 | P2 | Media larga de la coleccion PLA y paginas tecnicas | Muchos bloques; requieren placeholders consistentes y orden estable. |
 | P2 | Galerias de Axis One, Padi y articulos del curso | Contenido historico con varias imagenes y videos externos. |
 | P3 | Media secundaria de premios, iconos repetidos y recursos no visibles en rutas aprobadas | Resolver despues de confirmar que la ruta se conserva. |

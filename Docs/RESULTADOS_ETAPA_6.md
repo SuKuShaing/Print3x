@@ -64,6 +64,25 @@ La nueva entrega de media resolvió el pendiente del logo de identidad y los rec
 
 La actualización volvió a pasar `npm run check` con 0 errores, warnings y hints y `npm run build` con 42 páginas estáticas. La comprobación desde preview confirmó cargas `200` para los 11 recursos del home, cero errores de consola y cero overflow horizontal en viewport mobile.
 
+## Actualización posterior: storefront de productos PLA
+
+**Etapa:** 6 - Tarea 6.3, remediación visual posterior
+**Fecha:** 2026-08-06
+**Estado:** Completada
+
+Se reprodujo la presentación live de los 11 productos PLA con datos estáticos: galería tipo carrusel, miniaturas desktop, desplazamiento horizontal mobile, contador, controles, zoom modal, precio histórico, cantidad, estado `Agotado`, enlace de envío y acordeones específicos por producto. Los slugs históricos se mantienen sin normalización.
+
+- Archivos principales: `src/components/ProductGallery.astro`, `src/data/pla-product-details.ts`, `src/data/product-media.ts`, `src/pages/products/[slug].astro`, `src/scripts/print3x-ui.ts` y `src/styles/components/product.css`.
+- `npm run check`: 0 errores, 0 warnings y 0 hints.
+- `npm run build`: correcto; 42 páginas estáticas generadas.
+- Preview local: las 11 rutas responden `200`, cada una renderiza cuatro imágenes locales optimizadas y conserva su cantidad de acordeones.
+- Comparación live/local en `390px` y `1440px`: galería, miniaturas, títulos, precios, cantidad, botón, envío y encabezado de acordeones quedaron alineados con la geometría observada en Refresh.
+- Viewports `768px` y `1024px`: sin overflow horizontal ni recursos críticos faltantes.
+- Contenido: títulos y cuerpos de los 11 grupos de acordeones coinciden con el live después de normalizar espacios; se corrigió una diferencia detectada en el texto de compatibilidad del PLA dorado.
+- Interacciones: siguiente/anterior, miniaturas, cantidad, apertura de acordeón, modal de imagen y cierre con `Escape` verificados; consola sin errores.
+
+Los bloqueos generales de media, alt aprobado, Futura, favicon de identidad y políticas históricas permanecen documentados. No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
 ## Actualización posterior: flechas del menú principal
 
 **Etapa:** 6 - Tarea 6.3, remediación visual posterior
@@ -131,3 +150,35 @@ Los once assets locales ahora se importan desde `src/assets` y se renderizan con
 - Preview local: `/` y `/collections` cargan los recursos optimizados; consola sin errores en las rutas comprobadas.
 - Se retiraron las copias duplicadas sin optimizar de `public/images`; los placeholders SVG técnicos permanecen en `public`.
 - El `alt` revisado, el favicon de identidad, Futura y las restantes referencias Shopify siguen pendientes según el manifiesto.
+
+## Actualización posterior: réplica de la colección PLA
+
+**Etapa:** 6 - Tarea 6.3, remediación visual posterior
+**Fecha:** 2026-08-06
+**Estado:** Completada con media local y equivalencias documentadas
+
+Se reprodujo la ruta live `/collections/pla` con su estructura histórica: hero con texto e imagen local aprobada, grid de 11 productos en el orden público, precios históricos y estado `Agotado`, hover de segunda imagen, introducción PLA, 18 bloques de características imagen-texto y dos grupos de acordeones.
+
+- Archivos principales: `src/pages/collections/[slug].astro`, `src/data/pla-collection.ts`, `src/styles/components/collection.css`, `src/content/collections/pla.md` y `src/assets/index-collections-pla/*`.
+- El hero usa `src/assets/index/Hero_3.jpg` por confirmación del usuario; la referencia Shopify `2052425b5f.jpg` permanece como media pendiente y no se declara equivalente.
+- Las 18 imágenes editoriales se importan desde `src/assets` y se renderizan mediante `MediaPlaceholder`, que entrega `<Picture>` de `astro:assets`; se conservaron sus proporciones históricas en los marcos responsive.
+- La verificación independiente en preview con emulación exacta `390x844` y `1440x900` confirmó el layout del hero, el grid de productos, los bloques editoriales y los estados de acordeón; no hay overflow horizontal, imágenes externas ni errores de consola.
+- `npm run check`: 0 errores, 0 warnings y 0 hints.
+- `npm run build`: correcto; 42 páginas estáticas generadas.
+- Verificación local: 11 productos, 18 bloques editoriales, 2 grupos de acordeones, 42 elementos `<picture>` y hover primario/secundario funcionando en desktop.
+
+Los bloqueos generales de Futura, favicon de identidad, alt pendiente de revisión editorial y media Shopify no entregada permanecen documentados. No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+## Corrección posterior: color de la franja de características PLA
+
+**Etapa:** 6 - Tarea 6.3, remediación visual posterior
+**Fecha:** 2026-08-06
+**Estado:** Completada
+
+La franja `Todas las características del Mejor: PLA` ahora usa la clase `gradient` de Refresh sobre `color-accent-2`, aplicando el token activo `#ab0c6f`. El texto usa el color claro del esquema para igualar la referencia visual.
+
+- Archivos modificados: `src/pages/collections/[slug].astro` y `src/styles/components/collection.css`.
+- Preview `390x844`: fondo computado `rgb(171, 12, 111)`, texto `rgb(247, 247, 247)`, sin overflow horizontal.
+- Consola del preview: sin errores ni warnings.
+- `npm run check`: 0 errores, 0 warnings y 0 hints.
+- `npm run build`: correcto; 42 páginas estáticas generadas.
