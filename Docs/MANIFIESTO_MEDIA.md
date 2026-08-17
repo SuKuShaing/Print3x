@@ -3,13 +3,13 @@
 **Fuente Shopify:** `zip_theme_shopify_estable/`  
 **Fuente local:** `src/assets/`
 **Fecha de inspeccion:** 2026-08-17
-**Estado:** 108 recursos locales entregados e integrados desde `src/assets` mediante `<Picture>`: 29 recursos del header, index y colecciones, 44 imagenes de galerias de productos PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal y 10 recursos nuevos de Padi. El favicon usa un placeholder SVG local porque el recurso Shopify activo no tiene copia local confirmada. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
+**Estado:** 109 recursos locales entregados e integrados desde `src/assets` mediante `<Picture>`: 30 recursos del header, index y colecciones, 44 imagenes de galerias de productos PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal y 10 recursos nuevos de Padi. El favicon usa un placeholder SVG local porque el recurso Shopify activo no tiene copia local confirmada. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
 
 ## Resumen de conteos
 
 | Categoria | Conteo | Alcance |
 |---|---:|---|
-| Imagenes locales entregadas e integradas | 108 | 29 recursos del header/index/colecciones, 44 imagenes de galerias PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal y 10 recursos nuevos de Padi. |
+| Imagenes locales entregadas e integradas | 109 | 30 recursos del header/index/colecciones, 44 imagenes de galerias PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal y 10 recursos nuevos de Padi. |
 | Recursos `shopify://shop_images` unicos globales | 85 | Union de templates y `config/settings_data.json`. |
 | Ocurrencias globales de referencias Shopify | 93 | Incluye repeticiones entre templates y configuracion. |
 | Recursos distintos identificados en templates | 81 | Conteo de nombres unicos dentro de templates; el registro de ejecucion lo denomina referencias de templates. |
@@ -39,12 +39,13 @@ Las dimensiones y el peso se obtuvieron leyendo los archivos locales entregados.
 |---|---|---|---:|---:|---|---|---|
 | `Logo Print3x.png` | `src/assets/Logo Print3x.png` | PNG | `2362 x 433` | `55421` bytes | `header`, logo de identidad; confirmado por el usuario. | Pendiente; el header usa `alt` vacio y su enlace conserva el nombre de Print3x. | No asignada. |
 | `Categorias_2_impresora_3D_Axis_one.jpg` | `src/assets/index/Categorias_2_impresora_3D_Axis_one.jpg` | JPEG | `4928 x 3264` | `2509141` bytes | `index`, categoria de impresoras; tambien tarjeta de `/collections`; confirmado por el nombre y el pedido del usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
+| `Foto5.jpg` | `src/assets/index-products-axis-one/fotos producto/Foto5.jpg` | JPEG | Dimensiones del asset local | Pendiente de lectura | `collections/impresoras-3d`, hero junto al texto; confirmado por el usuario. | `Impresora 3D Profesional Axis One` | No se declara equivalencia automatica con `foto4_edited_-_Ligera.jpg`. |
 | `Nuestros_compromisos_icono_1_carrete_filamento.avif` | `src/assets/index/Nuestros_compromisos_icono_1_carrete_filamento.avif` | AVIF | `150 x 150` | `5187` bytes | `index`, compromiso 1. | Pendiente: no se conserva texto no observado. | No asignada. |
 | `Nuestros_compromisos_icono_2_impresion-3d.avif` | `src/assets/index/Nuestros_compromisos_icono_2_impresion-3d.avif` | AVIF | `150 x 150` | `2609` bytes | `index`, compromiso 2. | Pendiente: no se conserva texto no observado. | No asignada. |
 | `Nuestros_compromisos_icono_3_linea-de-meta.avif` | `src/assets/index/Nuestros_compromisos_icono_3_linea-de-meta.avif` | AVIF | `150 x 150` | `6458` bytes | `index`, compromiso 3. | Pendiente: no se conserva texto no observado. | No asignada. |
 | `Nuestros_compromisos_icono_4_pulgar_arriba.avif` | `src/assets/index/Nuestros_compromisos_icono_4_pulgar_arriba.avif` | AVIF | `150 x 150` | `6362` bytes | `index`, compromiso 4. | Pendiente: no se conserva texto no observado. | No asignada. |
 
-**Regla:** los 98 recursos integrados tienen estado local `available`; todos se importan desde `src/assets/` y Astro genera sus rutas optimizadas bajo `/_astro/`. Los cuatro heroes tienen uso `index`; `Hero_3.jpg` se usa además como hero visible de `/collections/pla` por confirmación del usuario. Las dos imagenes de categorias tienen uso `index` y `collection` como tarjetas; los cuatro iconos tienen uso `index` en compromisos; los 18 recursos editoriales de PLA tienen uso `collection`; las 16 imagenes editoriales de Axis One tienen uso en sus bloques editoriales; las 9 imagenes de `fotos producto/` tienen uso en su galeria principal. Ninguno se declara equivalente a `2052425b5f.jpg`, `Cinco_hermosos...`, `Banner_2...`, `Banner_3...` u otra referencia Shopify sin evidencia de origen. Las otras 85 referencias Shopify siguen pendientes; esta confirmacion no las convierte en disponibles.
+**Regla:** los 109 recursos integrados tienen estado local `available`; todos se importan desde `src/assets/` y Astro genera sus rutas optimizadas bajo `/_astro/`. Los cuatro heroes tienen uso `index`; `Hero_3.jpg` se usa además como hero visible de `/collections/pla` por confirmación del usuario. Las dos imagenes de categorias tienen uso `index` y `collection` como tarjetas; los cuatro iconos tienen uso `index` en compromisos; los 18 recursos editoriales de PLA tienen uso `collection`; las 16 imagenes editoriales de Axis One tienen uso en sus bloques editoriales; las 9 imagenes de `fotos producto/` tienen uso en su galeria principal. `Foto5.jpg` se usa además como hero visible de `/collections/impresoras-3d` por confirmación del usuario. Ninguno se declara equivalente a `2052425b5f.jpg`, `Cinco_hermosos...`, `Banner_2...`, `Banner_3...` u otra referencia Shopify sin evidencia de origen. Las otras 85 referencias Shopify siguen pendientes; esta confirmacion no las convierte en disponibles.
 
 ### Galerias locales de productos PLA
 
@@ -73,7 +74,7 @@ La entrega `src/assets/index-products-axis-one/` contiene 16 imagenes que corres
 | Uso | Archivos locales | Estado |
 |---|---:|---|
 | Bloques editoriales Axis One | 16 | `available`; alt revisado desde el HTML publicado. |
-| Galería principal Axis One | 9 imagenes locales en `fotos producto/` | `available`; se renderizan como `<Picture>` y conservan el orden local aprobado: `foto4`, video, `foto2`, `foto1`, `7 Print3x`, `23 print3x`, `11 print3x`, `Foto5`, `Foto9`. |
+| Galería principal Axis One | 9 imagenes locales en `fotos producto/` | `available`; se renderizan como `<Picture>` y conservan el orden local aprobado: `foto4`, video, `foto2`, `foto1`, `7 Print3x`, `23 print3x`, `11 print3x`, `Foto5`, `Foto9`. `foto4` y `foto2` también se usan como imágenes primaria/secundaria de la tarjeta en `/collections/impresoras-3d`. |
 | Video de presentación Axis One | 1 URL YouTube, en 2 bloques | `available`; se integra con `lite-youtube-embed`, carga el iframe solo al activarse y usa `youtube-nocookie`. |
 
 ### Bloques y galeria locales de Padi
@@ -82,7 +83,7 @@ La entrega `src/assets/index-products-padi/` contiene ocho imagenes para los blo
 
 | Uso | Archivos locales | Proporcion | Estado |
 |---|---:|---:|---|
-| Galeria principal Padi | 4 | Segun dimensiones locales de cada fotografia; marco de galeria `3:2` | `available`; alt revisado como nombre descriptivo del producto. |
+| Galeria principal Padi | 4 | Segun dimensiones locales de cada fotografia; marco de galeria `3:2` | `available`; alt revisado como nombre descriptivo del producto. Dos fotografías también se usan como imágenes primaria/secundaria de la tarjeta en `/collections/impresoras-3d`. |
 | Bloques editoriales Padi | 8 referencias, 6 nuevas | Se conserva el marco `image-with-text` de la plantilla | `available`; incluye Objetivo, Fácil Adhesión, Despegue flexible, Instalación Magnética, Comportamiento Térmico Inteligente, Único elemento, Impresiones perfectas e Historia. |
 
 Los cuatro nombres de origen Shopify `DSC_0020.JPG-Ligera.jpg`, `DSC_0005.JPG-Ligera.jpg`, `DSC_0009.JPG-Ligera.jpg` y `DSC_0010.JPG-Ligera.jpg` permanecen como referencias historicas `pending` en `src/content/products/padi-superficie-de-impresion.md`; las cuatro fotografias nuevas entregadas son la galeria local aprobada y no se declaran equivalentes automaticas por nombre.
@@ -298,7 +299,7 @@ Las dimensiones conocidas de los archivos locales pueden usarse para sus propios
 
 ## Optimizacion con Astro
 
-Los 98 recursos disponibles se importan desde `src/assets/` como metadata de imagen de Astro. `MediaPlaceholder.astro`, las galerias de producto y el logo del header usan `<Picture>` con fuentes `avif` y `webp`, fallback del formato original, `sizes` y variantes `srcset` para `390`, `768`, `1024` y `1440` px. Las variantes no amplian archivos que sean menores que cada breakpoint; los placeholders de media pendiente no se transforman ni se sustituyen.
+Los 109 recursos disponibles se importan desde `src/assets/` como metadata de imagen de Astro. `MediaPlaceholder.astro`, las galerias de producto y el logo del header usan `<Picture>` con fuentes `avif` y `webp`, fallback del formato original, `sizes` y variantes `srcset` para `390`, `768`, `1024` y `1440` px. Las variantes no amplian archivos que sean menores que cada breakpoint; los placeholders de media pendiente no se transforman ni se sustituyen.
 
 ## Prioridad de obtencion e integracion
 

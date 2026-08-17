@@ -69,6 +69,35 @@
 - La Tarea 7.2 formal de inventario DNS y rollback sigue abierta/preparada.
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
 
+## Actualización Etapa 7 - Tarea 7.2: colección Impresoras 3D
+
+**Estado:** completada para la implementación de `/collections/impresoras-3d`; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- Se adaptó `src/pages/collections/[slug].astro` para que la colección de impresoras use el hero de dos columnas y las tarjetas de producto del patrón de `/collections/pla`.
+- Se creó `src/data/impresoras-3d-collection.ts` con el texto observado, `Foto5.jpg` como hero y las imágenes locales de las tarjetas de Axis One y Padi.
+- El hero renderiza `src/assets/index-products-axis-one/fotos producto/Foto5.jpg` mediante `<Picture>` a través de `MediaPlaceholder.astro`.
+- Se actualizó `src/content/collections/impresoras-3d.md` y `Docs/MANIFIESTO_MEDIA.md` para registrar el uso confirmado y mantener separada la referencia Shopify histórica pendiente.
+- La colección conserva el estado estático histórico: enlaces a fichas, precios observados y botones deshabilitados, sin carrito ni compra.
+- Se corrigió el hover de las tarjetas agregando una imagen secundaria local para Axis One y Padi; la imagen principal ahora se reemplaza por otra fotografía del mismo producto en desktop.
+
+### Verificación
+
+- `npm run check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `npm run build`: correcto; 41 páginas estáticas generadas.
+- Preview local de `/collections/impresoras-3d`: ruta `200`, título, texto introductorio, 2 tarjetas, 3 imágenes optimizadas bajo `/_astro/` y 3 elementos `<picture>`.
+- Preview a 390 px: hero apilado, imagen visible, sin overflow horizontal (`scrollWidth` igual a `clientWidth`) y sin errores de consola.
+- Preview a 1440 px: hero en dos columnas; el bloque de imagen ocupa `605 x 377.6px`, con texto a la izquierda y `Foto5.jpg` a la derecha.
+- Hover desktop: Axis One cambia de `foto4` a `foto2` y Padi cambia a `fotos 2 despegue.JPG`; la imagen secundaria queda con opacidad `1` y la principal con opacidad `0`.
+- Regresión de `/collections/pla`: ruta `200`, 11 tarjetas, 18 características, 2 grupos de acordeones y sin overflow horizontal.
+
+### Bloqueos y pendientes
+
+- El alt de `Foto5.jpg` queda como descripción revisada del producto y puede requerir validación editorial final si se exige equivalencia literal con Shopify.
+- La referencia Shopify `foto4_edited_-_Ligera.jpg` sigue documentada como no equivalente automáticamente a `Foto5.jpg`.
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
 ## Corrección visual Etapa 7 - Tarea 7.2: opciones de tamaño Padi
 
 **Estado:** completada.

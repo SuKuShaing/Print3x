@@ -3,6 +3,11 @@ import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import MediaPlaceholder from '../../components/MediaPlaceholder.astro';
 import { indexMedia } from '../../data/index-media';
+import {
+  impresoras3dCollectionCardMedia,
+  impresoras3dCollectionDescription,
+  impresoras3dCollectionHero,
+} from '../../data/impresoras-3d-collection';
 import { plaCollectionAccordionSections, plaCollectionDescription, plaCollectionFeatures } from '../../data/pla-collection';
 import { productMedia } from '../../data/product-media';
 import SiteLayout from '../../layouts/SiteLayout.astro';
@@ -26,8 +31,13 @@ const productsBySlug = new Map(products.map((product) => [product.data.slug, pro
 const collectionProducts = collection.data.productSlugs
   .map((slug) => productsBySlug.get(slug))
   .filter((product): product is CollectionEntry<'products'> => Boolean(product));
-const collectionMedia = collection.data.slug === 'pla' ? indexMedia.categoriasFilamentosPla : null;
+const collectionMedia = collection.data.slug === 'pla'
+  ? indexMedia.hero3
+  : collection.data.slug === 'impresoras-3d'
+    ? impresoras3dCollectionHero
+    : null;
 const isPla = collection.data.slug === 'pla';
+const isImpresoras3d = collection.data.slug === 'impresoras-3d';
 const formatPrice = (value: number | null) =>
   value === null
     ? null
@@ -44,21 +54,24 @@ const formatPrice = (value: number | null) =>
   sourceUrl={collection.data.sourceUrl}
   sourceRetrieved={collection.data.sourceRetrieved}
 >
-  {isPla ? (
-    <article class="collection-page collection-page--pla">
-      <section class="collection-hero collection-hero--with-image color-background-1" aria-labelledby="PlaCollectionTitle">
+  {isPla || isImpresoras3d ? (
+    <article class:list={['collection-page', 'collection-page--pla', isImpresoras3d && 'collection-page--impresoras-3d']}>
+      <section
+        class="collection-hero collection-hero--with-image color-background-1"
+        aria-labelledby={isPla ? 'PlaCollectionTitle' : 'Impresoras3dCollectionTitle'}
+      >
         <div class="collection-hero__inner page-width">
           <div class="collection-hero__text-wrapper">
-            <h1 class="collection-hero__title" id="PlaCollectionTitle">{collection.data.title}</h1>
+            <h1 class="collection-hero__title" id={isPla ? 'PlaCollectionTitle' : 'Impresoras3dCollectionTitle'}>{collection.data.title}</h1>
             <div class="collection-hero__description rte">
-              <p>{plaCollectionDescription}</p>
+              <p>{isPla ? plaCollectionDescription : impresoras3dCollectionDescription}</p>
             </div>
           </div>
           <div class="collection-hero__image-container media gradient">
             <MediaPlaceholder
-              media={indexMedia.hero3}
-              width={indexMedia.hero3.width}
-              height={indexMedia.hero3.height}
+              media={collectionMedia}
+              width={collectionMedia?.width ?? 1500}
+              height={collectionMedia?.height ?? 750}
               loading="eager"
               fetchpriority="high"
               sizes="(min-width: 1200px) 550px, (min-width: 750px) calc(50vw - 65px), calc(100vw - 30px)"
@@ -70,10 +83,14 @@ const formatPrice = (value: number | null) =>
 
       <section class="pla-products-section" aria-labelledby="pla-products-title">
         <div class="page-width">
-          <h2 class="pla-products-section__title" id="pla-products-title">Impresion 3D Filamentos</h2>
+          <h2 class:list={['pla-products-section__title', !isPla && 'visually-hidden']} id="pla-products-title">
+            {isPla ? 'Impresion 3D Filamentos' : 'Productos'}
+          </h2>
           <ul class="pla-product-grid grid grid--2-col-tablet-down grid--3-col-desktop" role="list">
             {collectionProducts.map((product) => {
-              const media = productMedia[product.data.slug] ?? [];
+              const media = isImpresoras3d
+                ? impresoras3dCollectionCardMedia[product.data.slug as keyof typeof impresoras3dCollectionCardMedia] ?? []
+                : productMedia[product.data.slug] ?? [];
               const primary = media[0];
               const secondary = media[1];
               const primaryCardMedia = primary
@@ -102,13 +119,15 @@ const formatPrice = (value: number | null) =>
                             class="pla-product-card__image pla-product-card__image--primary"
                             sizes="(min-width: 1200px) 373px, (min-width: 750px) 33vw, 50vw"
                           />
-                          <MediaPlaceholder
-                            media={secondaryCardMedia}
-                            width={secondary?.width ?? 1000}
-                            height={secondary?.height ?? 1000}
-                            class="pla-product-card__image pla-product-card__image--secondary"
-                            sizes="(min-width: 1200px) 373px, (min-width: 750px) 33vw, 50vw"
-                          />
+                          {(!isImpresoras3d || secondary) && (
+                            <MediaPlaceholder
+                              media={secondaryCardMedia}
+                              width={secondary?.width ?? 1000}
+                              height={secondary?.height ?? 1000}
+                              class="pla-product-card__image pla-product-card__image--secondary"
+                              sizes="(min-width: 1200px) 373px, (min-width: 750px) 33vw, 50vw"
+                            />
+                          )}
                         </a>
                         <div class="pla-product-card__badge card__badge">
                           <span class="badge badge--bottom-left color-background-2">Agotado</span>
@@ -154,14 +173,14 @@ const formatPrice = (value: number | null) =>
         </div>
       </section>
 
-      <section class="pla-features-intro color-accent-2 gradient" aria-labelledby="pla-features-title">
+      {isPla && <section class="pla-features-intro color-accent-2 gradient" aria-labelledby="pla-features-title">
         <div class="page-width">
           <p class="caption-with-letter-spacing">Todas las caracteristicas del Mejor:</p>
           <h2 class="hxl" id="pla-features-title">PLA</h2>
         </div>
-      </section>
+      </section>}
 
-      <div class="pla-features" aria-label="Características del filamento PLA">
+      {isPla && <div class="pla-features" aria-label="Características del filamento PLA">
         {plaCollectionFeatures.map((feature, index) => (
           <section class:list={[
             'image-with-text',
@@ -220,9 +239,9 @@ const formatPrice = (value: number | null) =>
             </div>
           </section>
         ))}
-      </div>
+      </div>}
 
-      <div class="pla-collapsible-sections">
+      {isPla && <div class="pla-collapsible-sections">
         {plaCollectionAccordionSections.map((section, sectionIndex) => (
           <section class="pla-collapsible color-background-1" aria-labelledby={`PlaAccordionSection-${sectionIndex + 1}`}>
             <div class="collapsible-content collapsible-none-layout isolate page-width">
@@ -256,7 +275,7 @@ const formatPrice = (value: number | null) =>
             </div>
           </section>
         ))}
-      </div>
+      </div>}
     </article>
   ) : (
     <article class="collection-page page-width">

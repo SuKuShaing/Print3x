@@ -9,7 +9,8 @@ Las imágenes estarán en internet en el github, puesto que son todas copias de 
 
 ## ToDos
 
-- [ ] Hacer la página de blog y nosotros
+- [ ] Hacer las páginas nosotros (ya tengo las imágenes en la carpeta)
+- [ ] Hacer la página de blog
 - [ ] Falta el favicon
 
 - [x] Replicar la estructura de producto en padi,

@@ -12,20 +12,20 @@ productSlugs:
   - padi-superficie-de-impresion
 media:
   - status: pending
-    sourceReference: 'Colección HTML media principal: foto4_edited_-_Ligera.jpg'
+    sourceReference: 'src/assets/index-products-axis-one/fotos producto/Foto5.jpg'
     use: 'Imagen principal de la colección'
-    expectedDimensions: '750 x pendiente'
-    aspectRatio: 'pendiente'
-    reason: 'La imagen no está disponible entre los assets locales entregados.'
+    expectedDimensions: 'dimensiones del asset local'
+    aspectRatio: 'dimensiones del asset local'
+    reason: 'La referencia local fue confirmada por el usuario y se integra desde el registro de media de la página; este campo conserva el estado histórico de la referencia Shopify pendiente.'
 ---
 
 ## Descripción
 
-Obtén tu impresora 3D profesional, con capacitaciones y asesoría. La fuente describe equipos con calibración automática, gran área de impresión y respaldo del equipo de Print3x.
+Obtén tu Impresoras 3D Profesional, con capacitaciones y asesoría, disponibles a la venta, cuentan con calibración automática, gran área de impresión y el respaldo completo de nuestro equipo.
 
 ## Productos de la colección
 
 - [Impresora 3D Profesional Axis One](/products/axis-one)
 - [Padi - Superficie de impresión](/products/padi-superficie-de-impresion)
 
-Las imágenes de la colección permanecen pendientes hasta recibir recursos locales.
+El hero usa `src/assets/index-products-axis-one/fotos producto/Foto5.jpg`, confirmado por el usuario como la imagen que debe acompañar al texto de la colección. Las imágenes de las tarjetas consumen las galerías locales de Axis One y Padi.
