@@ -2,9 +2,11 @@
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import AxisOneFeatures from '../../components/AxisOneFeatures.astro';
+import PadiFeatures from '../../components/PadiFeatures.astro';
 import ProductGallery from '../../components/ProductGallery.astro';
 import MediaPlaceholder from '../../components/MediaPlaceholder.astro';
 import { axisOneGallery, axisOneProductDetails } from '../../data/axis-one-product';
+import { padiGallery, padiProductDetails } from '../../data/padi-product';
 import { plaProductDetails } from '../../data/pla-product-details';
 import { productMedia } from '../../data/product-media';
 import SiteLayout from '../../layouts/SiteLayout.astro';
@@ -29,8 +31,9 @@ const gallery = productMedia[data.slug] ?? data.media.map(() => null);
 const plaDetails = plaProductDetails[data.slug];
 const plaGallery = productMedia[data.slug];
 const axisOneDetails = axisOneProductDetails[data.slug];
-const storefrontDetails = axisOneDetails ?? plaDetails;
-const storefrontGallery = axisOneDetails ? axisOneGallery : plaGallery;
+const padiDetails = padiProductDetails[data.slug];
+const storefrontDetails = axisOneDetails ?? plaDetails ?? padiDetails;
+const storefrontGallery = axisOneDetails ? axisOneGallery : padiDetails ? padiGallery : plaGallery;
 const formatPrice = (value: number | null) =>
   value === null
     ? null
@@ -75,6 +78,25 @@ const dimensions = (value: string) => {
           </div>
 
           <p class="product-page__tax caption">Iva incluido.</p>
+
+          {data.presentations.length > 1 && (
+            <fieldset class="product-page__options">
+              <legend class="form__label">Size</legend>
+              <div class="product-page__options-list">
+                {data.presentations.map((presentation, index) => (
+                  <label class="product-page__option">
+                    <input
+                      type="radio"
+                      name={`presentation-${data.slug}`}
+                      value={presentation}
+                      checked={index === 0}
+                    />
+                    <span>{presentation}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+          )}
 
           <div class="product-page__quantity-field" data-p3x-quantity>
             <label class="quantity__label form__label" for={`Quantity-${data.slug}`}>Cantidad</label>
@@ -125,6 +147,7 @@ const dimensions = (value: string) => {
         </div>
       </div>
 
+      {storefrontDetails.accordions.length > 0 && (
       <section class="product-page__accordions" data-p3x-accordion aria-labelledby={`ProductDetails-${data.slug}`}>
         <div class="product-page__accordions-heading">
           <p class="product-page__summary-label">Resumen de las:</p>
@@ -149,8 +172,10 @@ const dimensions = (value: string) => {
           </div>
         ))}
       </section>
+      )}
 
       {axisOneDetails && <AxisOneFeatures details={axisOneDetails} />}
+      {padiDetails && <PadiFeatures details={padiDetails} />}
     </article>
   ) : (
     <article class="product-page page-width">

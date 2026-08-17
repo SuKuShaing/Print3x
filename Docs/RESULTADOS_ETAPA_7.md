@@ -68,3 +68,44 @@
 - El bloque editorial `LiteYoutube` conserva la miniatura externa del componente; la miniatura de la galería usa el asset local `miniatura.jpg` y el iframe solo se solicita cuando la persona activa el video.
 - La Tarea 7.2 formal de inventario DNS y rollback sigue abierta/preparada.
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+## Corrección visual Etapa 7 - Tarea 7.2: opciones de tamaño Padi
+
+**Estado:** completada.
+
+- Se actualizaron las pastillas de tamaño en `src/styles/components/product.css`.
+- La opción seleccionada usa fondo `#941081`, texto claro y borde sólido.
+- La opción no seleccionada usa fondo transparente, texto magenta y borde magenta tenue.
+- Los radios nativos quedan visualmente ocultos, pero mantienen accesibilidad de teclado y foco visible.
+- `npm run check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `npm run build`: correcto; 41 páginas estáticas generadas.
+- Preview local: opciones de `198 x 48.4px`, sin overflow horizontal y sin errores de consola.
+
+## Actualización Etapa 7 - Tarea 7.2: Padi
+
+**Estado:** completada para la implementación del producto; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- Se conectó `/products/padi-superficie-de-impresion` al storefront estático de productos existente.
+- Se creó `src/data/padi-product.ts` con la galería local de cuatro imágenes, los ocho bloques editoriales y los textos observados en la página original.
+- Se creó `src/components/PadiFeatures.astro` con el patrón visual `image-with-text` de las páginas de producto existentes.
+- Se incorporaron los tamaños `220 x 220 mm` y `305 x 305 mm` como opciones estáticas.
+- El producto conserva el precio histórico observado, pero muestra `Agotado` en la etiqueta, el estado y el botón deshabilitado; no se agregó compra ni inventario real.
+- Se actualizaron los estilos de producto y `Docs/MANIFIESTO_MEDIA.md` con los 10 recursos PADI nuevos integrados mediante `<Picture>`.
+
+### Verificación
+
+- `npm run check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `npm run build`: correcto; 41 páginas estáticas generadas.
+- Preview local de `/products/padi-superficie-de-impresion`: ruta `200`, galería de 4 imágenes y 8 bloques editoriales con imágenes optimizadas bajo `/_astro/`.
+- Preview local: se muestran los dos tamaños, `Agotado` en precio/estado/botón y el botón de compra permanece deshabilitado.
+- Preview local: la galería avanza, el modal abre una imagen y `Escape` lo cierra; no se registran errores de consola.
+- Preview desktop: marco principal de galería `786.5 x 524.3px`, sin overflow horizontal (`scrollWidth` igual a `clientWidth`).
+- Preview móvil: sin overflow horizontal y con controles de galería móviles conservados.
+
+### Bloqueos y pendientes
+
+- Las cuatro fotografías de la galería PADI son archivos nuevos entregados localmente y no se declaran equivalentes automáticas de las referencias Shopify históricas; esas referencias siguen documentadas como `pending` en el frontmatter.
+- Alt de los archivos entregados queda documentado como descriptivo/revisado para esta implementación; requiere validación editorial final si se exige equivalencia literal con el HTML Shopify.
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.

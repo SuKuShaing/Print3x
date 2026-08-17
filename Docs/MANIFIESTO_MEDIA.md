@@ -3,13 +3,13 @@
 **Fuente Shopify:** `zip_theme_shopify_estable/`  
 **Fuente local:** `src/assets/`
 **Fecha de inspeccion:** 2026-08-17
-**Estado:** 98 recursos locales entregados e integrados desde `src/assets` mediante `<Picture>`: 29 recursos del header, index y colecciones, 44 imagenes de galerias de productos PLA, 16 imagenes editoriales de Axis One y 9 imagenes de su galeria principal. El favicon usa un placeholder SVG local porque el recurso Shopify activo no tiene copia local confirmada. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
+**Estado:** 108 recursos locales entregados e integrados desde `src/assets` mediante `<Picture>`: 29 recursos del header, index y colecciones, 44 imagenes de galerias de productos PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal y 10 recursos nuevos de Padi. El favicon usa un placeholder SVG local porque el recurso Shopify activo no tiene copia local confirmada. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
 
 ## Resumen de conteos
 
 | Categoria | Conteo | Alcance |
 |---|---:|---|
-| Imagenes locales entregadas e integradas | 98 | 29 recursos del header/index/colecciones, 44 imagenes de galerias PLA, 16 imagenes editoriales de Axis One y 9 imagenes de su galeria principal. |
+| Imagenes locales entregadas e integradas | 108 | 29 recursos del header/index/colecciones, 44 imagenes de galerias PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal y 10 recursos nuevos de Padi. |
 | Recursos `shopify://shop_images` unicos globales | 85 | Union de templates y `config/settings_data.json`. |
 | Ocurrencias globales de referencias Shopify | 93 | Incluye repeticiones entre templates y configuracion. |
 | Recursos distintos identificados en templates | 81 | Conteo de nombres unicos dentro de templates; el registro de ejecucion lo denomina referencias de templates. |
@@ -75,6 +75,17 @@ La entrega `src/assets/index-products-axis-one/` contiene 16 imagenes que corres
 | Bloques editoriales Axis One | 16 | `available`; alt revisado desde el HTML publicado. |
 | Galería principal Axis One | 9 imagenes locales en `fotos producto/` | `available`; se renderizan como `<Picture>` y conservan el orden local aprobado: `foto4`, video, `foto2`, `foto1`, `7 Print3x`, `23 print3x`, `11 print3x`, `Foto5`, `Foto9`. |
 | Video de presentación Axis One | 1 URL YouTube, en 2 bloques | `available`; se integra con `lite-youtube-embed`, carga el iframe solo al activarse y usa `youtube-nocookie`. |
+
+### Bloques y galeria locales de Padi
+
+La entrega `src/assets/index-products-padi/` contiene ocho imagenes para los bloques editoriales de Padi. `logo Axis One.png` ya estaba contabilizado como recurso de Axis One y `Emoji_hot_and_cold2.webp` ya estaba contabilizado en la coleccion PLA. La subcarpeta `fotos producto/` contiene las cuatro imagenes de la galeria principal. Todos los recursos se integran mediante `<Picture>` en `/products/padi-superficie-de-impresion`.
+
+| Uso | Archivos locales | Proporcion | Estado |
+|---|---:|---:|---|
+| Galeria principal Padi | 4 | Segun dimensiones locales de cada fotografia; marco de galeria `3:2` | `available`; alt revisado como nombre descriptivo del producto. |
+| Bloques editoriales Padi | 8 referencias, 6 nuevas | Se conserva el marco `image-with-text` de la plantilla | `available`; incluye Objetivo, Fácil Adhesión, Despegue flexible, Instalación Magnética, Comportamiento Térmico Inteligente, Único elemento, Impresiones perfectas e Historia. |
+
+Los cuatro nombres de origen Shopify `DSC_0020.JPG-Ligera.jpg`, `DSC_0005.JPG-Ligera.jpg`, `DSC_0009.JPG-Ligera.jpg` y `DSC_0010.JPG-Ligera.jpg` permanecen como referencias historicas `pending` en `src/content/products/padi-superficie-de-impresion.md`; las cuatro fotografias nuevas entregadas son la galeria local aprobada y no se declaran equivalentes automaticas por nombre.
 
 ### Bloques editoriales locales de la coleccion PLA
 

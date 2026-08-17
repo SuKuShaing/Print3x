@@ -150,6 +150,58 @@
   margin-top: -1.4rem !important;
 }
 
+.product-page__options {
+  border: 0;
+  margin: 2.2rem 0 0;
+  padding: 0;
+}
+
+.product-page__options legend {
+  color: rgb(var(--color-base-accent-1));
+  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.product-page__options-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+}
+
+.product-page__option {
+  align-items: center;
+  border: 0.1rem solid rgba(var(--color-base-accent-1), 0.3);
+  box-sizing: border-box;
+  border-radius: var(--buttons-radius);
+  color: rgb(var(--color-base-accent-1));
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1.6rem;
+  height: 4.4rem;
+  justify-content: center;
+  min-width: 0;
+  padding: 0 1rem;
+  width: 18rem;
+}
+
+.product-page__option input {
+  height: 0.1rem;
+  opacity: 0;
+  position: absolute;
+  width: 0.1rem;
+}
+
+.product-page__option:has(input:checked) {
+  background: rgb(var(--color-base-text));
+  border-color: rgb(var(--color-base-text));
+  color: rgb(var(--color-base-solid-button-labels));
+}
+
+.product-page__option:has(input:focus-visible) {
+  outline: 0.2rem solid rgba(var(--color-base-accent-1), 0.65);
+  outline-offset: 0.2rem;
+}
+
 .product-page__quantity-field {
   margin: 1.5rem 0 0;
   max-width: 44rem;
@@ -712,6 +764,42 @@
   margin-top: 2.4rem;
 }
 
+.padi-content {
+  padding-bottom: 8rem;
+}
+
+.padi-content__intro {
+  margin-bottom: 4rem;
+  margin-top: 4rem;
+  padding: 3rem 0;
+  text-align: center;
+  width: 100%;
+}
+
+.padi-content__heading {
+  text-align: center;
+}
+
+.padi-content__heading h2 {
+  margin: 0;
+}
+
+.padi-feature + .padi-feature {
+  margin-top: 4rem;
+}
+
+.padi-feature .image-with-text__media {
+  height: 46rem;
+}
+
+.padi-feature .media-placeholder {
+  height: 100%;
+}
+
+.padi-feature .media-placeholder__image {
+  object-fit: contain;
+}
+
 @media screen and (max-width: 749px) {
   .product-page {
     padding-bottom: 4rem;
@@ -805,6 +893,24 @@
 
   .axis-one-content {
     padding-bottom: 4rem;
+  }
+
+  .padi-content {
+    padding-bottom: 4rem;
+  }
+
+  .padi-content__intro {
+    margin-bottom: 2.4rem;
+    margin-top: 2.4rem;
+    padding: 2.4rem 0;
+  }
+
+  .padi-feature + .padi-feature {
+    margin-top: 2rem;
+  }
+
+  .padi-feature .image-with-text__media {
+    height: 29.6rem;
   }
 
   .axis-one-content__intro {
