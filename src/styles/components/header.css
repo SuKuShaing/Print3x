@@ -269,10 +269,6 @@
   margin-right: -1.2rem;
 }
 
-.header__icon--account {
-  display: none;
-}
-
 .header__search {
   display: flex;
 }
@@ -374,7 +370,7 @@
 
 .menu-drawer__navigation-container {
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: 1fr;
   align-content: space-between;
 }
 
@@ -427,26 +423,6 @@
   font-size: 1.5rem;
 }
 
-.menu-drawer__utility-links {
-  padding: 2rem;
-  background-color: rgba(var(--color-foreground), 0.03);
-}
-
-.menu-drawer__account {
-  display: inline-flex;
-  align-items: center;
-  padding: 1.2rem;
-  color: rgb(var(--color-foreground));
-  text-decoration: none;
-  font-size: 1.4rem;
-}
-
-.menu-drawer__account .icon-account {
-  width: 2rem;
-  height: 2rem;
-  margin-right: 1rem;
-}
-
 .icon-sprite {
   position: absolute;
   width: 0;
@@ -487,9 +463,6 @@
     display: block;
   }
 
-  .header__icon--account {
-    display: flex;
-  }
 }
 
 @media screen and (max-width: 989px) {

@@ -9,10 +9,12 @@ Las imágenes estarán en internet en el github, puesto que son todas copias de 
 
 ## ToDos
 
-- [ ] Replicar la estructura de producto en padi y en axis one,
+- [ ] Replicar la estructura de producto en axis one,
+- [ ] Replicar la estructura de producto en padi,
 - [ ] Hacer la página de blog y nosotros
-- [ ] sacar la opción de hacer login
+- [ ] Falta el favicon
 
+- [x] sacar la opción de hacer login
 - [x] Colocar las imágenes de los filamentos en products/pla
 - [x] darle estructura a la página de collections/pla
 - [x] Comprimir las imágenes usando la forma que ofrece Astro para optimizar imágenes
