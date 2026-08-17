@@ -2,14 +2,14 @@
 
 **Fuente Shopify:** `zip_theme_shopify_estable/`  
 **Fuente local:** `src/assets/`
-**Fecha de inspeccion:** 2026-08-06
-**Estado:** 73 recursos locales entregados e integrados desde `src/assets` mediante `<Picture>`: 29 recursos del header, index y colecciones, mas 44 imagenes de galerias de productos PLA. El favicon usa un placeholder SVG local porque el recurso Shopify activo no tiene copia local confirmada. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
+**Fecha de inspeccion:** 2026-08-17
+**Estado:** 98 recursos locales entregados e integrados desde `src/assets` mediante `<Picture>`: 29 recursos del header, index y colecciones, 44 imagenes de galerias de productos PLA, 16 imagenes editoriales de Axis One y 9 imagenes de su galeria principal. El favicon usa un placeholder SVG local porque el recurso Shopify activo no tiene copia local confirmada. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
 
 ## Resumen de conteos
 
 | Categoria | Conteo | Alcance |
 |---|---:|---|
-| Imagenes locales entregadas e integradas | 73 | 29 recursos del header/index/colecciones y 44 imagenes nuevas de galerias PLA. |
+| Imagenes locales entregadas e integradas | 98 | 29 recursos del header/index/colecciones, 44 imagenes de galerias PLA, 16 imagenes editoriales de Axis One y 9 imagenes de su galeria principal. |
 | Recursos `shopify://shop_images` unicos globales | 85 | Union de templates y `config/settings_data.json`. |
 | Ocurrencias globales de referencias Shopify | 93 | Incluye repeticiones entre templates y configuracion. |
 | Recursos distintos identificados en templates | 81 | Conteo de nombres unicos dentro de templates; el registro de ejecucion lo denomina referencias de templates. |
@@ -23,7 +23,7 @@ La suma de 81 recursos distintos de templates y 4 referencias de configuracion d
 
 ## Imagenes locales verificadas
 
-Las dimensiones y el peso se obtuvieron leyendo los once archivos locales. El usuario confirmo que los cuatro `Hero_*.jpg` son las imagenes del hero del index y que las imagenes de categorias e iconos corresponden a los bloques descritos en el pedido. Esta confirmacion define el rol de uso, no una equivalencia con un nombre de imagen Shopify.
+Las dimensiones y el peso se obtuvieron leyendo los archivos locales entregados. El usuario confirmo que los cuatro `Hero_*.jpg` son las imagenes del hero del index y que las imagenes de categorias, iconos y bloques de producto corresponden a los usos descritos en los pedidos. Esta confirmacion define el rol de uso, no una equivalencia con un nombre de imagen Shopify.
 
 | Archivo local | Ruta | Formato | Dimensiones | Peso | Uso confirmado | Alt | Equivalencia Shopify |
 |---|---|---|---:|---:|---|---|---|
@@ -44,7 +44,7 @@ Las dimensiones y el peso se obtuvieron leyendo los once archivos locales. El us
 | `Nuestros_compromisos_icono_3_linea-de-meta.avif` | `src/assets/index/Nuestros_compromisos_icono_3_linea-de-meta.avif` | AVIF | `150 x 150` | `6458` bytes | `index`, compromiso 3. | Pendiente: no se conserva texto no observado. | No asignada. |
 | `Nuestros_compromisos_icono_4_pulgar_arriba.avif` | `src/assets/index/Nuestros_compromisos_icono_4_pulgar_arriba.avif` | AVIF | `150 x 150` | `6362` bytes | `index`, compromiso 4. | Pendiente: no se conserva texto no observado. | No asignada. |
 
-**Regla:** los 73 archivos integrados tienen estado local `available`; todos se importan desde `src/assets/` y Astro genera sus rutas optimizadas bajo `/_astro/`. Los cuatro heroes tienen uso `index`; `Hero_3.jpg` se usa además como hero visible de `/collections/pla` por confirmación del usuario. Las dos imagenes de categorias tienen uso `index` y `collection` como tarjetas; los cuatro iconos tienen uso `index` en compromisos; los 18 recursos editoriales de PLA tienen uso `collection`. Ninguno se declara equivalente a `2052425b5f.jpg`, `Cinco_hermosos...`, `Banner_2...`, `Banner_3...` u otra referencia Shopify sin evidencia de origen. Las otras 85 referencias Shopify siguen pendientes; esta confirmacion no las convierte en disponibles.
+**Regla:** los 98 recursos integrados tienen estado local `available`; todos se importan desde `src/assets/` y Astro genera sus rutas optimizadas bajo `/_astro/`. Los cuatro heroes tienen uso `index`; `Hero_3.jpg` se usa además como hero visible de `/collections/pla` por confirmación del usuario. Las dos imagenes de categorias tienen uso `index` y `collection` como tarjetas; los cuatro iconos tienen uso `index` en compromisos; los 18 recursos editoriales de PLA tienen uso `collection`; las 16 imagenes editoriales de Axis One tienen uso en sus bloques editoriales; las 9 imagenes de `fotos producto/` tienen uso en su galeria principal. Ninguno se declara equivalente a `2052425b5f.jpg`, `Cinco_hermosos...`, `Banner_2...`, `Banner_3...` u otra referencia Shopify sin evidencia de origen. Las otras 85 referencias Shopify siguen pendientes; esta confirmacion no las convierte en disponibles.
 
 ### Galerias locales de productos PLA
 
@@ -65,6 +65,16 @@ La entrega `src/assets/index-products-pla/` contiene cuatro archivos JPG por car
 | `/products/pla_rojo` | `pla-rojo` | 4 | `1:1` | `available` |
 
 El estado `pending` que permanece en el frontmatter de estos productos describe la equivalencia de las referencias del endpoint historico; no representa la disponibilidad de estas galerias locales, que queda registrada como `available` en `product-media.ts`.
+
+### Bloques editoriales locales de Axis One
+
+La entrega `src/assets/index-products-axis-one/` contiene 16 imagenes que corresponden, en el mismo orden de la ruta publicada, a los bloques `Objetivo`, `Volumen de impresión`, `Calibración Automática`, `Filamentos Rígidos y Flexibles`, `Padi`, `Pantalla Táctil`, `MCE`, `Alta Resolución`, `Separación de corrientes`, `Protección Electrica`, `Soporte Técnico Total`, `Software propio`, `S.O.C.`, `Tensores regulables`, `Velocidades de impresión` y `Capacitaciones`. El contenido las integra con `<Picture>` mediante `MediaPlaceholder.astro`.
+
+| Uso | Archivos locales | Estado |
+|---|---:|---|
+| Bloques editoriales Axis One | 16 | `available`; alt revisado desde el HTML publicado. |
+| Galería principal Axis One | 9 imagenes locales en `fotos producto/` | `available`; se renderizan como `<Picture>` y conservan el orden local aprobado: `foto4`, video, `foto2`, `foto1`, `7 Print3x`, `23 print3x`, `11 print3x`, `Foto5`, `Foto9`. |
+| Video de presentación Axis One | 1 URL YouTube, en 2 bloques | `available`; se integra con `lite-youtube-embed`, carga el iframe solo al activarse y usa `youtube-nocookie`. |
 
 ### Bloques editoriales locales de la coleccion PLA
 
@@ -273,11 +283,11 @@ No todas las referencias Shopify tienen dimensiones locales verificables. El pla
 | Video externo | Reservar area de cover y boton accesible | No descargar ni asignar miniaturas no verificadas. |
 | Imagen editorial | Preservar ancho de contenido y ratio de la imagen fuente si se conoce | Si no hay dimensiones, registrar pendiente antes de fijar un ratio arbitrario. |
 
-Las dimensiones conocidas de los once archivos locales pueden usarse para sus propios bloques cuando el contenido confirme el destino. No deben utilizarse para inferir equivalencias Shopify.
+Las dimensiones conocidas de los archivos locales pueden usarse para sus propios bloques cuando el contenido confirme el destino. No deben utilizarse para inferir equivalencias Shopify.
 
 ## Optimizacion con Astro
 
-Los 55 archivos disponibles se importan desde `src/assets/` como metadata de imagen de Astro. `MediaPlaceholder.astro`, las galerias de producto y el logo del header usan `<Picture>` con fuentes `avif` y `webp`, fallback del formato original, `sizes` y variantes `srcset` para `390`, `768`, `1024` y `1440` px. Las variantes no amplian archivos que sean menores que cada breakpoint; los placeholders de media pendiente no se transforman ni se sustituyen.
+Los 98 recursos disponibles se importan desde `src/assets/` como metadata de imagen de Astro. `MediaPlaceholder.astro`, las galerias de producto y el logo del header usan `<Picture>` con fuentes `avif` y `webp`, fallback del formato original, `sizes` y variantes `srcset` para `390`, `768`, `1024` y `1440` px. Las variantes no amplian archivos que sean menores que cada breakpoint; los placeholders de media pendiente no se transforman ni se sustituyen.
 
 ## Prioridad de obtencion e integracion
 

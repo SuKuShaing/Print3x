@@ -1,0 +1,25 @@
+---
+import 'lite-youtube-embed/src/lite-yt-embed.css';
+
+interface Props {
+  videoId: string;
+  title: string;
+  class?: string;
+}
+
+const { videoId, title, class: className } = Astro.props;
+const posterUrl = `https://i.ytimg.com/vi/${encodeURIComponent(videoId)}/hqdefault.jpg`;
+---
+
+<lite-youtube
+  class={className}
+  videoid={videoId}
+  title={title}
+  playlabel={`Reproducir: ${title}`}
+  params="rel=0"
+  style={`background-image: url("${posterUrl}")`}
+></lite-youtube>
+
+<script>
+  import 'lite-youtube-embed/src/lite-yt-embed.js';
+</script>

@@ -52,6 +52,13 @@ export interface PendingMediaAsset extends MediaAssetBase {
   src?: never;
 }
 
+export interface VideoMediaAsset extends MediaAssetBase {
+  status: 'video';
+  videoId: string;
+  title: string;
+  poster?: AvailableMediaAsset;
+}
+
 export type MediaAsset = AvailableMediaAsset | PendingMediaAsset;
 export type MediaReference = MediaAsset | null;
 export type MediaCollection = readonly MediaReference[];

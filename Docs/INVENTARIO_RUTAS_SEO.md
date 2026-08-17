@@ -114,7 +114,7 @@ Estas rutas no deben confundirse con los templates del ZIP ni con las 32 filas a
 | `/policies/refund-policy` | Enlazada por footer; status completo pendiente de nueva auditoria | Pendiente | `revisar-condicionada` | No incorporarla al sitemap objetivo sin revisar contenido legal. |
 | `/policies/shipping-policy` | Enlazada por footer y popups de producto; status completo pendiente de nueva auditoria | Pendiente | `revisar-condicionada` | Revisar si sigue siendo necesaria como pagina informativa. |
 | `/cart` | 200 observado; carrito vacio y flujo Shopify visible | misma URL | `auxiliar-controlada` | No implementar carrito real; resolver con pagina informativa o estado controlado y excluir del sitemap de contenido. |
-| `/customer_authentication/redirect` | Redirige a autenticacion Shopify; la pagina final es noindex | URL externa de autenticacion | `auxiliar-controlada` | No pedir credenciales ni conservar dependencia de cuenta; resolver con experiencia controlada y no indexable. |
+| `/customer_authentication/redirect` | Redirigia a autenticacion Shopify; la ruta fue retirada de Astro | No se genera | `retirar-controlado` | No se conserva la dependencia de cuenta ni se solicitan credenciales. Un futuro acceso de usuarios requiere una decision e implementacion separadas. |
 | `/search` | 200 observado | misma URL | `auxiliar-controlada` | Conservar solo con busqueda estatica local; excluir del sitemap de contenido. |
 
 ## Templates sin URL publica confirmada
@@ -148,7 +148,7 @@ La siguiente lista es un control de no-publicacion automatica:
 | Superficie | Regla documental |
 |---|---|
 | 404 y rutas retiradas | Excluir `/pages/contactanos`, `/products/filamento_tpu` y `/collections/accesorios-3d` hasta que exista una decision distinta. |
-| Auxiliares | Excluir `/cart`, `/search` y autenticacion del sitemap de contenido; mantener respuesta controlada si el enlace se conserva. |
+| Auxiliares | Excluir `/cart` y `/search` del sitemap de contenido; la ruta de autenticacion no se genera. |
 | Discovery | `/agents.md` requiere una decision separada; no mezclarlo con el sitemap editorial por defecto. |
 | Politicas | No excluir por defecto si siguen siendo publicas, pero exigir revision legal y metadata antes de incorporarlas al sitemap Astro. |
 | Templates no publicados | No generar URLs solo porque exista `templates/*.json`. |

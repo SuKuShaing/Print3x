@@ -9,11 +9,11 @@ Las imágenes estarán en internet en el github, puesto que son todas copias de 
 
 ## ToDos
 
-- [ ] Replicar la estructura de producto en axis one,
 - [ ] Replicar la estructura de producto en padi,
 - [ ] Hacer la página de blog y nosotros
 - [ ] Falta el favicon
 
+- [x] Replicar la estructura de producto en axis one,
 - [x] sacar la opción de hacer login
 - [x] Colocar las imágenes de los filamentos en products/pla
 - [x] darle estructura a la página de collections/pla

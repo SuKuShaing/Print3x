@@ -318,6 +318,7 @@ function setupGalleries(scope: ParentNode): void {
     const nextControls = Array.from(gallery.querySelectorAll<HTMLElement>('[data-p3x-gallery-next]')).filter(
       (control) => control.closest('[data-p3x-gallery]') === gallery,
     );
+    const thumbnailList = gallery.querySelector<HTMLElement>('.product-gallery__thumbnail-list');
     const status = gallery.querySelector<HTMLElement>('[data-p3x-gallery-status]');
     const stacked = gallery.dataset.p3xGalleryDisplay === 'stacked';
     const isMobileCarousel = () => window.matchMedia?.('(max-width: 749px)').matches ?? false;
@@ -332,6 +333,12 @@ function setupGalleries(scope: ParentNode): void {
       getGalleryMediaId(media[0])!;
     let lastOpener: HTMLElement | null = null;
     let modalIsOpen = false;
+    let isThumbnailDragging = false;
+    let thumbnailDragMoved = false;
+    let thumbnailDragStartX = 0;
+    let thumbnailDragStartScrollLeft = 0;
+    let thumbnailDragTarget: HTMLElement | null = null;
+    let suppressThumbnailClick = false;
 
     const updateGallery = (id: string, shouldScroll = true) => {
       const activeMedia = mediaById.get(id);
@@ -366,6 +373,9 @@ function setupGalleries(scope: ParentNode): void {
 
       if (shouldScroll && isMobileCarousel()) {
         activeMedia.scrollIntoView({ behavior: 'auto', block: 'nearest', inline: 'start' });
+      } else if (shouldScroll) {
+        const activeThumbnail = thumbnails.find((thumbnail) => thumbnail.dataset.p3xGalleryTarget === activeId);
+        activeThumbnail?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
       }
     };
 
@@ -467,6 +477,12 @@ function setupGalleries(scope: ParentNode): void {
 
       const thumbnail = event.target.closest<HTMLElement>('[data-p3x-gallery-thumb]');
       if (thumbnail && thumbnail.closest('[data-p3x-gallery]') === gallery) {
+        if (suppressThumbnailClick) {
+          suppressThumbnailClick = false;
+          event.preventDefault();
+          return;
+        }
+
         const target = thumbnail.dataset.p3xGalleryTarget;
         if (target && mediaById.has(target)) {
           event.preventDefault();
@@ -483,6 +499,53 @@ function setupGalleries(scope: ParentNode): void {
         openModal(opener);
       }
     });
+
+    if (thumbnailList) {
+      const finishThumbnailDrag = (event: PointerEvent) => {
+        if (!isThumbnailDragging) return;
+
+        isThumbnailDragging = false;
+        thumbnailList.classList.remove('is-dragging');
+        if (thumbnailList.hasPointerCapture(event.pointerId)) thumbnailList.releasePointerCapture(event.pointerId);
+        const target = thumbnailDragTarget?.dataset.p3xGalleryTarget;
+        thumbnailDragTarget = null;
+
+        if (!thumbnailDragMoved && target && mediaById.has(target)) {
+          updateGallery(target);
+        } else if (thumbnailDragMoved) {
+          suppressThumbnailClick = true;
+          window.setTimeout(() => (suppressThumbnailClick = false), 0);
+        }
+      };
+
+      thumbnailList.addEventListener('pointerdown', (event) => {
+        if (event.pointerType !== 'mouse' || event.button !== 0) return;
+
+        isThumbnailDragging = true;
+        thumbnailDragMoved = false;
+        thumbnailDragStartX = event.clientX;
+        thumbnailDragStartScrollLeft = thumbnailList.scrollLeft;
+        thumbnailDragTarget = event.target instanceof Element
+          ? event.target.closest<HTMLElement>('[data-p3x-gallery-thumb]')
+          : null;
+        thumbnailList.setPointerCapture(event.pointerId);
+      });
+
+      thumbnailList.addEventListener('pointermove', (event) => {
+        if (!isThumbnailDragging) return;
+
+        const distance = event.clientX - thumbnailDragStartX;
+        if (!thumbnailDragMoved && Math.abs(distance) < 5) return;
+
+        thumbnailDragMoved = true;
+        event.preventDefault();
+        thumbnailList.classList.add('is-dragging');
+        thumbnailList.scrollLeft = thumbnailDragStartScrollLeft - distance;
+      });
+
+      thumbnailList.addEventListener('pointerup', finishThumbnailDrag);
+      thumbnailList.addEventListener('pointercancel', finishThumbnailDrag);
+    }
 
     gallery.addEventListener('keydown', (event) => {
       if (!(event.target instanceof Element)) return;

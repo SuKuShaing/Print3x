@@ -1,0 +1,65 @@
+---
+import MediaPlaceholder from './MediaPlaceholder.astro';
+import LiteYoutube from './LiteYoutube.astro';
+import type { AxisOneProductDetails } from '../data/axis-one-product';
+
+interface Props {
+  details: AxisOneProductDetails;
+}
+
+const { details } = Astro.props;
+---
+
+<section class="axis-one-content" aria-labelledby="AxisOneFeaturesHeading">
+  <div class="axis-one-content__intro color-accent-2 gradient">
+    <header class="axis-one-content__heading page-width">
+      <h2 id="AxisOneFeaturesHeading">{details.heading}</h2>
+    </header>
+  </div>
+
+  <div class="axis-one-video page-width">
+    <div class="axis-one-video__media">
+      <LiteYoutube videoId={details.videoId} title={details.videoLabel} />
+    </div>
+  </div>
+
+  {details.features.map((feature, index) => (
+    <section class="image-with-text image-with-text--no-overlap page-width isolate collapse-corners axis-one-feature">
+      <div class:list={[
+        'image-with-text__grid',
+        'grid',
+        'grid--gapless',
+        'grid--1-col',
+        'grid--2-col-tablet',
+        { 'image-with-text__grid--reverse': index % 2 === 1 },
+      ]}>
+        <div class="image-with-text__media-item image-with-text__media-item--medium image-with-text__media-item--top grid__item">
+          <div class="image-with-text__media image-with-text__media--medium global-media-settings">
+            <MediaPlaceholder
+              media={feature.image}
+              width={feature.image.width ?? 1000}
+              height={feature.image.height ?? 1000}
+              loading={index < 2 ? 'eager' : 'lazy'}
+              sizes="(min-width: 750px) 50vw, 100vw"
+            />
+          </div>
+        </div>
+        <div class="image-with-text__text-item grid__item">
+          <div class="image-with-text__content image-with-text__content--top image-with-text__content--desktop-left image-with-text__content--mobile-left color-background-2 content-container">
+            <h3 class="image-with-text__heading inline-richtext h2">{feature.heading}</h3>
+            <div class="image-with-text__text rte">
+              {feature.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              {feature.links?.map((link) => <p><a href={link.href}>{link.label}</a></p>)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="axis-one-technical page-width" aria-labelledby="AxisOneTechnicalHeading">
+    <h2 id="AxisOneTechnicalHeading">{details.technicalSheet.heading}</h2>
+    {details.technicalSheet.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    <p class="axis-one-technical__pending">Documento no disponible</p>
+  </section>
+</section>

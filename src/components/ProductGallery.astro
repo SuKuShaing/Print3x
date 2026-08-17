@@ -1,14 +1,18 @@
 ---
 import MediaPlaceholder from './MediaPlaceholder.astro';
-import type { AvailableMediaAsset } from '../data/types';
+import LiteYoutube from './LiteYoutube.astro';
+import type { MediaReference, VideoMediaAsset } from '../data/types';
+
+type ProductGalleryMedia = MediaReference | VideoMediaAsset;
 
 interface Props {
-  media: readonly AvailableMediaAsset[];
+  media: readonly ProductGalleryMedia[];
   title: string;
 }
 
 const { media, title } = Astro.props;
 const mediaIds = media.map((_, index) => `product-media-${index + 1}`);
+const isVideo = (item: ProductGalleryMedia): item is VideoMediaAsset => item?.status === 'video';
 ---
 
 <div
@@ -33,15 +37,20 @@ const mediaIds = media.map((_, index) => `product-media-${index + 1}`);
           aria-hidden={index === 0 ? 'false' : 'true'}
         >
           <div class="product-gallery__media-frame">
-            <MediaPlaceholder
-              media={item}
-              width={item.width ?? 1000}
-              height={item.height ?? 1000}
-              class="product-gallery__media-placeholder"
-              loading={index === 0 ? 'eager' : 'lazy'}
-              fetchpriority={index === 0 ? 'high' : undefined}
-              sizes="(min-width: 990px) 65vw, 100vw"
-            />
+            {isVideo(item) ? (
+              <LiteYoutube videoId={item.videoId} title={item.title} class="product-gallery__video" />
+            ) : (
+              <MediaPlaceholder
+                media={item}
+                width={item?.width ?? 1000}
+                height={item?.height ?? 1000}
+                class="product-gallery__media-placeholder"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchpriority={index === 0 ? 'high' : undefined}
+                sizes="(min-width: 990px) 65vw, 100vw"
+              />
+            )}
+            {item?.status === 'available' && (
             <button
               class="product-gallery__media-toggle"
               type="button"
@@ -56,54 +65,70 @@ const mediaIds = media.map((_, index) => `product-media-${index + 1}`);
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12.8324 3.03011C10.1255 0.323296 5.73693 0.323296 3.03011 3.03011C0.323296 5.73693 0.323296 10.1256 3.03011 12.8324C5.73693 15.5392 10.1255 15.5392 12.8324 12.8324C15.5392 10.1256 15.5392 5.73693 12.8324 3.03011ZM2.32301 2.32301C5.42035 -0.774336 10.4421 -0.774336 13.5395 2.32301C16.6101 5.39361 16.6366 10.3556 13.619 13.4588L18.2473 18.0871C18.4426 18.2824 18.4426 18.599 18.2473 18.7943C18.0521 18.9895 17.7355 18.9895 17.5402 18.7943L12.8778 14.1318C9.76383 16.6223 5.20839 16.4249 2.32301 13.5395C-0.774335 10.4421 -0.774335 5.42035 2.32301 2.32301Z" fill="currentColor" />
               </svg>
             </button>
+            )}
           </div>
         </li>
       );
     })}
   </ul>
 
-  <div class="product-gallery__controls" aria-label="Controles de la galería">
-    <button type="button" class="slider-button slider-button--prev" data-p3x-gallery-prev aria-label="Diapositiva anterior">
-      <svg class="icon icon-caret product-gallery__caret--previous" viewBox="0 0 10 6" aria-hidden="true" focusable="false">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor" />
-      </svg>
-    </button>
-    <div class="slider-counter caption" data-p3x-gallery-status role="status" aria-live="polite">
-      1 / {media.length}
+  <div class="product-gallery__thumbnail-navigation">
+    <div class="product-gallery__controls" aria-label="Controles de la galería">
+      <button type="button" class="slider-button slider-button--prev" data-p3x-gallery-prev aria-label="Diapositiva anterior">
+        <svg class="icon icon-caret product-gallery__caret--previous" viewBox="0 0 10 6" aria-hidden="true" focusable="false">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor" />
+        </svg>
+      </button>
+      <div class="slider-counter caption" data-p3x-gallery-status role="status" aria-live="polite">
+        1 / {media.length}
+      </div>
+      <button type="button" class="slider-button slider-button--next" data-p3x-gallery-next aria-label="Diapositiva siguiente">
+        <svg class="icon icon-caret product-gallery__caret--next" viewBox="0 0 10 6" aria-hidden="true" focusable="false">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor" />
+        </svg>
+      </button>
     </div>
-    <button type="button" class="slider-button slider-button--next" data-p3x-gallery-next aria-label="Diapositiva siguiente">
-      <svg class="icon icon-caret product-gallery__caret--next" viewBox="0 0 10 6" aria-hidden="true" focusable="false">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor" />
-      </svg>
-    </button>
-  </div>
 
-  <div class="product-gallery__thumbnail-slider">
-    <ul class="product-gallery__thumbnail-list" role="list">
-      {media.map((item, index) => {
-        const mediaId = mediaIds[index];
-        return (
-          <li class="product-gallery__thumbnail-item">
-            <button
-              class="product-gallery__thumbnail"
-              type="button"
-              data-p3x-gallery-thumb
-              data-p3x-gallery-target={mediaId}
-              aria-current={index === 0 ? 'true' : 'false'}
-              aria-label={`Cargar imagen ${index + 1} de ${media.length}`}
-            >
-              <MediaPlaceholder
-                media={item}
-                width={200}
-                height={200}
-                loading="lazy"
-                sizes="(min-width: 990px) 15vw, 25vw"
-              />
-            </button>
-          </li>
-        );
-      })}
-    </ul>
+    <div class="product-gallery__thumbnail-slider">
+      <ul class="product-gallery__thumbnail-list" role="list">
+        {media.map((item, index) => {
+          const mediaId = mediaIds[index];
+          return (
+            <li class="product-gallery__thumbnail-item">
+              <button
+                class="product-gallery__thumbnail"
+                type="button"
+                data-p3x-gallery-thumb
+                data-p3x-gallery-target={mediaId}
+                aria-current={index === 0 ? 'true' : 'false'}
+                aria-label={`Cargar imagen ${index + 1} de ${media.length}`}
+              >
+                {isVideo(item) ? (
+                  <span class="product-gallery__video-thumbnail" aria-hidden="true">
+                    <MediaPlaceholder
+                      media={item.poster ?? null}
+                      width={item.poster?.width ?? 16}
+                      height={item.poster?.height ?? 9}
+                      loading="lazy"
+                      sizes="(min-width: 990px) 15vw, 25vw"
+                    />
+                    <span class="product-gallery__video-play">▶</span>
+                  </span>
+                ) : (
+                  <MediaPlaceholder
+                    media={item}
+                    width={200}
+                    height={200}
+                    loading="lazy"
+                    sizes="(min-width: 990px) 15vw, 25vw"
+                  />
+                )}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   </div>
 
   <dialog class="product-gallery__modal" data-p3x-gallery-modal aria-label={`Galería de ${title}`}>

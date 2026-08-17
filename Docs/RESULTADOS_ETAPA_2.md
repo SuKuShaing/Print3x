@@ -115,10 +115,30 @@ HTML estático. No se modificaron `zip_theme_shopify_estable/`,
 
 ## Criterio de aceptacion
 
-**Cumplido con bloqueos documentados.** Las rutas enlazadas tienen experiencias
-estáticas controladas, no hay flujos comerciales ni redirect externo de autenticación,
-y search/cart/auth están fuera del índice mediante `noindex`. El favicon, las URLs
-limpias de Cloudflare y productos/colecciones quedan para etapas posteriores.
+**Cumplido con bloqueos documentados en la fecha de cierre de la etapa.** Las rutas
+enlazadas tenían experiencias estáticas controladas, no había flujos comerciales ni
+redirect externo de autenticación, y search/cart/auth estaban fuera del índice mediante
+`noindex`. El acceso de cuenta se retiró posteriormente y queda documentado abajo.
+El favicon, las URLs limpias de Cloudflare y productos/colecciones quedan para etapas
+posteriores.
+
+## Actualización posterior: retiro del acceso de cuenta
+
+**Etapa:** 7 - Tarea 7.2, ajuste posterior del shell
+**Fecha de actualización:** 2026-08-17
+**Estado:** completada.
+
+Se retiraron del header desktop y del menú mobile los enlaces de cuenta, el símbolo
+SVG asociado y sus estilos exclusivos. También se eliminó la ruta
+`/customer_authentication/redirect`; no se genera una página de login ni se conserva
+la dependencia de autenticación de Shopify. Un futuro inicio de sesión dentro de
+Astro deberá implementarse como una decisión separada.
+
+### Verificación independiente
+
+- La búsqueda de referencias de cuenta/login en `src` no devuelve resultados.
+- `robots.txt` ya no desautoriza una ruta de autenticación inexistente.
+- Se mantienen los enlaces de búsqueda y carrito, sin cambios en sus experiencias.
 
 ## Actualización posterior: visibilidad y atribución del footer
 

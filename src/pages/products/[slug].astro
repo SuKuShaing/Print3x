@@ -1,8 +1,10 @@
 ---
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
+import AxisOneFeatures from '../../components/AxisOneFeatures.astro';
 import ProductGallery from '../../components/ProductGallery.astro';
 import MediaPlaceholder from '../../components/MediaPlaceholder.astro';
+import { axisOneGallery, axisOneProductDetails } from '../../data/axis-one-product';
 import { plaProductDetails } from '../../data/pla-product-details';
 import { productMedia } from '../../data/product-media';
 import SiteLayout from '../../layouts/SiteLayout.astro';
@@ -26,6 +28,9 @@ const { data } = product;
 const gallery = productMedia[data.slug] ?? data.media.map(() => null);
 const plaDetails = plaProductDetails[data.slug];
 const plaGallery = productMedia[data.slug];
+const axisOneDetails = axisOneProductDetails[data.slug];
+const storefrontDetails = axisOneDetails ?? plaDetails;
+const storefrontGallery = axisOneDetails ? axisOneGallery : plaGallery;
 const formatPrice = (value: number | null) =>
   value === null
     ? null
@@ -52,10 +57,10 @@ const dimensions = (value: string) => {
   sourceUrl={data.sourceUrl}
   sourceRetrieved={data.sourceRetrieved}
 >
-  {plaDetails && plaGallery ? (
-    <article class="product-page product-page--storefront page-width">
-      <div class="product-page__layout product-page__layout--storefront">
-        <ProductGallery media={plaGallery} title={data.title} />
+  {storefrontDetails && storefrontGallery ? (
+    <article class="product-page product-page--storefront">
+      <div class="product-page__layout product-page__layout--storefront page-width">
+        <ProductGallery media={storefrontGallery} title={data.title} />
 
         <div id="ProductInfo" class="product-page__info product-page__info--sticky">
           <div class="product-page__title">
@@ -123,10 +128,10 @@ const dimensions = (value: string) => {
       <section class="product-page__accordions" data-p3x-accordion aria-labelledby={`ProductDetails-${data.slug}`}>
         <div class="product-page__accordions-heading">
           <p class="product-page__summary-label">Resumen de las:</p>
-          <h2 class="product-page__accordions-title h1" id={`ProductDetails-${data.slug}`}>{plaDetails.heading}</h2>
+          <h2 class="product-page__accordions-title h1" id={`ProductDetails-${data.slug}`}>{storefrontDetails.heading}</h2>
         </div>
 
-        {plaDetails.accordions.map((item) => (
+        {storefrontDetails.accordions.map((item) => (
           <div class="product__accordion accordion">
             <details data-p3x-details>
               <summary>
@@ -144,6 +149,8 @@ const dimensions = (value: string) => {
           </div>
         ))}
       </section>
+
+      {axisOneDetails && <AxisOneFeatures details={axisOneDetails} />}
     </article>
   ) : (
     <article class="product-page page-width">
