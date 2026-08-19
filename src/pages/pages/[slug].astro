@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import NosotrosPage from '../../components/NosotrosPage.astro';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
@@ -27,7 +28,7 @@ const { data } = page;
   sourceUrl={data.sourceUrl}
   sourceRetrieved={data.sourceRetrieved}
 >
-  <article class="editorial-page page-width">
+  {data.slug === 'nosotros' ? <NosotrosPage /> : <article class="editorial-page page-width">
     <header class="editorial-page__header">
       <p class="editorial-page__eyebrow">Print3x</p>
       <h1>{data.title}</h1>
@@ -35,5 +36,5 @@ const { data } = page;
     <div class="editorial-page__body rte">
       <Content />
     </div>
-  </article>
+  </article>}
 </SiteLayout>

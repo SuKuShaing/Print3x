@@ -45,6 +45,10 @@ Las dimensiones y el peso se obtuvieron leyendo los archivos locales entregados.
 | `Nuestros_compromisos_icono_3_linea-de-meta.avif` | `src/assets/index/Nuestros_compromisos_icono_3_linea-de-meta.avif` | AVIF | `150 x 150` | `6458` bytes | `index`, compromiso 3. | Pendiente: no se conserva texto no observado. | No asignada. |
 | `Nuestros_compromisos_icono_4_pulgar_arriba.avif` | `src/assets/index/Nuestros_compromisos_icono_4_pulgar_arriba.avif` | AVIF | `150 x 150` | `6362` bytes | `index`, compromiso 4. | Pendiente: no se conserva texto no observado. | No asignada. |
 
+### Página Nosotros
+
+Los cuatro archivos entregados en `src/assets/index-pages-nosotros/` se verifican como media local disponible. `foto equipo.jpg` se usa como fotografía principal de `/pages/nosotros`; los iconos de carrete, línea de meta y pulgar arriba se usan en el carrusel de compromisos. El cuarto icono no se fuerza en la página porque la referencia publicada muestra tres compromisos. Todos se renderizan mediante `<Picture>`.
+
 **Regla:** los 109 recursos integrados tienen estado local `available`; todos se importan desde `src/assets/` y Astro genera sus rutas optimizadas bajo `/_astro/`. Los cuatro heroes tienen uso `index`; `Hero_3.jpg` se usa además como hero visible de `/collections/pla` por confirmación del usuario. Las dos imagenes de categorias tienen uso `index` y `collection` como tarjetas; los cuatro iconos tienen uso `index` en compromisos; los 18 recursos editoriales de PLA tienen uso `collection`; las 16 imagenes editoriales de Axis One tienen uso en sus bloques editoriales; las 9 imagenes de `fotos producto/` tienen uso en su galeria principal. `Foto5.jpg` se usa además como hero visible de `/collections/impresoras-3d` por confirmación del usuario. Ninguno se declara equivalente a `2052425b5f.jpg`, `Cinco_hermosos...`, `Banner_2...`, `Banner_3...` u otra referencia Shopify sin evidencia de origen. Las otras 85 referencias Shopify siguen pendientes; esta confirmacion no las convierte en disponibles.
 
 ### Galerias locales de productos PLA

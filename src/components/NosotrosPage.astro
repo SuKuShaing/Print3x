@@ -1,0 +1,131 @@
+---
+import { Picture } from 'astro:assets';
+import MediaPlaceholder from './MediaPlaceholder.astro';
+import teamPhoto from '../assets/index-pages-nosotros/foto equipo.jpg';
+import missionIcon from '../assets/index-pages-nosotros/Nuestros_compromisos_icono_1_carrete_filamento.avif';
+import valueIcon from '../assets/index-pages-nosotros/Nuestros_compromisos_icono_3_linea-de-meta.avif';
+import visionIcon from '../assets/index-pages-nosotros/Nuestros_compromisos_icono_4_pulgar_arriba.avif';
+
+const teamMedia = {
+  status: 'available' as const,
+  altStatus: 'reviewed' as const,
+  alt: 'Fotografía del equipo de Print3x',
+  src: teamPhoto,
+};
+
+const commitments = [
+  {
+    heading: 'Misión',
+    text: 'Brindarte herramientas para hacer tus ideas realidad.',
+    image: visionIcon,
+    alt: 'Icono de pulgar arriba',
+  },
+  {
+    heading: 'Propuesta de valor',
+    text: 'Una impresora 3D de alta calidad muy fácil de usar, con una amplia variedad de materiales a utilizar para imprimir lo que desees.',
+    image: valueIcon,
+    alt: 'Icono de línea de meta',
+  },
+  {
+    heading: 'Visión',
+    text: 'Imprimir todas las piezas del universo.',
+    image: missionIcon,
+    alt: 'Icono de carrete de filamento',
+  },
+] as const;
+
+const press = [
+  { year: '2018', items: [
+    ['28agt', 'Gana competencia en Canadá', 'https://portalinnova.cl/emprendimiento-chileno-impresora-3d-gana-competencia-en-canada/'],
+    ['17agt', 'Rector recibe a estudiantes del programa de emprendimiento', 'https://www.usach.cl/news/rector-zolezzi-recibe-estudiantes-viajaron-canada-programa-emprendimiento'],
+    ['02agt', 'Ganadores de Despega Usach', 'https://www.usach.cl/news/ganadores-despega-usach-relatan-este-concurso-amplio-sus-horizontes'],
+    ['01jul', 'Emprendimiento PRINT3X gana jornada en Canada', 'https://www.linkedin.com/feed/update/urn:li:activity:6428680955501834240'],
+    ['11May', 'Máquina de fabricación chilena para materiales flexibles o rígidos', 'https://portalinnova.cl/impresora-3d-print3x-maquina-de-fabricacion-chilena-para-materiales-flexibles-o-rigidos/'],
+  ]},
+  { year: '2017', items: [
+    ['16Mar', 'Exitoso término del concurso Despega Usach', 'https://www.usach.cl/news/exitoso-termino-del-concurso-estudiantil-despega-usach-transformando-realidades-0'],
+    ['16Mar', 'Estudiantes ganadores de Despega Usach destacan', 'https://www.usach.cl/news/estudiantes-ganadores-despega-usach-destacan-aporte-la-pasantia-estados-unidos-0'],
+  ]},
+  { year: '2016', items: [['13Mar', 'Alumnos regresan de pasantía en Stanford', 'http://proyectosespeciales.emol.com/clientes/usach/pdfs/01.pdf']] },
+  { year: '2015', items: [['06Dic', 'Estudiantes de la universidad realizaran pasantia en Stanford', 'http://impresa.elmercurio.com/Pages/NewsDetail.aspx?dt=2015-12-06&PaginaId=11&BodyID=10']] },
+  { year: '2014', items: [
+    ['10Nov', 'Estudiantes de la U. de Santiago Ensamblan Primera Impresora 3D', 'http://chile.noticiasabc.com/2014/11/10/estudiantes-de-la-u-de-santiago-ensamblan-primera-impresora-3d/'],
+    ['07Nov', 'Estudiantes de nuestra Casa de Estudios son los primeros en impresora 3D', 'https://www.die.usach.cl/estudiantes-de-nuestra-casa-estudios-son-los-primeros-universitarios-que-ensamblan-primera-impresora-3d'],
+    ['06Nov', 'Estudiantes son los primeros universitarios que ensamblan una impresora 3D', 'https://article.wn.com/view/2014/11/06/Estudiantes_de_nuestra_Casa_de_Estudios_son_los_primeros_uni/'],
+    ['06Nov', 'Usach al día', 'https://www.usach.cl/news/estudiantes-nuestra-casa-estudios-son-los-primeros-universitarios-ensamblan-primera-impresora-3d'],
+  ]},
+] as const;
+
+const history = [
+  'Crea en 3D, nace como un proyecto para generar piezas de calidad con diseños únicos y/o prototipos para proyectos del grupo de innovación OpenCree, el cual esta formado por alumnos y ex alumnos de la Universida de Santiago de Chile.',
+  'Después de 4 meses de investigación, más 8 meses de fabricación y calibrado, obtuvieron una impresora 3D, la primera versión, de calidad media, la cual fue bien recibida por el mercado. En su afán perfeccionista fueron mejorando la impresora y con ello las impresiones, hasta llegar a la 3ra versión, La Minerva, en la cual tienen la misma calidad que las impresoras top del mercado y contaba con la primera versión de calibración automática, proceso que distingue a esta empresa por lo fácil que hace el uso de estas máquinas.',
+  'Después de ganar premios internacionales, continuaron desarrollando e hicieron una impresora 3D completamente de cero, con la cual logran controlar todos los parámetros de desarrollo y fabricación de estas máquinas.',
+  'Para la expansión internacional se decide cambiar el nombre de Crea en 3D a Print3x para comunicarlo con facilidad en cualquier parte del mundo y fijar los colores institucionales.',
+  'En enero del 2019 lanzan al mercado la impresora Axis One, la cual tiene 2 años de desarrollo pensado en hacerlas más fácil, más rápidas, eficientes, seguras, bellas y agradables, con el objetivo de que estas tecnologías se acerquen a todas las personas y descubran el potencial creativo que pueden tener con una de estas herramientas que la tecnología nos permite disfrutar.',
+];
+
+const future = [
+  'Nuestros siguientes pasos a corto plazo va a ser sacar un modelo de 200 x 200 x 200 mm, un modelo con las mismas características que la Axis One pero más pequeña, y posterior a ello hacer un modelo DIY de mucho menor precio para hacerla totalmente accesible, vamos a diseñarla de tal manera de que sea muy fácil de armar, con una electrónica sencilla de montar, para otorgar un producto bueno, bonito y barato.',
+  'Posterior a ello vamos a saltar a imprimir con 2 o 3 materiales a la vez, aún nos falta determinar cual es el optimo, con el fin de imprimir con materiales solubles, flexibles y rígidos a la vez, hacer integración completa de sistemas de conexión, es decir, que puedas enviar a imprimir por el computador, sin necesidad de tocar la impresora y que la impresora este conectada al wifi de tu hogar u empresa, y que cuando termine la impresión, te notifique al celular. Para esa visión trabajamos.',
+  'Dentro de nuestros ambiciosos objetivos esta que las impresoras 3D impriman todo tipo de cosas en todos los lugares posibles y dentro de esa meta esta el espacio.',
+  'Vamos a desarrollar impresoras 3D que impriman con microgravedad (nombre de la gravedad en el espacio) cosa de que los futuros astronautas puedan imprimir cualquier implemento directamente en sus naves, desde la central en la Tierra simplemente se le envía el archivo listo, se le envía la informacion y ellos podrán reproducir cualquier pieza diseñada a través de nuestras impresoras 3D.',
+  'Impresoras para las colonias de Marte y la Luna. A tales distancias si queremos un asentamiento estable, necesitaran todo tipo de herramientas y modificar las actuales, para ello requerirán imprimir todo tipo de formas nuevas y todo tipo de materiales, queremos tener varios tipos de maquinas que construyan las bigas y edificaciones de las colonias, que otras maquinas construyan los utensilios que van a utilizar, la idea es que estas maquinas sean capaces de utilizar materiales disponibles en estos astros, cosa que lleguen a ser independientes de la central en el planeta Tierra.',
+];
+---
+
+<article class="about-page">
+  <section class="about-page__hero">
+    <MediaPlaceholder media={teamMedia} width={teamPhoto.width} height={teamPhoto.height} loading="eager" sizes="(min-width: 990px) 1200px, 100vw" />
+    <div class="about-page__hero-copy">
+      <h1>Nosotros</h1>
+    </div>
+  </section>
+
+  <section class="about-page__intro page-width" aria-labelledby="about-intro-title">
+    <h2 id="about-intro-title">¿Quiénes<br class="about-page__mobile-break" /> Somos?</h2>
+    <p>Somos un equipo multidisciplinario que vio la necesidad de una maquina que pudiese trasladar las ideas de la mente al mundo físico de una manera muy sencilla.</p>
+    <p>Queremos desarrollar una herramienta tan sencilla de ocupar y tan poderosa que coloque a la ingeniería chilena como un ejemplo de desarrollo.</p>
+    <p>Lo hacemos porque queremos aportar al desarrollo de la nación, apoyar la construcción de nuevas ideas con nuestras herramientas y que nuestras futuras maquinas construyan las colonias lunares y marcianas.</p>
+    <p><a href="/pages/premios">Nuestros premios</a></p>
+  </section>
+
+  <section class="about-page__press page-width" aria-labelledby="about-press-title">
+    <h2 id="about-press-title">Apariciones en la prensa</h2>
+    {press.map((group) => (
+      <div class="about-page__press-year">
+        <h3>{group.year}</h3>
+        <ul>
+          {group.items.map(([date, label, href]) => <li><span>{date}</span><a href={href} rel="noopener noreferrer">{label}</a></li>)}
+        </ul>
+      </div>
+    ))}
+  </section>
+
+  <section class="about-page__commitments" aria-label="Nuestros compromisos">
+    <div class="page-width">
+      <div class="about-page__slider" data-p3x-slider data-p3x-slider-mode="scroll" data-p3x-slider-loop="false" data-p3x-slider-keyboard="true" tabindex="0" aria-label="Nuestros compromisos">
+        <ul class="about-page__commitment-grid slider slider--mobile grid grid--1-col-tablet-down grid--3-col-desktop grid--peek" role="list">
+          {commitments.map((commitment, index) => (
+            <li class="about-page__commitment slider__slide" data-p3x-slide data-p3x-slide-active={index === 0 ? true : undefined}>
+              <div class="about-page__commitment-card">
+                <Picture src={commitment.image} formats={['avif', 'webp']} widths={[150]} sizes="150px" alt={commitment.alt} width={150} height={150} loading="lazy" />
+                <h3>{commitment.heading}</h3>
+                <p>{commitment.text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div class="about-page__slider-controls slider-buttons">
+          <button type="button" class="slider-button slider-button--prev" data-p3x-slider-prev aria-label="Compromiso anterior">‹</button>
+          <span data-p3x-slider-status aria-live="polite">1 / 3</span>
+          <button type="button" class="slider-button slider-button--next" data-p3x-slider-next aria-label="Compromiso siguiente">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="about-page__longform page-width">
+    <section aria-labelledby="about-history-title"><h2 id="about-history-title">Historia</h2>{history.map((paragraph) => <p>{paragraph}</p>)}</section>
+    <section aria-labelledby="about-future-title"><h2 id="about-future-title">Futuro</h2>{future.map((paragraph) => <p>{paragraph}</p>)}</section>
+  </div>
+</article>

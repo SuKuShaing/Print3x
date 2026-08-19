@@ -69,6 +69,151 @@
 - La Tarea 7.2 formal de inventario DNS y rollback sigue abierta/preparada.
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
 
+## Actualización Etapa 7 - Tarea 7.3: separación vertical de Nosotros
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- `src/styles/components/editorial.css` añade `4rem` de margen superior a los compromisos y al bloque Historia/Futuro en desktop.
+- En móvil, ambos márgenes se ajustan a `3rem` para conservar proporción sin hacer crecer excesivamente la página.
+- Se mantienen intactos los espacios internos de la introducción, la prensa, el carrusel y los bloques de contenido.
+
+### Verificación
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 páginas estáticas y 720 variantes generadas.
+- Preview desktop: `44px` entre prensa y compromisos, y `44px` entre compromisos e Historia.
+- Preview móvil a `390px`: `33px` entre las mismas secciones, sin overflow horizontal y con 0 imágenes rotas.
+
+### Bloqueos y pendientes
+
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+## Actualización Etapa 7 - Tarea 7.2: fondo y alineación de las diapositivas de compromisos
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- `src/styles/components/editorial.css` mueve el fondo `#981986` y el radio de `20px` desde `.about-page__commitment-card` a `.about-page__commitment`.
+- La tarjeta interna queda transparente para evitar que el margen superior colapsado del icono desplace visualmente el recuadro hacia abajo.
+- Se conserva la capa visual sutil sobre el fondo y la separación interna del contenido.
+
+### Verificación
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 páginas estáticas y 720 variantes generadas.
+- Preview: el `li` tiene fondo `rgb(152, 25, 134)` equivalente a `#981986`, radio `20px`; la tarjeta tiene fondo transparente.
+- Preview: 0 imágenes rotas y sin overflow horizontal del documento.
+
+### Bloqueos y pendientes
+
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+## Actualización Etapa 7 - Tarea 7.2: fidelidad visual de Nosotros
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- El hero de `/pages/nosotros` ahora ocupa todo el ancho, inicia inmediatamente bajo el header y conserva la proporción de la referencia live en desktop y móvil.
+- Se ajustaron tamaños, anchos y espaciados de títulos, introducción, prensa, Historia y Futuro a las proporciones observadas en `https://www.print3x.cl/pages/nosotros`.
+- La prensa usa filas de texto con fecha inline, sin bordes ni tarjetas añadidas.
+- Los tres compromisos ahora se muestran como columnas en desktop y como carrusel horizontal con peek y controles en móvil, igual que la referencia.
+- Se ajustó el alto del logo/header para igualar la altura observada del shell sin cambiar rutas ni contenido comercial.
+- Se conservaron los assets locales, `<Picture>`, la navegación estática y los textos aprobados.
+
+### Verificación
+
+- `npm run check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `npm run build`: genera `dist/pages/nosotros.html`; mantiene el bloqueo preexistente de `Sharp` ausente en `node_modules` durante la optimización de imágenes.
+- Preview desktop a `1536px`: header `76.5px`, hero `1521 x 616px`, contenido central `858px`, compromisos `1210 x 375px`, sin overflow horizontal.
+- Preview móvil a `390px`: hero `375 x 374px`, contenido `302px`, compromisos con tarjetas `328px`, tres slides y sin overflow horizontal.
+- Preview móvil: el botón siguiente cambia el slide activo de `0` a `1`, los controles están dentro del carrusel y el contenido de Historia/Futuro conserva el orden y la lectura vertical.
+
+### Bloqueos y pendientes
+
+- El hero y los iconos usan los archivos locales entregados, por lo que la fotografía no puede ser idéntica a la fotografía histórica remota de Shopify.
+- Debe resolverse `Sharp` antes de una validación final de carga real de las variantes optimizadas y antes del despliegue en Cloudflare Pages.
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+## Correccion visual Etapa 7 - Tarea 7.2: titulo Nosotros
+
+**Estado:** completada.
+
+- El titulo `Nosotros` del hero aumento levemente de `4.727rem` a `5rem`.
+- El titulo usa blanco pleno (`#fff`) en lugar de la opacidad heredada del contenedor.
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `git diff --check`: sin errores de whitespace.
+- El bloqueo de `Sharp` permanece independiente y sin cambios.
+
+## Correccion visual Etapa 7 - Tarea 7.2: recorte y filtro del hero Nosotros
+
+**Estado:** completada.
+
+- La fotografía del hero usa `object-position: center top` para conservar la parte superior de la imagen y desplazar el recorte hacia abajo.
+- Se añadió una capa negra de `15%` sobre la fotografía, sin oscurecer el título.
+- El contenido del hero conserva una capa superior (`z-index: 2`) y el filtro queda debajo (`z-index: 1`).
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- Preview local: `object-position: 50% 0%`, filtro `rgba(0, 0, 0, 0.15)`, título `rgb(255, 255, 255)`, `font-size: 55px` y sin overflow horizontal.
+- El bloqueo de `Sharp` permanece independiente y sin cambios.
+
+## Correccion de runtime Etapa 7 - Tarea 7.2: variantes de imagen
+
+**Estado:** completada.
+
+- El problema de imágenes ausentes en `pnpm preview` se debía a que `Sharp` estaba solo como dependencia opcional transitiva de Astro y no estaba declarado directamente.
+- Se añadió `sharp@0.35.3` a `package.json`; `pnpm-lock.yaml` quedó actualizado.
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 páginas generadas y 720 variantes de imagen optimizadas.
+- Preview `/pages/nosotros`: 2/2 imágenes cargadas, ambas con HTTP `200`.
+- Preview `/`: 11/11 imágenes cargadas, todas con HTTP `200` y sin imágenes rotas.
+- El bloqueo de `Sharp` queda resuelto.
+
+## Actualización Etapa 7 - Tarea 7.2: página Nosotros
+
+**Estado:** completada para la implementación visual de `/pages/nosotros`; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- Se creó `src/components/NosotrosPage.astro` para reproducir la estructura publicada: fotografía del equipo, introducción, prensa por año, compromisos en carrusel y bloques de Historia/Futuro.
+- Se integró `src/assets/index-pages-nosotros/foto equipo.jpg` como fotografía principal y tres iconos locales como media de compromisos, todos mediante `<Picture>` o `MediaPlaceholder`.
+- Se conectó la variante especial desde `src/pages/pages/[slug].astro` sin alterar las demás páginas editoriales ni la ruta `/pages/nosotros`.
+- Se añadieron estilos responsive en `src/styles/components/editorial.css`, conservando el sistema visual Refresh, los colores institucionales y el comportamiento accesible del carrusel existente.
+- Se actualizó `Docs/MANIFIESTO_MEDIA.md` con el uso de los cuatro archivos entregados; el cuarto icono no se fuerza en la página porque la referencia live muestra tres compromisos.
+
+### Verificación
+
+- `npm run check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `npm run build`: genera `dist/pages/nosotros.html`; advierte el bloqueo preexistente `MissingSharp` durante la generación de variantes de imagen.
+- Preview local: `/pages/nosotros` responde 200, conserva title, canonical y `noindex, nofollow` fuera de producción.
+- Preview a 390px: 3 slides, 2 ocultos inicialmente, el botón siguiente cambia el compromiso activo y `scrollWidth` queda en 375px frente a 390px de viewport.
+- Preview desktop: la página mantiene la composición de hero, introducción, prensa, compromisos e Historia/Futuro sin overflow.
+
+### Bloqueos y pendientes
+
+- `Sharp` continúa ausente en `node_modules`; el build puede dejar variantes AVIF/WebP no servidas en preview local. Es un bloqueo existente del entorno y debe resolverse antes de una validación visual final de imágenes o del despliegue.
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+## Actualización Etapa 7 - Tarea 7.2: prioridad de carga de heroes del index
+
+**Estado:** completada con bloqueo preexistente de `Sharp` documentado.
+
+### Cambio realizado
+
+- `src/pages/index.astro` ahora renderiza los cuatro heroes del slideshow con `loading="eager"` para que estén disponibles antes de cambiar de slide.
+- Solo el primer hero conserva `fetchpriority="high"`, evitando competir con cuatro descargas de máxima prioridad.
+- Las imágenes de categorías y compromisos no fueron modificadas y mantienen `loading="lazy"`.
+
+### Verificación
+
+- `npm run check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `npm run build`: generó las rutas estáticas, pero emitió advertencias `MissingSharp` y terminó con un error nativo de cierre de proceso; `Sharp` ya estaba ausente en `node_modules` y no fue introducido por este cambio.
+- `dist/index.html`: contiene cuatro heroes con `loading="eager"` y un único `fetchpriority="high"`; las imágenes restantes del index conservan `loading="lazy"`, aparte del logo eager del header.
+- Preview local de `/`: detecta 4 slides y las cuatro imágenes hero tienen `loading="eager"`; solo la primera tiene `fetchpriority="high"`.
+- La lista de solicitudes del preview muestra las cuatro URLs `Hero_1` a `Hero_4` solicitadas desde la carga inicial, antes de cambiar de slide.
+
 ## Actualización Etapa 7 - Tarea 7.2: colección Impresoras 3D
 
 **Estado:** completada para la implementación de `/collections/impresoras-3d`; la etapa de despliegue sigue abierta.
@@ -137,4 +282,26 @@
 
 - Las cuatro fotografías de la galería PADI son archivos nuevos entregados localmente y no se declaran equivalentes automáticas de las referencias Shopify históricas; esas referencias siguen documentadas como `pending` en el frontmatter.
 - Alt de los archivos entregados queda documentado como descriptivo/revisado para esta implementación; requiere validación editorial final si se exige equivalencia literal con el HTML Shopify.
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+## Actualización Etapa 7 - Tarea 7.2: fidelidad visual de compromisos de Nosotros
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- `src/components/NosotrosPage.astro` ahora ordena los iconos como en la referencia: pulgar para Misión, línea de meta para Propuesta de valor y carrete para Visión.
+- `src/styles/components/editorial.css` aplica el fondo institucional magenta, texto claro, tarjetas con esquinas redondeadas y gradiente sutil para la sección de compromisos.
+- No se modificaron los textos ni el comportamiento del carrusel móvil.
+
+### Verificación
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 páginas estáticas y 720 variantes de imagen generadas.
+- Preview desktop: fondo `rgb(148, 16, 129)`, tres tarjetas con radio `20px`, orden visual de iconos correcto y 0 imágenes rotas.
+- Preview móvil: fondo magenta, carrusel horizontal intencional y sin overflow horizontal del documento.
+- `git diff --check`: correcto; solo muestra avisos normales de conversión LF/CRLF de Git.
+
+### Bloqueos y pendientes
+
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
