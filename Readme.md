@@ -9,7 +9,7 @@ Las imágenes estarán en internet en el github, puesto que son todas copias de 
 
 ## ToDos
 
-- [ ] Hacer las páginas nosotros (ya tengo las imágenes en la carpeta)
+- [ ] Hacer las páginas nosotros (ya tengo las imágenes en la carpeta, solo falta lanzarlo)
 - [ ] Hacer la página de blog
 - [ ] Falta el favicon
 
