@@ -3,7 +3,7 @@
 ## Estado actual verificado
 
 - La raiz contiene una aplicacion Astro estatica ejecutable. `package.json` usa Astro `7.1.6`, TypeScript `6.0.3` y requiere Node `>=22.12.0`; `.nvmrc` fija `22.12.0`.
-- Los scripts disponibles son `npm run dev`, `npm run build`, `npm run preview` y `npm run check`. No inventes scripts de lint, tests, typecheck o codegen que no existan en `package.json`.
+- Usa siempre `pnpm` como gestor de paquetes y ejecutor de scripts. Los scripts disponibles son `pnpm dev`, `pnpm build`, `pnpm preview` y `pnpm check`. No uses `npm` ni inventes scripts de lint, tests, typecheck o codegen que no existan en `package.json`.
 - `astro.config.mjs` fija `output: 'static'`, `site: 'https://www.print3x.cl'`, `trailingSlash: 'never'` y `build.format: 'file'`.
 - Las Etapas 0 a 6 estan aprobadas con bloqueos documentados. La Etapa 7.1 esta preparada para Cloudflare Pages, pero el proyecto no se ha desplegado, no se ha usado Wrangler y no se ha modificado DNS.
 - `dist/`, `audit-lighthouse-desktop/` y `audit-lighthouse-mobile/` son salidas o evidencias generadas. No trates `dist/` como fuente de contenido.
@@ -73,8 +73,8 @@
 
 ## Verificacion y despliegue
 
-- El orden minimo es `npm ci`, `npm run check`, `npm run build`, inspeccion de `dist` y pruebas desde `npm run preview -- --host 127.0.0.1`.
-- Para una preview de Cloudflare usa Node `22.12.0`, comando `npm run build`, salida `dist` y la configuracion de indexacion documentada en `Docs/CLOUDFLARE_PAGES_PREVIEW.md`.
+- El orden minimo es `pnpm install --frozen-lockfile`, `pnpm check`, `pnpm build`, inspeccion de `dist` y pruebas desde `pnpm preview --host 127.0.0.1`.
+- Para una preview de Cloudflare usa Node `22.12.0`, comando `pnpm build`, salida `dist` y la configuracion de indexacion documentada en `Docs/CLOUDFLARE_PAGES_PREVIEW.md`.
 - La evidencia existente de las Etapas 4–6 registra 42 paginas estaticas, 31 URLs de sitemap, 0 errores de check, Lighthouse 100 en accesibilidad, buenas practicas y SEO en desktop/mobile, y crawl local sin enlaces internos rotos. Repite las verificaciones despues de cambios relevantes; no cites resultados viejos como prueba del estado actual sin ejecutarlos de nuevo.
 - Valida visualmente al menos 390px, 768px, 1024px y 1440px, y prueba teclado, foco, Escape, menu mobile, slider, galeria, modal, accordions, busqueda local, 404 y rutas auxiliares.
 - Antes de desplegar, valida en Pages las URLs limpias, `.html`, slash, assets, sitemap, robots, canonicals, metadata y rutas profundas. No modifiques DNS hasta aprobar preview y rollback.
