@@ -9,10 +9,9 @@ Las imágenes estarán en internet en el github, puesto que son todas copias de 
 
 ## ToDos
 
-- [ ] Falta el favicon
-      Según la estructura del proyecto y las recomendaciones de Astro ¿dónde debo colocar el favicon?, puedes usar los mcp para buscar información
 - [ ] Hacer la páginas de información
 
+- [x] Falta el favicon
 - [x] Usar el componente card en otras páginas
     - [x] padi
     - [x] Axis one

@@ -69,6 +69,28 @@
 - La Tarea 7.2 formal de inventario DNS y rollback sigue abierta/preparada.
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
 
+## Actualización Etapa 7 - Tarea 7.2: favicon institucional PNG
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- `src/layouts/SiteLayout.astro` ahora referencia `public/Favicon.png` como `/Favicon.png` con `type="image/png"`.
+- Se conserva el archivo `public/Favicon.png` entregado para la identidad visual; no se reintroduce el placeholder SVG.
+
+### Verificación
+
+- `pnpm install --frozen-lockfile`: correcto.
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 páginas estáticas generadas.
+- `dist/Favicon.png` existe y conserva el nombre con mayúscula inicial.
+- Las 41 páginas generadas incluyen `<link rel="icon" href="/Favicon.png" type="image/png">`.
+
+### Bloqueos y pendientes
+
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+- El endpoint heredado `src/pages/favicon.ico.ts` permanece sin cambios; el favicon global utiliza exclusivamente el PNG configurado en el layout.
+
 ## Actualizacion Etapa 7 - Tarea 7.2: ImageTextCard en las caracteristicas de PLA
 
 **Estado:** completada; la etapa de despliegue sigue abierta.

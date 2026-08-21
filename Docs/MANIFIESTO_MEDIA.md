@@ -3,7 +3,7 @@
 **Fuente Shopify:** `zip_theme_shopify_estable/`  
 **Fuente local:** `src/assets/`
 **Fecha de inspeccion:** 2026-08-17
-**Estado:** 119 recursos locales entregados e integrados desde `src/assets` mediante `<Picture>`: 30 recursos del header, index y colecciones, 44 imagenes de galerias de productos PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal, 10 recursos nuevos de Padi, 6 imagenes historicas de Premios e historia y 4 posters locales de sus videos. El favicon usa un placeholder SVG local porque el recurso Shopify activo no tiene copia local confirmada. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
+**Estado:** 119 recursos locales entregados e integrados desde `src/assets` mediante `<Picture>`: 30 recursos del header, index y colecciones, 44 imagenes de galerias de productos PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal, 10 recursos nuevos de Padi, 6 imagenes historicas de Premios e historia y 4 posters locales de sus videos. Ademas, `public/Favicon.png` esta confirmado como favicon local de uso directo. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
 
 ## Resumen de conteos
 
@@ -16,7 +16,7 @@
 | Videos externos unicos | 13 | URLs YouTube encontradas en templates; algunas aparecen mas de una vez. |
 | Fuentes Futura locales | 0 | La configuracion activa pide `futura_n4`, pero no hay archivos de fuente locales entregados. |
 | Logo local confirmado | 1 | `src/assets/Logo Print3x.png`, integrado en el header. No se declara equivalencia automatica con la referencia Shopify activa. |
-| Favicon local confirmado | 0 | El favicon de identidad activo sigue sin copia local; `/favicon.svg` es solo un placeholder técnico para evitar un 404. |
+| Favicon local confirmado | 1 | `public/Favicon.png`, servido directamente como `/Favicon.png` desde el layout comun. No se declara equivalencia automatica con la referencia Shopify activa. |
 | Imagen social local confirmada | 0 | `/images/social-placeholder.svg` es un placeholder técnico; no reemplaza una imagen social de marca aprobada. |
 
 La suma de 81 recursos distintos de templates y 4 referencias de configuracion da 85 recursos unicos globales. Las 93 ocurrencias no deben reducirse a 85 al migrar: una misma referencia puede usarse en varias paginas o bloques.
@@ -38,6 +38,7 @@ Las dimensiones y el peso se obtuvieron leyendo los archivos locales entregados.
 | Archivo local | Ruta | Formato | Dimensiones | Peso | Uso confirmado | Alt | Equivalencia Shopify |
 |---|---|---|---:|---:|---|---|---|
 | `Logo Print3x.png` | `src/assets/Logo Print3x.png` | PNG | `2362 x 433` | `55421` bytes | `header`, logo de identidad; confirmado por el usuario. | Pendiente; el header usa `alt` vacio y su enlace conserva el nombre de Print3x. | No asignada. |
+| `Favicon.png` | `public/Favicon.png` | PNG | Dimensiones del asset local | `3763` bytes | `head`, favicon institucional; confirmado por el usuario. | No aplica. | No se declara equivalencia automatica con la referencia Shopify activa. |
 | `Categorias_2_impresora_3D_Axis_one.jpg` | `src/assets/index/Categorias_2_impresora_3D_Axis_one.jpg` | JPEG | `4928 x 3264` | `2509141` bytes | `index`, categoria de impresoras; tambien tarjeta de `/collections`; confirmado por el nombre y el pedido del usuario. | Pendiente: no se conserva texto no observado. | No asignada. |
 | `Foto5.jpg` | `src/assets/index-products-axis-one/fotos producto/Foto5.jpg` | JPEG | Dimensiones del asset local | Pendiente de lectura | `collections/impresoras-3d`, hero junto al texto; confirmado por el usuario. | `Impresora 3D Profesional Axis One` | No se declara equivalencia automatica con `foto4_edited_-_Ligera.jpg`. |
 | `Nuestros_compromisos_icono_1_carrete_filamento.avif` | `src/assets/index/Nuestros_compromisos_icono_1_carrete_filamento.avif` | AVIF | `150 x 150` | `5187` bytes | `index`, compromiso 1. | Pendiente: no se conserva texto no observado. | No asignada. |
@@ -147,7 +148,7 @@ Cada nombre listado corresponde a la referencia `shopify://shop_images/<nombre>`
 - `print3x_37f89bc9-34db-41c5-9279-6da27da882be.png`
 - `print3x_logos_de_seguridad_con_norton_8fe9c9fd-df41-4e2d-a6c9-7d0553b6820a.png`
 
-Fuente: `config/settings_data.json`. El favicon activo no tiene copia local confirmada. El logo entregado esta integrado en el header, pero no se declara equivalente automatico a la referencia Shopify activa.
+Fuente: `config/settings_data.json`. `public/Favicon.png` es el favicon local de uso actual, pero no se declara equivalente automatico con la referencia Shopify activa. El logo entregado esta integrado en el header, pero no se declara equivalente automatico a la referencia Shopify activa.
 
 ### `templates/article.calibracion_automatica.json`: 4
 
@@ -324,7 +325,7 @@ Los 109 recursos disponibles se importan desde `src/assets/` como metadata de im
 
 | Prioridad | Recursos | Motivo |
 |---|---|---|
-| P0 | Favicon y Futura | Identidad global, head y similitud visual; el logo local ya fue integrado, pero el favicon y la fuente siguen pendientes. |
+| P0 | Futura | Identidad global y similitud visual; el logo y el favicon locales ya fueron integrados, pero la fuente sigue pendiente. |
 | P1 | Media de portada y categorias | Afecta la primera impresion y la geometria del home; los 11 recursos iniciales y las 44 imagenes PLA ya tienen rol confirmado o documentado. |
 | P1 | Media de las 31 rutas de contenido del sitemap | Afecta producto, coleccion, paginas y articulos que concentran SEO; las 11 galerias PLA ya fueron integradas. |
 | P2 | Media larga de la coleccion PLA y paginas tecnicas | Muchos bloques; requieren placeholders consistentes y orden estable. |
@@ -355,14 +356,14 @@ Se deben revisar disponibilidad, privacidad, miniaturas, carga externa, accesibi
 
 - `type_header_font` y `type_body_font` son `futura_n4`.
 - No hay archivos Futura en `src/assets/` ni un directorio de fuentes local entregado.
-- El logo activo historico es `print3x_37f89bc9-34db-41c5-9279-6da27da882be.png` y el favicon activo es `Favicon_73f39bdd-9378-4f51-9ccc-73019a4e9071.png`, ambos bajo `shopify://shop_images`. El archivo local `Logo Print3x.png` fue entregado por el usuario e integrado en el header sin declararlo equivalente por nombre.
+- El logo activo historico es `print3x_37f89bc9-34db-41c5-9279-6da27da882be.png` y el favicon activo es `Favicon_73f39bdd-9378-4f51-9ccc-73019a4e9071.png`, ambos bajo `shopify://shop_images`. Los archivos locales `Logo Print3x.png` y `public/Favicon.png` fueron entregados por el usuario e integrados en el header y el head, respectivamente, sin declararlos equivalentes por nombre.
 - No se deben fabricar versiones locales ni sustituir Futura por una fuente generica sin decision visual y de licencia.
 
 ## Bloqueos de media
 
 1. No existe recurso local equivalente confirmado para 85 referencias Shopify unicas.
 2. No se puede mapear ningun `Hero_*.jpg` a una referencia Shopify solo por el nombre o la apariencia.
-3. El favicon y las fuentes Futura requieren entrega o decision de uso de CDN con licencia y disponibilidad; el logo local ya esta integrado, pero su equivalencia historica Shopify no esta probada.
+3. Las fuentes Futura requieren entrega o decision de uso de CDN con licencia y disponibilidad; la equivalencia historica Shopify del logo y el favicon locales no esta probada.
 4. Las dimensiones esperadas de la mayoria de recursos Shopify no estan disponibles localmente; deben conservarse desde el metadata de origen o dejarse como placeholder pendiente.
 5. Videos, Drive, Autodesk, Wayback, redes y formularios son dependencias externas que necesitan una revision especifica.
 6. No se puede declarar que todas las referencias tienen destino final hasta que la matriz SEO confirme que la plantilla que las usa sigue publicada.
