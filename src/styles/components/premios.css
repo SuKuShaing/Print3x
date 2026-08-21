@@ -16,23 +16,6 @@
   max-width: var(--page-width);
 }
 
-.premios-page__image-section .image-with-text__media {
-  min-height: 100%;
-}
-
-.premios-page__image-section .image-with-text__media picture {
-  display: block;
-}
-
-.premios-page__image-section .image-with-text__media picture img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-}
-
 .premios-page__video-section {
   padding: 27px 0;
 }

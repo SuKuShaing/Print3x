@@ -34,6 +34,10 @@
 - Al terminar o finalizar cada etapa, crea o actualiza `Docs/RESULTADOS_ETAPA_N.md` con estado final, tareas, archivos, comandos, resultados, bloqueos, pendientes y evidencia de aceptacion.
 - La etapa 7 sigue abierta: el siguiente trabajo documentado es preparar y autorizar una preview de Cloudflare Pages, no cambiar produccion.
 
+## Control del README
+
+- La seccion `ToDos` de `Readme.md` solo puede ser modificada por el usuario. No agregues, elimines, marques ni desmarques tareas en esa seccion, aunque el trabajo correspondiente se haya completado.
+
 ## Invariantes de la migracion
 
 - El objetivo es un escaparate historico estatico en Astro y Cloudflare Pages, sin carrito real, checkout, cuentas de cliente, compra, inventario, pickup ni APIs comerciales.

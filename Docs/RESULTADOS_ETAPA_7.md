@@ -396,3 +396,28 @@
 ### Bloqueos y pendientes
 
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+## Actualización Etapa 7 - Tarea 7.3: componente reutilizable de card imagen y texto
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- Se creó `src/components/ImageTextCard.astro` a partir de la card de `/pages/premios`.
+- `year`, `title` y `content` son opcionales; `content` acepta un párrafo o una lista de párrafos.
+- La prop `reverse` alterna la posición de imagen y texto en desktop, manteniendo el apilado responsive en mobile.
+- Las reglas visuales generales de imagen fueron trasladadas al componente; el espaciado específico de Premios permanece en `src/styles/components/premios.css`.
+- `src/components/PremiosPage.astro` utiliza ahora el componente reutilizable sin cambiar su contenido ni composición visual.
+- Se marcó la tarea correspondiente como completada en `Readme.md`.
+
+### Verificación
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 páginas estáticas y 812 variantes de imagen generadas.
+- Preview local de `/pages/premios` en `390px`, `768px`, `1024px` y `1440px`: sin overflow horizontal.
+- Preview desktop: imagen y texto mantienen el mismo alto, la inversión de la segunda card funciona y la imagen conserva `object-fit: cover`.
+- Preview mobile: imagen sobre texto, espaciado y radios conservados; screenshot revisado en `390px`.
+
+### Bloqueos y pendientes
+
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
