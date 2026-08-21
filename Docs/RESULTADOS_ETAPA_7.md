@@ -88,6 +88,52 @@
 
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
 
+## Correccion visual Etapa 7 - Tarea 7.2: logo de la primera card de productos
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- `src/components/ImageTextCard.astro` incorpora la prop `imageFit` para elegir entre `cover` y `contain` sin afectar las cards existentes de Premios.
+- La primera card de `src/components/PadiFeatures.astro` y `src/components/AxisOneFeatures.astro` usa `imageFit="contain"`, mostrando completo el logo Axis One.
+- Se retiro la regla CSS de producto que perdia contra la especificidad del estilo encapsulado de `ImageTextCard`.
+
+### Verificacion
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 paginas estaticas y 887 variantes de imagen optimizadas.
+- Preview de Padi y Axis One a `1280px`: la primera imagen computa `object-fit: contain` y no existe overflow.
+- Preview de Padi y Axis One a `390px`: la primera imagen mantiene `object-fit: contain`, no hay overflow y no hay imagenes rotas.
+- `git diff --check`: correcto; solo muestra los avisos normales de conversion LF/CRLF de Git.
+
+### Bloqueos y pendientes
+
+- No se modificaron DNS, produccion, Shopify ni `zip_theme_shopify_estable/`.
+
+## Actualizacion Etapa 7 - Tarea 7.2: reutilizacion de ImageTextCard en productos
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- `src/components/ImageTextCard.astro` ahora acepta enlaces opcionales y el atributo de carga de imagen sin cambiar la API usada por Premios.
+- `src/components/PadiFeatures.astro` reemplaza el markup duplicado de sus ocho cards por `ImageTextCard`.
+- `src/components/AxisOneFeatures.astro` reutiliza el mismo componente para sus dieciseis cards, manteniendo el video y la ficha tecnica fuera de esta migracion.
+- `src/styles/components/product.css` conserva `object-fit: contain` para las imagenes editoriales de ambos productos y retira reglas especificas del antiguo `MediaPlaceholder`.
+
+### Verificacion
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 paginas estaticas y 887 variantes de imagen optimizadas.
+- Preview de `/products/padi-superficie-de-impresion`: 8 cards, 8 `<picture>`, 4 inversiones responsive, 2 enlaces editoriales, 0 imagenes rotas y sin overflow a 390px.
+- Preview de `/products/axis-one`: 16 cards, 16 `<picture>`, 8 inversiones responsive, 2 enlaces editoriales, 0 imagenes rotas y sin overflow a 1440px.
+- `git diff --check`: correcto; solo muestra los avisos normales de conversion LF/CRLF de Git.
+
+### Bloqueos y pendientes
+
+- No se modificaron DNS, produccion, Shopify ni `zip_theme_shopify_estable/`.
+- La Tarea 7.2 formal de inventario DNS y rollback continua abierta/preparada.
+
 ## Corrección Etapa 7 - Tarea 7.2: marco visual de posters locales
 
 **Estado:** completada; la etapa de despliegue sigue abierta.

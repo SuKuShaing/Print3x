@@ -739,14 +739,6 @@
   height: 46rem;
 }
 
-.axis-one-feature .media-placeholder {
-  height: 100%;
-}
-
-.axis-one-feature .media-placeholder__image {
-  object-fit: contain;
-}
-
 .axis-one-technical {
   margin-top: 7rem;
   max-width: 76rem;
@@ -790,14 +782,6 @@
 
 .padi-feature .image-with-text__media {
   height: 46rem;
-}
-
-.padi-feature .media-placeholder {
-  height: 100%;
-}
-
-.padi-feature .media-placeholder__image {
-  object-fit: contain;
 }
 
 @media screen and (max-width: 749px) {

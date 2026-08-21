@@ -10,10 +10,11 @@ Las imágenes estarán en internet en el github, puesto que son todas copias de 
 ## ToDos
 
 - [ ] Usar el componente card en otras páginas
-    - [ ] padi
-    - [ ] Axis one
+    - [x] padi
+    - [x] Axis one
     - [ ] colecciones PLA
 - [ ] Falta el favicon
+      Según la estructura del proyecto y las recomendaciones de Astro ¿dónde debo colocar el favicon?, puedes usar los mcp para buscar información
 - [ ] Hacer la páginas de información
 
 - [x] Convertir en componente reutilizable por otras páginas la card de páginas de premios e implementar

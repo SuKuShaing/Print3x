@@ -8,8 +8,11 @@ interface Props {
   year?: string;
   title?: string;
   content?: string | readonly string[];
+  links?: readonly { href: string; label: string }[];
   reverse?: boolean;
   breakBeforeContent?: readonly number[];
+  imageFit?: 'cover' | 'contain';
+  loading?: 'eager' | 'lazy';
   class?: string;
 }
 
@@ -19,8 +22,11 @@ const {
   year,
   title,
   content,
+  links = [],
   reverse = false,
   breakBeforeContent = [],
+  imageFit = 'cover',
+  loading = 'lazy',
   class: className,
 } = Astro.props;
 
@@ -38,7 +44,13 @@ const paragraphs = typeof content === 'string' ? [content] : content ?? [];
       reverse && 'image-with-text__grid--reverse',
     ]}>
       <div class="image-with-text__media-item image-with-text__media-item--medium grid__item">
-        <div class="image-with-text__media image-with-text__media--adapt global-media-settings media" style={`padding-bottom: ${(image.height / image.width) * 100}%;`}>
+        <div class:list={[
+          'image-with-text__media',
+          'image-with-text__media--adapt',
+          'global-media-settings',
+          'media',
+          imageFit === 'contain' && 'image-with-text__media--contain',
+        ]} style={`padding-bottom: ${(image.height / image.width) * 100}%;`}>
           <Picture
             src={image}
             formats={['avif', 'webp']}
@@ -47,7 +59,7 @@ const paragraphs = typeof content === 'string' ? [content] : content ?? [];
             alt={alt}
             width={1500}
             height={Math.round(1500 * image.height / image.width)}
-            loading="lazy"
+            loading={loading}
           />
         </div>
       </div>
@@ -55,10 +67,11 @@ const paragraphs = typeof content === 'string' ? [content] : content ?? [];
         <div class="image-with-text__content image-with-text__content--top image-with-text__content--desktop-left image-with-text__content--mobile-left image-with-text__content--adapt gradient color-background-2 content-container">
           {year && <p class="image-with-text__text image-with-text__text--caption caption-with-letter-spacing caption-with-letter-spacing--medium">{year}</p>}
           {title && <h2 class="image-with-text__heading inline-richtext h2">{title}</h2>}
-          {paragraphs.length > 0 && <div class="image-with-text__text rte body">
+          {(paragraphs.length > 0 || links.length > 0) && <div class="image-with-text__text rte body">
             {paragraphs.map((paragraph, index) => (
               <p>{breakBeforeContent.includes(index) && <br />}{paragraph}</p>
             ))}
+            {links.map((link) => <p><a href={link.href}>{link.label}</a></p>)}
           </div>}
         </div>
       </div>
@@ -82,5 +95,9 @@ const paragraphs = typeof content === 'string' ? [content] : content ?? [];
     height: 100%;
     object-fit: cover;
     object-position: center center;
+  }
+
+  .image-text-card .image-with-text__media--contain picture img {
+    object-fit: contain;
   }
 </style>
