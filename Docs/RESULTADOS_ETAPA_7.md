@@ -69,6 +69,29 @@
 - La Tarea 7.2 formal de inventario DNS y rollback sigue abierta/preparada.
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
 
+## Actualizacion Etapa 7 - Tarea 7.2: ImageTextCard en las caracteristicas de PLA
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- `src/pages/collections/[slug].astro` reemplaza el markup duplicado de las caracteristicas de PLA por `ImageTextCard`.
+- `src/components/ImageTextCard.astro` acepta `html` para conservar el contenido editorial aprobado con negritas, saltos de linea y multiples parrafos.
+- Se mantienen las 18 imagenes locales, el orden y la alternancia definida en `src/data/pla-collection.ts`.
+- `src/styles/components/collection.css` retira reglas especificas del markup anterior que ya no se utilizan.
+
+### Verificacion
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 paginas estaticas y 930 variantes de imagen optimizadas.
+- Preview de `/collections/pla` a `1280px`: 18 cards, 18 `<picture>`, 9 inversiones responsive, contenido HTML preservado, 0 imagenes rotas y sin overflow.
+- Preview de `/collections/pla` a `390px`: 18 cards, 9 inversiones responsive, 0 imagenes rotas y sin overflow horizontal.
+- `git diff --check`: correcto; solo muestra los avisos normales de conversion LF/CRLF de Git.
+
+### Bloqueos y pendientes
+
+- No se modificaron DNS, produccion, Shopify ni `zip_theme_shopify_estable/`.
+
 ## Corrección visual Etapa 7 - Tarea 7.2: inversión de card Vuelta a Chile
 
 **Estado:** completada; la etapa de despliegue sigue abierta.
@@ -87,6 +110,27 @@
 ### Bloqueos y pendientes
 
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+## Correccion visual Etapa 7 - Tarea 7.2: centrado y separacion de cards PLA
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- `src/styles/components/collection.css` centra cada `.pla-feature` mediante margenes automaticos.
+- Las cards consecutivas de PLA ahora tienen `4rem` de separacion en desktop y `2rem` en mobile, igual que las cards de Padi y Axis One.
+
+### Verificacion
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 paginas estaticas y 930 variantes de imagen optimizadas.
+- Preview a `1440px`: cards centradas con margen lateral de `60px` y separacion computada de `44px`.
+- Preview a `390px`: separacion computada de `22px`, sin overflow horizontal y sin imagenes rotas.
+- `git diff --check`: correcto; solo muestra los avisos normales de conversion LF/CRLF de Git.
+
+### Bloqueos y pendientes
+
+- No se modificaron DNS, produccion, Shopify ni `zip_theme_shopify_estable/`.
 
 ## Correccion visual Etapa 7 - Tarea 7.2: logo de la primera card de productos
 

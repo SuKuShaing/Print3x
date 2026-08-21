@@ -8,6 +8,7 @@ interface Props {
   year?: string;
   title?: string;
   content?: string | readonly string[];
+  html?: string;
   links?: readonly { href: string; label: string }[];
   reverse?: boolean;
   breakBeforeContent?: readonly number[];
@@ -22,6 +23,7 @@ const {
   year,
   title,
   content,
+  html,
   links = [],
   reverse = false,
   breakBeforeContent = [],
@@ -67,7 +69,8 @@ const paragraphs = typeof content === 'string' ? [content] : content ?? [];
         <div class="image-with-text__content image-with-text__content--top image-with-text__content--desktop-left image-with-text__content--mobile-left image-with-text__content--adapt gradient color-background-2 content-container">
           {year && <p class="image-with-text__text image-with-text__text--caption caption-with-letter-spacing caption-with-letter-spacing--medium">{year}</p>}
           {title && <h2 class="image-with-text__heading inline-richtext h2">{title}</h2>}
-          {(paragraphs.length > 0 || links.length > 0) && <div class="image-with-text__text rte body">
+          {html && <div class="image-with-text__text rte body" set:html={html} />}
+          {!html && (paragraphs.length > 0 || links.length > 0) && <div class="image-with-text__text rte body">
             {paragraphs.map((paragraph, index) => (
               <p>{breakBeforeContent.includes(index) && <br />}{paragraph}</p>
             ))}

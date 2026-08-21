@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
+import ImageTextCard from '../../components/ImageTextCard.astro';
 import MediaPlaceholder from '../../components/MediaPlaceholder.astro';
 import { indexMedia } from '../../data/index-media';
 import {
@@ -181,63 +182,16 @@ const formatPrice = (value: number | null) =>
       </section>}
 
       {isPla && <div class="pla-features" aria-label="Características del filamento PLA">
-        {plaCollectionFeatures.map((feature, index) => (
-          <section class:list={[
-            'image-with-text',
-            'image-with-text--no-overlap',
-            'page-width',
-            'isolate',
-            'collapse-corners',
-            'pla-feature',
-            feature.imageWidth === 'small' ? 'pla-feature--small-image' : 'pla-feature--medium-image',
-          ]} aria-labelledby={`PlaFeature-${index + 1}`}>
-            <div
-              class:list={[
-                'image-with-text__grid',
-                'grid',
-                'grid--gapless',
-                'grid--1-col',
-                feature.imageWidth === 'small' ? 'grid--3-col-tablet' : 'grid--2-col-tablet',
-                feature.reverse && 'image-with-text__grid--reverse',
-              ]}
-            >
-              <div class:list={[
-                'image-with-text__media-item',
-                `image-with-text__media-item--${feature.imageWidth}`,
-                `image-with-text__media-item--${feature.contentPosition}`,
-                'grid__item',
-              ]}>
-                <div class="image-with-text__media image-with-text__media--adapt media global-media-settings color-background-1">
-                  <div
-                    class="pla-feature__media-frame"
-                    style={`--pla-feature-ratio: ${feature.expectedWidth} / ${feature.expectedHeight};`}
-                  >
-                    <MediaPlaceholder
-                      media={feature.media}
-                      width={feature.media.width ?? 1500}
-                      height={feature.media.height ?? 1000}
-                      loading="lazy"
-                      sizes="(min-width: 1200px) 550px, (min-width: 750px) 50vw, 100vw"
-                      class="pla-feature__media"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="image-with-text__text-item grid__item">
-                <div class:list={[
-                  'image-with-text__content',
-                  `image-with-text__content--${feature.contentPosition}`,
-                  'image-with-text__content--desktop-left',
-                  'image-with-text__content--mobile-left',
-                  'color-background-1',
-                  'content-container',
-                ]}>
-                  <h2 class="image-with-text__heading" id={`PlaFeature-${index + 1}`}>{feature.heading}</h2>
-                  <div class="image-with-text__text rte" set:html={feature.html} />
-                </div>
-              </div>
-            </div>
-          </section>
+        {plaCollectionFeatures.map((feature) => (
+          <ImageTextCard
+            image={feature.media.src}
+            alt={feature.media.alt}
+            title={feature.heading}
+            html={feature.html}
+            reverse={feature.reverse}
+            loading="lazy"
+            class="pla-feature"
+          />
         ))}
       </div>}
 
