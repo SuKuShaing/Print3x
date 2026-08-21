@@ -69,6 +69,97 @@
 - La Tarea 7.2 formal de inventario DNS y rollback sigue abierta/preparada.
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
 
+## Corrección visual Etapa 7 - Tarea 7.2: inversión de card Vuelta a Chile
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- `src/components/PremiosPage.astro` cambia el bloque `2016 - Vuelta a Chile` a `reverse: true`, colocando la imagen a la derecha y el texto a la izquierda mediante la clase responsive existente de Refresh.
+
+### Verificación
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 páginas estáticas y 776 variantes de imagen optimizadas.
+- `git diff --check`: correcto; solo muestra avisos normales de conversión LF/CRLF de Git.
+- El HTML generado de `/pages/premios` conserva el bloque `Vuelta a Chile` y aplica la inversión responsive mediante `image-with-text__grid--reverse`.
+
+### Bloqueos y pendientes
+
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+## Corrección Etapa 7 - Tarea 7.2: marco visual de posters locales
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+### Corrección realizada
+
+- `src/components/LiteYoutube.astro` envuelve el `<Picture>` en `.lite-youtube__poster`, porque Astro aplica la clase del componente de imagen al `<img>` interno.
+- El contenedor y el `<picture>` interno ahora ocupan todo el marco del video; esto elimina el bloque negro generado debajo del poster y conserva la proporción especial 4:3.
+
+### Verificación
+
+- Preview local de `/pages/premios`: los cuatro posters ocupan exactamente el marco de sus videos; los videos 16:9 miden `1170 x 658.125px` y el video 4:3 mide `1170 x 877.5px`.
+- Preview local full page: captura `artifacts/premios-posters-fixed.png`, sin bloques negros debajo de los posters y con las cuatro imágenes visibles después de activar su carga diferida por scroll.
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 páginas estáticas y 812 variantes de imagen generadas.
+
+### Bloqueos y pendientes
+
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+## Actualización Etapa 7 - Tarea 7.2: posters locales de videos de Premios
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- `src/components/PremiosPage.astro` asocia `thumbnail 1` a `thumbnail 4` con los cuatro videos en el orden de aparición del timeline.
+- `src/components/LiteYoutube.astro` acepta un poster local, lo renderiza mediante `<Picture>` y oculta ese poster cuando el componente activa el iframe.
+- Cuando existe poster local, se evita la solicitud del poster remoto de YouTube; la carga del iframe continúa siendo diferida hasta la interacción.
+- `Docs/MANIFIESTO_MEDIA.md` registra los cuatro posters como media local disponible.
+
+### Verificación
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 páginas estáticas y 812 variantes de imagen generadas, incluyendo variantes optimizadas de los cuatro posters.
+- `git diff --check`: correcto; solo muestra avisos normales de conversión LF/CRLF de Git.
+
+### Bloqueos y pendientes
+
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+## Actualización Etapa 7 - Tarea 7.2: fidelidad visual de Premios e historia
+
+**Estado:** completada para la implementación visual de `/pages/premios`; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- Se creó `src/components/PremiosPage.astro` con la secuencia publicada de título, seis bloques históricos, cuatro videos y apariciones en prensa.
+- Las seis imágenes entregadas en `src/assets/index-pages-premios/` se integran mediante `<Picture>` y conservan la alternancia de columnas de la referencia.
+- Los cuatro videos del archivo `Links a los videos en youtube.txt` se integran mediante `LiteYoutube.astro`, sin iframes directos ni carga del video antes de activarlo.
+- Se añadieron estilos responsive en `src/styles/components/premios.css` para reproducir el espaciado, tarjetas de texto, proporciones de imagen, videos 16:9/4:3 y bloque final de prensa de Refresh.
+- Se actualizó `Docs/MANIFIESTO_MEDIA.md` con los seis recursos locales y los cuatro posters locales de video.
+
+### Verificación
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 páginas estáticas y 776 variantes de imagen optimizadas.
+- Preview local de `/pages/premios` a `390px`: título, seis imágenes, cuatro controles de video y bloque de prensa presentes; no existe overflow horizontal (`documentWidth` 375px por scrollbar vertical frente a viewport de 390px).
+- Preview local de `/pages/premios`: antes de activar un video no hay iframes; al activar el primer video se crea el iframe `https://www.youtube-nocookie.com/embed/xRHSvi9GFfE?rel=0&autoplay=1&playsinline=1`, confirmando la carga diferida de `LiteYoutube`.
+- El iframe activado muestra que el video externo no está disponible actualmente en YouTube; la integración local y la URL configurada funcionan, pero la disponibilidad del recurso depende del proveedor.
+- La snapshot de accesibilidad conserva landmarks, título, textos alternativos, botones de reproducción y enlaces de prensa.
+- Corrección posterior: las imágenes se veían estiradas porque el selector base de Refresh se detenía en `<picture>` y no alcanzaba el `<img>` generado por Astro; `premios.css` ahora aplica al `<img>` interno la misma posición absoluta, proporción del contenedor y `object-fit: cover` de la referencia publicada.
+- Verificación posterior: la primera imagen pasa de `455.8 x 843px` a `455.8 x 256.025px`, coincidiendo con el contenedor y la referencia de `print3x.cl`.
+- Corrección visual posterior: el título `Premios e historia` heredaba `text-align: start` dentro de un contenedor centrado; `premios.css` ahora lo centra explícitamente.
+- Verificación posterior: el centro del título difiere `0.1px` del centro del viewport de `1536px`.
+- Corrección visual posterior: la tarjeta histórica de 2017 tenía `reverse: true`; ahora usa `reverse: false` para conservar la imagen a la izquierda y el texto a la derecha, como en `print3x.cl`.
+
+### Bloqueos y pendientes
+
+- Los cuatro posters locales de `src/assets/index-pages-premios/thumbnails/` se integran en el orden de aparición de los videos; `LiteYoutube.astro` los renderiza mediante `<Picture>` y solo solicita el iframe al activar el video.
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
 ## Actualización Etapa 7 - Tarea 7.3: separación vertical de Nosotros
 
 **Estado:** completada; la etapa de despliegue sigue abierta.

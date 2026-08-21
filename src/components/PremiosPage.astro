@@ -1,0 +1,237 @@
+---
+import { Picture } from 'astro:assets';
+import LiteYoutube from './LiteYoutube.astro';
+import image2014 from '../assets/index-pages-premios/2014_Primera_Impresora_3D_Crea_en_3D_Print3x.jpg';
+import image2015 from '../assets/index-pages-premios/2015_Ganadores_despega_usach_Crea_en_3D_Print3x.jpg';
+import image2016Stanford from '../assets/index-pages-premios/2016_Ganadores_en_Stanford_Crea_en_3D_Print3x.jpg';
+import image2016Chile from '../assets/index-pages-premios/2016_2_Aparicion_en_el_diario_el_mercurio_Crea_en_3D_Print3x.jpg';
+import image2017 from '../assets/index-pages-premios/2017_Premios_Despega_Usach_Crea_en_3D_Print3x.jpg';
+import image2018 from '../assets/index-pages-premios/2018_Ganadores_en_Conrad_Waterloo_Crea_en_3D_Print3x.jpg';
+import thumbnail1 from '../assets/index-pages-premios/thumbnails/thumbnail 1.png';
+import thumbnail2 from '../assets/index-pages-premios/thumbnails/thumbnail 2.jpg';
+import thumbnail3 from '../assets/index-pages-premios/thumbnails/thumbnail 3.jpg';
+import thumbnail4 from '../assets/index-pages-premios/thumbnails/thumbnail 4.jpg';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+const imageSections = [
+  {
+    year: '2014',
+    heading: 'Primera Impresora',
+    paragraphs: [
+      'Muestra de la primera impresora 3D hecha en la Universidad de Santiago de chile, la impresora 3D que acompaña a Sebastian Sanhueza es la primera versión de varias que le continuaron.',
+      'Esto fue presentado en el congreso de Biotecnologia del 2014, Usach.',
+    ],
+    image: image2014,
+    alt: 'Foto de Sebastián Sanhueza Tapia en la presentación de la primera impresora 3D Chilena por parte de Print3x printex printec print3c',
+    reverse: false,
+  },
+  {
+    year: '2015',
+    heading: 'Ganadores del Despega Usach',
+    paragraphs: [
+      'En esta imagen se muestra al equipo de Crea en 3D (el nombre anterior de la empresa Print3x) cuando reciben el premio por ser uno de los 5 ganadores del concurso de emprendimiento de la universidad.',
+      'Miembros de Crea en 3D, de izquierda a derecha, Sebastián Sanhueza, Presentadora, Denis Ogaz, Christopher Casares, Gerson Molina (No está en la foto)',
+    ],
+    image: image2015,
+    alt: 'Fotografía de cuando Print3x gano el despega usach, en ese momento nos llamábamos Crea en 3D | Print3x printex printec print3c',
+    reverse: true,
+  },
+  {
+    year: '2016',
+    heading: 'Entrega de certificados Stanford',
+    paragraphs: [
+      'Una vez finalizado el curso y concurso nos entregaron los certificados. Se hizo una ronda de inversión, a pesar de no haber conseguido inversión en las rondas de financiamiento, si estuvimos en el podio de los finalistas.',
+    ],
+    image: image2016Stanford,
+    alt: 'Entrega de certificados a Sebastián Sanhueza Tapia en Standford University por parte de Phillip y Bob | Print3x printex printec print3c',
+    reverse: false,
+  },
+  {
+    year: '2016',
+    heading: 'Vuelta a Chile',
+    paragraphs: [
+      'Al volver a Chile tuvimos unas serie de entrevista por la pasantía en Stanford y la vida del emprendimiento en Silicon Valley, además de que tuvimos las casualidad de que el Gerente de innovación de Corfo Tadashi Takaoka estaba en el área, y gracias a los profesores nos juntaron para tener la experiencia de las serendipias del valle del silicio y él también estuvo en la ronda de opinión de los proyectos de los chilenos.',
+    ],
+    image: image2016Chile,
+    alt: 'Aparición en la prensa de los ganadores del despega Usach Print3x printex printec print3c',
+    reverse: true,
+  },
+  {
+    year: '2017',
+    heading: 'Entrega de Premios de la nueva version del despega usach',
+    paragraphs: [
+      'Al haber sido ganadores de la versión anterior se nos invito a contar las experiencias de nuestros emprendimientos a las nuevas generaciones de emprendedores de la Universidad de Santiago de Chile. En esa versión Sebastián contaba la historia de Crea en 3D (actualmente Print3x) y los aprendizajes obtenidos en Stanford.',
+    ],
+    image: image2017,
+    alt: 'Entrega de premios del despega usach por parte de Sebastián Sanhueza Tapia Print3x printex printec print3c',
+    reverse: false,
+  },
+  {
+    year: '2018',
+    heading: 'Ganadores en Waterloo University',
+    paragraphs: [
+      'Al ya haber ganado varios concursos, la Usach nos beco para ir a competir a la aceleradora de negocios de Conrad, en la universidad de Waterloo, Ontario, Canada. Y ¿qué creen? Ganamos el primer lugar frente a más de 50 proyectos internacionales y el apoyo de los inversionistas especializados.',
+      'En el siguiente video se muestra cuando van a dar los ganadores del concuro.',
+    ],
+    image: image2018,
+    alt: 'Print3x Ganadores de la competencia de emprendedores en Conrad Waterloo Print3x printex printec print3c',
+    reverse: true,
+  },
+] as const;
+
+const videos = [
+  {
+    title: 'Aparición de Crea en 3D (después se llamaría Print3x) en Mini Documental sobre impresión 3D en Chile',
+    videoId: 'xRHSvi9GFfE',
+    videoTitle: 'Aparición de Print3x (anteriormente llamada Crea en 3D) en un minidocumental',
+    poster: thumbnail1,
+    className: '',
+  },
+  {
+    title: 'Entrevista a Sebastián Sanhueza en la construcción de la Axis One',
+    videoId: '6wg21oH6Pas',
+    videoTitle: 'Entrevista a Sebastián Sanhueza en la construcción de la Axis One',
+    poster: thumbnail2,
+    className: '',
+  },
+  {
+    title: 'Print3x gana la competencia en Conrad, Waterloo',
+    videoId: 'aMgsiajRdcY',
+    videoTitle: 'Print3x Gana final de pitch en Waterloo, Canada',
+    poster: thumbnail3,
+    className: 'premios-page__video--four-three',
+  },
+  {
+    title: 'Entrevista a Sebastián Sanhueza como ganador veterano del despega Usach',
+    videoId: 'BgAuIucQkG0',
+    videoTitle: 'Entrevista a Sebastián Sanhueza como ganador veterano del despega Usach',
+    poster: thumbnail4,
+    className: '',
+  },
+] as const;
+
+const timeline = [
+  { type: 'image' as const, section: imageSections[0] },
+  { type: 'video' as const, section: videos[0] },
+  { type: 'image' as const, section: imageSections[1] },
+  { type: 'image' as const, section: imageSections[2] },
+  { type: 'image' as const, section: imageSections[3] },
+  { type: 'video' as const, section: videos[1] },
+  { type: 'image' as const, section: imageSections[4] },
+  { type: 'image' as const, section: imageSections[5] },
+  { type: 'video' as const, section: videos[2] },
+  { type: 'video' as const, section: videos[3] },
+] as const;
+
+const press = [
+  {
+    year: '2018',
+    links: [
+      ['28 agt', 'Gana competencia en Canadá', 'https://portalinnova.cl/emprendimiento-chileno-impresora-3d-gana-competencia-en-canada/'],
+      ['17agt', 'Rector recibe a estudiantes del programa de emprendimiento', 'https://www.usach.cl/news/rector-zolezzi-recibe-estudiantes-viajaron-canada-programa-emprendimiento'],
+      ['02agt', 'Ganadores de Despega Usach', 'https://www.usach.cl/news/ganadores-despega-usach-relatan-este-concurso-amplio-sus-horizontes'],
+      ['01jul', 'Emprendimiento PRINT3X gana jornada en Canada', 'https://www.linkedin.com/feed/update/urn:li:activity:6428680955501834240'],
+      ['11May', 'Máquina de fabricación chilena para materiales flexibles o rígidos', 'https://portalinnova.cl/impresora-3d-print3x-maquina-de-fabricacion-chilena-para-materiales-flexibles-o-rigidos/'],
+    ],
+  },
+  {
+    year: '2017',
+    links: [
+      ['16Mar', 'Exitoso término del concurso Despega Usach', 'https://www.usach.cl/news/exitoso-termino-del-concurso-estudiantil-despega-usach-transformando-realidades-0'],
+      ['16Mar', 'Estudiantes ganadores de Despega Usach destacan', 'https://www.usach.cl/news/estudiantes-ganadores-despega-usach-destacan-aporte-la-pasantia-estados-unidos-0'],
+    ],
+  },
+  {
+    year: '2016',
+    links: [['13Mar', 'Alumnos regresan de pasantía en Stanford', 'http://proyectosespeciales.emol.com/clientes/usach/pdfs/01.pdf']],
+  },
+  {
+    year: '2015',
+    links: [
+      ['06Dic', 'Estudiantes de la universidad realizaran pasantia en Stanford', 'http://impresa.elmercurio.com/Pages/NewsDetail.aspx?dt=2015-12-06&PaginaId=11&BodyID=10'],
+      ['26Abr', 'Mini documental sobre impresión 3D en Chile', 'https://www.youtube.com/watch?v=xRHSvi9GFfE'],
+    ],
+  },
+  {
+    year: '2014',
+    links: [
+      ['10Nov', 'Estudiantes de la U. de Santiago Ensamblan Primera Impresora 3D', 'http://chile.noticiasabc.com/2014/11/10/estudiantes-de-la-u-de-santiago-ensamblan-primera-impresora-3d/'],
+      ['07Nov', 'Estudiantes de nuestra Casa de Estudios son los primeros en impresora 3D', 'https://www.die.usach.cl/estudiantes-de-nuestra-casa-de-estudios-son-los-primeros-universitarios-que-ensamblan-impresora-3d'],
+      ['06Nov', 'Estudiantes son los primeros universitarios que ensamblan impresora 3D', 'https://article.wn.com/view/2014/11/06/Estudiantes_de_nuestra_Casa_de_Estudios_son_los_primeros_uni/'],
+      ['06Nov', 'Usach al día', 'https://www.usach.cl/news/estudiantes-nuestra-casa-estudios-son-los-primeros-universitarios-ensamblan-impresora-3d'],
+    ],
+  },
+] as const;
+---
+
+<article class="premios-page">
+  <section class="premios-page__title page-width page-width--narrow">
+    <h1 class="h0">{title}</h1>
+  </section>
+
+  {timeline.map((item) => item.type === 'image' ? (
+    <section class:list={['premios-page__image-section', item.section.heading === 'Entrega de certificados Stanford' && 'premios-page__image-section--stanford']}>
+      <div class="image-with-text image-with-text--no-overlap page-width isolate collapse-corners">
+        <div class:list={['image-with-text__grid', 'grid', 'grid--gapless', 'grid--1-col', 'grid--2-col-tablet', item.section.reverse && 'image-with-text__grid--reverse']}>
+          <div class="image-with-text__media-item image-with-text__media-item--medium grid__item">
+            <div class="image-with-text__media image-with-text__media--adapt global-media-settings media" style={`padding-bottom: ${(item.section.image.height / item.section.image.width) * 100}%;`}>
+              <Picture
+                src={item.section.image}
+                formats={['avif', 'webp']}
+                widths={[375, 750, 1100, 1500]}
+                sizes="(min-width: 1200px) 550px, (min-width: 750px) calc((100vw - 10rem) / 2), 100vw"
+                alt={item.section.alt}
+                width={1500}
+                height={Math.round(1500 * item.section.image.height / item.section.image.width)}
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <div class="image-with-text__text-item grid__item">
+            <div class="image-with-text__content image-with-text__content--top image-with-text__content--desktop-left image-with-text__content--mobile-left image-with-text__content--adapt gradient color-background-2 content-container">
+              <p class="image-with-text__text image-with-text__text--caption caption-with-letter-spacing caption-with-letter-spacing--medium">{item.section.year}</p>
+              <h2 class="image-with-text__heading inline-richtext h2">{item.section.heading}</h2>
+              <div class="image-with-text__text rte body">
+                {item.section.paragraphs.map((paragraph, index) => (
+                  <p>{item.section.year === '2018' && index === 1 && <br />}{paragraph}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  ) : (
+    <section class="premios-page__video-section color-background-1 gradient">
+      <div class="premios-page__video-inner page-width">
+        <div class="title-wrapper title-wrapper--no-top-margin">
+          <h2 class="title inline-richtext h2">{item.section.title}</h2>
+        </div>
+        <LiteYoutube videoId={item.section.videoId} title={item.section.videoTitle} poster={item.section.poster} class={`premios-page__video ${item.section.className}`} />
+      </div>
+    </section>
+  ))}
+
+  <section class="premios-page__press color-background-1 gradient">
+    <div class="premios-page__press-wrapper">
+      <div class="premios-page__press-content rte">
+        <h2 class="h1">Apariciones en la prensa</h2>
+        <div class="premios-page__press-links">
+          {press.map((group) => (
+            <div>
+              <p><strong>{group.year}</strong></p>
+              {group.links.map(([date, label, href]) => (
+                <p>{date} <a href={href} rel="noopener noreferrer">{label}</a></p>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</article>

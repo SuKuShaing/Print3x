@@ -9,10 +9,12 @@ Las imágenes estarán en internet en el github, puesto que son todas copias de 
 
 ## ToDos
 
-- [ ] Hacer las páginas nosotros (ya tengo las imágenes en la carpeta, solo falta lanzarlo)
-- [ ] Hacer la página de blog
+- [ ] Convertir en componente reutilizable por otras páginas la card de páginas de premios e implementar
 - [ ] Falta el favicon
+- [ ] Hacer la páginas de información
 
+- [x] Hacer las páginas de premios -> Colocar los posters en los videos
+- [x] Hacer las páginas nosotros
 - [x] Replicar la estructura de producto en padi,
 - [x] Replicar la estructura de producto en axis one,
 - [x] sacar la opción de hacer login

@@ -3,13 +3,13 @@
 **Fuente Shopify:** `zip_theme_shopify_estable/`  
 **Fuente local:** `src/assets/`
 **Fecha de inspeccion:** 2026-08-17
-**Estado:** 109 recursos locales entregados e integrados desde `src/assets` mediante `<Picture>`: 30 recursos del header, index y colecciones, 44 imagenes de galerias de productos PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal y 10 recursos nuevos de Padi. El favicon usa un placeholder SVG local porque el recurso Shopify activo no tiene copia local confirmada. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
+**Estado:** 119 recursos locales entregados e integrados desde `src/assets` mediante `<Picture>`: 30 recursos del header, index y colecciones, 44 imagenes de galerias de productos PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal, 10 recursos nuevos de Padi, 6 imagenes historicas de Premios e historia y 4 posters locales de sus videos. El favicon usa un placeholder SVG local porque el recurso Shopify activo no tiene copia local confirmada. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
 
 ## Resumen de conteos
 
 | Categoria | Conteo | Alcance |
 |---|---:|---|
-| Imagenes locales entregadas e integradas | 109 | 30 recursos del header/index/colecciones, 44 imagenes de galerias PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal y 10 recursos nuevos de Padi. |
+| Imagenes locales entregadas e integradas | 119 | 30 recursos del header/index/colecciones, 44 imagenes de galerias PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal, 10 recursos nuevos de Padi, 6 imagenes historicas de Premios e historia y 4 posters locales de sus videos. |
 | Recursos `shopify://shop_images` unicos globales | 85 | Union de templates y `config/settings_data.json`. |
 | Ocurrencias globales de referencias Shopify | 93 | Incluye repeticiones entre templates y configuracion. |
 | Recursos distintos identificados en templates | 81 | Conteo de nombres unicos dentro de templates; el registro de ejecucion lo denomina referencias de templates. |
@@ -80,6 +80,21 @@ La entrega `src/assets/index-products-axis-one/` contiene 16 imagenes que corres
 | Bloques editoriales Axis One | 16 | `available`; alt revisado desde el HTML publicado. |
 | Galería principal Axis One | 9 imagenes locales en `fotos producto/` | `available`; se renderizan como `<Picture>` y conservan el orden local aprobado: `foto4`, video, `foto2`, `foto1`, `7 Print3x`, `23 print3x`, `11 print3x`, `Foto5`, `Foto9`. `foto4` y `foto2` también se usan como imágenes primaria/secundaria de la tarjeta en `/collections/impresoras-3d`. |
 | Video de presentación Axis One | 1 URL YouTube, en 2 bloques | `available`; se integra con `lite-youtube-embed`, carga el iframe solo al activarse y usa `youtube-nocookie`. |
+
+### Página Premios e historia
+
+Los seis archivos de `src/assets/index-pages-premios/` corresponden a los bloques de imagen de `/pages/premios`. Se integran en el orden publicado, conservando la alternancia de columnas de la referencia y se renderizan mediante `<Picture>`. Los cuatro posters de `src/assets/index-pages-premios/thumbnails/` se asocian a los videos en el orden de aparición del timeline. Los cuatro videos de la página usan `LiteYoutube.astro` con los IDs registrados en `Links a los videos en youtube.txt`; el iframe se solicita solo al activar cada video.
+
+| Archivo local | Uso | Estado |
+|---|---|---|
+| `2014_Primera_Impresora_3D_Crea_en_3D_Print3x.jpg` | Bloque 2014, Primera Impresora | `available`; alt observado en la referencia |
+| `2015_Ganadores_despega_usach_Crea_en_3D_Print3x.jpg` | Bloque 2015, Ganadores del Despega Usach | `available`; alt observado en la referencia |
+| `2016_Ganadores_en_Stanford_Crea_en_3D_Print3x.jpg` | Bloque 2016, certificados Stanford | `available`; alt observado en la referencia |
+| `2016_2_Aparicion_en_el_diario_el_mercurio_Crea_en_3D_Print3x.jpg` | Bloque 2016, Vuelta a Chile | `available`; alt observado en la referencia |
+| `2017_Premios_Despega_Usach_Crea_en_3D_Print3x.jpg` | Bloque 2017, premios Despega Usach | `available`; alt observado en la referencia |
+| `2018_Ganadores_en_Conrad_Waterloo_Crea_en_3D_Print3x.jpg` | Bloque 2018, Waterloo University | `available`; alt observado en la referencia |
+
+Los cuatro posters locales se integran mediante `<Picture>` y permanecen visibles hasta activar el video; `LiteYoutube.astro` no solicita el poster remoto de YouTube cuando existe un asset local y mantiene la carga del iframe diferida hasta la interacción. Las referencias Shopify restantes y sus nombres históricos siguen documentadas en la matriz de pendientes.
 
 ### Bloques y galeria locales de Padi
 
