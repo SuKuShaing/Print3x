@@ -1,7 +1,13 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
+import { Picture } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import type { ImageMetadata } from 'astro';
 import SiteLayout from '../../../layouts/SiteLayout.astro';
+import repetierPoster from '../../../assets/index-blogs-curso_impresion_3d-configurar-repetier-host/configurar repetier host.jpg';
+import openScadPoster from '../../../assets/index-blogs-openscad/openscad.jpg';
+import meshmixerPoster from '../../../assets/index-blogs-meshmixer/Miniatura 1.jpg';
+import calibrationPoster from '../../../assets/index-blogs-calibración_automatica/miniatura 1.jpg';
 
 export async function getStaticPaths() {
   const blogs = await getCollection('blogs');
@@ -16,8 +22,13 @@ interface Props {
 }
 
 const { blog } = Astro.props as Props;
-const { Content } = await render(blog);
 const { data } = blog;
+const articleMedia: Record<string, ImageMetadata> = {
+  'configurar-repetier-host': repetierPoster,
+  openscad: openScadPoster,
+  meshmixer: meshmixerPoster,
+  impresion_3d_calibracion_automatica: calibrationPoster,
+};
 ---
 
 <SiteLayout
@@ -27,28 +38,56 @@ const { data } = blog;
   sourceUrl={data.sourceUrl}
   sourceRetrieved={data.sourceRetrieved}
 >
-  <article class="editorial-page page-width">
-    <header class="editorial-page__header">
-      <p class="editorial-page__eyebrow">Blog Print3x</p>
-      <h1>{data.title}</h1>
-    </header>
-    <div class="editorial-page__body rte"><Content /></div>
-    <section class="editorial-index" aria-labelledby="editorial-index-title">
-      <h2 id="editorial-index-title">{data.title}</h2>
-      <div class="editorial-index__grid">
-        {data.articles.map((article) => (
-          <a class="editorial-card" href={`/blogs/${data.slug}/${article.slug}`}>
-            {article.mediaSource && (
-              <div class="editorial-card__media media-placeholder media-placeholder--pending" data-media-status="pending" aria-hidden="true"></div>
-            )}
-            <div class="editorial-card__content">
-              <h3>{article.title}</h3>
-              {article.description && <p>{article.description}</p>}
-              <span class="editorial-card__link">Leer artículo</span>
+   <div class="main-blog page-width">
+    <h1 class="title--primary">{data.title}</h1>
+
+    <div class="blog-articles">
+      {data.articles.map((article) => {
+        const poster = articleMedia[article.slug];
+
+        return (
+          <div class="blog-articles__article article">
+            <div class="article-card-wrapper card-wrapper underline-links-hover">
+              <div class="card article-card card--card article-card__image--medium card--media color-background-2 gradient">
+                <div class="card__inner ratio" style="--ratio-percent: 56.25%;">
+                  <div class="article-card__image-wrapper card__media">
+                    <div class="article-card__image media media--hover-effect">
+                      {poster ? (
+                        <Picture
+                          src={poster}
+                          formats={['avif', 'webp']}
+                          widths={[360, 533, 720, 1000, 1500]}
+                          sizes="(min-width: 1200px) 550px, (min-width: 750px) calc((100vw - 130px) / 2), calc(100vw - 50px)"
+                          alt={article.title}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div class="media-placeholder media-placeholder--pending" data-media-status="pending" aria-hidden="true"></div>
+                      )}
+                    </div>
+                  </div>
+                  <div class="card__content">
+                    <div class="card__information">
+                      <h2 class="card__heading">{article.title}</h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="card__content">
+                  <div class="card__information">
+                    <h2 class="card__heading">
+                      <a href={`/blogs/${data.slug}/${article.slug}`} class="full-unstyled-link">
+                        {article.title}
+                      </a>
+                    </h2>
+                    {article.description && <p class="article-card__excerpt rte-width">{article.description}</p>}
+                    <div class="article-card__footer"></div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </a>
-        ))}
-      </div>
-    </section>
-  </article>
+          </div>
+        );
+      })}
+    </div>
+  </div>
 </SiteLayout>

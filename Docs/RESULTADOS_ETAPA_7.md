@@ -118,6 +118,7 @@
 - Se integró la miniatura del primer video de cada artículo: Repetier Host, OpenSCAD, Meshmixer y Calibración Automática.
 - Las cuatro imágenes se renderizan mediante `<Picture>` con variantes `avif` y `webp`; no se cargan imágenes externas ni se generan placeholders para estos artículos.
 - `src/styles/components/editorial.css` incorpora las reglas de `main-blog`, cards, alturas medias de imagen y breakpoints de Refresh.
+- Se restauró el comportamiento de hover de las cards: elevación de `0.3rem`, sombra y transición suave.
 - `Docs/MANIFIESTO_MEDIA.md` registra el uso de los cuatro posters en el índice del curso.
 
 ### Archivos creados o modificados
@@ -135,6 +136,7 @@
 - Preview local de `/blogs/curso_impresion_3d` a `390px`, `768px`, `1024px` y `1440px`: 4 cards, 4 `<picture>`, 0 placeholders, 0 imágenes rotas y sin overflow horizontal.
 - Preview local: la ruta conserva un único `h1`, las cuatro URLs internas responden `200` y no registra errores de consola.
 - Las fuentes renderizadas de las cards apuntan a `/_astro/`; no hay URLs CDN en el bloque del índice.
+- Hover verificado en preview: la primera card aplica `translateY(-3.3px)` y sombra `rgba(148, 16, 129, 0.12)`.
 
 ### Bloqueos y pendientes
 

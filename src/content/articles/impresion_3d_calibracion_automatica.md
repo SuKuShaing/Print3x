@@ -6,13 +6,30 @@ sourceUrl: https://www.print3x.cl/blogs/curso_impresion_3d/impresion_3d_calibrac
 sourceRetrieved: '2026-07-30'
 status: published
 tags: [impresion-3d, calibracion]
+seo:
+  title: Obtener Impresora 3D con Calibración Automática – Print3x
+  description: 'En este articulo se muestra como instalar un sensor inductivo para volver una impresora 3D normal en una impresora 3D con Calibración Automática'
 media:
-  - status: pending
-    sourceReference: 'Miniatura_autoleveling_1.jpg, Miniatura_Autoleveling_2.jpg, Miniatura_Autoleveling_3.jpg y Diagrama_de_Conexion.jpg'
-    use: 'Portadas de video y diagrama de conexión'
-    expectedDimensions: '3840px de ancho en la fuente; alto no disponible'
-    aspectRatio: 'pendiente: alto no disponible en la fuente'
-    reason: 'No existe copia local aprobada; los videos se conservan como enlaces revisados.'
+  - status: available
+    sourceReference: 'miniatura 1.jpg'
+    use: 'Portada del video sobre conectar la electrónica'
+    expectedDimensions: '1280 x 720px'
+    aspectRatio: '16:9'
+  - status: available
+    sourceReference: 'miniatura 2.jpg'
+    use: 'Portada del video sobre modificar el firmware'
+    expectedDimensions: '1280 x 720px'
+    aspectRatio: '16:9'
+  - status: available
+    sourceReference: 'miniatura 3.jpg'
+    use: 'Portada del video sobre modificar el Gcode'
+    expectedDimensions: '1280 x 720px'
+    aspectRatio: '16:9'
+  - status: available
+    sourceReference: 'Diagrama_de_Conexion.webp'
+    use: 'Diagrama de conexión'
+    expectedDimensions: '1167 x 768px'
+    aspectRatio: 'aproximadamente 1.52:1'
 ---
 
 ## Impresora 3D con Calibración Automática
@@ -21,15 +38,11 @@ Las ventajas que este sistema tiene, es que nunca mas tendrás que volver a cali
 
 ## Primera parte: Conectar electronica
 
-<div class="editorial-media-pending" data-media-status="pending"><strong>Video y portada pendientes: conectar electrónica</strong><span>Fuente: Miniatura_autoleveling_1.jpg · Uso: portada del video · Proporción esperada: pendiente de alto en la fuente.</span></div>
-
 [Ver video](https://youtu.be/HSaMxLdqlrI)
 
 ## Diagrama de conexión para obtener tu impresora 3d con nivelación automática
 
 A la izquierda de la imagen, se encuentra la fuente de poder y la placa Ramps, a la derecha están los cables del sensor
-
-<div class="editorial-media-pending" data-media-status="pending"><strong>Media pendiente: diagrama de conexión</strong><span>Fuente: Diagrama_de_Conexion.jpg · Uso: esquema de conexión · Proporción esperada: pendiente de alto en la fuente.</span></div>
 
 ## Recursos adicionales para obtener tu impresora 3d con nivelación automática
 
@@ -67,15 +80,11 @@ Segun el tipo de lazo, abierto o cerrado, tendras que configurar la logica en el
 
 ## Segunda parte: Modificar el Firmware
 
-<div class="editorial-media-pending" data-media-status="pending"><strong>Video y portada pendientes: firmware</strong><span>Fuente: Miniatura_Autoleveling_2.jpg · Uso: portada del video · Proporción esperada: pendiente de alto en la fuente.</span></div>
-
 [Ver video](https://youtu.be/0v7mVu4zT-c)
 
 Previo a modificar el codigo de tu Marlin, recuerda guardar un respaldo de tu versión estable de Marlin
 
 ## Tercera parte: Modificar el Gcode
-
-<div class="editorial-media-pending" data-media-status="pending"><strong>Video y portada pendientes: Gcode</strong><span>Fuente: Miniatura_Autoleveling_3.jpg · Uso: portada del video · Proporción esperada: pendiente de alto en la fuente.</span></div>
 
 [Ver video](https://youtu.be/LLit5ohZNTQ)
 

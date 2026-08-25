@@ -5,6 +5,7 @@ import SiteLayout from '../../../layouts/SiteLayout.astro';
 import MeshmixerArticle from '../../../components/MeshmixerArticle.astro';
 import OpenScadArticle from '../../../components/OpenScadArticle.astro';
 import RepetierHostArticle from '../../../components/RepetierHostArticle.astro';
+import CalibrationArticle from '../../../components/CalibrationArticle.astro';
 
 export async function getStaticPaths() {
   const articles = await getCollection('articles');
@@ -24,6 +25,7 @@ const { data } = article;
 const isMeshmixer = data.slug === 'meshmixer';
 const isOpenScad = data.slug === 'openscad';
 const isRepetierHost = data.slug === 'configurar-repetier-host';
+const isCalibration = data.slug === 'impresion_3d_calibracion_automatica';
 ---
 
 <SiteLayout
@@ -33,13 +35,15 @@ const isRepetierHost = data.slug === 'configurar-repetier-host';
   sourceUrl={data.sourceUrl}
   sourceRetrieved={data.sourceRetrieved}
 >
-  <article class:list={[isMeshmixer ? 'meshmixer-article-page' : isOpenScad ? 'openscad-article-page' : isRepetierHost ? 'repetier-host-article-page' : 'editorial-page editorial-article page-width']}>
+  <article class:list={[isMeshmixer ? 'meshmixer-article-page' : isOpenScad ? 'openscad-article-page' : isRepetierHost ? 'repetier-host-article-page' : isCalibration ? 'calibration-article-page' : 'editorial-page editorial-article page-width']}>
     {isMeshmixer ? (
       <MeshmixerArticle />
     ) : isOpenScad ? (
       <OpenScadArticle />
     ) : isRepetierHost ? (
       <RepetierHostArticle />
+    ) : isCalibration ? (
+      <CalibrationArticle />
     ) : (
       <>
         <header class="editorial-page__header">
