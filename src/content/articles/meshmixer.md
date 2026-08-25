@@ -6,13 +6,34 @@ sourceUrl: https://www.print3x.cl/blogs/curso_impresion_3d/meshmixer
 sourceRetrieved: '2026-07-30'
 status: published
 tags: [impresion-3d, meshmixer]
+seo:
+  description: 'Todo lo necesario para Instalar el Meshmixer y aprender como usarlo, mover piezas, reparar piezas, hacer soportes en ramificados, cortes, análisis, modificaciones y mutaciones.'
 media:
-  - status: pending
-    sourceReference: 'Miniatura_para_instalar_el_Meshmixer.jpg, Miniatura_guia.jpg, Miniatura_soportes_en_arbol_con_meshmixer.jpg, Tip_Post_y_Base_Diameter.jpg y Base_y_Tip.jpg'
-    use: 'Portadas de video, guía e imágenes de configuración'
-    expectedDimensions: '3840px para portadas y 1500px para imágenes técnicas; alto no disponible'
-    aspectRatio: 'pendiente: alto no disponible en la fuente'
-    reason: 'No existe copia local aprobada; los videos y descargas se conservan como enlaces revisados.'
+  - status: available
+    sourceReference: 'Miniatura 1.jpg'
+    use: 'Portada del video de instalación de Meshmixer'
+    expectedDimensions: '3840 x 2160px'
+    aspectRatio: '16:9'
+  - status: available
+    sourceReference: 'Miniatura 2.jpg'
+    use: 'Portada del video de guía rápida de soportes'
+    expectedDimensions: '3840 x 2159px'
+    aspectRatio: 'aproximadamente 16:9'
+  - status: available
+    sourceReference: 'Miniatura 3.jpg'
+    use: 'Portada del video de soportes en árbol'
+    expectedDimensions: '3840 x 2160px'
+    aspectRatio: '16:9'
+  - status: available
+    sourceReference: 'img 1.webp'
+    use: 'Diagrama de Tip Diameter, Post Diameter y Base Diameter'
+    expectedDimensions: '1500 x 1112px'
+    aspectRatio: '74.15%'
+  - status: available
+    sourceReference: 'img 2.webp'
+    use: 'Diagrama de Tip Height y Base Height'
+    expectedDimensions: '1500 x 2000px'
+    aspectRatio: '3:4'
 ---
 
 <div class="editorial-media-pending" data-media-status="pending"><strong>Video y portada pendientes: instalación</strong><span>Fuente: Miniatura_para_instalar_el_Meshmixer.jpg · Uso: portada del video · Proporción esperada: pendiente de alto en la fuente.</span></div>

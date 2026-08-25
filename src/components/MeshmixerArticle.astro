@@ -1,0 +1,245 @@
+---
+import LiteYoutube from './LiteYoutube.astro';
+import ImageTextCard from './ImageTextCard.astro';
+import installationPoster from '../assets/index-blogs-meshmixer/Miniatura 1.jpg';
+import quickGuidePoster from '../assets/index-blogs-meshmixer/Miniatura 2.jpg';
+import supportsPoster from '../assets/index-blogs-meshmixer/Miniatura 3.jpg';
+import diameterImage from '../assets/index-blogs-meshmixer/img 1.webp';
+import heightImage from '../assets/index-blogs-meshmixer/img 2.webp';
+---
+
+<div class="meshmixer-article">
+  <section class="meshmixer-article__title color-background-1 gradient">
+    <div class="page-width">
+      <h1>Meshmixer</h1>
+    </div>
+  </section>
+
+  <section class="meshmixer-article__video-section color-background-1 gradient">
+    <div class="page-width">
+      <LiteYoutube
+        videoId="bV8uAMO8r9o"
+        title="Video de instalación de Meshmixer"
+        poster={installationPoster}
+        class="meshmixer-article__video global-media-settings"
+      />
+    </div>
+  </section>
+
+  <section id="descargarmeshmixer" class="meshmixer-article__text-section color-background-1 gradient">
+    <div class="page-width">
+      <div class="meshmixer-article__blocks rte">
+        <h2>Meshmixer 3.5 Download</h2>
+        <p>Descarga el Meshmixer directamente desde los <strong>servidores de Autodesk</strong></p>
+        <div class="meshmixer-article__buttons">
+          <a class="button button--primary" href="https://meshmixer.com/downloads/Autodesk_Meshmixer_v3p5_Win64.exe">Meshmixer 3.5 Windows</a>
+          <a class="button button--primary" href="https://web.archive.org/web/20200604032808/http://www.meshmixer.com/downloads/Autodesk_Meshmixer_v3p5_MacOS.pkg">Meshmixer 3.5 Mac</a>
+        </div>
+
+        <p>Dado que Meshmixer dejará de estar disponible oficialmente, guardamos los instalables para que sigas disfrutando de ellos.</p>
+        <h2>Descargar Meshmixer 3.5</h2>
+        <p>Estos archivos éstan en <strong>nuestros servidores</strong>, en caso de estar roto el link avisenos para repararlo</p>
+        <div class="meshmixer-article__buttons">
+          <span class="meshmixer-article__disabled" title="Archivo no disponible">
+            <button class="button button--primary" type="button" disabled>Meshmixer 3.5 para Windows</button>
+          </span>
+          <span class="meshmixer-article__disabled" title="Archivo no disponible">
+            <button class="button button--primary" type="button" disabled>Meshmixer 3.5 para Mac</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="guiaRapidaSoporte" class="meshmixer-article__video-section color-background-1 gradient">
+    <div class="page-width">
+      <div class="meshmixer-article__blocks rte">
+        <h2>Guía rapida de Soportes en árbol con Meshmixer</h2>
+      </div>
+      <LiteYoutube
+        videoId="SMMqAksHSOc"
+        title="Soportes Personalizados en Meshmixer Guía Rápida"
+        poster={quickGuidePoster}
+        class="meshmixer-article__video global-media-settings"
+      />
+    </div>
+  </section>
+
+  <section class="meshmixer-article__text-section color-background-1 gradient">
+    <div class="page-width">
+      <div class="meshmixer-article__blocks rte">
+        <p>La lista completa de configuraciones seleccionadas para el MeshMixer que se menciona en el video está más abajo. ⬇</p>
+        <h2>Pieza utilizada en el video</h2>
+        <p><a href="https://www.thingiverse.com/thing:883182" target="_blank" rel="noreferrer">Ocarina archivo original</a></p>
+        <p>
+          <span class="meshmixer-article__disabled" title="Archivo no disponible">
+            <button class="button button--primary" type="button" disabled>Ocarina con soportes</button>
+          </span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="soportesmeshmixer" class="meshmixer-article__video-section color-background-1 gradient">
+    <div class="page-width">
+      <div class="meshmixer-article__blocks rte">
+        <h2>Soportes en árbol en Meshmixer</h2>
+      </div>
+      <LiteYoutube
+        videoId="FUP4YUVHpK4"
+        title="Video de como hacer soportes en árbol con Meshmixer"
+        poster={supportsPoster}
+        class="meshmixer-article__video global-media-settings"
+      />
+    </div>
+  </section>
+
+  <ImageTextCard
+    image={diameterImage}
+    alt="Meshmixer tip post, post diameter, base diameter, print3x printex printec print3c"
+    title="Partes de soporte en meshmixer"
+    html={`<p><strong>Tip Diameter</strong>: Diametro de la punta, dejar el mismo tamaño que el diametro de la boquilla</p><p><strong>Post Diameter</strong>: Diametro del soporte, dejar en 3 mm de diametro</p><p><strong>Base Diameter</strong>: Diametro de la base, dejar en 8 mm</p>`}
+    class="meshmixer-article__image-text-card"
+    loading="lazy"
+  />
+
+  <ImageTextCard
+    image={heightImage}
+    alt=""
+    title="Partes del soporte en meshmixer"
+    html={`<p><strong>Tip Height</strong>: Altura del cono que contacta la pieza, dejar por defecto</p><p><strong>Base Height</strong>: Altura del cono base del soporte en árbol creado, dejar por defecto</p>`}
+    class="meshmixer-article__image-text-card"
+    loading="lazy"
+  />
+
+  <section id="ConfiguracionesDelMeshMixer" class="meshmixer-article__text-section color-background-1 gradient">
+    <div class="page-width">
+      <div class="meshmixer-article__blocks rte">
+        <h2>Configuraciones finales y rapidas usadas en Meshmixer</h2>
+        <p><strong>Overhangs</strong></p>
+        <p>Angle thresh: 25<br />contact tol: 0<br />Y-offset: Depende</p>
+        <p><strong>Support Generator</strong></p>
+        <p>Max Angle: 50<br />Density: 90<br />Layer Height: 0,1<br />Post Diameter: 3<br />Tip Diameter: 0,4<br />Base Diameter: 8</p>
+        <p><strong>Advanced Support</strong></p>
+        <p>Allow Top Connections: Activar solo en caso de ser necesario<br />Optimization: 50<br />Solid min offset: Por defecto<br />Tip Height: 1<br />Base Height: 0,4<br />Strut Density: 90<br />Post sides: 16</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="meshmixer-article__text-section color-background-1 gradient">
+    <div class="page-width">
+      <div class="meshmixer-article__blocks rte">
+        <h2>Piezas usadas en el video</h2>
+        <p><a href="https://www.thingiverse.com/thing:2123706" target="_blank" rel="noreferrer">Korin - Dragon Ball</a></p>
+        <p><a href="https://www.thingiverse.com/thing:3644988" target="_blank" rel="noreferrer">Snitch, Quidditch Harry Potter</a></p>
+        <p><a href="https://www.thingiverse.com/thing:883182" target="_blank" rel="noreferrer">Basic Working 12 Hole Ocarina</a></p>
+        <p><a href="https://www.thingiverse.com/thing:4706344" target="_blank" rel="noreferrer">Umbreon (Pokemon)</a></p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .meshmixer-article__title,
+  .meshmixer-article__text-section,
+  .meshmixer-article__title {
+    padding: 4rem 0 5.2rem;
+  }
+
+  .meshmixer-article__title h1 {
+    max-width: 82rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .meshmixer-article__video-section {
+    padding: 3.6rem 0;
+  }
+
+  .meshmixer-article :global(lite-youtube) {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: 0;
+    padding-bottom: 56.25%;
+    border-radius: calc(var(--media-radius) - var(--media-border-width));
+  }
+
+  .meshmixer-article__blocks {
+    max-width: 82rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .meshmixer-article__text-section {
+    padding: 4rem 0 5.2rem;
+  }
+
+  .meshmixer-article__blocks h2 {
+    margin-top: 0;
+    margin-bottom: 2rem;
+  }
+
+  .meshmixer-article__blocks h2:not(:first-child) {
+    margin-top: 5.2rem;
+  }
+
+  .meshmixer-article__blocks p {
+    margin-bottom: 2rem;
+  }
+
+  .meshmixer-article__blocks p:last-child {
+    margin-bottom: 0;
+  }
+
+  .meshmixer-article__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 49.5rem;
+    margin: 0 auto;
+  }
+
+  .meshmixer-article__buttons .button {
+    width: 100%;
+    margin: 0;
+    color: rgb(var(--color-button-text));
+    text-decoration: none;
+  }
+
+  .meshmixer-article__disabled {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .meshmixer-article__disabled .button {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  :global(.meshmixer-article__image-text-card) {
+    padding: 3.6rem 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .meshmixer-article__title {
+      padding: 3rem 0 3.9rem;
+    }
+
+    .meshmixer-article__video-section {
+      padding: 2.7rem 0;
+    }
+
+    .meshmixer-article__text-section {
+      padding: 3rem 0 3.9rem;
+    }
+
+    .meshmixer-article__blocks h2:not(:first-child) {
+      margin-top: 4rem;
+    }
+
+    :global(.meshmixer-article__image-text-card) {
+      padding: 2.7rem 0;
+    }
+  }
+</style>
