@@ -69,6 +69,78 @@
 - La Tarea 7.2 formal de inventario DNS y rollback sigue abierta/preparada.
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
 
+## Actualización Etapa 7 - Tarea 7.2: artículo Calibración Automática
+
+**Estado:** implementación completada; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- Se creó `src/components/CalibrationArticle.astro` para reproducir la secuencia publicada del artículo de calibración automática.
+- Se integraron los tres videos del archivo `src/assets/index-blogs-calibración_automatica/url_video.txt` mediante `LiteYoutube.astro`, con los tres posters locales correspondientes.
+- Se integró `Diagrama_de_Conexion.webp` mediante `<Picture>` y se conservaron el texto, enlaces de recursos, nota de respaldo de Marlin y los bloques G-code.
+- `src/pages/blogs/[blog]/[slug].astro` usa el componente específico solo para `impresion_3d_calibracion_automatica`.
+- `src/content/articles/impresion_3d_calibracion_automatica.md` registra los cuatro recursos como `available` y conserva la metadata SEO observada.
+- `Docs/MANIFIESTO_MEDIA.md` registra dimensiones, usos y videos del artículo.
+
+### Archivos creados o modificados
+
+- `src/components/CalibrationArticle.astro`
+- `src/pages/blogs/[blog]/[slug].astro`
+- `src/content/articles/impresion_3d_calibracion_automatica.md`
+- `Docs/MANIFIESTO_MEDIA.md`
+- `Docs/RESULTADOS_ETAPA_7.md`
+
+### Verificación
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 páginas estáticas generadas y variantes optimizadas para los cuatro recursos locales.
+- La salida contiene `dist/blogs/curso_impresion_3d/impresion_3d_calibracion_automatica.html`.
+- Preview local independiente a 390, 768, 1024 y 1440px: la ruta responde `200`, no existe overflow horizontal, no hay errores de consola y se mantienen cuatro `<picture>` y cero placeholders pendientes.
+- Preview desktop: los tres videos usan marcos `1210 x 680.625px` y la referencia publicada usa el mismo marco 16:9; el diagrama se sirve desde `/_astro/`.
+- Antes de activar cualquier video: existen tres posters locales mediante `<picture>` y 0 iframes.
+- Después de activar el primer video: se crea el iframe `https://www.youtube-nocookie.com/embed/HSaMxLdqlrI?rel=0&autoplay=1&playsinline=1` correctamente.
+- Los dos bloques G-code mantienen sus cinco y cinco líneas, respectivamente, con desplazamiento horizontal disponible en mobile.
+- `git diff --check`: correcto; solo muestra los avisos normales de conversión LF/CRLF de Git.
+
+### Bloqueos y pendientes
+
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+## Actualización Etapa 7 - Tarea 7.2: índice del curso de Impresión 3D
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+**Fecha:** 2026-08-25
+
+### Cambio realizado
+
+- `src/pages/blogs/[blog]/index.astro` reproduce la estructura publicada de `main-blog`, con un solo `h1`, grilla Refresh de dos columnas en desktop y una columna en mobile.
+- Las cards conservan el orden, títulos, extractos y URLs históricas del contenido de `curso_impresion_3d`.
+- Se integró la miniatura del primer video de cada artículo: Repetier Host, OpenSCAD, Meshmixer y Calibración Automática.
+- Las cuatro imágenes se renderizan mediante `<Picture>` con variantes `avif` y `webp`; no se cargan imágenes externas ni se generan placeholders para estos artículos.
+- `src/styles/components/editorial.css` incorpora las reglas de `main-blog`, cards, alturas medias de imagen y breakpoints de Refresh.
+- `Docs/MANIFIESTO_MEDIA.md` registra el uso de los cuatro posters en el índice del curso.
+
+### Archivos creados o modificados
+
+- `src/pages/blogs/[blog]/index.astro`
+- `src/styles/components/editorial.css`
+- `Docs/MANIFIESTO_MEDIA.md`
+- `Docs/RESULTADOS_ETAPA_7.md`
+
+### Verificación independiente
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 páginas estáticas generadas y variantes optimizadas de los cuatro posters.
+- `git diff --check`: correcto; solo muestra avisos normales de conversión LF/CRLF de Git.
+- Preview local de `/blogs/curso_impresion_3d` a `390px`, `768px`, `1024px` y `1440px`: 4 cards, 4 `<picture>`, 0 placeholders, 0 imágenes rotas y sin overflow horizontal.
+- Preview local: la ruta conserva un único `h1`, las cuatro URLs internas responden `200` y no registra errores de consola.
+- Las fuentes renderizadas de las cards apuntan a `/_astro/`; no hay URLs CDN en el bloque del índice.
+
+### Bloqueos y pendientes
+
+- La diferencia tipográfica respecto de la página publicada depende de la Futura local ausente; se conserva la familia configurada por el tema y el fallback existente del proyecto.
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
 ## Corrección Etapa 7 - Tarea 7.1: contraste de botones Repetier Host
 
 **Estado:** completada; la etapa de despliegue sigue abierta.
@@ -116,7 +188,7 @@
 
 - Se creó `src/components/MeshmixerArticle.astro` para reproducir la secuencia publicada de `/blogs/curso_impresion_3d/meshmixer`.
 - Se integraron los tres videos de `src/assets/index-blogs-meshmixer/urls-videos.txt` con `LiteYoutube.astro` y sus posters locales `Miniatura 1.jpg`, `Miniatura 2.jpg` y `Miniatura 3.jpg`.
-- Se integraron `img 1.webp` y `img 2.webp` como bloques de imagen y texto mediante `<Picture>`, conservando las proporciones observadas en la referencia.
+- Se integraron `img 1.webp` y `img 2.webp` mediante dos instancias de `src/components/ImageTextCard.astro`, pasando el contenido editorial como `html` para conservar negritas y párrafos.
 - `src/pages/blogs/[blog]/[slug].astro` selecciona el componente específico solo para `meshmixer`; los demás artículos mantienen su renderizado existente.
 - `src/content/articles/meshmixer.md` registra la descripción SEO observada y los cinco recursos locales como `available`.
 - `Docs/MANIFIESTO_MEDIA.md` registra los recursos, dimensiones, usos y videos de Meshmixer.
@@ -139,6 +211,8 @@
 - Antes de activar cualquier video: tres posters locales mediante `<picture>`, 0 iframes y 0 bloques `pending`.
 - Después de activar el primer video: iframe `https://www.youtube-nocookie.com/embed/bV8uAMO8r9o?rel=0&autoplay=1&playsinline=1` creado correctamente.
 - Las dos imágenes técnicas cargan desde `/_astro/` como variantes optimizadas; no existen `<img>` directos en el componente.
+- Preview desktop: los dos `ImageTextCard` conservan marcos de `605 x 448.5px` y `605 x 806.66px`, con imagen a la izquierda y texto a la derecha.
+- Preview mobile: los dos `ImageTextCard` se apilan en una columna, sin overflow horizontal.
 - Consola de preview: 0 errores y 0 warnings en la carga inicial.
 - `git diff --check`: correcto; solo muestra avisos normales de conversión LF/CRLF de Git.
 
@@ -146,6 +220,12 @@
 
 - Las descargas y enlaces a Thingiverse, Google Drive, Autodesk y Wayback permanecen como enlaces externos revisados; no se cargan automáticamente.
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+### Corrección de disponibilidad
+
+- Se deshabilitaron los botones `Meshmixer 3.5 para Windows` y `Meshmixer 3.5 para Mac` de la sección de servidores de Print3x.
+- Se deshabilitó el control `Ocarina con soportes`.
+- Los tres controles usan `title="Archivo no disponible"` en un contenedor nativo para conservar el tooltip al pasar el mouse sobre el control deshabilitado.
 - El endpoint heredado `src/pages/favicon.ico.ts` permanece sin cambios; el favicon global utiliza exclusivamente el PNG configurado en el layout.
 
 ## Actualización Etapa 7 - Tarea 7.1: artículo OpenSCAD
@@ -183,7 +263,7 @@
 
 ### Bloqueos y pendientes
 
-- La tabla de comparación continúa como enlace externo revisado a Google Drive; no se incrusta automáticamente.
+- La tabla de comparación permanece como botón desactivado con `title="Archivo no disponible"`; no se incrusta ni navega a Google Drive.
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
 
 ## Actualizacion Etapa 7 - Tarea 7.2: ImageTextCard en las caracteristicas de PLA

@@ -1,0 +1,192 @@
+---
+import { Picture } from 'astro:assets';
+import LiteYoutube from './LiteYoutube.astro';
+import firstPoster from '../assets/index-blogs-calibración_automatica/miniatura 1.jpg';
+import secondPoster from '../assets/index-blogs-calibración_automatica/miniatura 2.jpg';
+import thirdPoster from '../assets/index-blogs-calibración_automatica/miniatura 3.jpg';
+import diagram from '../assets/index-blogs-calibración_automatica/Diagrama_de_Conexion.webp';
+
+const firstVideoTitle = 'Video sobre como conectar la electrónica para que obtengas la calibración automática';
+const secondVideoTitle = 'Miniatura del video de Autoleveling de la empresa print3x printex printec print3c';
+const thirdVideoTitle = 'Miniatura del video de como modificar el Gcode del Autoleveling de la empresa print3x printex printec print3c';
+---
+
+<div class="calibration-article">
+  <section class="calibration-article__intro gradient color-background-1">
+    <div class="page-width">
+      <div class="calibration-article__blocks rte">
+        <h1>Impresora 3D con Calibración Automática</h1>
+        <p>Las ventajas que este sistema tiene, es que nunca mas tendrás que volver a calibrar con la mano la impresora, se hace una sola vez y quedo, es casi magia</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="calibration-article__video-section">
+    <div class="page-width">
+      <div class="calibration-article__video-block">
+        <h2 class="h1">Primera parte: Conectar electronica</h2>
+        <LiteYoutube videoId="HSaMxLdqlrI" title={firstVideoTitle} poster={firstPoster} class="calibration-article__video global-media-settings" />
+      </div>
+    </div>
+  </section>
+
+  <section class="calibration-article__diagram-intro gradient color-background-1">
+    <div class="page-width">
+      <div class="calibration-article__blocks rte">
+        <h2 class="h1">Diagrama de conexión para obtener tu impresora 3d con nivelación automática</h2>
+        <p>A la izquierda de la imagen, se encuentra la fuente de poder y la placa Ramps, a la derecha están los cables del sensor</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="calibration-article__diagram">
+    <div class="page-width">
+      <Picture
+        src={diagram}
+        formats={['avif', 'webp']}
+        widths={[375, 750, 1100, 1500]}
+        sizes="(min-width: 1200px) 1210px, calc(100vw - 3rem)"
+        alt="Diagrama de conexión del sensor inductivo print3x printex printec print3c"
+        loading="lazy"
+      />
+    </div>
+  </section>
+
+  <section class="calibration-article__resources gradient color-background-1">
+    <div class="page-width">
+      <div class="calibration-article__blocks calibration-article__blocks--left rte">
+        <h2 class="h1">Recursos adicionales para obtener tu impresora 3d con nivelación automática</h2>
+        <p>Pieza de la tobera (imprimir sin soportes)</p>
+        <p><a href="https://bit.ly/DescargarTobera">Pieza de la Tobera</a></p>
+        <p>Piezas de la puntas de la cama</p>
+        <p><a href="https://bit.ly/DescargarPuntasCama">Puntas de la cama</a></p>
+        <p>Modelos de Sensores a color en tu maquina</p>
+        <p><strong>Sensor Capacitivo</strong>:</p>
+        <p>Tiene menor fidelidad en la distancia de detección, pero detecta todo tipo de superficies.</p>
+        <p>Recomendado el: LJC18A3-B-Z/BX NPN</p>
+        <p><strong>Sensor inductivo</strong> (recomendamos ésta opción):</p>
+        <p>Sensor inductivo, mayor fidelidad en la detección, siempre detecta la misma distancia, pero solo detecta metales magneticos.</p>
+        <p>Ojo: el Aluminio no es un metal magnetico</p>
+        <p>El que recomendamos y usamos en nuestra maquinas es el "LJ12A3-4-Z/BX NPN"</p>
+        <p><strong>NPN o PNP</strong>:</p>
+        <p>NPN: normalmente cerrado, está apagado, cuando detecta inducción, se prende o dispara la señal</p>
+        <p>PNP: normalmente abierto, siempre está encendido y cuando detecta, se apaga o termina la señal</p>
+        <p>Segun el tipo de lazo, abierto o cerrado, tendras que configurar la logica en el Marlin o invertirla.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="calibration-article__video-section">
+    <div class="page-width">
+      <div class="calibration-article__video-block">
+        <h2 class="h1">Segunda parte: Modificar el Firmware</h2>
+        <LiteYoutube videoId="0v7mVu4zT-c" title={secondVideoTitle} poster={secondPoster} class="calibration-article__video global-media-settings" />
+      </div>
+    </div>
+  </section>
+
+  <section class="calibration-article__note gradient color-background-1">
+    <div class="page-width">
+      <div class="calibration-article__blocks calibration-article__blocks--left rte">
+        <p>Previo a modificar el codigo de tu Marlin, recuerda guardar un respaldo de tu versión estable de Marlin</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="calibration-article__video-section">
+    <div class="page-width">
+      <div class="calibration-article__video-block">
+        <h2 class="h1">Tercera parte: Modificar el Gcode</h2>
+        <LiteYoutube videoId="LLit5ohZNTQ" title={thirdVideoTitle} poster={thirdPoster} class="calibration-article__video global-media-settings" />
+      </div>
+    </div>
+  </section>
+
+  <section class="calibration-article__gcode gradient color-background-1">
+    <div class="page-width">
+      <div class="calibration-article__blocks calibration-article__blocks--left rte">
+        <h2 class="h1">G-Code para tener la impresora 3d con calibración automática</h2>
+        <p>El código Gcode son las instrucciones que lee la impresora 3D para hacer tu pieza, y para aplicar las mejoras que hemos hecho tenemos que colocar los siguientes códigos, al inicio y al final, tal como se muestra en el video</p>
+        <p class="calibration-article__code-label"><strong>Star G-Code (codigo inicial)</strong></p>
+        <pre><code>M109 S170 ; fija temperatura (espera hasta llegar a ella y deja pasar los movimientos)
+M104 S225 ; calienta hasta la temperatura (permitiendo movimientos)
+G28 ; lleva al origen
+G29 ; sondea la cama (Mejora hecha por Sebastián Sanhueza de print3x.cl)
+G1 X100 Y100 Z15 F5000 ; fija posición de espera</code></pre>
+        <p class="calibration-article__code-label"><strong>End G-code (codigo Final)</strong></p>
+        <pre><code>M104 S0 ; Enfria el hotend
+G28 X0 ; home X axis
+G1 Y180.000 ; Entrega la pieza (Mejora hecha por Sebastián Sanhueza de print3x.cl)
+M84 ; disable motor
+M107 ; Apaga ventilador</code></pre>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .calibration-article__intro,
+  .calibration-article__diagram-intro,
+  .calibration-article__resources,
+  .calibration-article__note,
+  .calibration-article__gcode { width: 100%; }
+
+  .calibration-article__intro,
+  .calibration-article__diagram-intro,
+  .calibration-article__resources,
+  .calibration-article__note,
+  .calibration-article__gcode { padding: 4rem 0 5.2rem; }
+
+  .calibration-article__blocks { max-width: 78rem; margin: 0 auto; text-align: center; }
+  .calibration-article__blocks--left { text-align: left; }
+  .calibration-article__blocks h1,
+  .calibration-article__blocks h2 { margin: 0; }
+  .calibration-article__blocks h2 { margin-bottom: 2rem; }
+  .calibration-article__blocks h1 + p { margin-top: 2rem; }
+  .calibration-article__blocks p { margin-bottom: 2rem; }
+  .calibration-article__blocks p:last-child { margin-bottom: 0; }
+
+  .calibration-article__video-section { padding: 3.6rem 0; }
+  .calibration-article__video-block { max-width: 120rem; margin: 0 auto; }
+  .calibration-article__video-block h2 { margin: 0 0 3.6rem; text-align: center; }
+  .calibration-article :global(lite-youtube) {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: 0;
+    padding-bottom: 56.25%;
+    border-radius: calc(var(--media-radius) - var(--media-border-width));
+  }
+
+  .calibration-article__diagram { padding: 0; }
+  .calibration-article__diagram .page-width { max-width: 121rem; }
+  .calibration-article__diagram picture,
+  .calibration-article__diagram img { display: block; width: 100%; height: auto; }
+  .calibration-article__diagram img { border-radius: var(--media-radius); }
+
+  .calibration-article__gcode pre {
+    overflow-x: auto;
+    margin: 0 0 2.2rem;
+    padding: 2rem;
+    border-radius: var(--buttons-radius);
+    color: rgb(var(--color-base-background-1));
+    background: rgb(37, 41, 45);
+    font-family: monospace;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.7;
+  }
+  .calibration-article__gcode pre:last-child { margin-bottom: 0; }
+  .calibration-article__code-label { color: rgb(var(--color-base-text)); }
+
+  @media screen and (max-width: 749px) {
+    .calibration-article__intro,
+    .calibration-article__diagram-intro,
+    .calibration-article__resources,
+    .calibration-article__note,
+    .calibration-article__gcode { padding: 3rem 0 3.9rem; }
+    .calibration-article__video-section { padding: 2.7rem 0; }
+    .calibration-article__video-block h2 { margin-bottom: 2.7rem; }
+    .calibration-article__gcode pre { padding: 1.5rem; font-size: 1.45rem; }
+  }
+</style>
