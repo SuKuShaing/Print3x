@@ -3,13 +3,13 @@
 **Fuente Shopify:** `zip_theme_shopify_estable/`  
 **Fuente local:** `src/assets/`
 **Fecha de inspeccion:** 2026-08-17
-**Estado:** 130 recursos locales entregados e integrados desde `src/assets` mediante `<Picture>`: 30 recursos del header, index y colecciones, 44 imagenes de galerias de productos PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal, 10 recursos nuevos de Padi, 6 imagenes historicas de Premios e historia, 4 posters locales de sus videos, 1 portada local para Repetier Host, 1 portada local para OpenSCAD, 5 recursos locales de Meshmixer y 4 recursos locales del articulo de calibracion automatica. Ademas, `public/Favicon.png` esta confirmado como favicon local de uso directo. El indice `/blogs/curso_impresion_3d` reutiliza los cuatro posters del primer video de cada articulo mediante `<Picture>`. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
+**Estado:** 142 recursos locales entregados e integrados desde `src/assets` mediante `<Picture>`: 30 recursos del header, index y colecciones, 44 imagenes de galerias de productos PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal, 10 recursos nuevos de Padi, 6 imagenes historicas de Premios e historia, 4 posters locales de sus videos, 1 portada local para Repetier Host, 1 portada local para OpenSCAD, 5 recursos locales de Meshmixer, 4 recursos locales del articulo de calibracion automatica y 12 recursos locales de la pagina del mejor filamento PLA. Ademas, `public/Favicon.png` esta confirmado como favicon local de uso directo. El indice `/blogs/curso_impresion_3d` reutiliza los cuatro posters del primer video de cada articulo mediante `<Picture>`. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
 
 ## Resumen de conteos
 
 | Categoria | Conteo | Alcance |
 |---|---:|---|
-| Imagenes locales entregadas e integradas | 130 | 30 recursos del header/index/colecciones, 44 imagenes de galerias PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal, 10 recursos nuevos de Padi, 6 imagenes historicas de Premios e historia, 4 posters locales de sus videos, 1 portada local para Repetier Host, 1 portada local para OpenSCAD, 5 recursos locales de Meshmixer y 4 recursos locales del articulo de calibracion automatica. |
+| Imagenes locales entregadas e integradas | 142 | 30 recursos del header/index/colecciones, 44 imagenes de galerias PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal, 10 recursos nuevos de Padi, 6 imagenes historicas de Premios e historia, 4 posters locales de sus videos, 1 portada local para Repetier Host, 1 portada local para OpenSCAD, 5 recursos locales de Meshmixer, 4 recursos locales del articulo de calibracion automatica y 12 recursos de la pagina del mejor filamento PLA. |
 | Recursos `shopify://shop_images` unicos globales | 85 | Union de templates y `config/settings_data.json`. |
 | Ocurrencias globales de referencias Shopify | 93 | Incluye repeticiones entre templates y configuracion. |
 | Recursos distintos identificados en templates | 81 | Conteo de nombres unicos dentro de templates; el registro de ejecucion lo denomina referencias de templates. |
@@ -50,7 +50,7 @@ Las dimensiones y el peso se obtuvieron leyendo los archivos locales entregados.
 
 Los cuatro archivos entregados en `src/assets/index-pages-nosotros/` se verifican como media local disponible. `foto equipo.jpg` se usa como fotografía principal de `/pages/nosotros`; los iconos de carrete, línea de meta y pulgar arriba se usan en el carrusel de compromisos. El cuarto icono no se fuerza en la página porque la referencia publicada muestra tres compromisos. Todos se renderizan mediante `<Picture>`.
 
-**Regla:** los 126 recursos integrados tienen estado local `available`; todos se importan desde `src/assets/` y Astro genera sus rutas optimizadas bajo `/_astro/`. Los cuatro heroes tienen uso `index`; `Hero_3.jpg` se usa además como hero visible de `/collections/pla` por confirmación del usuario. Las dos imagenes de categorias tienen uso `index` y `collection` como tarjetas; los cuatro iconos tienen uso `index` en compromisos; los 18 recursos editoriales de PLA tienen uso `collection`; las 16 imagenes editoriales de Axis One tienen uso en sus bloques editoriales; las 9 imagenes de `fotos producto/` tienen uso en su galeria principal. `Foto5.jpg` se usa además como hero visible de `/collections/impresoras-3d` por confirmación del usuario. Ninguno se declara equivalente a `2052425b5f.jpg`, `Cinco_hermosos...`, `Banner_2...`, `Banner_3...` u otra referencia Shopify sin evidencia de origen. Las otras 85 referencias Shopify siguen pendientes; esta confirmacion no las convierte en disponibles.
+**Regla:** los 142 recursos integrados tienen estado local `available`; todos se importan desde `src/assets/` y Astro genera sus rutas optimizadas bajo `/_astro/`. Los cuatro heroes tienen uso `index`; `Hero_3.jpg` se usa además como hero visible de `/collections/pla` por confirmación del usuario. Las dos imagenes de categorias tienen uso `index` y `collection` como tarjetas; los cuatro iconos tienen uso `index` en compromisos; los 18 recursos editoriales de PLA tienen uso `collection`; las 16 imagenes editoriales de Axis One tienen uso en sus bloques editoriales; las 9 imagenes de `fotos producto/` tienen uso en su galeria principal; los 12 recursos de la pagina del mejor filamento PLA se usan en sus bloques editoriales y se renderizan mediante `<Picture>`. `Foto5.jpg` se usa además como hero visible de `/collections/impresoras-3d` por confirmación del usuario. Ninguno se declara equivalente a `2052425b5f.jpg`, `Cinco_hermosos...`, `Banner_2...`, `Banner_3...` u otra referencia Shopify sin evidencia de origen. Las otras 85 referencias Shopify siguen pendientes; esta confirmacion no las convierte en disponibles.
 
 ### Galerias locales de productos PLA
 
@@ -252,6 +252,24 @@ Fuente: `config/settings_data.json`. `public/Favicon.png` es el favicon local de
 - `Impresion_3D_con_burbujas_-_Ligera.jpg`
 - `Tolerancia_de_los_Filamento_PLA_2.jpg`
 
+### Pagina local del mejor filamento PLA
+
+Los 12 recursos entregados en `src/assets/index-pages-mejor_filamento/` corresponden a los bloques de imagen observados en `/pages/como-determinar-cual-es-el-mejor-filamento-pla`. Se integran en el mismo orden de la referencia publicada; los bloques con texto usan `ImageTextCard.astro`, las cuatro imagenes tecnicas independientes usan `<Picture>` directamente y todos quedan con estado `available`.
+
+| Archivo local | Dimensiones | Uso | Estado |
+|---|---:|---|---|
+| `img_1_Filamento_roto_autoquiebre_-_Ligera.webp` | `1500 x 946` | Punto 1, AutoQuiebre | `available` |
+| `img_2_Filamento PLA con diametro mayor al dicho.jpeg` | `1500 x 2000` | Punto 2 y control de tolerancia | `available` |
+| `img_3_Tolerancia de los Filamento PLA 2.jpg` | `1000 x 470` | Diámetro ideal con tolerancia | `available` |
+| `img_4_Grafico de distribucion de los valores a lo largo con margenes.jpg` | `1084 x 414` | Distribución de valores de 1.75 mm | `available` |
+| `img_5_Compracion de diametros de PLA.jpg` | `1554 x 648` | Comparación de diámetros | `available` |
+| `img_6_Grafico de distribucion de los diametros del Filamento PLA a lo largo con margenes con tolerancia.jpg` | `1068 x 414` | Distribución de diámetros tolerables | `available` |
+| `img_8_Cambio de tono filamento PLA Print3x - Ligera.jpg` | `1500 x 2403` | Punto 3, color homogéneo | `available` |
+| `img_9_Huevo_Dorado_PLA_Print3x.webp` | `1500 x 1500` | Punto 4, termocoloración | `available` |
+| `img_10_Impresion 3D con burbujas - Ligera.jpg` | `1500 x 1646` | Punto 5, burbujas | `available` |
+| `img_11_Filamento PLA con grumos.jpg` | `1500 x 999` | Punto 6, fluidez | `available` |
+| `img_12_Hilos o voladisos en la impresion 3D - Ligera.jpg` | `1500 x 1115` | Punto 9, baja hidrolisis | `available` |
+
 ### `templates/page.nosotros.json`: 1 recurso nuevo
 
 - `Toa_Diego_Seba_Pini_-_recortado.jpg`
@@ -352,7 +370,7 @@ Las dimensiones conocidas de los archivos locales pueden usarse para sus propios
 
 ## Optimizacion con Astro
 
-Los 126 recursos disponibles se importan desde `src/assets/` como metadata de imagen de Astro. `MediaPlaceholder.astro`, las galerias de producto, los artículos Meshmixer/OpenSCAD/Repetier Host y el logo del header usan `<Picture>` con fuentes `avif` y `webp`, fallback del formato original, `sizes` y variantes `srcset` para `390`, `768`, `1024` y `1440` px. Las variantes no amplian archivos que sean menores que cada breakpoint; los placeholders de media pendiente no se transforman ni se sustituyen.
+Los 142 recursos disponibles se importan desde `src/assets/` como metadata de imagen de Astro. `MediaPlaceholder.astro`, las galerias de producto, los artículos Meshmixer/OpenSCAD/Repetier Host, la pagina del mejor filamento PLA y el logo del header usan `<Picture>` con fuentes `avif` y `webp`, fallback del formato original, `sizes` y variantes `srcset` para `390`, `768`, `1024` y `1440` px. Las variantes no amplian archivos que sean menores que cada breakpoint; los placeholders de media pendiente no se transforman ni se sustituyen.
 
 ## Prioridad de obtencion e integracion
 

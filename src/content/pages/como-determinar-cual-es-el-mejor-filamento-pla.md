@@ -8,30 +8,61 @@ seo:
   title: '✌ ¿Cómo Determinar cuál es el MEJOR Filamento PLA?'
   description: '✔️ En este artículo te damos los 10 puntos clave para elegir el mejor filamento pla ✨Para determinar hay que ir a la teoría, en teoría todos los filamentos debiesen ser iguales, fin del articulo xD. En la práctica no es así, a pesar de que la base para todos los filamentos de este tipo'
 media:
-  - status: pending
-    sourceReference: Filamento_roto_autoquiebre_-_Ligera.jpg
+  - status: available
+    sourceReference: src/assets/index-pages-mejor_filamento/img_1_Filamento_roto_autoquiebre_-_Ligera.webp
     use: 'Punto 1, AutoQuiebre'
-    expectedDimensions: '1500px de ancho en la fuente; alto no disponible'
-    aspectRatio: 'pendiente: alto no disponible en la fuente'
-    reason: 'No existe copia local aprobada.'
-  - status: pending
-    sourceReference: 'Compracion_de_diametros_de_PLA.jpg y recursos relacionados de diámetro'
+    expectedDimensions: 'Dimensiones del asset local'
+    aspectRatio: 'Según dimensiones del asset local'
+  - status: available
+    sourceReference: src/assets/index-pages-mejor_filamento/img_2_Filamento PLA con diametro mayor al dicho.jpeg
     use: 'Punto 2, diámetro estandarizado'
-    expectedDimensions: '3840px o 1500px de ancho según recurso; alto no disponible'
-    aspectRatio: 'pendiente: alto no disponible en la fuente'
-    reason: 'No existe copia local aprobada.'
-  - status: pending
-    sourceReference: Cambio_de_tono_filamento_PLA_Print3x_-_Ligera.jpg
+    expectedDimensions: 'Dimensiones del asset local'
+    aspectRatio: 'Según dimensiones del asset local'
+  - status: available
+    sourceReference: src/assets/index-pages-mejor_filamento/img_3_Tolerancia de los Filamento PLA 2.jpg
+    use: 'Punto 2, tolerancia aceptable'
+    expectedDimensions: 'Dimensiones del asset local'
+    aspectRatio: 'Según dimensiones del asset local'
+  - status: available
+    sourceReference: src/assets/index-pages-mejor_filamento/img_4_Grafico de distribucion de los valores a lo largo con margenes.jpg
+    use: 'Punto 2, distribución de valores'
+    expectedDimensions: 'Dimensiones del asset local'
+    aspectRatio: 'Según dimensiones del asset local'
+  - status: available
+    sourceReference: src/assets/index-pages-mejor_filamento/img_5_Compracion de diametros de PLA.jpg
+    use: 'Punto 2, comparación de diámetros'
+    expectedDimensions: 'Dimensiones del asset local'
+    aspectRatio: 'Según dimensiones del asset local'
+  - status: available
+    sourceReference: src/assets/index-pages-mejor_filamento/img_6_Grafico de distribucion de los diametros del Filamento PLA a lo largo con margenes con tolerancia.jpg
+    use: 'Punto 2, tolerancia de diámetros'
+    expectedDimensions: 'Dimensiones del asset local'
+    aspectRatio: 'Según dimensiones del asset local'
+  - status: available
+    sourceReference: src/assets/index-pages-mejor_filamento/img_8_Cambio de tono filamento PLA Print3x - Ligera.jpg
     use: 'Punto 3, color homogéneo'
-    expectedDimensions: '1500px de ancho en la fuente; alto no disponible'
-    aspectRatio: 'pendiente: alto no disponible en la fuente'
-    reason: 'No existe copia local aprobada.'
-  - status: pending
-    sourceReference: 'Huevo_Dorado_PLA_Print3x.jpg, Impresion_3D_con_burbujas_-_Ligera.jpg, Filamento_PLA_con_grumos.jpg y Hilos_o_voladisos_en_la_impresion_3D_-_Ligera.jpg'
-    use: 'Puntos 4 a 9 del artículo'
-    expectedDimensions: '1500px de ancho en la fuente; alto no disponible'
-    aspectRatio: 'pendiente: alto no disponible en la fuente'
-    reason: 'No existe copia local aprobada.'
+    expectedDimensions: 'Dimensiones del asset local'
+    aspectRatio: 'Según dimensiones del asset local'
+  - status: available
+    sourceReference: src/assets/index-pages-mejor_filamento/img_9_Huevo_Dorado_PLA_Print3x.webp
+    use: 'Punto 4, termocoloración'
+    expectedDimensions: 'Dimensiones del asset local'
+    aspectRatio: 'Según dimensiones del asset local'
+  - status: available
+    sourceReference: src/assets/index-pages-mejor_filamento/img_10_Impresion 3D con burbujas - Ligera.jpg
+    use: 'Punto 5, burbujas'
+    expectedDimensions: 'Dimensiones del asset local'
+    aspectRatio: 'Según dimensiones del asset local'
+  - status: available
+    sourceReference: src/assets/index-pages-mejor_filamento/img_11_Filamento PLA con grumos.jpg
+    use: 'Punto 6, fluidez'
+    expectedDimensions: 'Dimensiones del asset local'
+    aspectRatio: 'Según dimensiones del asset local'
+  - status: available
+    sourceReference: src/assets/index-pages-mejor_filamento/img_12_Hilos o voladisos en la impresion 3D - Ligera.jpg
+    use: 'Punto 9, baja hidrolisis'
+    expectedDimensions: 'Dimensiones del asset local'
+    aspectRatio: 'Según dimensiones del asset local'
 ---
 
 ## En este artículo te damos los 10 puntos clave para elegir el mejor filamento
@@ -42,28 +73,13 @@ En la práctica no es así, a pesar de que la base para todos los filamentos de 
 
 Así que en este artículo veremos ¿Cómo determinar cuál es el mejor filamento PLA? Para ello vamos a necesitar tu mirada crítica a la hora de imprimir
 
-<div class="editorial-media-pending" data-media-status="pending">
-  <strong>Media pendiente: Filamento PLA quebrado</strong>
-  <span>Fuente: Filamento_roto_autoquiebre_-_Ligera.jpg · Uso: punto 1 · Proporción esperada: pendiente de alto en la fuente.</span>
-</div>
-
 ## 1° Evitar el AutoQuiebre
 
 En pocas palabras **que no se quiebre solo**. Por obvio que parezca hay filamentos que al estar imprimiéndose, el filamento que va hacia el extrusor se rompe, se corta de la nada y se pierde la impresión a menos que tengas un sensor de filamento en tu impresora, y aun así, quedan marcas y se nota que en ese punto hubo un corte en la impresión, es por ello que **se deben evitar filamentos que se quiebre solos,** sí ya compraste con mala marca y te sucedió, cambia de proveedor.
 
-<div class="editorial-media-pending" data-media-status="pending">
-  <strong>Media pendiente: diámetro del filamento</strong>
-  <span>Fuente: Filamento_PLA_con_diametro_mayor_al_dicho.jpg · Uso: punto 2 · Proporción esperada: pendiente de alto en la fuente.</span>
-</div>
-
 ## 2do Que el filamento tenga el Diámetro Estandarizado,
 
 Significa que todo el filamento tenga el mismo diámetro con una variación dentro del rango de error aceptado por el fabricante, y expuesto explícitamente en las propiedades, es decir, que todo el filamento tenga un diámetro exactamente igual. Ahora ¿qué es el margen de error en el filamento 3D? Para la fabricación del filamento 3D, el margen de error es un valor de la tolerancia máxima o mínima que se acepta para el diámetro del filamento.
-
-<div class="editorial-media-pending" data-media-status="pending">
-  <strong>Media pendiente: gráficos y comparación de diámetro</strong>
-  <span>Fuente: Tolerancia_de_los_Filamento_PLA_2.jpg, Grafico_de_distribucion_de_los_valores_a_lo_largo_con_margenes.jpg y Compracion_de_diametros_de_PLA.jpg · Uso: punto 2 · Proporción esperada: pendiente de alto en la fuente.</span>
-</div>
 
 ¿Por qué esto es importante? Por 2 motivos, primero, porque primero hay impresoras 3D que aceptan determinado diámetro estandarizado (el diámetro estándar y más común hoy en día es de 1.75 mm de diámetro) y no más grueso, si hay un tramo más grueso, el nozzle se traba puesto que no puede ingresar más filamento al cabezal.
 
@@ -73,19 +89,9 @@ Y el segundo motivo es porque al momento de laminar una pieza ya sea con Slic3r,
 
 La mayoría de los fabricantes tienen la tolerancia entre +- 0.05 mm, la cual es un rango aceptable, puesto que en su punto máximo el filamentito tendrá 1.80 mm y en su punto mínimo tendrá 1.70 mm de diámetro, cual es un margen manejable para cualquier impresora 3D, sin embargo y mientras menor amplitud tenga esta tolerancia, mejor será el filamento.
 
-<div class="editorial-media-pending" data-media-status="pending">
-  <strong>Media pendiente: tolerancia de diámetros</strong>
-  <span>Fuente: Grafico_de_distribucion_de_los_diametros_del_Filamento_PLA_a_lo_largo_con_margenes_con_tolerancia.jpg y Filamento_PLA_con_diametro_mayor_al_dicho.jpg · Uso: punto 2 · Proporción esperada: pendiente de alto en la fuente.</span>
-</div>
-
 ## ¿Qué pasa sí el filamento que compre decía 1.75 mm +- 0.05 y tengo un diámetro mayor o menor de eso?
 
 En ese caso, el fabricante tiene un mal control de calidad puesto que dejo pasar un filamento que no se encuentra en el rango que ellos ofrecen, entonces. Yo en tu caso dejaría de comprarles o les avisaría de esto para que lo mejoren.
-
-<div class="editorial-media-pending" data-media-status="pending">
-  <strong>Media pendiente: cambio de tono</strong>
-  <span>Fuente: Cambio_de_tono_filamento_PLA_Print3x_-_Ligera.jpg · Uso: punto 3 · Proporción esperada: pendiente de alto en la fuente.</span>
-</div>
 
 ## 3ro El Color Homogéneo
 
@@ -93,30 +99,15 @@ El **Color Homogéneo** del filamento al momento de la compra es un rango visual
 
 En este caso es un error, sin embargo, el siguiente caso, es un tipo de filamento que se llama Rainbow (arcoíris) y busca ese efecto.
 
-<div class="editorial-media-pending" data-media-status="pending">
-  <strong>Media pendiente: huevo impreso en PLA</strong>
-  <span>Fuente: Huevo_Dorado_PLA_Print3x.jpg · Uso: punto 4 · Proporción esperada: pendiente de alto en la fuente.</span>
-</div>
-
 ## 4to Filamento Sin Termocoloración
 
 La termocoloración es cuando el filamento es de un tono previamente a ser extruido y cuando es impreso hay líneas de un tono más claro y otro más oscuro, en la siguiente imagen se muestra una impresión con este detalle, recomendamos que sí eso pasa, avisar al fabricante para que lo mejore en los siguientes batch de producción.
 
 Esa imagen es de nuestro filamento, donde los clientes nos alertaron y lo mejoramos en los siguientes batch de producción. Sí el fabricante no responde por la calidad de las piezas que imprimes, recomendamos cambiar de proveedor.
 
-<div class="editorial-media-pending" data-media-status="pending">
-  <strong>Media pendiente: impresión con burbujas</strong>
-  <span>Fuente: Impresion_3D_con_burbujas_-_Ligera.jpg · Uso: punto 5 · Proporción esperada: pendiente de alto en la fuente.</span>
-</div>
-
 ## 5to Elige un filamento Sin Burbujas
 
 Esto es producido por 3 motivos, uno por la humedad ambiental, dado que el filamento PLA tiene hidrolisis, es decir absorbe agua desde el ambiente y puede influir en la calidad de la impresión; el segundo motivo es debido a la producción, en la cual pueden quedar micro burbujas en el filamento, en nuestro caso, nuestros filamentos están libres de microburbujas, garantizado ;) y el tercer motivo es por un exceso de temperatura, por ejemplo, el PLA es conveniente trabajarlo entre 200 a 220 grados Celsius, si tu imprimes a 250 pueden salir burbujas por ese motivo.
-
-<div class="editorial-media-pending" data-media-status="pending">
-  <strong>Media pendiente: grumos en el filamento</strong>
-  <span>Fuente: Filamento_PLA_con_grumos.jpg · Uso: punto 6 · Proporción esperada: pendiente de alto en la fuente.</span>
-</div>
 
 ## 6to La Fluidez
 
@@ -129,11 +120,6 @@ El filamento debe ser **Inocuo y no toxico,** es decir, no debe reaccionar con c
 ## 8vo El filamento no debe emitir olores
 
 El filamento no debe emitir olores al momento de la impresión, debe ser una impresión **Sin Olores.** Los filamentos PLA en su mayoría no emiten olores y puede imprimirse en habitaciones cerradas, sí tu material da olor al ser impreso, cambia de vendedor puesto que te están timando. Esta característica no ocurre con el filamento ABS, el cual sí emite olores que sí se acumulan en una habitación pueden ser inflamables (a muy alta concentración) y si los respiras por más de 3 horas, pueden causan dolores de cabeza, es por ello que el ABS debe imprimirse en ambientes ventilados.
-
-<div class="editorial-media-pending" data-media-status="pending">
-  <strong>Media pendiente: hilos o voladizos</strong>
-  <span>Fuente: Hilos_o_voladisos_en_la_impresion_3D_-_Ligera.jpg · Uso: punto 9 · Proporción esperada: pendiente de alto en la fuente.</span>
-</div>
 
 ## 9no Baja Hidrolisis
 

@@ -9,8 +9,11 @@ Las imágenes estarán en internet en el github, puesto que son todas copias de 
 
 ## ToDos
 
-- [ ] Hacer la páginas de información
+- [ ] eliminar las páginas de blog
+- [ ] instalar el astro sitemaps
+- [ ] colocarle el llm.txt
 
+- [x] Hacer la páginas de información
 - [x] Falta el favicon
 - [x] Usar el componente card en otras páginas
     - [x] padi

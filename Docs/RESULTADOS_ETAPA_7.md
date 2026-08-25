@@ -69,6 +69,71 @@
 - La Tarea 7.2 formal de inventario DNS y rollback sigue abierta/preparada.
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
 
+## Actualización Etapa 7 - Tarea 7.2: página Mejor Filamento PLA
+
+**Estado:** implementación completada; la etapa de despliegue sigue abierta.
+**Fecha:** 2026-08-25
+
+### Cambio realizado
+
+- Se creó `src/components/MejorFilamentoPage.astro` para reproducir la secuencia publicada de `/pages/como-determinar-cual-es-el-mejor-filamento-pla`: título, introducción, bloques de texto, cuatro imágenes técnicas independientes y ocho bloques con imagen y texto.
+- Los ocho bloques mixtos usan `src/components/ImageTextCard.astro`, con la imagen a la derecha en desktop y apilado responsive en mobile.
+- Se integraron los 12 recursos de `src/assets/index-pages-mejor_filamento/`; todos se renderizan mediante `<Picture>` con variantes optimizadas `avif` y `webp`.
+- Se actualizaron el frontmatter y el manifiesto de media a `available`, con dimensiones locales verificadas y usos documentados.
+- Se retiraron del contenido Markdown los nueve avisos de media pendiente que ya no representan el estado de esta página.
+- `src/pages/pages/[slug].astro` selecciona el componente específico solo para esta ruta; las demás páginas mantienen su renderizado actual.
+
+### Archivos creados o modificados
+
+- `src/components/MejorFilamentoPage.astro`
+- `src/pages/pages/[slug].astro`
+- `src/content/pages/como-determinar-cual-es-el-mejor-filamento-pla.md`
+- `Docs/MANIFIESTO_MEDIA.md`
+- `Docs/INVENTARIO_RUTAS_SEO.md`
+- `Docs/RESULTADOS_ETAPA_7.md`
+
+### Verificación independiente
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints en 48 archivos.
+- `pnpm build`: correcto; 41 páginas estáticas generadas y salida `dist/pages/como-determinar-cual-es-el-mejor-filamento-pla.html` presente.
+- Preview local de la ruta: respuesta `200`, 12 `<picture>`, 8 `ImageTextCard`, 0 placeholders pendientes y 0 errores de consola.
+- Preview a `390px`: `scrollWidth` igual al viewport, imagen sobre texto y marco de imagen de `357.4px` sin overflow.
+- Preview a `768px`: grilla responsive activa, columnas de `195.6px` y `447.2px`, sin overflow.
+- Preview a `1024px`: sin overflow horizontal y la imagen permanece en el lado derecho.
+- Preview a `1440px`: marco interno de `1210px`, imagen de `384.625px`, texto de `825.375px`, sin overflow horizontal.
+- Los recursos usados en la ruta se sirven desde `/_astro/`; no se cargan imágenes CDN ni se generan bloques `pending`.
+- `git diff --check`: correcto; solo muestra avisos normales de conversión LF/CRLF de Git.
+
+### Bloqueos y pendientes
+
+- La ausencia de Futura local provoca diferencias menores de salto de línea y altura frente a la referencia publicada; se conserva la familia configurada y el fallback aprobado, sin descargar fuentes remotas.
+- No se modificaron DNS, producción, Shopify, `Readme.md` ni `zip_theme_shopify_estable/`.
+
+## Actualización Etapa 7 - Tarea 7.3: separación visual del artículo Mejor Filamento PLA
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+**Fecha:** 2026-08-25
+
+### Cambio realizado
+
+- Se añadió margen vertical de `32px` a las imágenes independientes de `MejorFilamentoPage.astro`, reducido a `24px` en mobile.
+- Se añadió margen vertical de `16px` a las `ImageTextCard` de esta página, reducido a `12px` en mobile.
+- La regla de las cards vive en `ImageTextCard.astro` y está limitada por la clase `mejor-filamento-page__image-text`; no cambia el espaciado de sus otros usos.
+
+### Archivos creados o modificados
+
+- `src/components/MejorFilamentoPage.astro`
+- `src/components/ImageTextCard.astro`
+- `Docs/RESULTADOS_ETAPA_7.md`
+
+### Verificación
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints en 48 archivos.
+- `pnpm build`: correcto; 41 páginas estáticas generadas.
+- Preview compilado en `1440px`: margen computado de `16px` en cards y `32px` en imágenes sueltas; 12 imágenes, 8 cards, 0 pendientes y sin overflow horizontal.
+- Preview compilado en `390px`: margen computado de `12px` en cards y `24px` en imágenes sueltas; `scrollWidth` igual al viewport y sin overflow horizontal.
+- No se modificaron DNS, producción, Shopify ni `Readme.md`.
+
 ## Actualización Etapa 7 - Tarea 7.2: artículo Calibración Automática
 
 **Estado:** implementación completada; la etapa de despliegue sigue abierta.

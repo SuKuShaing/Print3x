@@ -4,6 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import NosotrosPage from '../../components/NosotrosPage.astro';
 import PremiosPage from '../../components/PremiosPage.astro';
+import MejorFilamentoPage from '../../components/MejorFilamentoPage.astro';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
@@ -29,7 +30,7 @@ const { data } = page;
   sourceUrl={data.sourceUrl}
   sourceRetrieved={data.sourceRetrieved}
 >
-  {data.slug === 'nosotros' ? <NosotrosPage /> : data.slug === 'premios' ? <PremiosPage title={data.title} /> : <article class="editorial-page page-width">
+  {data.slug === 'nosotros' ? <NosotrosPage /> : data.slug === 'premios' ? <PremiosPage title={data.title} /> : data.slug === 'como-determinar-cual-es-el-mejor-filamento-pla' ? <MejorFilamentoPage /> : <article class="editorial-page page-width">
     <header class="editorial-page__header">
       <p class="editorial-page__eyebrow">Print3x</p>
       <h1>{data.title}</h1>
