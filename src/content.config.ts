@@ -11,6 +11,14 @@ const pendingMedia = z.object({
   reason: z.string(),
 });
 
+const availableMedia = z.object({
+  status: z.literal('available'),
+  sourceReference: z.string(),
+  use: z.string(),
+  expectedDimensions: z.string(),
+  aspectRatio: z.string(),
+});
+
 const editorialSeo = z.object({
   title: z.string().optional(),
   description: z.string().optional(),
@@ -25,7 +33,7 @@ const editorialBase = {
   sourceRetrieved: z.string(),
   status: z.literal('published'),
   seo: editorialSeo,
-  media: z.array(pendingMedia),
+  media: z.array(z.union([pendingMedia, availableMedia])),
 };
 
 const collectionPages = defineCollection({

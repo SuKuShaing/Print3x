@@ -2,6 +2,9 @@
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import SiteLayout from '../../../layouts/SiteLayout.astro';
+import MeshmixerArticle from '../../../components/MeshmixerArticle.astro';
+import OpenScadArticle from '../../../components/OpenScadArticle.astro';
+import RepetierHostArticle from '../../../components/RepetierHostArticle.astro';
 
 export async function getStaticPaths() {
   const articles = await getCollection('articles');
@@ -18,6 +21,9 @@ interface Props {
 const { article } = Astro.props as Props;
 const { Content } = await render(article);
 const { data } = article;
+const isMeshmixer = data.slug === 'meshmixer';
+const isOpenScad = data.slug === 'openscad';
+const isRepetierHost = data.slug === 'configurar-repetier-host';
 ---
 
 <SiteLayout
@@ -27,14 +33,30 @@ const { data } = article;
   sourceUrl={data.sourceUrl}
   sourceRetrieved={data.sourceRetrieved}
 >
-  <article class="editorial-page editorial-article page-width">
-    <header class="editorial-page__header">
-      <p class="editorial-page__eyebrow"><a href={`/blogs/${data.blog}`}>{data.blog}</a></p>
-      <h1>{data.title}</h1>
-    </header>
-    <div class="editorial-page__body rte">
-      <Content />
-    </div>
-    <p class="editorial-article__back"><a href={`/blogs/${data.blog}`}>Regresar al blog</a></p>
+  <article class:list={[isMeshmixer ? 'meshmixer-article-page' : isOpenScad ? 'openscad-article-page' : isRepetierHost ? 'repetier-host-article-page' : 'editorial-page editorial-article page-width']}>
+    {isMeshmixer ? (
+      <MeshmixerArticle />
+    ) : isOpenScad ? (
+      <OpenScadArticle />
+    ) : isRepetierHost ? (
+      <RepetierHostArticle />
+    ) : (
+      <>
+        <header class="editorial-page__header">
+          <p class="editorial-page__eyebrow"><a href={`/blogs/${data.blog}`}>{data.blog}</a></p>
+          <h1>{data.title}</h1>
+        </header>
+        <div class="editorial-page__body rte">
+          <Content />
+        </div>
+        <p class="editorial-article__back"><a href={`/blogs/${data.blog}`}>Regresar al blog</a></p>
+      </>
+    )}
   </article>
 </SiteLayout>
+
+<style>
+  .repetier-host-article-page {
+    padding: 0;
+  }
+</style>

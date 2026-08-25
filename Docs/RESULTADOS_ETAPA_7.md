@@ -69,6 +69,24 @@
 - La Tarea 7.2 formal de inventario DNS y rollback sigue abierta/preparada.
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
 
+## Corrección Etapa 7 - Tarea 7.1: contraste de botones Repetier Host
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+- `.rte a` estaba sobrescribiendo el color del texto de `.button`, dejando texto magenta sobre fondo magenta.
+- `src/components/RepetierHostArticle.astro` ahora fuerza el color claro del botón y elimina el subrayado heredado.
+- Verificación de preview: texto visible, fondo `rgb(206, 24, 112)` y contraste correcto en los cinco botones.
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+## Corrección Etapa 7 - Tarea 7.1: archivos no disponibles
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+- Se deshabilitaron `Archivos de configuración` y los tres botones de servidores de Print3x.
+- Cada control usa `title="Archivo no disponible"`, por lo que el navegador muestra el aviso al pasar el mouse sobre el botón.
+- El enlace `Servidores de Repetier` permanece activo.
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
 ## Actualización Etapa 7 - Tarea 7.2: favicon institucional PNG
 
 **Estado:** completada; la etapa de despliegue sigue abierta.
@@ -89,7 +107,84 @@
 ### Bloqueos y pendientes
 
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+## Actualización Etapa 7 - Tarea 7.2: artículo Meshmixer
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- Se creó `src/components/MeshmixerArticle.astro` para reproducir la secuencia publicada de `/blogs/curso_impresion_3d/meshmixer`.
+- Se integraron los tres videos de `src/assets/index-blogs-meshmixer/urls-videos.txt` con `LiteYoutube.astro` y sus posters locales `Miniatura 1.jpg`, `Miniatura 2.jpg` y `Miniatura 3.jpg`.
+- Se integraron `img 1.webp` y `img 2.webp` como bloques de imagen y texto mediante `<Picture>`, conservando las proporciones observadas en la referencia.
+- `src/pages/blogs/[blog]/[slug].astro` selecciona el componente específico solo para `meshmixer`; los demás artículos mantienen su renderizado existente.
+- `src/content/articles/meshmixer.md` registra la descripción SEO observada y los cinco recursos locales como `available`.
+- `Docs/MANIFIESTO_MEDIA.md` registra los recursos, dimensiones, usos y videos de Meshmixer.
+
+### Archivos creados o modificados
+
+- `src/components/MeshmixerArticle.astro`
+- `src/pages/blogs/[blog]/[slug].astro`
+- `src/content/articles/meshmixer.md`
+- `Docs/MANIFIESTO_MEDIA.md`
+- `Docs/RESULTADOS_ETAPA_7.md`
+
+### Verificación
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 páginas estáticas generadas.
+- `dist/blogs/curso_impresion_3d/meshmixer.html` existe.
+- Preview desktop: tres videos de `1210 x 680.625px`, altura total `6841px`, sin overflow horizontal.
+- Preview mobile a `390px`: videos de `342.2 x 192.49px`, sin overflow horizontal y botones de descarga a ancho completo.
+- Antes de activar cualquier video: tres posters locales mediante `<picture>`, 0 iframes y 0 bloques `pending`.
+- Después de activar el primer video: iframe `https://www.youtube-nocookie.com/embed/bV8uAMO8r9o?rel=0&autoplay=1&playsinline=1` creado correctamente.
+- Las dos imágenes técnicas cargan desde `/_astro/` como variantes optimizadas; no existen `<img>` directos en el componente.
+- Consola de preview: 0 errores y 0 warnings en la carga inicial.
+- `git diff --check`: correcto; solo muestra avisos normales de conversión LF/CRLF de Git.
+
+### Bloqueos y pendientes
+
+- Las descargas y enlaces a Thingiverse, Google Drive, Autodesk y Wayback permanecen como enlaces externos revisados; no se cargan automáticamente.
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
 - El endpoint heredado `src/pages/favicon.ico.ts` permanece sin cambios; el favicon global utiliza exclusivamente el PNG configurado en el layout.
+
+## Actualización Etapa 7 - Tarea 7.1: artículo OpenSCAD
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- Se creó `src/components/OpenScadArticle.astro` para reproducir las dos secciones publicadas: video y comparativa.
+- Se integró `src/assets/index-blogs-openscad/openscad.jpg` como poster local mediante `<Picture>` dentro de `LiteYoutube.astro`.
+- Se usó el video `TscVG74uTUA`, correspondiente a `src/assets/index-blogs-openscad/url-video.txt`; el iframe se crea solo al activar el video.
+- La ruta `src/pages/blogs/[blog]/[slug].astro` usa el componente específico solo para `openscad`; los demás artículos mantienen su renderizado existente.
+- `src/content/articles/openscad.md` registra la portada como media `available`, sus dimensiones `1280 x 720px`, proporción `16:9` y la descripción SEO observada.
+- `Docs/MANIFIESTO_MEDIA.md` registra la portada local de OpenSCAD y el archivo de origen de la URL.
+
+### Archivos creados o modificados
+
+- `src/components/OpenScadArticle.astro`
+- `src/pages/blogs/[blog]/[slug].astro`
+- `src/content/articles/openscad.md`
+- `Docs/MANIFIESTO_MEDIA.md`
+- `Docs/RESULTADOS_ETAPA_7.md`
+
+### Verificación
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 páginas estáticas generadas y variantes optimizadas de la portada local.
+- Preview local móvil a `390px`: video `342.2 x 192.49px`, comparativa centrada, sin overflow horizontal y sin errores de consola; las medidas coinciden con la referencia publicada.
+- Preview local desktop a `1440px`: video `1210 x 680.625px`, composición centrada, sin overflow horizontal y sin errores de consola.
+- Antes de activar el video: poster servido mediante `<picture>` bajo `/_astro/` y 0 iframes.
+- Después de activar el video: iframe `https://www.youtube-nocookie.com/embed/TscVG74uTUA?rel=0&autoplay=1&playsinline=1` creado correctamente.
+- La salida contiene `dist/blogs/curso_impresion_3d/openscad.html`.
+- `git diff --check`: correcto; solo muestra avisos normales de conversión LF/CRLF de Git.
+- Corrección posterior: se fija el color del texto del botón porque la regla global `.rte a` lo sobrescribía con el mismo magenta del fondo.
+
+### Bloqueos y pendientes
+
+- La tabla de comparación continúa como enlace externo revisado a Google Drive; no se incrusta automáticamente.
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
 
 ## Actualizacion Etapa 7 - Tarea 7.2: ImageTextCard en las caracteristicas de PLA
 
@@ -529,6 +624,43 @@
 - Preview local de `/pages/premios` en `390px`, `768px`, `1024px` y `1440px`: sin overflow horizontal.
 - Preview desktop: imagen y texto mantienen el mismo alto, la inversión de la segunda card funciona y la imagen conserva `object-fit: cover`.
 - Preview mobile: imagen sobre texto, espaciado y radios conservados; screenshot revisado en `390px`.
+
+## Actualización Etapa 7 - Tarea 7.1: artículo Configurar Repetier Host
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+
+### Cambio realizado
+
+- Se creó `src/components/RepetierHostArticle.astro` para reproducir la secuencia publicada de introducción, video, archivos de configuración y descargas.
+- Se integró `configurar repetier host.jpg` como portada local del video `ENIRcInoUVI`; `LiteYoutube.astro` la renderiza mediante `<Picture>` y solo crea el iframe al activar el video.
+- La ruta `src/pages/blogs/[blog]/[slug].astro` usa el componente específico solo para `configurar-repetier-host`; los demás artículos conservan el renderizado Markdown existente.
+- El contrato de contenido acepta media `available` y el frontmatter del artículo registra la portada local con dimensiones `1280 x 720px` y proporción `16:9`.
+- `Docs/MANIFIESTO_MEDIA.md` registra el nuevo recurso y su bloqueo/referencia histórica Shopify.
+
+### Archivos creados o modificados
+
+- `src/components/RepetierHostArticle.astro`
+- `src/pages/blogs/[blog]/[slug].astro`
+- `src/content.config.ts`
+- `src/content/articles/configurar-repetier-host.md`
+- `Docs/MANIFIESTO_MEDIA.md`
+- `Docs/RESULTADOS_ETAPA_7.md`
+
+### Verificación
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 41 páginas estáticas generadas y variantes optimizadas para la portada local.
+- Preview local de `/blogs/curso_impresion_3d/configurar-repetier-host`: ruta `200`, título y tres encabezados en el orden publicado.
+- Preview desktop: video `1210 x 681px`, equivalente al marco 16:9 de la referencia; sin overflow horizontal.
+- Preview mobile: video `454 x 255px`, sin overflow horizontal y sin errores de consola.
+- Antes de activar el video: 1 `<picture>`, poster local servido bajo `/_astro/` y 0 iframes.
+- Después de activar el video: iframe `https://www.youtube-nocookie.com/embed/ENIRcInoUVI?rel=0&autoplay=1&playsinline=1` creado correctamente.
+- `git diff --check`: correcto; solo muestra los avisos normales de conversión LF/CRLF de Git.
+
+### Bloqueos y pendientes
+
+- Los enlaces de Google Drive y Repetier siguen siendo enlaces externos revisados; no se descargan ni se incrustan automáticamente.
+- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
 
 ### Bloqueos y pendientes
 

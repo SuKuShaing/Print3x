@@ -1,0 +1,161 @@
+---
+import LiteYoutube from './LiteYoutube.astro';
+import poster from '../assets/index-blogs-curso_impresion_3d-configurar-repetier-host/configurar repetier host.jpg';
+---
+
+<div class="repetier-host-article">
+  <section class="repetier-host-article__intro gradient color-background-1">
+    <div class="page-width">
+      <div class="repetier-host-article__blocks rte">
+        <h1>Configurar Repetier Host</h1>
+        <p>Para configurar Repetier Host tienes que seguir los pasos del video y más abajo se encuentran los archivos de configuración que se mencionan en el video</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="repetier-host-article__video-section">
+    <div class="page-width">
+      <div class="repetier-host-article__video global-media-settings">
+        <LiteYoutube
+          videoId="ENIRcInoUVI"
+          title="Video sobre como configurar Repetier Host"
+          poster={poster}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section id="ArchivosDeConfiguracion" class="repetier-host-article__content gradient color-background-1">
+    <div class="page-width">
+      <div class="repetier-host-article__blocks rte">
+        <h2>Archivos para ejecutar el paso a paso de como configurar el Repetier Host</h2>
+        <p>Ademas de los archivos tambien hay un pdf paso a paso de como hacer el proceso</p>
+        <p>
+          <span class="repetier-host-article__disabled-button" title="Archivo no disponible">
+            <button class="button" type="button" disabled>Archivos de configuración</button>
+          </span>
+        </p>
+
+        <h2>Descargar Repetier Host</h2>
+        <p>Tenemos respaldo de los programas que usamos, puesto que tienen la mala costumbre de no estar disponibles en el futuro.</p>
+        <p><strong>Tenemos disponible:</strong></p>
+        <p>Repetier-Host Windows 2.3.1</p>
+        <p>Repetier-Host Linux AppImage 2.3.1</p>
+        <p>Repetier-Host Mac 1.2.1</p>
+        <p><a class="button" href="https://www.repetier.com/download-now/">Servidores de Repetier</a></p>
+        <p>
+          <span class="repetier-host-article__disabled-button" title="Archivo no disponible">
+            <button class="button" type="button" disabled>Servidores de Print3x - Repetier Windows</button>
+          </span>
+        </p>
+        <p>
+          <span class="repetier-host-article__disabled-button" title="Archivo no disponible">
+            <button class="button" type="button" disabled>Servidores de Print3x - Repetier Linux</button>
+          </span>
+        </p>
+        <p>
+          <span class="repetier-host-article__disabled-button" title="Archivo no disponible">
+            <button class="button" type="button" disabled>Servidores de Print3x - Repetier Mac</button>
+          </span>
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .repetier-host-article__intro,
+  .repetier-host-article__content {
+    width: 100%;
+  }
+
+  .repetier-host-article__intro {
+    padding: 4rem 0 5.2rem;
+  }
+
+  .repetier-host-article__content {
+    padding: 4rem 0 7rem;
+  }
+
+  .repetier-host-article__blocks {
+    max-width: 82rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .repetier-host-article__blocks h1,
+  .repetier-host-article__blocks h2 {
+    margin-top: 0;
+  }
+
+  .repetier-host-article__blocks h2 {
+    margin-bottom: 2rem;
+  }
+
+  .repetier-host-article__blocks h2:not(:first-child) {
+    margin-top: 5.2rem;
+  }
+
+  .repetier-host-article__blocks p {
+    margin-bottom: 2rem;
+  }
+
+  .repetier-host-article__blocks p:last-child {
+    margin-bottom: 0;
+  }
+
+  .repetier-host-article__blocks .button {
+    margin-top: 0.6rem;
+    color: rgb(var(--color-button-text));
+    text-decoration: none;
+  }
+
+  .repetier-host-article__disabled-button {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .repetier-host-article__disabled-button .button {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  .repetier-host-article__video-section {
+    padding: 3.6rem 0;
+  }
+
+  .repetier-host-article__video {
+    max-width: 120rem;
+    margin: 0 auto;
+  }
+
+  :global(.repetier-host-article__video lite-youtube) {
+    display: block;
+    width: 100%;
+    max-width: none;
+    border-radius: calc(var(--media-radius) - var(--media-border-width));
+  }
+
+  @media screen and (max-width: 749px) {
+    .repetier-host-article__intro {
+      padding: 3rem 0 3.9rem;
+    }
+
+    .repetier-host-article__content {
+      padding: 3rem 0 5rem;
+    }
+
+    .repetier-host-article__video-section {
+      padding: 2.4rem 0;
+    }
+
+    .repetier-host-article__blocks h2:not(:first-child) {
+      margin-top: 4rem;
+    }
+
+    .repetier-host-article__blocks .button {
+      max-width: 100%;
+      text-align: center;
+    }
+  }
+</style>

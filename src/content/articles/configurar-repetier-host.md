@@ -7,12 +7,11 @@ sourceRetrieved: '2026-07-30'
 status: published
 tags: [impresion-3d, repetier-host]
 media:
-  - status: pending
-    sourceReference: Minitura_configurar_Repetier.jpg
+  - status: available
+    sourceReference: 'configurar repetier host.jpg'
     use: 'Portada del video de configuración'
-    expectedDimensions: '3840px de ancho en la fuente; alto no disponible'
-    aspectRatio: 'pendiente: alto no disponible en la fuente'
-    reason: 'No existe copia local aprobada; el video se conserva como enlace revisado.'
+    expectedDimensions: '1280 x 720px'
+    aspectRatio: '16:9'
 ---
 
 Para configurar Repetier Host tienes que seguir los pasos del video y más abajo se encuentran los archivos de configuración que se mencionan en el video

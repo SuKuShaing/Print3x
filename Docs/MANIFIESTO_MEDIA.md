@@ -3,13 +3,13 @@
 **Fuente Shopify:** `zip_theme_shopify_estable/`  
 **Fuente local:** `src/assets/`
 **Fecha de inspeccion:** 2026-08-17
-**Estado:** 119 recursos locales entregados e integrados desde `src/assets` mediante `<Picture>`: 30 recursos del header, index y colecciones, 44 imagenes de galerias de productos PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal, 10 recursos nuevos de Padi, 6 imagenes historicas de Premios e historia y 4 posters locales de sus videos. Ademas, `public/Favicon.png` esta confirmado como favicon local de uso directo. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
+**Estado:** 126 recursos locales entregados e integrados desde `src/assets` mediante `<Picture>`: 30 recursos del header, index y colecciones, 44 imagenes de galerias de productos PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal, 10 recursos nuevos de Padi, 6 imagenes historicas de Premios e historia, 4 posters locales de sus videos, 1 portada local para Repetier Host, 1 portada local para OpenSCAD y 5 recursos locales de Meshmixer. Ademas, `public/Favicon.png` esta confirmado como favicon local de uso directo. El resto mantiene faltantes y bloqueos de media para etapas posteriores.
 
 ## Resumen de conteos
 
 | Categoria | Conteo | Alcance |
 |---|---:|---|
-| Imagenes locales entregadas e integradas | 119 | 30 recursos del header/index/colecciones, 44 imagenes de galerias PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal, 10 recursos nuevos de Padi, 6 imagenes historicas de Premios e historia y 4 posters locales de sus videos. |
+| Imagenes locales entregadas e integradas | 126 | 30 recursos del header/index/colecciones, 44 imagenes de galerias PLA, 16 imagenes editoriales de Axis One, 9 imagenes de su galeria principal, 10 recursos nuevos de Padi, 6 imagenes historicas de Premios e historia, 4 posters locales de sus videos, 1 portada local para Repetier Host, 1 portada local para OpenSCAD y 5 recursos locales de Meshmixer. |
 | Recursos `shopify://shop_images` unicos globales | 85 | Union de templates y `config/settings_data.json`. |
 | Ocurrencias globales de referencias Shopify | 93 | Incluye repeticiones entre templates y configuracion. |
 | Recursos distintos identificados en templates | 81 | Conteo de nombres unicos dentro de templates; el registro de ejecucion lo denomina referencias de templates. |
@@ -50,7 +50,7 @@ Las dimensiones y el peso se obtuvieron leyendo los archivos locales entregados.
 
 Los cuatro archivos entregados en `src/assets/index-pages-nosotros/` se verifican como media local disponible. `foto equipo.jpg` se usa como fotografía principal de `/pages/nosotros`; los iconos de carrete, línea de meta y pulgar arriba se usan en el carrusel de compromisos. El cuarto icono no se fuerza en la página porque la referencia publicada muestra tres compromisos. Todos se renderizan mediante `<Picture>`.
 
-**Regla:** los 109 recursos integrados tienen estado local `available`; todos se importan desde `src/assets/` y Astro genera sus rutas optimizadas bajo `/_astro/`. Los cuatro heroes tienen uso `index`; `Hero_3.jpg` se usa además como hero visible de `/collections/pla` por confirmación del usuario. Las dos imagenes de categorias tienen uso `index` y `collection` como tarjetas; los cuatro iconos tienen uso `index` en compromisos; los 18 recursos editoriales de PLA tienen uso `collection`; las 16 imagenes editoriales de Axis One tienen uso en sus bloques editoriales; las 9 imagenes de `fotos producto/` tienen uso en su galeria principal. `Foto5.jpg` se usa además como hero visible de `/collections/impresoras-3d` por confirmación del usuario. Ninguno se declara equivalente a `2052425b5f.jpg`, `Cinco_hermosos...`, `Banner_2...`, `Banner_3...` u otra referencia Shopify sin evidencia de origen. Las otras 85 referencias Shopify siguen pendientes; esta confirmacion no las convierte en disponibles.
+**Regla:** los 126 recursos integrados tienen estado local `available`; todos se importan desde `src/assets/` y Astro genera sus rutas optimizadas bajo `/_astro/`. Los cuatro heroes tienen uso `index`; `Hero_3.jpg` se usa además como hero visible de `/collections/pla` por confirmación del usuario. Las dos imagenes de categorias tienen uso `index` y `collection` como tarjetas; los cuatro iconos tienen uso `index` en compromisos; los 18 recursos editoriales de PLA tienen uso `collection`; las 16 imagenes editoriales de Axis One tienen uso en sus bloques editoriales; las 9 imagenes de `fotos producto/` tienen uso en su galeria principal. `Foto5.jpg` se usa además como hero visible de `/collections/impresoras-3d` por confirmación del usuario. Ninguno se declara equivalente a `2052425b5f.jpg`, `Cinco_hermosos...`, `Banner_2...`, `Banner_3...` u otra referencia Shopify sin evidencia de origen. Las otras 85 referencias Shopify siguen pendientes; esta confirmacion no las convierte en disponibles.
 
 ### Galerias locales de productos PLA
 
@@ -96,6 +96,28 @@ Los seis archivos de `src/assets/index-pages-premios/` corresponden a los bloque
 | `2018_Ganadores_en_Conrad_Waterloo_Crea_en_3D_Print3x.jpg` | Bloque 2018, Waterloo University | `available`; alt observado en la referencia |
 
 Los cuatro posters locales se integran mediante `<Picture>` y permanecen visibles hasta activar el video; `LiteYoutube.astro` no solicita el poster remoto de YouTube cuando existe un asset local y mantiene la carga del iframe diferida hasta la interacción. Las referencias Shopify restantes y sus nombres históricos siguen documentadas en la matriz de pendientes.
+
+### Artículo Configurar Repetier Host
+
+`src/assets/index-blogs-curso_impresion_3d-configurar-repetier-host/configurar repetier host.jpg` mide `1280 x 720px` y se usa como portada local del video `ENIRcInoUVI` en `/blogs/curso_impresion_3d/configurar-repetier-host`. Se renderiza mediante `<Picture>` dentro de `LiteYoutube.astro`; el iframe de YouTube solo se solicita al activar el control de reproducción.
+
+### Artículo OpenSCAD
+
+`src/assets/index-blogs-openscad/openscad.jpg` mide `1280 x 720px` y se usa como portada local del video `TscVG74uTUA` en `/blogs/curso_impresion_3d/openscad`. Se renderiza mediante `<Picture>` dentro de `LiteYoutube.astro`; el iframe de YouTube solo se solicita al activar el control de reproducción. La URL se conserva en `src/assets/index-blogs-openscad/url-video.txt`.
+
+### Artículo Meshmixer
+
+Los cinco recursos de `src/assets/index-blogs-meshmixer/` se integran en `/blogs/curso_impresion_3d/meshmixer` mediante `<Picture>`. Las tres miniaturas se usan como posters locales de los videos definidos en `urls-videos.txt`; `LiteYoutube.astro` conserva la carga diferida del iframe y solicita YouTube solo cuando se activa cada video.
+
+| Archivo local | Uso | Dimensiones | Proporción | Estado |
+|---|---|---:|---:|---|
+| `Miniatura 1.jpg` | Video de instalación de Meshmixer (`bV8uAMO8r9o`) | `3840 x 2160` | `16:9` | `available` |
+| `Miniatura 2.jpg` | Guía rápida de soportes (`SMMqAksHSOc`) | `3840 x 2159` | `aprox. 16:9` | `available` |
+| `Miniatura 3.jpg` | Soportes en árbol (`FUP4YUVHpK4`) | `3840 x 2160` | `16:9` | `available` |
+| `img 1.webp` | Tip Diameter, Post Diameter y Base Diameter | `1500 x 1112` | `74.15%` | `available` |
+| `img 2.webp` | Tip Height y Base Height | `1500 x 2000` | `3:4` | `available` |
+
+Las descargas de Meshmixer, los archivos de piezas y los enlaces a Thingiverse se mantienen como enlaces externos revisados; no se cargan automáticamente ni se convierten en dependencias de la aplicación.
 
 ### Bloques y galeria locales de Padi
 
@@ -319,7 +341,7 @@ Las dimensiones conocidas de los archivos locales pueden usarse para sus propios
 
 ## Optimizacion con Astro
 
-Los 109 recursos disponibles se importan desde `src/assets/` como metadata de imagen de Astro. `MediaPlaceholder.astro`, las galerias de producto y el logo del header usan `<Picture>` con fuentes `avif` y `webp`, fallback del formato original, `sizes` y variantes `srcset` para `390`, `768`, `1024` y `1440` px. Las variantes no amplian archivos que sean menores que cada breakpoint; los placeholders de media pendiente no se transforman ni se sustituyen.
+Los 126 recursos disponibles se importan desde `src/assets/` como metadata de imagen de Astro. `MediaPlaceholder.astro`, las galerias de producto, los artículos Meshmixer/OpenSCAD/Repetier Host y el logo del header usan `<Picture>` con fuentes `avif` y `webp`, fallback del formato original, `sizes` y variantes `srcset` para `390`, `768`, `1024` y `1440` px. Las variantes no amplian archivos que sean menores que cada breakpoint; los placeholders de media pendiente no se transforman ni se sustituyen.
 
 ## Prioridad de obtencion e integracion
 

@@ -1,0 +1,113 @@
+---
+import LiteYoutube from './LiteYoutube.astro';
+import poster from '../assets/index-blogs-openscad/openscad.jpg';
+---
+
+<div class="openscad-article">
+  <section class="openscad-article__video-section color-background-1 gradient">
+    <div class="openscad-article__video-wrapper page-width">
+      <div class="title-wrapper title-wrapper--no-top-margin">
+        <h2 class="title inline-richtext h1">Video</h2>
+      </div>
+      <LiteYoutube
+        videoId="TscVG74uTUA"
+        title="Miniatura del video de Diseña piezas en 3D con Chat GPT 4 y Bing en OpenSCAD"
+        poster={poster}
+        class="openscad-article__video global-media-settings"
+      />
+    </div>
+  </section>
+
+  <section class="openscad-article__comparison color-background-1 gradient">
+    <div class="openscad-article__comparison-wrapper page-width">
+      <div class="openscad-article__comparison-blocks rte">
+        <h2 class="rte inline-richtext h1">Ver comparativa</h2>
+        <div class="openscad-article__comparison-text rte">
+          <p>Ver Tabla de comparación en Sheets de Google Drive</p>
+        </div>
+        <div class="openscad-article__comparison-buttons">
+          <a class="button button--primary" href="https://docs.google.com/spreadsheets/d/18AO-XmEr5aS12AY6Z2IVqcB_nOfmgYwHUpulRcNmwoc/edit?usp=sharing">
+            Ver Tabla de comparación en Drive
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .openscad-article__video-section {
+    padding: 36px 0;
+  }
+
+  .openscad-article__video-wrapper {
+    max-width: var(--page-width);
+  }
+
+  .openscad-article__video-wrapper .title-wrapper {
+    margin: 0 auto 33px;
+  }
+
+  .openscad-article__video-wrapper .title {
+    margin: 0;
+  }
+
+  .openscad-article__video-wrapper :global(lite-youtube) {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: 0;
+    padding-bottom: 56.25%;
+    border-radius: var(--media-radius);
+  }
+
+  .openscad-article__comparison {
+    padding: 40px 0 52px;
+  }
+
+  .openscad-article__comparison-wrapper {
+    max-width: var(--page-width);
+  }
+
+  .openscad-article__comparison-blocks {
+    max-width: 78rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .openscad-article__comparison-blocks h2 {
+    margin: 0;
+  }
+
+  .openscad-article__comparison-text,
+  .openscad-article__comparison-buttons {
+    margin-top: 2rem;
+  }
+
+  .openscad-article__comparison-text p {
+    margin: 0;
+  }
+
+  .openscad-article__comparison-buttons .button {
+    margin: 0;
+    color: rgb(var(--color-button-text));
+  }
+
+  @media screen and (max-width: 749px) {
+    .openscad-article__video-section {
+      padding: 27px 0;
+    }
+
+    .openscad-article__comparison {
+      padding: 30px 0 39px;
+    }
+
+    .openscad-article__comparison-blocks {
+      width: calc(100% - 3.64rem);
+    }
+
+    .openscad-article__comparison-buttons .button {
+      width: 100%;
+    }
+  }
+</style>
