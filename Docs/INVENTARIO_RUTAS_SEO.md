@@ -24,7 +24,7 @@ El sitemap raiz actual enlaza:
 - `sitemap_collections_1.xml?from=211931136157&to=211931693213`.
 - `sitemap_blogs_1.xml`.
 
-El GET repetido devuelve 31 URLs de contenido mas `/agents.md`, es decir, 32 `<loc>` verificables. El registro de ejecucion existente de Tarea 0.2 declara el mismo conteo. `/collections` y `/collections/all` responden 200 y fueron observadas durante el rastreo, pero no aparecen como `<loc>` en los hijos actuales; se conservan como rutas adicionales fuera de las 32 filas del sitemap.
+El GET repetido de la fuente historica devuelve 31 URLs de contenido mas `/agents.md`, es decir, 32 `<loc>` verificables. El registro de ejecucion existente de Tarea 0.2 declara el mismo conteo. Por decision posterior, la salida Astro objetivo excluye tres articulos y queda en 28 URLs de contenido. `/collections` y `/collections/all` responden 200 y fueron observadas durante el rastreo, pero no aparecen como `<loc>` en los hijos actuales; se conservan como rutas adicionales fuera de las 32 filas del sitemap.
 
 ## Matriz principal: 32 filas del baseline persistente
 
@@ -71,22 +71,22 @@ Los guiones bajos son parte del slug y no se deben normalizar. El estado 200 de 
 | `/pages/tarifas-de-envio` | sitemap actual | 200 | misma URL, pendiente de nueva lectura de head | `conservar-controlada` | Es destino de popups de producto; el contenido legal/comercial debe revisarse. |
 | `/pages/decuento-por-post-en-rrss` | sitemap actual | 200 | misma URL, pendiente de nueva lectura de head | `conservar-controlada` | Se conserva el typo del slug; revisar vigencia del contenido. |
 
-### Blogs y articulos: 10 URLs del sitemap
+### Blogs y articulos: 10 URLs del sitemap historico
 
 | URL | Fuente | Estado observado | Canonical | Decision | Template |
 |---|---|---:|---|---|---|
 | `/blogs/noticias` | sitemap actual | 200 | misma URL, pendiente de nueva lectura de head | `conservar` | Indice de blog. |
 | `/blogs/articulos` | sitemap actual | 200 | misma URL, pendiente de nueva lectura de head | `conservar` | Indice de blog. |
 | `/blogs/curso_impresion_3d` | sitemap actual | 200 | misma URL, pendiente de nueva lectura de head | `conservar` | Indice del curso; slug con underscore. |
-| `/blogs/noticias/encuesta-sistema-operativo-y-software` | sitemap actual | 200 | misma URL, pendiente de nueva lectura de head | `conservar` | Articulo editorial. |
-| `/blogs/articulos/los-mejores-disenos-stl-para-imprimir-esta-navidad` | sitemap actual | 200 | misma URL, pendiente de nueva lectura de head | `conservar` | Articulo editorial con media. |
-| `/blogs/articulos/regalos-originales-para-el-14-de-febrero-dia-del-amor-y-la-amistad` | sitemap actual | 200 | misma URL, pendiente de nueva lectura de head | `conservar` | Articulo editorial. |
+| `/blogs/noticias/encuesta-sistema-operativo-y-software` | sitemap historico | 200 | No se genera en Astro | `retirar-404-controlado` | Retirado por decision de alcance; se elimina el archivo de contenido y no se enlaza desde la navegacion. |
+| `/blogs/articulos/los-mejores-disenos-stl-para-imprimir-esta-navidad` | sitemap historico | 200 | No se genera en Astro | `retirar-404-controlado` | Retirado por decision de alcance; se elimina el archivo de contenido y no se enlaza desde la navegacion. |
+| `/blogs/articulos/regalos-originales-para-el-14-de-febrero-dia-del-amor-y-la-amistad` | sitemap historico | 200 | No se genera en Astro | `retirar-404-controlado` | Retirado por decision de alcance; se elimina el archivo de contenido y no se enlaza desde la navegacion. |
 | `/blogs/curso_impresion_3d/impresion_3d_calibracion_automatica` | sitemap actual | 200 | misma URL, pendiente de nueva lectura de head | `conservar` | Video y media externa; slug con underscore. |
 | `/blogs/curso_impresion_3d/meshmixer` | sitemap actual | 200 | misma URL, pendiente de nueva lectura de head | `conservar` | Video, Drive/Autodesk y media externa. |
 | `/blogs/curso_impresion_3d/openscad` | sitemap actual | 200 | misma URL, pendiente de nueva lectura de head | `conservar` | Video y hoja de Google Drive. |
 | `/blogs/curso_impresion_3d/configurar-repetier-host` | sitemap actual | 200 | misma URL, pendiente de nueva lectura de head | `conservar-controlada` | Video, archivos externos y PDF; revisar enlaces. |
 
-La tabla de blogs contiene 3 indices y 7 articulos. Los articulos tienen slugs que deben conservarse literalmente.
+La tabla de blogs contiene 3 indices y 7 articulos historicos; tras la decision de alcance, Astro publica 3 indices y 4 articulos. Los slugs de los articulos conservados se mantienen literalmente.
 
 ### Discovery: una URL del sitemap agentic
 
@@ -147,7 +147,7 @@ La siguiente lista es un control de no-publicacion automatica:
 
 | Superficie | Regla documental |
 |---|---|
-| 404 y rutas retiradas | Excluir `/pages/contactanos`, `/products/filamento_tpu` y `/collections/accesorios-3d` hasta que exista una decision distinta. |
+| 404 y rutas retiradas | Excluir `/pages/contactanos`, `/products/filamento_tpu`, `/collections/accesorios-3d` y los tres articulos retirados hasta que exista una decision distinta. |
 | Auxiliares | Excluir `/cart` y `/search` del sitemap de contenido; la ruta de autenticacion no se genera. |
 | Discovery | `/agents.md` requiere una decision separada; no mezclarlo con el sitemap editorial por defecto. |
 | Politicas | No excluir por defecto si siguen siendo publicas, pero exigir revision legal y metadata antes de incorporarlas al sitemap Astro. |

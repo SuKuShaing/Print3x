@@ -109,31 +109,6 @@
 - La ausencia de Futura local provoca diferencias menores de salto de línea y altura frente a la referencia publicada; se conserva la familia configurada y el fallback aprobado, sin descargar fuentes remotas.
 - No se modificaron DNS, producción, Shopify, `Readme.md` ni `zip_theme_shopify_estable/`.
 
-## Actualización Etapa 7 - Tarea 7.3: separación visual del artículo Mejor Filamento PLA
-
-**Estado:** completada; la etapa de despliegue sigue abierta.
-**Fecha:** 2026-08-25
-
-### Cambio realizado
-
-- Se añadió margen vertical de `32px` a las imágenes independientes de `MejorFilamentoPage.astro`, reducido a `24px` en mobile.
-- Se añadió margen vertical de `16px` a las `ImageTextCard` de esta página, reducido a `12px` en mobile.
-- La regla de las cards vive en `ImageTextCard.astro` y está limitada por la clase `mejor-filamento-page__image-text`; no cambia el espaciado de sus otros usos.
-
-### Archivos creados o modificados
-
-- `src/components/MejorFilamentoPage.astro`
-- `src/components/ImageTextCard.astro`
-- `Docs/RESULTADOS_ETAPA_7.md`
-
-### Verificación
-
-- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints en 48 archivos.
-- `pnpm build`: correcto; 41 páginas estáticas generadas.
-- Preview compilado en `1440px`: margen computado de `16px` en cards y `32px` en imágenes sueltas; 12 imágenes, 8 cards, 0 pendientes y sin overflow horizontal.
-- Preview compilado en `390px`: margen computado de `12px` en cards y `24px` en imágenes sueltas; `scrollWidth` igual al viewport y sin overflow horizontal.
-- No se modificaron DNS, producción, Shopify ni `Readme.md`.
-
 ## Actualización Etapa 7 - Tarea 7.2: artículo Calibración Automática
 
 **Estado:** implementación completada; la etapa de despliegue sigue abierta.
@@ -170,6 +145,32 @@
 ### Bloqueos y pendientes
 
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+
+## Actualización Etapa 7 - Tarea 7.2: retiro de artículos y del grupo Blog
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+**Fecha:** 2026-08-25
+
+### Cambio realizado
+
+- Se eliminaron `src/content/articles/encuesta-sistema-operativo-y-software.md`, `src/content/articles/los-mejores-disenos-stl-para-imprimir-esta-navidad.md` y `src/content/articles/regalos-originales-para-el-14-de-febrero-dia-del-amor-y-la-amistad.md`.
+- `src/content/blogs/noticias.md` y `src/content/blogs/articulos.md` quedaron con `articles: []`, evitando enlaces a contenido retirado en sus índices.
+- Se retiró el grupo `Blog` del menú estático de `src/components/Header.astro`; el cambio aplica a las variantes desktop y mobile porque ambas consumen `menuGroups`.
+- `Docs/INVENTARIO_RUTAS_SEO.md` y `AGENTS.md` reflejan las tres URLs como retiradas y el objetivo actual de 28 URLs de contenido en el sitemap.
+
+### Verificación independiente
+
+- No quedan referencias a los tres slugs ni al grupo `Blog` en `src`.
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 38 páginas estáticas generadas.
+- `dist/sitemap.xml`: 28 URLs de contenido; solo permanecen los cuatro artículos del curso y los tres índices de blog.
+- Preview local: los tres artículos retirados responden `404`; `/blogs/noticias` y `/blogs/articulos` responden `200` sin cards; `/` responde `200` sin `Blog` ni los títulos retirados.
+- `git diff --check`: correcto; solo muestra los avisos normales de conversión LF/CRLF de Git.
+
+### Bloqueos y pendientes
+
+- Los índices `/blogs/noticias` y `/blogs/articulos` se mantienen como rutas vacías; no están enlazados desde el menú y su retiro completo requeriría una decisión separada sobre esas URLs.
+- No se modificaron DNS, producción, Shopify, `Readme.md` ni `zip_theme_shopify_estable/`.
 
 ## Actualización Etapa 7 - Tarea 7.2: índice del curso de Impresión 3D
 

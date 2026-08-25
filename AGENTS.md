@@ -61,7 +61,7 @@
 
 ## Rutas y SEO
 
-- La matriz principal conserva 31 URLs de contenido para el sitemap: portada, 13 productos, 2 colecciones, 5 paginas, 3 blogs y 7 articulos. Los productos, colecciones y articulos conservan sus slugs originales.
+- La matriz principal conserva 28 URLs de contenido para el sitemap: portada, 13 productos, 2 colecciones, 5 paginas, 3 blogs y 4 articulos. Los productos, colecciones y articulos conservan sus slugs originales; tres articulos historicos fueron retirados por decision posterior.
 - `/collections` y `/collections/all` existen como rutas controladas fuera del sitemap de contenido. `/blogs/articulos/tagged/impresion-3d` es una ruta controlada con `noindex`.
 - `/search` y `/cart` son experiencias estaticas controladas, sin comercio ni login, y deben permanecer `noindex, nofollow`. La ruta Shopify `/customer_authentication/redirect` no se genera en Astro; cualquier futuro acceso de usuarios requiere una decision e implementacion separadas. Las cuatro policies tambien estan fuera del indice y requieren revision legal antes de tratarlas como vigentes.
 - `/pages/contactanos`, `/products/filamento_tpu` y `/collections/accesorios-3d` no deben publicarse automaticamente solo porque existan enlaces o templates; respeta las decisiones de `Docs/INVENTARIO_RUTAS_SEO.md`.

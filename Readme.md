@@ -12,6 +12,8 @@ Las imágenes estarán en internet en el github, puesto que son todas copias de 
 - [ ] eliminar las páginas de blog
 - [ ] instalar el astro sitemaps
 - [ ] colocarle el llm.txt
+- [ ] hacer un buen readme
+- [ ] desplegar
 
 - [x] Hacer la páginas de información
 - [x] Falta el favicon
