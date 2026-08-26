@@ -22,7 +22,7 @@
 - `src/layouts/SiteLayout.astro` contiene el documento comun, metadata, canonical, robots, favicon, skip link, `#MainContent`, header y footer.
 - `src/components/` contiene `Header.astro`, `Footer.astro` y `MediaPlaceholder.astro`.
 - `src/content/` contiene colecciones Astro para `products`, `collections`, `pages`, `blogs` y `articles`, validadas en `src/content.config.ts`.
-- `src/pages/` genera portada, productos, colecciones, paginas, blogs, articulos, policies, 404, busqueda, carrito, autenticacion, sitemap, robots y favicons.
+- `src/pages/` genera portada, productos, colecciones, paginas, blogs, articulos, policies, 404, busqueda, carrito, autenticacion, robots y favicons; `astro.config.mjs` activa `@astrojs/sitemap` solo en builds de produccion.
 - `src/data/` contiene contratos estaticos, policies y el inventario de los cinco assets locales del index. `src/scripts/print3x-ui.ts` contiene solo interacciones visuales opt-in mediante `data-p3x-*`.
 - `src/styles/` adapta el sistema visual de Refresh; `src/assets/` contiene los once archivos locales disponibles y `public/fonts/` no contiene Futura.
 

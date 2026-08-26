@@ -9,7 +9,7 @@
 | Campo | Valor |
 |---|---|
 | Framework preset | Astro / Static HTML |
-| Build command | `npm run build` |
+| Build command | `pnpm build` |
 | Build output directory | `dist` |
 | Node.js | `22.12.0` |
 | Base directory | raíz del repositorio |
@@ -21,15 +21,17 @@
 ## Comportamiento de indexación
 
 - Preview y staging: sin `PUBLIC_SITE_ENV=production`, el layout genera `noindex, nofollow` y `robots.txt` usa `Disallow: /`.
-- Producción: con `PUBLIC_SITE_ENV=production`, `robots.txt` permite las rutas públicas, bloquea auxiliares y policies, y referencia `https://www.print3x.cl/sitemap.xml`.
+- Producción: con `PUBLIC_SITE_ENV=production`, `robots.txt` permite el rastreo para que Google pueda leer los `noindex` de rutas auxiliares y referencia `https://www.print3x.cl/sitemap-index.xml`.
+- Producción: `@astrojs/sitemap` genera automáticamente `dist/sitemap-index.xml` y `dist/sitemap-0.xml`, con las 28 rutas aprobadas y sin `lastmod` inventado.
+- Preview/branch: no se generan archivos de sitemap y `robots.txt` no anuncia el sitemap de producción.
 - El dominio canónico, Open Graph, Twitter y sitemap usan `https://www.print3x.cl`; comprobar que no se publique una preview con esa variable.
 
 ## Verificación previa
 
-1. Ejecutar `npm ci`.
-2. Ejecutar `npm run check`.
-3. Ejecutar `npm run build` sin `PUBLIC_SITE_ENV` y revisar que preview sea `noindex`.
-4. Ejecutar el build de producción con `PUBLIC_SITE_ENV=production` y revisar sitemap, robots, rutas, metadata, favicons y 404.
+1. Ejecutar `pnpm install --frozen-lockfile`.
+2. Ejecutar `pnpm check`.
+3. Ejecutar `pnpm build` sin `PUBLIC_SITE_ENV` y revisar que preview sea `noindex` y no genere sitemap.
+4. Ejecutar el build de producción con `PUBLIC_SITE_ENV=production` y revisar `sitemap-index.xml`, `sitemap-0.xml`, robots, rutas, metadata, favicons y 404.
 5. Publicar únicamente una preview de Pages.
 6. Probar rutas limpias, variantes `.html` y slash en el dominio de Pages.
 7. No cambiar DNS hasta completar la validación y aprobar rollback.

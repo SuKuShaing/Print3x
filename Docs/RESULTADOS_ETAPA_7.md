@@ -810,6 +810,41 @@
 - Los enlaces de Google Drive y Repetier siguen siendo enlaces externos revisados; no se descargan ni se incrustan automáticamente.
 - No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
 
+## Actualizacion Etapa 7 - Tarea 7.2: sitemap automatico con `@astrojs/sitemap`
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+**Fecha:** 2026-08-25
+
+### Investigacion y decision
+
+- Context7 consulto la documentacion oficial de Astro: `@astrojs/sitemap` se instala con `pnpm add`, requiere `site` y admite `filter`, `serialize`, `filenameBase` y namespaces.
+- Firecrawl y Tavily confirmaron que el plugin descubre todas las paginas estaticas por defecto, por lo que este proyecto necesita una allowlist exacta y no una regla por prefijo.
+- El subagente de Expo comprobo que no existe un MCP de Expo disponible en este entorno y que Expo/React Native no documenta una solucion para sitemaps de Astro. No se invento una API de Expo.
+- Se adopto el plugin solicitado porque automatiza el build, pero se conserva el control editorial de las 28 URLs aprobadas. La version `3.7.3` genera un indice y un hijo, por lo que la URL anunciada pasa de `/sitemap.xml` a `/sitemap-index.xml`.
+
+### Cambio realizado
+
+- `package.json` y `pnpm-lock.yaml` fijan `@astrojs/sitemap@3.7.3` como dependencia de desarrollo.
+- `astro.config.mjs` activa la integracion solo cuando `PUBLIC_SITE_ENV=production`.
+- `astro.config.mjs` filtra por una allowlist exacta: portada, 13 productos, 2 colecciones, 5 paginas, 3 blogs y 4 articulos.
+- Se desactivan namespaces `news`, `xhtml`, `image` y `video` porque el sitemap actual solo contiene URLs y no declara esos datos.
+- Se omite `lastmod`, `priority` y `changefreq` porque no existen fechas ni senales editoriales verificables para inventarlos.
+- Se elimina `src/pages/sitemap.xml.ts` para evitar dos fuentes de verdad.
+- `src/pages/robots.txt.ts` anuncia `sitemap-index.xml` solo en produccion. En produccion permite el rastreo general para que Google pueda leer los `noindex` de search, cart, policies y tagged; en preview mantiene `Disallow: /` sin anunciar el sitemap productivo.
+- `Docs/CLOUDFLARE_PAGES_PREVIEW.md` documenta `pnpm`, los dos archivos generados y la diferencia de preview/produccion.
+
+### Verificacion independiente
+
+- `pnpm install --frozen-lockfile`: correcto.
+- `pnpm check`: 0 errores, 0 warnings y 0 hints.
+- `pnpm build` sin `PUBLIC_SITE_ENV`: correcto; 38 paginas generadas, no existe `dist/sitemap*.xml` y `dist/robots.txt` solo contiene `Disallow: /`.
+- `PUBLIC_SITE_ENV=production pnpm build`: correcto; 38 paginas generadas y `dist/sitemap-index.xml` mas `dist/sitemap-0.xml` presentes.
+- `sitemap-0.xml`: 28 `<loc>` unicos, todos absolutos bajo `https://www.print3x.cl`, sin `.html`, slash final, query, search, cart, policies, tagged, `/collections` ni `/collections/all`.
+- Cada `<loc>` tiene su HTML generado, canonical coincidente y no contiene `meta robots noindex`.
+- `robots.txt` de produccion contiene `Allow: /` y `Sitemap: https://www.print3x.cl/sitemap-index.xml`.
+
 ### Bloqueos y pendientes
 
-- No se modificaron DNS, producción, Shopify ni `zip_theme_shopify_estable/`.
+- La URL antigua `/sitemap.xml` deja de ser el recurso canonico del sitemap; se debe enviar solo `/sitemap-index.xml` a Search Console despues de aprobar la preview.
+- El comportamiento HTTP de rutas limpias, `.html` y slash debe validarse en la preview real de Cloudflare Pages.
+- No se modificaron DNS, produccion, Shopify ni `zip_theme_shopify_estable/`.

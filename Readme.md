@@ -1,20 +1,19 @@
 # Print3x
 
-- Ruta carpeta nueva web D:\Ordenar\Print3x Final Astro
-- Ruta de las fotos C:\Users\sukus\Desktop\Proyectos_Activos\Print3x Web\Web\Imagenes de la Web\Filamentos PLA\Fotos Filamentos Print3x\Editadas\ligeras
+(Aquí escribir la historia)
 
-## Las imágenes
+## Las imágenes (Esta parte no debe ser editada por LLMs)
 
 Las imágenes estarán en internet en el github, puesto que son todas copias de otras imágenes que ya tengo en la carpeta de print3x
 
-## ToDos
+## ToDos (Esta parte no debe ser editada por LLMs)
 
-- [ ] eliminar las páginas de blog
-- [ ] instalar el astro sitemaps
-- [ ] colocarle el llm.txt
 - [ ] hacer un buen readme
+- [ ] colocarle el llm.txt
 - [ ] desplegar
 
+- [x] instalar el astro sitemaps
+- [x] eliminar las páginas de blog
 - [x] Hacer la páginas de información
 - [x] Falta el favicon
 - [x] Usar el componente card en otras páginas
