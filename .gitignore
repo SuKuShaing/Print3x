@@ -3,6 +3,12 @@ dist/
 .astro/
 .vscode
 
+.playwright-cli/
+audit-performance-*.json
+artifacts/
+tmp-*.png
+live-*.png
+
 .env
 .env.*
 !.env.example
