@@ -848,3 +848,26 @@
 - La URL antigua `/sitemap.xml` deja de ser el recurso canonico del sitemap; se debe enviar solo `/sitemap-index.xml` a Search Console despues de aprobar la preview.
 - El comportamiento HTTP de rutas limpias, `.html` y slash debe validarse en la preview real de Cloudflare Pages.
 - No se modificaron DNS, produccion, Shopify ni `zip_theme_shopify_estable/`.
+
+## Actualizacion Etapa 7 - Tarea 7.2: enlace al repositorio en el footer
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+**Fecha:** 2026-08-25
+
+### Cambio realizado
+
+- `src/components/Footer.astro` agrega GitHub a la lista de redes sociales con el enlace `https://github.com/SuKuShaing/Print3x`.
+- El icono usa SVG inline, `currentColor` y las clases existentes del footer para conservar el tamano, el color y el comportamiento hover del resto de redes.
+- El enlace conserva apertura en nueva pestana, `noopener noreferrer` y una etiqueta accesible `GitHub`.
+
+### Verificacion independiente
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 38 paginas estaticas generadas.
+- `git diff --check`: correcto; solo muestra los avisos normales de conversion LF/CRLF de Git.
+- El HTML generado contiene el enlace y el icono de GitHub.
+- Preview local comprobado en `390px`, `768px`, `1024px` y `1440px`: seis elementos sociales, enlace e icono presentes y sin overflow horizontal.
+
+### Bloqueos y pendientes
+
+- La preview de Cloudflare, DNS y produccion no se modifican.

@@ -1,5 +1,7 @@
 # Print3x
 
+<img src="src/assets/Logo%20Print3x.png" alt="Logo de Print3x" width="320">
+
 ## Qué fue Print3x
 
 Print3x fue un emprendimiento chileno dedicado al desarrollo de impresoras 3D, superficies de impresión y filamentos PLA. También compartió conocimientos sobre cómo usar, calibrar, mantener y reparar estas máquinas. Su propósito fue hacer más sencillo el paso de una idea digital a una pieza física y acercar la impresión 3D a más personas.
