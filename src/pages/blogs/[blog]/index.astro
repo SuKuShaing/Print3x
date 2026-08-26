@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import { Picture } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import type { ImageMetadata } from 'astro';
+import { itemListSchema } from '../../../data/structured-data';
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 import repetierPoster from '../../../assets/index-blogs-curso_impresion_3d-configurar-repetier-host/configurar repetier host.jpg';
 import openScadPoster from '../../../assets/index-blogs-openscad/openscad.jpg';
@@ -29,6 +30,18 @@ const articleMedia: Record<string, ImageMetadata> = {
   meshmixer: meshmixerPoster,
   impresion_3d_calibracion_automatica: calibrationPoster,
 };
+const siteBase = Astro.site ?? Astro.url;
+const homeUrl = new URL('/', siteBase).toString();
+const blogUrl = new URL(`/blogs/${data.slug}`, siteBase).toString();
+const itemListId = `${blogUrl}#articles`;
+const articlesSchema = itemListSchema({
+  id: itemListId,
+  name: data.title,
+  items: data.articles.map((article) => ({
+    name: article.title,
+    url: new URL(`/blogs/${data.slug}/${article.slug}`, siteBase).toString(),
+  })),
+});
 ---
 
 <SiteLayout
@@ -37,6 +50,13 @@ const articleMedia: Record<string, ImageMetadata> = {
   noIndex={data.seo?.noIndex ?? false}
   sourceUrl={data.sourceUrl}
   sourceRetrieved={data.sourceRetrieved}
+  pageType="CollectionPage"
+  mainEntityId={itemListId}
+  breadcrumbs={[
+    { name: 'Inicio', url: homeUrl },
+    { name: data.title, url: blogUrl },
+  ]}
+  structuredData={[articlesSchema]}
 >
    <div class="main-blog page-width">
     <h1 class="title--primary">{data.title}</h1>

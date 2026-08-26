@@ -871,3 +871,64 @@
 ### Bloqueos y pendientes
 
 - La preview de Cloudflare, DNS y produccion no se modifican.
+
+## Actualizacion Etapa 7 - Tarea 7.2: schema JSON-LD del sitio
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+**Fecha:** 2026-08-26
+
+### Revision y decision
+
+- La inspeccion de `https://www.print3x.cl` mediante navegador encontro
+  `Organization` y `WebSite` en la portada, y un `Product` adicional en
+  `/products/axis-one` con precio, SKU, variante Shopify, `OutOfStock` e imagen
+  CDN. Colecciones, articulos y paginas informativas no tenian schema
+  especifico ni breadcrumbs.
+- Se definio una base comun con `Organization`, `WebSite` y `WebPage`, mas
+  nodos especificos por tipo de contenido. La base se genera desde el layout y
+  no se duplica manualmente pagina por pagina.
+- Se excluyeron ofertas, precios vigentes, SKU, GTIN, ratings, reviews, fechas,
+  direccion, telefono y `LocalBusiness` porque el reemplazo es un escaparate
+  historico sin compra en linea y esos datos no estan aprobados.
+
+### Cambio realizado
+
+- Se creo `src/components/StructuredData.astro` para emitir un solo JSON-LD
+  seguro con `@graph` por documento.
+- Se creo `src/data/structured-data.ts` con helpers para `Product`, `Article`,
+  `ItemList`, imagenes locales optimizadas y URLs absolutas.
+- `src/layouts/SiteLayout.astro` ahora genera `Organization`, `WebSite`,
+  `WebPage`, `AboutPage` cuando corresponde y `BreadcrumbList`.
+- Se agregaron `Product` a las 13 rutas de producto sin ofertas comerciales;
+  `CollectionPage` + `ItemList` a colecciones e indices de blog; `Article` a
+  los cuatro articulos; y `AboutPage` a `/pages/nosotros`.
+- `src/data/types.ts` incorpora `VideoMediaAsset` al contrato comun de media,
+  permitiendo usar posters de video en el schema sin romper el renderizado.
+- Se creo `Docs/SCHEMA_SEO.md` con la matriz, decisiones, exclusiones y
+  pendientes.
+
+### Verificacion independiente
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 38 paginas estaticas generadas.
+- `pnpm build` con `PUBLIC_SITE_ENV=production`: correcto;
+  `sitemap-index.xml` y `sitemap-0.xml` generados.
+- Preview local con produccion habilitada: las 28 URLs del sitemap responden
+  200, mantienen canonical coincidente, no tienen `noindex`, contienen un solo
+  JSON-LD parseable y no contienen URLs relativas en el grafo.
+- Conteo de tipos verificado: `Product` 13, `Article` 4,
+  `CollectionPage` 5, `ItemList` 5, `BreadcrumbList` 27 y `AboutPage` 1.
+- `/products/axis-one` incluye 9 imagenes locales; un producto PLA incluye 4;
+  un articulo incluye su poster local; y `/pages/nosotros` usa `AboutPage`.
+- La inspeccion confirma que las imagenes del schema salen de `/_astro/` y no
+  de CDN Shopify.
+- `Readme.md`, DNS, produccion, Shopify y `zip_theme_shopify_estable/` no se
+  modificaron.
+
+### Bloqueos y pendientes
+
+- La validacion final con Rich Results Test y Schema Markup Validator requiere
+  una preview publica de Cloudflare; no se modifico DNS ni se publico.
+- Los productos no son elegibles por ahora para rich results comerciales de
+  oferta porque no existe una oferta vigente que declarar. Eso es intencional
+  para no presentar precios historicos como actuales.

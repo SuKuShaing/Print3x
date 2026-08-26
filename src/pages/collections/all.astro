@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import MediaPlaceholder from '../../components/MediaPlaceholder.astro';
+import { itemListSchema } from '../../data/structured-data';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 
 const products = await getCollection('products');
@@ -24,9 +25,30 @@ const orderedProducts = sourceOrder.flatMap((slug) => {
   const product = productsBySlug.get(slug);
   return product ? [product] : [];
 });
+const siteBase = Astro.site ?? Astro.url;
+const homeUrl = new URL('/', siteBase).toString();
+const productsUrl = new URL('/collections/all', siteBase).toString();
+const itemListId = `${productsUrl}#products`;
+const productsSchema = itemListSchema({
+  id: itemListId,
+  name: 'Productos de Print3x',
+  items: orderedProducts.map((product) => ({
+    name: product.data.title,
+    url: new URL(`/products/${product.data.slug}`, siteBase).toString(),
+  })),
+});
 ---
 
-<SiteLayout title="Productos – Print3x">
+<SiteLayout
+  title="Productos – Print3x"
+  pageType="CollectionPage"
+  mainEntityId={itemListId}
+  breadcrumbs={[
+    { name: 'Inicio', url: homeUrl },
+    { name: 'Productos', url: productsUrl },
+  ]}
+  structuredData={[productsSchema]}
+>
   <article class="collection-page page-width">
     <header class="collection-page__header">
       <p class="collection-page__eyebrow">Escaparate histórico</p>

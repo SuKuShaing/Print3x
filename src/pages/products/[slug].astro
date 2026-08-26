@@ -9,6 +9,7 @@ import { axisOneGallery, axisOneProductDetails } from '../../data/axis-one-produ
 import { padiGallery, padiProductDetails } from '../../data/padi-product';
 import { plaProductDetails } from '../../data/pla-product-details';
 import { productMedia } from '../../data/product-media';
+import { productSchema } from '../../data/structured-data';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 
 export async function getStaticPaths() {
@@ -45,6 +46,18 @@ const formatPrice = (value: number | null) =>
 const historicalPrice = formatPrice(data.historicalPriceCLP);
 const historicalPriceMax = formatPrice(data.historicalPriceMaxCLP);
 const historicalCompareAtPrice = formatPrice(data.historicalCompareAtPriceCLP);
+const siteBase = Astro.site ?? Astro.url;
+const productUrl = new URL(`/products/${data.slug}`, siteBase).toString();
+const homeUrl = new URL('/', siteBase).toString();
+const productsUrl = new URL('/collections/all', siteBase).toString();
+const productStructuredData = productSchema({
+  url: productUrl,
+  name: data.title,
+  productType: data.productType,
+  description: data.seoDescription,
+  media: storefrontGallery ?? gallery,
+  siteBase,
+});
 
 const dimensions = (value: string) => {
   const match = value.match(/(\d+)\s+x\s+(\d+)/);
@@ -59,6 +72,13 @@ const dimensions = (value: string) => {
   description={data.seoDescription ?? undefined}
   sourceUrl={data.sourceUrl}
   sourceRetrieved={data.sourceRetrieved}
+  mainEntityId={`${productUrl}#product`}
+  breadcrumbs={[
+    { name: 'Inicio', url: homeUrl },
+    { name: 'Productos', url: productsUrl },
+    { name: data.title, url: productUrl },
+  ]}
+  structuredData={[productStructuredData]}
 >
   {storefrontDetails && storefrontGallery ? (
     <article class="product-page product-page--storefront">

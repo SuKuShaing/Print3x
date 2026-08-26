@@ -21,6 +21,10 @@ interface Props {
 const { page } = Astro.props as Props;
 const { Content } = await render(page);
 const { data } = page;
+const siteBase = Astro.site ?? Astro.url;
+const homeUrl = new URL('/', siteBase).toString();
+const pageUrl = new URL(`/pages/${data.slug}`, siteBase).toString();
+const isAboutPage = data.slug === 'nosotros';
 ---
 
 <SiteLayout
@@ -29,6 +33,11 @@ const { data } = page;
   noIndex={data.seo?.noIndex ?? false}
   sourceUrl={data.sourceUrl}
   sourceRetrieved={data.sourceRetrieved}
+  pageType={isAboutPage ? 'AboutPage' : 'WebPage'}
+  breadcrumbs={[
+    { name: 'Inicio', url: homeUrl },
+    { name: data.title, url: pageUrl },
+  ]}
 >
   {data.slug === 'nosotros' ? <NosotrosPage /> : data.slug === 'premios' ? <PremiosPage title={data.title} /> : data.slug === 'como-determinar-cual-es-el-mejor-filamento-pla' ? <MejorFilamentoPage /> : <article class="editorial-page page-width">
     <header class="editorial-page__header">

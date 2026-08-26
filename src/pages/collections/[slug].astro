@@ -11,6 +11,7 @@ import {
 } from '../../data/impresoras-3d-collection';
 import { plaCollectionAccordionSections, plaCollectionDescription, plaCollectionFeatures } from '../../data/pla-collection';
 import { productMedia } from '../../data/product-media';
+import { itemListSchema } from '../../data/structured-data';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 
 export async function getStaticPaths() {
@@ -39,6 +40,19 @@ const collectionMedia = collection.data.slug === 'pla'
     : null;
 const isPla = collection.data.slug === 'pla';
 const isImpresoras3d = collection.data.slug === 'impresoras-3d';
+const siteBase = Astro.site ?? Astro.url;
+const homeUrl = new URL('/', siteBase).toString();
+const collectionsUrl = new URL('/collections', siteBase).toString();
+const collectionUrl = new URL(`/collections/${collection.data.slug}`, siteBase).toString();
+const itemListId = `${collectionUrl}#products`;
+const collectionProductsSchema = itemListSchema({
+  id: itemListId,
+  name: `Productos de ${collection.data.title}`,
+  items: collectionProducts.map((product) => ({
+    name: product.data.title,
+    url: new URL(`/products/${product.data.slug}`, siteBase).toString(),
+  })),
+});
 const formatPrice = (value: number | null) =>
   value === null
     ? null
@@ -54,6 +68,14 @@ const formatPrice = (value: number | null) =>
   description={collection.data.seoDescription ?? undefined}
   sourceUrl={collection.data.sourceUrl}
   sourceRetrieved={collection.data.sourceRetrieved}
+  pageType="CollectionPage"
+  mainEntityId={itemListId}
+  breadcrumbs={[
+    { name: 'Inicio', url: homeUrl },
+    { name: 'Colecciones', url: collectionsUrl },
+    { name: collection.data.title, url: collectionUrl },
+  ]}
+  structuredData={[collectionProductsSchema]}
 >
   {isPla || isImpresoras3d ? (
     <article class:list={['collection-page', 'collection-page--pla', isImpresoras3d && 'collection-page--impresoras-3d']}>

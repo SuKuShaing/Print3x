@@ -59,7 +59,7 @@ export interface VideoMediaAsset extends MediaAssetBase {
   poster?: AvailableMediaAsset;
 }
 
-export type MediaAsset = AvailableMediaAsset | PendingMediaAsset;
+export type MediaAsset = AvailableMediaAsset | PendingMediaAsset | VideoMediaAsset;
 export type MediaReference = MediaAsset | null;
 export type MediaCollection = readonly MediaReference[];
 

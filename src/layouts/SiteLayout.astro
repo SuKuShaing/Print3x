@@ -20,6 +20,9 @@ import '../styles/components/editorial.css';
 import '../styles/components/premios.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import StructuredData from '../components/StructuredData.astro';
+import { siteMedia } from '../data/site-media';
+import type { Breadcrumb, SchemaNode } from '../data/structured-data';
 
 interface Props {
   title: string;
@@ -28,17 +31,96 @@ interface Props {
   sourceUrl?: string;
   sourceRetrieved?: string;
   socialImage?: string;
+  pageType?: 'WebPage' | 'CollectionPage' | 'AboutPage';
+  mainEntityId?: string;
+  breadcrumbs?: readonly Breadcrumb[];
+  structuredData?: readonly SchemaNode[];
 }
 
-const { title, description, noIndex = false, sourceUrl, sourceRetrieved, socialImage } = Astro.props;
+const {
+  title,
+  description,
+  noIndex = false,
+  sourceUrl,
+  sourceRetrieved,
+  socialImage,
+  pageType = 'WebPage',
+  mainEntityId,
+  breadcrumbs = [],
+  structuredData = [],
+} = Astro.props;
 const canonicalPath = Astro.url.pathname === '/index.html'
   ? '/'
   : Astro.url.pathname.replace(/\.html$/, '');
 const siteBase = Astro.site ?? Astro.url;
 const canonical = new URL(canonicalPath, siteBase).toString();
+const homeUrl = new URL('/', siteBase).toString();
+const websiteId = `${homeUrl}#website`;
+const organizationId = `${homeUrl}#organization`;
+const webPageId = `${canonical}#webpage`;
 const productionBuild = import.meta.env.PUBLIC_SITE_ENV === 'production';
 const effectiveNoIndex = noIndex || !productionBuild;
 const resolvedSocialImage = new URL(socialImage ?? '/images/social-placeholder.svg', siteBase).toString();
+const schemaNodes: SchemaNode[] = [
+  {
+    '@type': 'Organization',
+    '@id': organizationId,
+    name: 'Print3x',
+    url: homeUrl,
+    logo: {
+      '@type': 'ImageObject',
+      url: new URL(siteMedia.logo.src.src, siteBase).toString(),
+      width: siteMedia.logo.width,
+      height: siteMedia.logo.height,
+    },
+    sameAs: [
+      'https://twitter.com/print3x',
+      'https://www.facebook.com/Print3x',
+      'https://www.instagram.com/print3x_company/',
+      'https://www.tiktok.com/@print3x_company',
+      'https://www.youtube.com/@print3x',
+    ],
+  },
+  {
+    '@type': 'WebSite',
+    '@id': websiteId,
+    name: 'Print3x',
+    url: homeUrl,
+    publisher: { '@id': organizationId },
+    inLanguage: 'es-CL',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${new URL('/search', siteBase).toString()}?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  },
+  {
+    '@type': pageType,
+    '@id': webPageId,
+    name: title,
+    url: canonical,
+    isPartOf: { '@id': websiteId },
+    inLanguage: 'es-CL',
+    ...(description ? { description } : {}),
+    ...(mainEntityId ? { mainEntity: { '@id': mainEntityId } } : {}),
+  },
+  ...(breadcrumbs.length > 0
+    ? [{
+        '@type': 'BreadcrumbList',
+        '@id': `${canonical}#breadcrumb`,
+        itemListElement: breadcrumbs.map((item, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: item.name,
+          item: item.url,
+        })),
+      }]
+    : []),
+  ...structuredData,
+];
 ---
 
 <!doctype html>
@@ -64,6 +146,7 @@ const resolvedSocialImage = new URL(socialImage ?? '/images/social-placeholder.s
     <meta name="twitter:image" content={resolvedSocialImage} />
     {sourceUrl && <meta name="source" content={sourceUrl} />}
     {sourceRetrieved && <meta name="source-retrieved" content={sourceRetrieved} />}
+    <StructuredData nodes={schemaNodes} />
   </head>
   <body>
     <a class="skip-to-content-link visually-hidden" href="#MainContent">Ir al contenido principal</a>

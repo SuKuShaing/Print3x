@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import MediaPlaceholder from '../../components/MediaPlaceholder.astro';
 import { indexMedia } from '../../data/index-media';
+import { itemListSchema } from '../../data/structured-data';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 
 const collections = await getCollection('collections');
@@ -11,9 +12,30 @@ const orderedCollections = collectionOrder.flatMap((slug) => {
   const collection = collectionsBySlug.get(slug);
   return collection ? [collection] : [];
 });
+const siteBase = Astro.site ?? Astro.url;
+const homeUrl = new URL('/', siteBase).toString();
+const collectionsUrl = new URL('/collections', siteBase).toString();
+const itemListId = `${collectionsUrl}#collections`;
+const collectionsSchema = itemListSchema({
+  id: itemListId,
+  name: 'Colecciones de Print3x',
+  items: orderedCollections.map((collection) => ({
+    name: collection.data.title,
+    url: new URL(`/collections/${collection.data.slug}`, siteBase).toString(),
+  })),
+});
 ---
 
-<SiteLayout title="Colecciones – Print3x">
+<SiteLayout
+  title="Colecciones – Print3x"
+  pageType="CollectionPage"
+  mainEntityId={itemListId}
+  breadcrumbs={[
+    { name: 'Inicio', url: homeUrl },
+    { name: 'Colecciones', url: collectionsUrl },
+  ]}
+  structuredData={[collectionsSchema]}
+>
   <article class="collection-page page-width">
     <header class="collection-page__header">
       <p class="collection-page__eyebrow">Print3x</p>

@@ -1,0 +1,15 @@
+---
+import type { SchemaNode } from '../data/structured-data';
+
+interface Props {
+  nodes: readonly SchemaNode[];
+}
+
+const { nodes } = Astro.props;
+const serialized = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': nodes,
+}).replace(/</g, '\\u003c');
+---
+
+<script is:inline type="application/ld+json" set:html={serialized}></script>
