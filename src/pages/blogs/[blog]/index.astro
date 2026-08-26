@@ -30,6 +30,9 @@ const articleMedia: Record<string, ImageMetadata> = {
   meshmixer: meshmixerPoster,
   impresion_3d_calibracion_automatica: calibrationPoster,
 };
+const firstArticleImage = data.articles
+  .map((article) => articleMedia[article.slug])
+  .find((image) => Boolean(image));
 const siteBase = Astro.site ?? Astro.url;
 const homeUrl = new URL('/', siteBase).toString();
 const blogUrl = new URL(`/blogs/${data.slug}`, siteBase).toString();
@@ -47,6 +50,8 @@ const articlesSchema = itemListSchema({
 <SiteLayout
   title={data.seo?.title ?? `${data.title} – Print3x`}
   description={data.seo?.description}
+  socialImage={firstArticleImage}
+  socialDescription={data.seo?.description ?? `Contenido del blog ${data.title} de Print3x.`}
   noIndex={data.seo?.noIndex ?? false}
   sourceUrl={data.sourceUrl}
   sourceRetrieved={data.sourceRetrieved}

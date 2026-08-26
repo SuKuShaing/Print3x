@@ -54,11 +54,15 @@ const articleStructuredData = articleSchema({
   section: parentBlog?.data.title,
   siteBase,
 });
+const socialDescription = data.seo?.description
+  ?? `Guía de ${data.title} dentro del curso de impresión 3D de Print3x.`;
 ---
 
 <SiteLayout
   title={data.seo?.title ?? `${data.title} – Print3x`}
   description={data.seo?.description}
+  socialImage={articlePosters[data.slug]}
+  socialDescription={socialDescription}
   noIndex={data.seo?.noIndex ?? false}
   sourceUrl={data.sourceUrl}
   sourceRetrieved={data.sourceRetrieved}

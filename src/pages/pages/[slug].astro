@@ -1,10 +1,14 @@
 ---
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
+import type { ImageMetadata } from 'astro';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import NosotrosPage from '../../components/NosotrosPage.astro';
 import PremiosPage from '../../components/PremiosPage.astro';
 import MejorFilamentoPage from '../../components/MejorFilamentoPage.astro';
+import teamPhoto from '../../assets/index-pages-nosotros/foto equipo.jpg';
+import firstAwardsPhoto from '../../assets/index-pages-premios/2014_Primera_Impresora_3D_Crea_en_3D_Print3x.jpg';
+import firstFilamentPhoto from '../../assets/index-pages-mejor_filamento/img_1_Filamento_roto_autoquiebre_-_Ligera.webp';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
@@ -25,11 +29,19 @@ const siteBase = Astro.site ?? Astro.url;
 const homeUrl = new URL('/', siteBase).toString();
 const pageUrl = new URL(`/pages/${data.slug}`, siteBase).toString();
 const isAboutPage = data.slug === 'nosotros';
+const pageImages: Record<string, ImageMetadata> = {
+  nosotros: teamPhoto,
+  premios: firstAwardsPhoto,
+  'como-determinar-cual-es-el-mejor-filamento-pla': firstFilamentPhoto,
+};
+const socialDescription = data.seo?.description ?? `Contenido histórico de ${data.title} en Print3x.`;
 ---
 
 <SiteLayout
   title={data.seo?.title ?? `${data.title} – Print3x`}
   description={data.seo?.description}
+  socialImage={pageImages[data.slug]}
+  socialDescription={socialDescription}
   noIndex={data.seo?.noIndex ?? false}
   sourceUrl={data.sourceUrl}
   sourceRetrieved={data.sourceRetrieved}

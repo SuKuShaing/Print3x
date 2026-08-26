@@ -40,6 +40,12 @@ const collectionMedia = collection.data.slug === 'pla'
     : null;
 const isPla = collection.data.slug === 'pla';
 const isImpresoras3d = collection.data.slug === 'impresoras-3d';
+const collectionDescription = collection.data.seoDescription
+  ?? (isPla
+    ? plaCollectionDescription
+    : isImpresoras3d
+      ? impresoras3dCollectionDescription
+      : `Colección histórica de ${collection.data.title} en Print3x.`);
 const siteBase = Astro.site ?? Astro.url;
 const homeUrl = new URL('/', siteBase).toString();
 const collectionsUrl = new URL('/collections', siteBase).toString();
@@ -66,6 +72,8 @@ const formatPrice = (value: number | null) =>
 <SiteLayout
   title={`${collection.data.title} – Print3x`}
   description={collection.data.seoDescription ?? undefined}
+  socialImage={collectionMedia?.src}
+  socialDescription={collectionDescription}
   sourceUrl={collection.data.sourceUrl}
   sourceRetrieved={collection.data.sourceRetrieved}
   pageType="CollectionPage"

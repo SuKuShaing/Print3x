@@ -182,3 +182,71 @@ La franja `Todas las características del Mejor: PLA` ahora usa la clase `gradie
 - Consola del preview: sin errores ni warnings.
 - `npm run check`: 0 errores, 0 warnings y 0 hints.
 - `npm run build`: correcto; 42 páginas estáticas generadas.
+
+## Actualizacion posterior: metadata social Open Graph
+
+**Etapa:** 6 - Tarea 6.3, metadata social
+**Fecha:** 2026-08-26
+**Estado:** Completada
+
+Se conecto metadata social especifica a todas las rutas que usan `SiteLayout`. El
+layout ahora acepta una imagen optimizada de Astro, titulo y descripcion social,
+genera URLs absolutas con el dominio canonico y usa el logo local como fallback.
+Tambien emite dimensiones, alt, `og:site_name` y Twitter Card
+`summary_large_image`.
+
+La seleccion de imagen conserva el criterio aprobado: el primer hero del home,
+la primera imagen disponible de cada producto, el hero de cada coleccion, el
+primer poster disponible de cada blog, el poster correspondiente de cada
+articulo y la primera imagen local disponible de las paginas editoriales. Las
+rutas sin media usan el logo; no se usan referencias `shopify://`, CDN Shopify ni
+el placeholder social tecnico.
+
+### Archivos modificados
+
+- `src/layouts/SiteLayout.astro`
+- `src/pages/index.astro`
+- `src/pages/products/[slug].astro`
+- `src/pages/collections/[slug].astro`
+- `src/pages/collections/index.astro`
+- `src/pages/collections/all.astro`
+- `src/pages/blogs/[blog]/index.astro`
+- `src/pages/blogs/[blog]/[slug].astro`
+- `src/pages/pages/[slug].astro`
+- `src/pages/404.astro`
+- `src/pages/cart.astro`
+- `src/pages/search.astro`
+- `src/pages/blogs/articulos/tagged/impresion-3d.astro`
+
+### Verificacion independiente
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 38 paginas estaticas generadas.
+- Build de produccion con `PUBLIC_SITE_ENV=production`: correcto; completo en
+  16.86 s y genero `sitemap-index.xml` y `sitemap-0.xml`.
+- `dist/robots.txt` permite rutas publicas y referencia
+  `https://www.print3x.cl/sitemap-index.xml`.
+- Las 38 paginas HTML generadas contienen `og:image` y las 38 usan una URL
+  absoluta bajo `https://www.print3x.cl/`.
+- Se verificaron imagenes especificas para home, producto, colecciones, blog y
+  paginas editoriales; las paginas sin media usan el logo local procesado por
+  Astro.
+- Las 8 rutas controladas esperadas mantienen `noindex, nofollow`: 404, search,
+  cart, tag de articulos y las cuatro policies.
+- No quedan referencias a `social-placeholder` en la salida HTML.
+
+### Bloqueos y pendientes
+
+- La validacion final de URLs limpias, `.html`, slash, assets y metadata en
+  Cloudflare Pages sigue pendiente de una preview publica autorizada.
+- El favicon de identidad, Futura local, alt aprobado y media Shopify faltante
+  permanecen documentados en el manifiesto.
+- No se modificaron DNS, produccion, Shopify, `Readme.md`,
+  `zip_theme_shopify_estable/` ni `Imagenes_de_la_web/`.
+
+### Criterio de aceptacion
+
+Cumplido para preview: todas las paginas generadas tienen imagen social, titulo y
+descripcion adecuados; las imagenes usan assets locales optimizados o el logo de
+fallback; las URLs son absolutas y canonicas; y las rutas controladas conservan
+su proteccion de indexacion.

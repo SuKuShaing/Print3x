@@ -35,6 +35,9 @@ const axisOneDetails = axisOneProductDetails[data.slug];
 const padiDetails = padiProductDetails[data.slug];
 const storefrontDetails = axisOneDetails ?? plaDetails ?? padiDetails;
 const storefrontGallery = axisOneDetails ? axisOneGallery : padiDetails ? padiGallery : plaGallery;
+const firstProductImage = (storefrontGallery ?? gallery).find((item) => item?.status === 'available');
+const socialImage = firstProductImage?.status === 'available' ? firstProductImage.src : undefined;
+const socialDescription = data.seoDescription ?? `Registro histórico de ${data.title} en Print3x.`;
 const formatPrice = (value: number | null) =>
   value === null
     ? null
@@ -70,6 +73,8 @@ const dimensions = (value: string) => {
 <SiteLayout
   title={`${data.title} – Print3x`}
   description={data.seoDescription ?? undefined}
+  socialImage={socialImage}
+  socialDescription={socialDescription}
   sourceUrl={data.sourceUrl}
   sourceRetrieved={data.sourceRetrieved}
   mainEntityId={`${productUrl}#product`}

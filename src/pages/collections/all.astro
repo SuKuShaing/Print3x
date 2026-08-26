@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import MediaPlaceholder from '../../components/MediaPlaceholder.astro';
+import { productMedia } from '../../data/product-media';
 import { itemListSchema } from '../../data/structured-data';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 
@@ -25,6 +26,9 @@ const orderedProducts = sourceOrder.flatMap((slug) => {
   const product = productsBySlug.get(slug);
   return product ? [product] : [];
 });
+const firstProductImage = sourceOrder
+  .flatMap((slug) => productMedia[slug] ?? [])
+  .find((media) => media.status === 'available');
 const siteBase = Astro.site ?? Astro.url;
 const homeUrl = new URL('/', siteBase).toString();
 const productsUrl = new URL('/collections/all', siteBase).toString();
@@ -41,6 +45,8 @@ const productsSchema = itemListSchema({
 
 <SiteLayout
   title="Productos – Print3x"
+  socialImage={firstProductImage?.src}
+  socialDescription="Explora el escaparate histórico de productos de impresión 3D de Print3x."
   pageType="CollectionPage"
   mainEntityId={itemListId}
   breadcrumbs={[

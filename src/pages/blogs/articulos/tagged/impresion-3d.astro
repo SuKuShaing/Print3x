@@ -7,7 +7,11 @@ const articles = (await getCollection('articles'))
   .filter((article) => article.data.tags.includes('impresion-3d'));
 ---
 
-<SiteLayout title={'Artículos – tagged "Impresión 3D" – Print3x'} noIndex>
+<SiteLayout
+  title={'Artículos – tagged "Impresión 3D" – Print3x'}
+  socialDescription="Artículos de Print3x relacionados con impresión 3D."
+  noIndex
+>
   <article class="editorial-page page-width">
     <header class="editorial-page__header">
       <p class="editorial-page__eyebrow">Artículos</p>
