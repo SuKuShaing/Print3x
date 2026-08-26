@@ -2,66 +2,66 @@
 slug: premios
 title: Premios e historia
 sourceUrl: https://www.print3x.cl/pages/premios
-sourceRetrieved: '2026-07-30'
+sourceRetrieved: "2026-07-30"
 status: published
 seo:
-  title: '🥇 Premios e Historia | PRINT3X'
-  description: '¿Por qué sabemos de los que hablamos? 😎 porque hemos recorrido el mismo camino que tu, tiempo antes, por eso nos manejamos en las herramientas que enseñamos al mundo. Te mostramos como hacer de todo con las impresoras 3D y te mostramos las maneras más eficientes para hacerlo.'
+    title: "🥇 Premios e Historia | PRINT3X"
+    description: "¿Por qué sabemos de los que hablamos? 😎 porque hemos recorrido el mismo camino que tu, tiempo antes, por eso nos manejamos en las herramientas que enseñamos al mundo. Te mostramos como hacer de todo con las impresoras 3D y te mostramos las maneras más eficientes para hacerlo."
 media:
-  - status: pending
-    sourceReference: Primera_Impresora_3D_Crea_en_3D_Print3x.jpg
-    use: 'Fotografía de la primera impresora 3D'
-    expectedDimensions: '1500px de ancho en la fuente; alto no disponible'
-    aspectRatio: 'pendiente: alto no disponible en la fuente'
-    reason: 'No existe copia local aprobada.'
-  - status: pending
-    sourceReference: Desafio_pais.jpg
-    use: 'Portada del mini documental'
-    expectedDimensions: '3840px de ancho en la fuente; alto no disponible'
-    aspectRatio: 'pendiente: alto no disponible en la fuente'
-    reason: 'No existe copia local aprobada; el video se conserva como enlace revisado.'
-  - status: pending
-    sourceReference: Ganadores_despega_usach_Crea_en_3D_Print3x.jpg
-    use: 'Fotografía de ganadores del Despega Usach'
-    expectedDimensions: '1500px de ancho en la fuente; alto no disponible'
-    aspectRatio: 'pendiente: alto no disponible en la fuente'
-    reason: 'No existe copia local aprobada.'
-  - status: pending
-    sourceReference: Ganadores_en_Stanford_Crea_en_3D_Print3x.jpg
-    use: 'Entrega de certificados Stanford'
-    expectedDimensions: '1500px de ancho en la fuente; alto no disponible'
-    aspectRatio: 'pendiente: alto no disponible en la fuente'
-    reason: 'No existe copia local aprobada.'
-  - status: pending
-    sourceReference: Aparicion_en_el_diario_el_mercurio_Crea_en_3D_Print3x.jpg
-    use: 'Aparición en prensa'
-    expectedDimensions: '1500px de ancho en la fuente; alto no disponible'
-    aspectRatio: 'pendiente: alto no disponible en la fuente'
-    reason: 'No existe copia local aprobada.'
-  - status: pending
-    sourceReference: Premios_Despega_Usach_Crea_en_3D_Print3x.jpg
-    use: 'Entrega de premios Despega Usach'
-    expectedDimensions: '1500px de ancho en la fuente; alto no disponible'
-    aspectRatio: 'pendiente: alto no disponible en la fuente'
-    reason: 'No existe copia local aprobada.'
-  - status: pending
-    sourceReference: Ganadores_en_Conrad_Waterloo_Crea_en_3D_Print3x.jpg
-    use: 'Ganadores en Waterloo University'
-    expectedDimensions: '1500px de ancho en la fuente; alto no disponible'
-    aspectRatio: 'pendiente: alto no disponible en la fuente'
-    reason: 'No existe copia local aprobada.'
-  - status: pending
-    sourceReference: Print3x_gana_la_competencia_de_Pitch.jpg
-    use: 'Portada de video de la competencia en Waterloo'
-    expectedDimensions: '3840px de ancho en la fuente; alto no disponible'
-    aspectRatio: 'pendiente: alto no disponible en la fuente'
-    reason: 'No existe copia local aprobada; el video se conserva como enlace revisado.'
-  - status: pending
-    sourceReference: maxresdefault.webp y maxresdefault_1.webp
-    use: 'Portadas de entrevistas en video'
-    expectedDimensions: '3840px de ancho en la fuente; alto no disponible'
-    aspectRatio: 'pendiente: alto no disponible en la fuente'
-    reason: 'No existe copia local aprobada; los videos se conservan como enlaces revisados.'
+    - status: pending
+      sourceReference: Primera_Impresora_3D_Crea_en_3D_Print3x.jpg
+      use: "Fotografía de la primera impresora 3D"
+      expectedDimensions: "1500px de ancho en la fuente; alto no disponible"
+      aspectRatio: "pendiente: alto no disponible en la fuente"
+      reason: "No existe copia local aprobada."
+    - status: pending
+      sourceReference: Desafio_pais.jpg
+      use: "Portada del mini documental"
+      expectedDimensions: "3840px de ancho en la fuente; alto no disponible"
+      aspectRatio: "pendiente: alto no disponible en la fuente"
+      reason: "No existe copia local aprobada; el video se conserva como enlace revisado."
+    - status: pending
+      sourceReference: Ganadores_despega_usach_Crea_en_3D_Print3x.jpg
+      use: "Fotografía de ganadores del Despega Usach"
+      expectedDimensions: "1500px de ancho en la fuente; alto no disponible"
+      aspectRatio: "pendiente: alto no disponible en la fuente"
+      reason: "No existe copia local aprobada."
+    - status: pending
+      sourceReference: Ganadores_en_Stanford_Crea_en_3D_Print3x.jpg
+      use: "Entrega de certificados Stanford"
+      expectedDimensions: "1500px de ancho en la fuente; alto no disponible"
+      aspectRatio: "pendiente: alto no disponible en la fuente"
+      reason: "No existe copia local aprobada."
+    - status: pending
+      sourceReference: Aparicion_en_el_diario_el_mercurio_Crea_en_3D_Print3x.jpg
+      use: "Aparición en prensa"
+      expectedDimensions: "1500px de ancho en la fuente; alto no disponible"
+      aspectRatio: "pendiente: alto no disponible en la fuente"
+      reason: "No existe copia local aprobada."
+    - status: pending
+      sourceReference: Premios_Despega_Usach_Crea_en_3D_Print3x.jpg
+      use: "Entrega de premios Despega Usach"
+      expectedDimensions: "1500px de ancho en la fuente; alto no disponible"
+      aspectRatio: "pendiente: alto no disponible en la fuente"
+      reason: "No existe copia local aprobada."
+    - status: pending
+      sourceReference: Ganadores_en_Conrad_Waterloo_Crea_en_3D_Print3x.jpg
+      use: "Ganadores en Waterloo University"
+      expectedDimensions: "1500px de ancho en la fuente; alto no disponible"
+      aspectRatio: "pendiente: alto no disponible en la fuente"
+      reason: "No existe copia local aprobada."
+    - status: pending
+      sourceReference: Print3x_gana_la_competencia_de_Pitch.jpg
+      use: "Portada de video de la competencia en Waterloo"
+      expectedDimensions: "3840px de ancho en la fuente; alto no disponible"
+      aspectRatio: "pendiente: alto no disponible en la fuente"
+      reason: "No existe copia local aprobada; el video se conserva como enlace revisado."
+    - status: pending
+      sourceReference: maxresdefault.webp y maxresdefault_1.webp
+      use: "Portadas de entrevistas en video"
+      expectedDimensions: "3840px de ancho en la fuente; alto no disponible"
+      aspectRatio: "pendiente: alto no disponible en la fuente"
+      reason: "No existe copia local aprobada; los videos se conservan como enlaces revisados."
 ---
 
 <div class="editorial-media-pending" data-media-status="pending">
@@ -73,7 +73,7 @@ media:
 
 ## Primera Impresora
 
-Muestra de la primera impresora 3D hecha en la Universidad de Santiago de chile, la impresora 3D que acompaña a Sebastian Sanhueza es la primera versión de varias que le continuaron.
+Muestra de la primera impresora 3D hecha en la Universidad de Santiago de chile, la impresora 3D que acompaña a Sebastián Sanhueza es la primera versión de varias que le continuaron.
 
 Esto fue presentado en el congreso de Biotecnologia del 2014, Usach.
 

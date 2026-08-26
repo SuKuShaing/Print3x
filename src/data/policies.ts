@@ -1,31 +1,31 @@
 export const policySlugs = [
-  'privacy-policy',
-  'terms-of-service',
-  'refund-policy',
-  'shipping-policy',
+    "privacy-policy",
+    "terms-of-service",
+    "refund-policy",
+    "shipping-policy",
 ] as const;
 
 export type PolicySlug = (typeof policySlugs)[number];
 
 export type Policy = {
-  slug: PolicySlug;
-  title: string;
-  sourceUrl: string;
-  sourceRetrieved: string;
-  contentStatus: 'available' | 'pending';
-  content: string;
+    slug: PolicySlug;
+    title: string;
+    sourceUrl: string;
+    sourceRetrieved: string;
+    contentStatus: "available" | "pending";
+    content: string;
 };
 
-const sourceRetrieved = '2026-07-30';
+const sourceRetrieved = "2026-07-30";
 
 export const policies: Record<PolicySlug, Policy> = {
-  'privacy-policy': {
-    slug: 'privacy-policy',
-    title: 'Política de privacidad',
-    sourceUrl: 'https://www.print3x.cl/policies/privacy-policy',
-    sourceRetrieved,
-    contentStatus: 'available',
-    content: `DECLARACIÓN DE PRIVACIDAD
+    "privacy-policy": {
+        slug: "privacy-policy",
+        title: "Política de privacidad",
+        sourceUrl: "https://www.print3x.cl/policies/privacy-policy",
+        sourceRetrieved,
+        contentStatus: "available",
+        content: `DECLARACIÓN DE PRIVACIDAD
 
 SECCIÓN 1 - ¿QUÉ HACEMOS CON TU INFORMACIÓN?
 
@@ -119,15 +119,15 @@ Si nuestra tienda es adquirida o fusionada con otra empresa, tu información pue
 
 PREGUNTAS E INFORMACIÓN DE CONTACTO
 
-Si quieres: acceder, corregir, enmendar o borrar cualquier información personal que poseamos sobre ti, registrar una queja, o simplemente quieres más información contacta a nuestro Oficial de Cumplimiento de Privacidad sebastian.sanhueza.t@usach.cl.`,
-  },
-  'terms-of-service': {
-    slug: 'terms-of-service',
-    title: 'Términos del servicio',
-    sourceUrl: 'https://www.print3x.cl/policies/terms-of-service',
-    sourceRetrieved,
-    contentStatus: 'available',
-    content: `TÉRMINOS DE SERVICIO
+Si quieres: acceder, corregir, enmendar o borrar cualquier información personal que poseamos sobre ti, registrar una queja, o simplemente quieres más información contacta a nuestro Oficial de Cumplimiento de Privacidad sebastian@sanhueza.pro.`,
+    },
+    "terms-of-service": {
+        slug: "terms-of-service",
+        title: "Términos del servicio",
+        sourceUrl: "https://www.print3x.cl/policies/terms-of-service",
+        sourceRetrieved,
+        contentStatus: "available",
+        content: `TÉRMINOS DE SERVICIO
 
 INFORMACIÓN GENERAL
 
@@ -283,15 +283,15 @@ Nos reservamos el derecho, a nuestra sola discreción, de actualizar, modificar 
 
 SECCIÓN 20 - INFORMACIÓN DE CONTACTO
 
-Preguntas acerca de los Términos de Servicio deben ser enviadas a sebastian.sanhueza.t@usach.cl.`,
-  },
-  'refund-policy': {
-    slug: 'refund-policy',
-    title: 'Política de reembolso',
-    sourceUrl: 'https://www.print3x.cl/policies/refund-policy',
-    sourceRetrieved,
-    contentStatus: 'available',
-    content: `Política de reembolso - DEVOLUCIONES
+Preguntas acerca de los Términos de Servicio deben ser enviadas a sebastian@sanhueza.pro`,
+    },
+    "refund-policy": {
+        slug: "refund-policy",
+        title: "Política de reembolso",
+        sourceUrl: "https://www.print3x.cl/policies/refund-policy",
+        sourceRetrieved,
+        contentStatus: "available",
+        content: `Política de reembolso - DEVOLUCIONES
 
 Resumen
 
@@ -311,14 +311,14 @@ Si el artículo fue marcado como regalo cuando fue comprado y enviado directamen
 Si el artículo no fue marcado como regalo cuando fue comprado, o el regalo fue enviado al comprador para entregártelo más tarde, le enviaremos un reembolso al comprador y él sabrá de tu devolución.
 
 Dependiendo de dónde vivas, el tiempo que tome recibir el producto intercambiado, puede variar.`,
-  },
-  'shipping-policy': {
-    slug: 'shipping-policy',
-    title: 'Política de envío',
-    sourceUrl: 'https://www.print3x.cl/policies/shipping-policy',
-    sourceRetrieved,
-    contentStatus: 'available',
-    content: `Política de envío
+    },
+    "shipping-policy": {
+        slug: "shipping-policy",
+        title: "Política de envío",
+        sourceUrl: "https://www.print3x.cl/policies/shipping-policy",
+        sourceRetrieved,
+        contentStatus: "available",
+        content: `Política de envío
 
 Resumen
 
@@ -338,5 +338,5 @@ Sí demoró más de lo habitual el envío puede deberse a situaciones fortuitas 
 Producto deteriorado por el envió
 
 Sí el producto llega deteriorado, favor de no abrir, haga registro fotografico y reportelo con nosotros por cualquier vía que desee, para que le hagamos el cambio del producto en caso de que no sirva para el uso que usted vaya a darle y colocar una amonestación en nuestro currier con el fin de que mejoren sus servicios.`,
-  },
+    },
 };
