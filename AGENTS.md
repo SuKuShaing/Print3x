@@ -22,7 +22,7 @@
 - `src/layouts/SiteLayout.astro` contiene el documento comun, metadata, canonical, robots, favicon, skip link, `#MainContent`, header y footer.
 - `src/components/` contiene `Header.astro`, `Footer.astro` y `MediaPlaceholder.astro`.
 - `src/content/` contiene colecciones Astro para `products`, `collections`, `pages`, `blogs` y `articles`, validadas en `src/content.config.ts`.
-- `src/pages/` genera portada, productos, colecciones, paginas, blogs, articulos, policies, 404, busqueda, carrito, autenticacion, robots y favicons; `astro.config.mjs` activa `@astrojs/sitemap` solo en builds de produccion.
+- `src/pages/` genera portada, productos, colecciones, paginas, blogs, articulos, policies, 404, busqueda, carrito, autenticacion, robots y favicons; `astro.config.mjs` genera `@astrojs/sitemap` en cada build.
 - `src/data/` contiene contratos estaticos, policies y el inventario de los cinco assets locales del index. `src/scripts/print3x-ui.ts` contiene solo interacciones visuales opt-in mediante `data-p3x-*`.
 - `src/styles/` adapta el sistema visual de Refresh; `src/assets/` contiene los once archivos locales disponibles y `public/fonts/` no contiene Futura.
 
@@ -66,7 +66,7 @@
 - `/search` y `/cart` son experiencias estaticas controladas, sin comercio ni login, y deben permanecer `noindex, nofollow`. La ruta Shopify `/customer_authentication/redirect` no se genera en Astro; cualquier futuro acceso de usuarios requiere una decision e implementacion separadas. Las cuatro policies tambien estan fuera del indice y requieren revision legal antes de tratarlas como vigentes.
 - `/pages/contactanos`, `/products/filamento_tpu` y `/collections/accesorios-3d` no deben publicarse automaticamente solo porque existan enlaces o templates; respeta las decisiones de `Docs/INVENTARIO_RUTAS_SEO.md`.
 - Canonical, Open Graph, Twitter y sitemap deben usar `https://www.print3x.cl`, nunca el dominio de preview. No inventes descriptions ausentes; el layout puede omitirlas cuando la fuente no las entrega.
-- Sin `PUBLIC_SITE_ENV=production`, las paginas generan `noindex, nofollow` y `robots.txt` usa `Disallow: /`. Solo el build de produccion con `PUBLIC_SITE_ENV=production` permite las rutas publicas y publica el sitemap definitivo.
+- Los builds generan `index, follow` para las rutas publicas y `noindex, nofollow` solo para las rutas controladas explicitamente. `robots.txt` permite el rastreo y anuncia el sitemap canonico en cada build; una preview publica debe protegerse mediante la configuracion de acceso de la plataforma, no mediante metadata SEO de produccion.
 - El build `format: 'file'` genera `dist/<ruta>.html`; la URL canonica es `/foo` sin slash ni extension. La respuesta real de `/foo`, `/foo/` y `/foo.html` debe validarse en Cloudflare Pages, no suponerse por el build local.
 
 ## Media e identidad pendientes
@@ -78,7 +78,7 @@
 ## Verificacion y despliegue
 
 - El orden minimo es `pnpm install --frozen-lockfile`, `pnpm check`, `pnpm build`, inspeccion de `dist` y pruebas desde `pnpm preview --host 127.0.0.1`.
-- Para una preview de Cloudflare usa Node `22.12.0`, comando `pnpm build`, salida `dist` y la configuracion de indexacion documentada en `Docs/CLOUDFLARE_PAGES_PREVIEW.md`.
+- Para una preview de Cloudflare usa Node `22.12.0`, comando `pnpm build`, salida `dist` y proteccion de acceso si el dominio de preview queda publico; la configuracion esta documentada en `Docs/CLOUDFLARE_PAGES_PREVIEW.md`.
 - La evidencia existente de las Etapas 4–6 registra 42 paginas estaticas, 31 URLs de sitemap, 0 errores de check, Lighthouse 100 en accesibilidad, buenas practicas y SEO en desktop/mobile, y crawl local sin enlaces internos rotos. Repite las verificaciones despues de cambios relevantes; no cites resultados viejos como prueba del estado actual sin ejecutarlos de nuevo.
 - Valida visualmente al menos 390px, 768px, 1024px y 1440px, y prueba teclado, foco, Escape, menu mobile, slider, galeria, modal, accordions, busqueda local, 404 y rutas auxiliares.
 - Antes de desplegar, valida en Pages las URLs limpias, `.html`, slash, assets, sitemap, robots, canonicals, metadata y rutas profundas. No modifiques DNS hasta aprobar preview y rollback.

@@ -64,9 +64,7 @@ identificadores estables como `#organization`, `#website`, `#webpage`,
 ## Validacion y pendientes
 
 - `pnpm check`: 0 errores, 0 warnings y 0 hints.
-- `pnpm build`: correcto; 38 paginas estaticas.
-- `pnpm build` con `PUBLIC_SITE_ENV=production`: correcto; sitemap productivo
-  generado con 28 URLs.
+- `pnpm build`: correcto; 38 paginas estaticas y sitemap generado con 28 URLs.
 - Preview local: 28 URLs del sitemap con status 200, canonical coincidente,
   un JSON-LD parseable por pagina y URLs absolutas.
 - El marcado debe volver a probarse en la preview real de Cloudflare y luego

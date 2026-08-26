@@ -13,26 +13,25 @@
 | Build output directory | `dist` |
 | Node.js | `22.12.0` |
 | Base directory | raíz del repositorio |
-| Producción | `PUBLIC_SITE_ENV=production` |
-| Preview/branch | no definir `PUBLIC_SITE_ENV` o usar cualquier valor distinto de `production` |
+| Indexacion | `index, follow` en rutas publicas; `noindex, nofollow` solo en rutas controladas |
 
 `.nvmrc` fija Node `22.12.0` para herramientas locales compatibles con `package.json`.
 
-## Comportamiento de indexación
+## Comportamiento de indexacion
 
-- Preview y staging: sin `PUBLIC_SITE_ENV=production`, el layout genera `noindex, nofollow` y `robots.txt` usa `Disallow: /`.
-- Producción: con `PUBLIC_SITE_ENV=production`, `robots.txt` permite el rastreo para que Google pueda leer los `noindex` de rutas auxiliares y referencia `https://www.print3x.cl/sitemap-index.xml`.
-- Producción: `@astrojs/sitemap` genera automáticamente `dist/sitemap-index.xml` y `dist/sitemap-0.xml`, con las 28 rutas aprobadas y sin `lastmod` inventado.
-- Preview/branch: no se generan archivos de sitemap y `robots.txt` no anuncia el sitemap de producción.
-- El dominio canónico, Open Graph, Twitter y sitemap usan `https://www.print3x.cl`; comprobar que no se publique una preview con esa variable.
+- `pnpm build` genera `dist/sitemap-index.xml` y `dist/sitemap-0.xml`, con las 28 rutas aprobadas y sin `lastmod` inventado.
+- `robots.txt` permite el rastreo general y referencia `https://www.print3x.cl/sitemap-index.xml`.
+- Las rutas publicas usan `index, follow`; search, cart, 404, tag y las cuatro policies conservan `noindex, nofollow` por decision SEO.
+- El dominio canonico, Open Graph, Twitter y sitemap usan `https://www.print3x.cl`.
+- Una preview publica no debe exponerse sin proteccion de acceso, porque comparte metadata y robots orientados al dominio canonico de produccion.
 
 ## Verificación previa
 
 1. Ejecutar `pnpm install --frozen-lockfile`.
 2. Ejecutar `pnpm check`.
-3. Ejecutar `pnpm build` sin `PUBLIC_SITE_ENV` y revisar que preview sea `noindex` y no genere sitemap.
-4. Ejecutar el build de producción con `PUBLIC_SITE_ENV=production` y revisar `sitemap-index.xml`, `sitemap-0.xml`, robots, rutas, metadata, favicons y 404.
-5. Publicar únicamente una preview de Pages.
+3. Ejecutar `pnpm build` y revisar `sitemap-index.xml`, `sitemap-0.xml`, robots, rutas, metadata, favicons y 404.
+4. Publicar únicamente una preview de Pages.
+5. Proteger la preview de Pages con el mecanismo de acceso disponible si se publica antes del cambio DNS.
 6. Probar rutas limpias, variantes `.html` y slash en el dominio de Pages.
 7. No cambiar DNS hasta completar la validación y aprobar rollback.
 

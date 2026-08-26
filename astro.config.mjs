@@ -1,8 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-const productionBuild = process.env.PUBLIC_SITE_ENV === 'production';
-
 const approvedSitemapPaths = new Set([
   '/',
   '/products/axis-one',
@@ -41,21 +39,19 @@ export default defineConfig({
   build: {
     format: 'file',
   },
-  integrations: productionBuild
-    ? [
-        sitemap({
-          filenameBase: 'sitemap',
-          filter: (page) => {
-            const pathname = new URL(page).pathname.replace(/\.html$/, '');
-            return approvedSitemapPaths.has(pathname);
-          },
-          namespaces: {
-            news: false,
-            xhtml: false,
-            image: false,
-            video: false,
-          },
-        }),
-      ]
-    : [],
+  integrations: [
+    sitemap({
+      filenameBase: 'sitemap',
+      filter: (page) => {
+        const pathname = new URL(page).pathname.replace(/\.html$/, '');
+        return approvedSitemapPaths.has(pathname);
+      },
+      namespaces: {
+        news: false,
+        xhtml: false,
+        image: false,
+        video: false,
+      },
+    }),
+  ],
 });

@@ -932,3 +932,62 @@
 - Los productos no son elegibles por ahora para rich results comerciales de
   oferta porque no existe una oferta vigente que declarar. Eso es intencional
   para no presentar precios historicos como actuales.
+
+## Actualizacion Etapa 7 - Tarea 7.1: retirar bloqueo SEO global de preview local
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+**Fecha:** 2026-08-26
+
+### Cambio realizado
+
+- Se retiro `PUBLIC_SITE_ENV` del layout, `robots.txt` y `astro.config.mjs`.
+- `pnpm build` genera siempre el sitemap aprobado y `robots.txt` con `Allow: /`.
+- Las rutas publicas generan `index, follow` en cualquier build.
+- Se conservaron los `noindex, nofollow` intencionales de search, cart, 404, tag
+  y las cuatro policies historicas.
+- Se actualizo la documentacion de Cloudflare para indicar que una preview
+  publica debe protegerse con acceso de plataforma, no con metadata SEO de
+  produccion.
+
+### Verificacion independiente
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints en 49 archivos.
+- `pnpm build`: correcto; 38 paginas estaticas generadas y sitemap presente.
+- La salida local final contiene `robots.txt` con `Allow: /` y sin `Disallow: /`.
+- La salida local final contiene `sitemap-index.xml` y `sitemap-0.xml`.
+- El conteo de `noindex, nofollow` queda limitado a las 8 rutas controladas
+  aprobadas; las rutas publicas generan `index, follow`.
+- `git diff --check`: correcto; solo muestra los avisos normales de conversion
+  LF/CRLF de Git.
+
+### Bloqueos y pendientes
+
+- Si se publica una preview de Pages antes del cambio DNS, debe protegerse con
+  Cloudflare Access u otro control equivalente para evitar su rastreo.
+- La validacion real de URLs limpias, `.html`, slash, assets y canonicals sigue
+  pendiente de una preview autorizada.
+- No se modificaron DNS, produccion, Shopify ni `Readme.md`.
+
+### Reverificacion independiente posterior
+
+- `pnpm install --frozen-lockfile`: correcto; dependencias al dia.
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints en 49 archivos.
+- `pnpm build`: correcto; 38 paginas estaticas generadas en `dist`.
+- Preview local en `http://127.0.0.1:4322/`: las 28 URLs del sitemap y las 10
+  rutas auxiliares responden 200; no hay canonicals incorrectos ni metadata
+  `robots` inesperada.
+- La portada, Axis One, search y cart conservan sus titles, canonicals y
+  directivas SEO esperadas; las 8 rutas controladas son las unicas con
+  `noindex, nofollow`.
+- Las variantes locales `.html` responden 200, las variantes con slash no se
+  generan y las rutas inexistentes o retiradas responden 404.
+- Preview de Axis One a 390px y 1440px: sin overflow horizontal y con
+  `index, follow`.
+- No se encontraron referencias a `PUBLIC_SITE_ENV` en el codigo ejecutable de
+  `src`; la preview no registro errores de consola en la pagina cargada.
+
+### Estado posterior
+
+- La verificacion local queda cerrada. La etapa de despliegue sigue abierta
+  porque aun falta crear y proteger una preview real de Cloudflare Pages.
+- No se modificaron DNS, produccion, Shopify ni `Readme.md`.

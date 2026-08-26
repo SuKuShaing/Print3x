@@ -63,8 +63,6 @@ const homeUrl = new URL('/', siteBase).toString();
 const websiteId = `${homeUrl}#website`;
 const organizationId = `${homeUrl}#organization`;
 const webPageId = `${canonical}#webpage`;
-const productionBuild = import.meta.env.PUBLIC_SITE_ENV === 'production';
-const effectiveNoIndex = noIndex || !productionBuild;
 const resolvedSocialImage = socialImage ?? siteMedia.logo.src;
 const resolvedSocialImageUrl = new URL(resolvedSocialImage.src, siteBase).toString();
 const resolvedSocialTitle = socialTitle ?? title;
@@ -140,7 +138,7 @@ const schemaNodes: SchemaNode[] = [
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/Favicon.png" type="image/png" />
     <meta name="theme-color" content="#ce1870" />
-    <meta name="robots" content={effectiveNoIndex ? 'noindex, nofollow' : 'index, follow'} />
+    <meta name="robots" content={noIndex ? 'noindex, nofollow' : 'index, follow'} />
     {description && <meta name="description" content={description} />}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_CL" />
