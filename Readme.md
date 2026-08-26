@@ -42,13 +42,14 @@ Durante la pandemia quebramos y Print3x dejó de operar como emprendimiento. Est
 
 ## ToDos
 
-- [ ] revisar datos sensibles
+- [ ] colocar el schema en las páginas
 - [ ] colocar el opengraph en las páginas
 - [ ] colocar los trackers
 - [ ] Crear el robots.txt
-- [ ] colocarle el llm.txt
+- [ ] colocar el llm.txt
 - [ ] desplegar
 
+- [x] revisar datos sensibles
 - [x] hacer un buen readme
 - [x] instalar el astro sitemaps
 - [x] eliminar las páginas de blog
