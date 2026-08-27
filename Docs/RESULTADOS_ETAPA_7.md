@@ -991,3 +991,61 @@
 - La verificacion local queda cerrada. La etapa de despliegue sigue abierta
   porque aun falta crear y proteger una preview real de Cloudflare Pages.
 - No se modificaron DNS, produccion, Shopify ni `Readme.md`.
+
+## Actualizacion Etapa 7 - Tarea 7.2: archivo `llms.txt`
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+**Fecha:** 2026-08-27
+
+### Investigacion y decision
+
+- Se leyo `cuales son las mejores practicas para crear un arc.md`; confirma el
+  nombre `llms.txt`, la ubicacion en la raiz del dominio, el formato Markdown,
+  los enlaces absolutos y la necesidad de curar el contenido.
+- La especificacion primaria de `llms.txt` en `https://llmstxt.org` y la
+  propuesta de Answer.AI confirman que el `H1` es el unico elemento obligatorio;
+  el resumen, el contexto y las listas de enlaces bajo `H2` son la estructura
+  recomendada. La seccion `Optional` se reserva para contenido secundario.
+- Se eligio `public/llms.txt` porque Astro copia su contenido directamente a la
+  raiz de `dist`, sin crear una ruta dinamica ni un endpoint adicional.
+
+### Cambio realizado
+
+- Se creo `public/llms.txt` con el contexto factual del escaparate historico:
+  origen de Print3x, idioma, ausencia de comercio activo y advertencia sobre
+  precios, disponibilidad, envios y afirmaciones tecnicas historicas.
+- El archivo contiene 25 enlaces absolutos a contenido publico curado: portada,
+  colecciones, 13 productos, guias de filamento, curso, cuatro articulos,
+  historia e identidad y una tabla de envios en `Optional`.
+- Se excluyeron rutas auxiliares, carrito, busqueda, policies, tag `noindex`,
+  indices de blog vacios, contenido promocional pendiente, rutas retiradas y
+  templates sin URL publica confirmada.
+
+### Verificacion independiente
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 38 paginas estaticas generadas.
+- `dist/llms.txt` existe y coincide con el archivo fuente de `public/`.
+- Preview local en `http://127.0.0.1:4322/llms.txt`: estado `200`, contenido de
+  texto, 1 `H1`, 4 `H2` y 25 enlaces absolutos.
+- Las 25 URLs enlazadas responden `200` en la preview local.
+- `robots.txt` responde `200` y mantiene el rastreo general habilitado.
+- `git diff --check`: correcto.
+
+### Bloqueos y pendientes
+
+- `llms.txt` es una propuesta de descubrimiento para agentes, no un mecanismo
+  de control de acceso ni un reemplazo de `robots.txt`.
+- Debe verificarse en la preview real de Cloudflare Pages que `/llms.txt`
+  conserve estado `200`, tipo de contenido de texto, cache y acceso sin bloqueo.
+- No se crea `llms-full.txt` porque no fue solicitado y el sitio no publica
+  versiones Markdown paralelas de sus paginas; los agentes deben seguir los
+  enlaces HTML canonicos.
+- No se modificaron DNS, produccion, Shopify, `Readme.md` ni el tema Shopify.
+
+### Criterio de aceptacion
+
+Cumplido para el build y la preview local: existe un `llms.txt` en la raiz de la
+salida estatica, sigue la estructura recomendada, enlaza solo contenido publico
+curado con URLs canonicas y advierte sobre el caracter historico del sitio. La
+validacion del hosting real permanece pendiente de la preview autorizada.
