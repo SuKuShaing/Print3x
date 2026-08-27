@@ -8,7 +8,7 @@ sourceRetrieved: '2026-07-30'
 status: published
 availability: unavailable
 descriptionStatus: pending
-seoDescription: null
+seoDescription: 'Filamento PLA blanco de 1 kg, con diámetro de 1,75 mm y 335,29 m de longitud por rollo. Registro histórico de Print3x con ficha técnica.'
 historicalPriceCLP: 10990
 historicalCompareAtPriceCLP: 15990
 historicalPriceMaxCLP: null

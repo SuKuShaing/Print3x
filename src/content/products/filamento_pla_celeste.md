@@ -8,7 +8,7 @@ sourceRetrieved: '2026-07-30'
 status: published
 availability: unavailable
 descriptionStatus: available
-seoDescription: null
+seoDescription: 'Filamento PLA celeste de 1 kg y 1,75 mm, con color homogéneo, 335,29 m por rollo y temperatura de trabajo de 210 a 220 °C.'
 historicalPriceCLP: 4990
 historicalCompareAtPriceCLP: 15990
 historicalPriceMaxCLP: null

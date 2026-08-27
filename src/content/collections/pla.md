@@ -6,7 +6,7 @@ sourceUrl: https://www.print3x.cl/collections/pla
 sourceRetrieved: '2026-07-30'
 status: published
 descriptionStatus: available
-seoDescription: null
+seoDescription: 'Explora la colección histórica de filamentos PLA de Print3x: rollos de 1 kg, diámetro de 1,75 mm ± 0,05 mm, 335,29 m y datos de impresión.'
 productSlugs:
   - filamento_pla_celeste
   - filamento_pla_azul

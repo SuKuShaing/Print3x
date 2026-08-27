@@ -8,7 +8,7 @@ sourceRetrieved: '2026-07-30'
 status: published
 availability: unavailable
 descriptionStatus: pending
-seoDescription: null
+seoDescription: 'Filamento PLA rosado de 1,75 mm, en rollo de 1 kg y 335,29 m, con temperatura de trabajo de 210 a 220 °C. Registro histórico.'
 historicalPriceCLP: 10990
 historicalCompareAtPriceCLP: 15990
 historicalPriceMaxCLP: null

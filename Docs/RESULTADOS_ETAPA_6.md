@@ -250,3 +250,238 @@ Cumplido para preview: todas las paginas generadas tienen imagen social, titulo 
 descripcion adecuados; las imagenes usan assets locales optimizados o el logo de
 fallback; las URLs son absolutas y canonicas; y las rutas controladas conservan
 su proteccion de indexacion.
+
+## Actualizacion posterior: auditoria SEO independiente local
+
+**Etapa:** 6 - Tareas 6.2, 6.4 y 6.5
+**Fecha:** 2026-08-26
+**Estado:** Auditoria local completada; correcciones SEO on-page pendientes.
+
+Esta verificacion se ejecuto sobre el estado actual despues de la integracion de
+metadata social. No modifica la preparacion de Cloudflare, no aprueba produccion
+y no reemplaza la validacion de una preview publica.
+
+### Alcance y evidencia
+
+- Se leyeron las reglas de `seo-audit`, el plan maestro, la matriz de rutas, el
+  manifiesto de media, `Docs/SCHEMA_SEO.md` y los resultados de las etapas 6 y 7.
+- `pnpm install --frozen-lockfile`: correcto.
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; el estado actual genera 38 paginas estaticas,
+  `sitemap-index.xml` y `sitemap-0.xml`.
+- El sitemap hijo contiene 28 URLs aprobadas; las 28 responden `200` en preview.
+- Se rastrearon 34 enlaces internos unicos: 0 enlaces rotos y 0 errores de
+  consola al visitar las 28 URLs del sitemap.
+- Los 28 documentos contienen JSON-LD parseable. Se observaron `Organization`,
+  `WebSite`, `WebPage`, `BreadcrumbList`, `CollectionPage`, `ItemList`,
+  `Article`, `AboutPage` y `Product`.
+- Lighthouse de home desktop/mobile: SEO, accesibilidad y buenas practicas en
+  100. `/collections/pla` obtuvo SEO 83 y accesibilidad 96; `/products/axis-one`
+  obtuvo SEO 83 y accesibilidad 97. Ambos resultados estan afectados por la
+  ausencia de meta description; PLA tambien tiene un problema de contraste.
+- Las pruebas de rutas locales muestran: rutas limpias `200`, variantes con
+  slash `404`, variantes `.html` `200`, y rutas inexistentes `404`. El resultado
+  final debe confirmarse en Cloudflare Pages.
+- Las imagenes revisadas tienen `width` y `height` y se sirven desde `/_astro/`.
+  La navegacion completa no produjo errores de consola.
+
+### Hallazgos priorizados
+
+#### P1 - Meta descriptions ausentes en rutas indexables
+
+Faltan `<meta name="description">` en estas 17 URLs indexables:
+
+- `/blogs/curso_impresion_3d/configurar-repetier-host`
+- `/collections/impresoras-3d`
+- `/collections/pla`
+- `/pages/decuento-por-post-en-rrss`
+- `/products/axis-one`
+- `/products/pla_amarillo`
+- `/products/pla_azul`
+- `/products/pla_blanco`
+- `/products/pla_celeste`
+- `/products/pla_gris`
+- `/products/pla_negro`
+- `/products/pla_oro`
+- `/products/padi-superficie-de-impresion`
+- `/products/pla_pantera_rosa`
+- `/products/pla_rojo`
+- `/products/pla_transparente`
+- `/products/pla_verde`
+
+La causa esta documentada en `src/pages/products/[slug].astro` y
+`src/pages/collections/[slug].astro`, que pasan `seoDescription` aunque el
+contenido de productos y colecciones la mantiene en `null`. La pagina de
+Repetier y la pagina promocional tampoco tienen una descripcion SEO aprobada.
+No se debe rellenar automaticamente con texto inventado.
+
+#### P1 - Jerarquia de headings incompleta en OpenSCAD
+
+`/blogs/curso_impresion_3d/openscad` no renderiza ningun `<h1>`. El componente
+`src/components/OpenScadArticle.astro` comienza con un `<h2>` y su ruta no agrega
+un encabezado principal. Se debe incorporar el titulo aprobado como `<h1>`.
+
+#### P1 - Recurso remoto cargado antes de activar el video
+
+La navegacion de `/products/axis-one` solicito
+`https://i.ytimg.com/vi/J-rV8g_5Te4/hqdefault.jpg` antes de la interaccion. El
+iframe sigue diferido, pero el poster externo contradice la regla del proyecto
+de no cargar recursos remotos automaticamente. `LiteYoutube.astro` debe recibir
+un poster local tambien en el bloque editorial o diferir toda solicitud remota.
+
+#### P2 - Alt de imagen pendiente
+
+La auditoria encontro numerosos `alt` vacios entre 262 imagenes observadas,
+incluidos logo, heroes y galerias de productos. El origen esta en los registros
+con `altStatus: pending` de `src/data/index-media.ts`, `src/data/product-media.ts`
+y `src/data/site-media.ts`. Se debe completar alt editorial aprobado; solo las
+imagenes puramente decorativas deben conservar `alt=""`.
+
+#### P2 - Descripciones duplicadas o demasiado largas
+
+`/blogs/articulos` y `/blogs/noticias` comparten una descripcion de 320
+caracteres. Tambien hay descripciones de 176 a 306 caracteres en blogs y paginas
+editoriales. Deben revisarse con copy aprobado y diferenciarlas por intencion de
+busqueda, sin inventar claims.
+
+#### P2 - Indices y contenido fino
+
+`/blogs/articulos` y `/blogs/noticias` son indexables aunque sus fuentes tienen
+`articles: []`. `/pages/decuento-por-post-en-rrss` publica principalmente un
+placeholder y carece de metadata SEO. Cada caso requiere contenido aprobado,
+`noindex` o retiro segun la matriz de rutas.
+
+#### P2 - URLs historicas retiradas sin destino documentado en hosting
+
+Las tres URLs de articulos retirados responden `404` sin redirect local. Tambien
+responden `404` las rutas auxiliares no publicadas de contacto, TPU y accesorios.
+La decision de retiro existe en la matriz, pero debe confirmarse si corresponde
+un `301` a un equivalente real o un retiro definitivo.
+
+#### P2 - Contraste en precio regular
+
+Lighthouse detecta `#b964ad` sobre blanco con ratio `3.82`, inferior a `4.5`, en
+el precio regular de PLA. El color debe oscurecerse o aplicarse una combinacion
+aprobada que conserve la identidad visual.
+
+#### P3 - Variantes y sitemap
+
+- `/sitemap.xml` responde `404`; el endpoint actual y anunciado es
+  `/sitemap-index.xml`. Debe confirmarse si se requiere redirect desde el
+  endpoint historico.
+- Las variantes `.html` responden `200` y las variantes con slash `404`; deben
+  probarse canonicals y redirects en Cloudflare Pages.
+- El loc de la home en sitemap no incluye slash final, mientras el canonical de
+  la home si lo incluye. Es una diferencia menor que conviene normalizar.
+- El home carga cinco imagenes con `loading="eager"` (cuatro heroes y el logo).
+  El trace local no mostro CLS (`0`) ni un bloqueo critico, pero solo el primer
+  hero tiene `fetchpriority="high"`.
+
+### Fortalezas confirmadas
+
+- Titles presentes en las rutas auditadas, con longitud observada entre 18 y 57
+  caracteres.
+- Canonicals, Open Graph, Twitter Card y `og:image` usan el dominio canonico y
+  assets procesados por Astro.
+- Rutas controladas mantienen `noindex, nofollow`.
+- No se encontraron enlaces internos rotos ni errores de consola en el crawl.
+- El JSON-LD es valido y no agrega ofertas comerciales falsas; la ausencia de
+  `offers` en productos es consistente con el objetivo de escaparate historico.
+
+### Bloqueos y siguiente accion
+
+- No hay acceso a Search Console, Analytics, CrUX, Cloudflare Pages ni al
+  dominio productivo; no se puede certificar indexacion, redirects reales o
+  rendimiento de campo.
+- El informe historico de esta etapa documenta 41 paginas, mientras el build
+  actual reporta 38. Esta diferencia debe reconciliarse antes del cierre.
+- La siguiente accion es aprobar el copy y los alt faltantes, decidir el destino
+  de las rutas retiradas y corregir los hallazgos P1/P2. Despues se deben repetir
+  `pnpm check`, `pnpm build`, crawl y Lighthouse.
+
+### Criterio de aceptacion de esta actualizacion
+
+Cumplido el crawl local y la comprobacion tecnica basica: build valido, 28 URLs
+del sitemap con `200`, 0 enlaces internos rotos, 0 errores de consola y JSON-LD
+parseable. No se considera cerrada la calidad SEO on-page hasta resolver o
+aprobar explicitamente los hallazgos P1 y P2.
+
+## Actualizacion posterior: remediacion de metadata y OpenSCAD
+
+**Etapa:** 6 - Tareas 6.2 y 6.5
+**Fecha:** 2026-08-26
+**Estado:** Remediacion completada; pendientes SEO no relacionados permanecen
+documentados.
+
+Se asigno una pagina a cada uno de 17 subagentes independientes. Cada agente
+leyo el contenido completo y el contrato de renderizado, redacto una description
+veraz en espanol y modifico solo su fuente de contenido. Un agente adicional
+comparo la jerarquia de headings de los articulos del curso y agrego `OpenSCAD`
+como el unico `<h1>` de `src/components/OpenScadArticle.astro`. Despues se hizo
+una revision editorial central para eliminar formulaciones poco naturales sin
+agregar hechos nuevos.
+
+### Archivos de contenido modificados
+
+- `src/content/articles/configurar-repetier-host.md`
+- `src/content/collections/impresoras-3d.md`
+- `src/content/collections/pla.md`
+- `src/content/pages/decuento-por-post-en-rrss.md`
+- `src/content/products/axis-one.md`
+- `src/content/products/filamento_pla_amarillo.md`
+- `src/content/products/filamento_pla_azul.md`
+- `src/content/products/filamento_pla_blanco.md`
+- `src/content/products/filamento_pla_celeste.md`
+- `src/content/products/filamento_pla_gris.md`
+- `src/content/products/filamento_pla_negro.md`
+- `src/content/products/filamento_pla_oro.md`
+- `src/content/products/filamento_pla_transparente.md`
+- `src/content/products/filamento_pla_verde.md`
+- `src/content/products/padi-superficie-de-impresion.md`
+- `src/content/products/pla_pantera_rosa.md`
+- `src/content/products/pla_rojo.md`
+
+### Reporte de descriptions
+
+Las 17 descriptions nuevas se verificaron en la salida servida. Todas tienen
+entre 122 y 151 caracteres, conservan la naturaleza historica del contenido y
+no agregan precio actual, stock, compra ni claims no documentados.
+
+| URL | Caracteres |
+| --- | ---: |
+| `/blogs/curso_impresion_3d/configurar-repetier-host` | 139 |
+| `/collections/impresoras-3d` | 151 |
+| `/collections/pla` | 138 |
+| `/pages/decuento-por-post-en-rrss` | 134 |
+| `/products/axis-one` | 142 |
+| `/products/filamento_pla_amarillo` | 131 |
+| `/products/filamento_pla_azul` | 136 |
+| `/products/filamento_pla_blanco` | 136 |
+| `/products/filamento_pla_celeste` | 122 |
+| `/products/filamento_pla_gris` | 123 |
+| `/products/filamento_pla_negro` | 124 |
+| `/products/filamento_pla_oro` | 147 |
+| `/products/padi-superficie-de-impresion` | 141 |
+| `/products/pla_pantera_rosa` | 125 |
+| `/products/pla_rojo` | 140 |
+| `/products/filamento_pla_transparente` | 123 |
+| `/products/filamento_pla_verde` | 122 |
+
+### Verificacion independiente
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints.
+- `pnpm build`: correcto; 38 paginas estaticas generadas.
+- Preview: las 17 URLs responden `200`, todas tienen meta description y cada una
+  conserva un solo `<h1>`.
+- Crawl del sitemap: 28 URLs responden `200`, las 28 rutas indexables tienen
+  meta description y no quedan descriptions ausentes.
+- `/blogs/curso_impresion_3d/openscad`: `h1Count=1`, texto exacto `OpenSCAD`.
+- `git diff --check`: correcto.
+- No se modificaron `Readme.md`, DNS, produccion, Shopify,
+  `zip_theme_shopify_estable/` ni `Imagenes_de_la_web/`.
+
+Las descriptions existentes de portada, indices de blog y paginas editoriales
+que superan 160 caracteres, el contraste de precio, el poster remoto de Axis
+One y las decisiones de rutas retiradas siguen pendientes de sus tareas
+especificas; esta actualizacion solo cierra las 17 descriptions ausentes y el
+`h1` de OpenSCAD.

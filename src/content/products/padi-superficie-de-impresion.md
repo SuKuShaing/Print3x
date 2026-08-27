@@ -8,7 +8,7 @@ sourceRetrieved: '2026-07-30'
 status: published
 availability: historical
 descriptionStatus: available
-seoDescription: null
+seoDescription: 'Superficie Padi para impresión 3D: facilita la adhesión del filamento y el despegue de las piezas al doblarla sobre una plataforma magnética.'
 historicalPriceCLP: 49990
 historicalCompareAtPriceCLP: null
 historicalPriceMaxCLP: 59990

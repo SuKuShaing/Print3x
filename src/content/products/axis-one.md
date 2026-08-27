@@ -8,7 +8,7 @@ sourceRetrieved: '2026-07-30'
 status: published
 availability: historical
 descriptionStatus: available
-seoDescription: null
+seoDescription: 'Impresora 3D profesional Axis One de Print3x, con calibración automática, pantalla táctil y compatibilidad con filamentos rígidos y flexibles.'
 historicalPriceCLP: 3000000
 historicalCompareAtPriceCLP: null
 historicalPriceMaxCLP: null

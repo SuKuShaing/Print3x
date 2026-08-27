@@ -8,7 +8,7 @@ sourceRetrieved: '2026-07-30'
 status: published
 availability: unavailable
 descriptionStatus: pending
-seoDescription: null
+seoDescription: 'Filamento PLA verde de 1 kg para impresión 3D, con diámetro de 1,75 mm y 335,29 m de longitud. Ficha histórica de Print3x.'
 historicalPriceCLP: 10990
 historicalCompareAtPriceCLP: 15990
 historicalPriceMaxCLP: null

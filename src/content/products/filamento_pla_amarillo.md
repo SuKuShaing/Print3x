@@ -8,7 +8,7 @@ sourceRetrieved: '2026-07-30'
 status: published
 availability: unavailable
 descriptionStatus: pending
-seoDescription: null
+seoDescription: 'Filamento PLA amarillo de 1 kg y 1,75 mm, con color homogéneo y temperatura de trabajo de 210 a 220 °C. Ficha histórica de Print3x.'
 historicalPriceCLP: 10990
 historicalCompareAtPriceCLP: 15990
 historicalPriceMaxCLP: null

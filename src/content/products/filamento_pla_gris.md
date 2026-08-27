@@ -8,7 +8,7 @@ sourceRetrieved: '2026-07-30'
 status: published
 availability: unavailable
 descriptionStatus: pending
-seoDescription: null
+seoDescription: 'Filamento PLA gris histórico de 1 kg, diámetro 1,75 mm ± 0,05 y 335,29 m por rollo; temperatura de trabajo de 210 a 220 °C.'
 historicalPriceCLP: 10990
 historicalCompareAtPriceCLP: 15990
 historicalPriceMaxCLP: null

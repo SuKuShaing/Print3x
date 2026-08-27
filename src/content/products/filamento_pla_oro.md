@@ -8,7 +8,7 @@ sourceRetrieved: '2026-07-30'
 status: published
 availability: unavailable
 descriptionStatus: pending
-seoDescription: null
+seoDescription: 'Filamento PLA Dorado para impresión 3D, rollo de 1 kg, diámetro de 1,75 mm y temperatura de trabajo de 210 a 220 °C. Registro histórico de Print3x.'
 historicalPriceCLP: 10990
 historicalCompareAtPriceCLP: 15990
 historicalPriceMaxCLP: null

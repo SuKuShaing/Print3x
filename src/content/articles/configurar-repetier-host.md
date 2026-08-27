@@ -5,6 +5,8 @@ title: Configurar Repetier Host
 sourceUrl: https://www.print3x.cl/blogs/curso_impresion_3d/configurar-repetier-host
 sourceRetrieved: '2026-07-30'
 status: published
+seo:
+  description: 'Aprende a configurar Repetier Host con un video paso a paso, archivos de configuración, PDF de apoyo y versiones para Windows, Linux y Mac.'
 tags: [impresion-3d, repetier-host]
 media:
   - status: available

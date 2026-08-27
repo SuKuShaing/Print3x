@@ -6,7 +6,7 @@ sourceUrl: https://www.print3x.cl/collections/impresoras-3d
 sourceRetrieved: '2026-07-30'
 status: published
 descriptionStatus: available
-seoDescription: null
+seoDescription: 'Explora la colección histórica de Print3x: impresora 3D Axis One y superficie Padi, con asesoría, calibración automática y amplio volumen de impresión.'
 productSlugs:
   - axis-one
   - padi-superficie-de-impresion

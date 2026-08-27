@@ -4,6 +4,8 @@ title: Decuento por Post en RRSS
 sourceUrl: https://www.print3x.cl/pages/decuento-por-post-en-rrss
 sourceRetrieved: '2026-07-30'
 status: published
+seo:
+  description: 'Página histórica de Print3x sobre «Filamento x Historia»; el bloque promocional y el formulario original están pendientes de revisión.'
 media:
   - status: pending
     sourceReference: 'Klaviyo image 321aabc4-a65d-4ad4-a6c2-feb3aa85cbe9.jpeg'
