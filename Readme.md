@@ -42,13 +42,11 @@ Durante la pandemia quebramos y Print3x dejó de operar como emprendimiento. Est
 
 ## ToDos
 
-- [ ] pasar la skill de diseño
-- [ ] pasar la skill de animaciones
-- [ ] colocar los trackers
-- [ ] Crear el robots.txt
 - [ ] colocar el llm.txt
+- [ ] colocar los trackers
 - [ ] desplegar
 
+- [x] Crear el robots.txt
 - [x] pasar la skill de SEO
 - [x] colocar el opengraph en las páginas
 - [x] colocar el schema en las páginas
