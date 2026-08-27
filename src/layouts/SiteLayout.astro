@@ -166,5 +166,58 @@ const schemaNodes: SchemaNode[] = [
     </main>
     <Footer />
     <script src="../scripts/print3x-ui.ts"></script>
+    <script is:inline>
+      (() => {
+        const loadGoogleAnalytics = () => {
+          if (window.__print3xGoogleAnalyticsLoaded) return;
+
+          window.__print3xGoogleAnalyticsLoaded = true;
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function gtag() {
+            window.dataLayer.push(arguments);
+          };
+          window.gtag('js', new Date());
+          window.gtag('config', 'G-F5XTDB1B1S');
+
+          const script = document.createElement('script');
+          script.async = true;
+          script.src = 'https://www.googletagmanager.com/gtag/js?id=G-F5XTDB1B1S';
+          document.head.appendChild(script);
+        };
+
+        const loadClarity = () => {
+          if (window.__print3xClarityLoaded) return;
+
+          window.__print3xClarityLoaded = true;
+          window.clarity = window.clarity || function clarity() {
+            (window.clarity.q = window.clarity.q || []).push(arguments);
+          };
+
+          const script = document.createElement('script');
+          script.async = true;
+          script.src = 'https://www.clarity.ms/tag/y95dr45vtg';
+          document.head.appendChild(script);
+        };
+
+        const loadAnalytics = () => {
+          loadGoogleAnalytics();
+          loadClarity();
+        };
+
+        const scheduleAnalytics = () => {
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(loadAnalytics, { timeout: 2000 });
+          } else {
+            window.setTimeout(loadAnalytics, 0);
+          }
+        };
+
+        if (document.readyState === 'complete') {
+          scheduleAnalytics();
+        } else {
+          window.addEventListener('load', scheduleAnalytics, { once: true });
+        }
+      })();
+    </script>
   </body>
 </html>

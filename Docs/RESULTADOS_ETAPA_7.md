@@ -1049,3 +1049,95 @@ Cumplido para el build y la preview local: existe un `llms.txt` en la raiz de la
 salida estatica, sigue la estructura recomendada, enlaza solo contenido publico
 curado con URLs canonicas y advierte sobre el caracter historico del sitio. La
 validacion del hosting real permanece pendiente de la preview autorizada.
+
+## Actualizacion Etapa 7 - Tarea 7.2: Google Analytics diferido
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+**Fecha:** 2026-08-27
+
+### Decision
+
+- Se autorizo explicitamente incorporar la propiedad Google Analytics 4
+  `G-F5XTDB1B1S` entregada por el usuario.
+- Esta integracion usa la libreria `gtag.js`; no incorpora el contenedor
+  historico de Google Tag Manager `GTM-5VNX4MX`.
+
+### Cambio realizado
+
+- `src/layouts/SiteLayout.astro` inicializa `dataLayer` y `gtag` al final del
+  `body`, pero solo inserta `https://www.googletagmanager.com/gtag/js` despues
+  del evento `load` de la pagina.
+- Tras `load`, se usa `requestIdleCallback` con un timeout de 2 segundos y un
+  fallback con `setTimeout(0)` para navegadores sin esa API.
+- Se conserva una guarda para evitar inicializaciones duplicadas dentro de una
+  misma pagina.
+
+### Verificacion independiente
+
+- `pnpm install --frozen-lockfile`: correcto.
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints en 49 archivos.
+- `pnpm build`: correcto; 38 paginas estaticas generadas.
+- La salida contiene el loader en las paginas generadas, pero no contiene un
+  `<script src="https://www.googletagmanager.com/...">` estatico.
+- Preview local de `/`: `readyState` `complete`, `dataLayer` inicializado,
+  `G-F5XTDB1B1S` presente y solicitud posterior a `googletagmanager.com` /
+  `analytics.google.com` observada sin errores de consola.
+- `git diff --check`: correcto; solo muestra el aviso normal de conversion
+  LF/CRLF de Git.
+
+### Bloqueos y pendientes
+
+- La integracion envia datos a Google para las visitas que carguen el tracker;
+  la necesidad de un banner o mecanismo de consentimiento debe revisarse antes
+  de produccion conforme a la politica legal aplicable.
+- No se modificaron DNS, produccion, Shopify, `Readme.md` ni el tema Shopify.
+
+### Criterio de aceptacion
+
+Cumplido para codigo, build y preview local: el tracker funciona en el layout
+comun y la solicitud externa no comienza durante la carga critica, sino despues
+de que la pagina alcanza `load` y el navegador dispone de un periodo idle.
+
+## Actualizacion Etapa 7 - Tarea 7.2: Microsoft Clarity diferido
+
+**Estado:** completada; consentimiento legal pendiente.
+**Fecha:** 2026-08-27
+
+### Decision
+
+- Se autorizo explicitamente incorporar el proyecto Microsoft Clarity
+  `y95dr45vtg` entregado por el usuario.
+- Clarity comparte el mismo loader diferido de Google Analytics, pero conserva
+  su propia cola y guarda de inicializacion.
+
+### Cambio realizado
+
+- `src/layouts/SiteLayout.astro` inicializa `window.clarity` y agrega de forma
+  dinamica `https://www.clarity.ms/tag/y95dr45vtg` despues del evento `load`.
+- La carga se ejecuta dentro de `requestIdleCallback` con timeout de 2 segundos
+  y usa `setTimeout(0)` como fallback.
+- La etiqueta se aplica desde el layout comun a todas las paginas generadas.
+
+### Verificacion independiente
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints en 49 archivos.
+- `pnpm build`: correcto; 38 paginas estaticas generadas.
+- La salida contiene `y95dr45vtg` solo dentro de `script.src`; no contiene una
+  etiqueta `<script src="https://www.clarity.ms/...">` estatica.
+- La preview confirma la presencia del proyecto, la funcion `clarity` y la
+  carga despues de `window.load`, sin errores de consola en la carga limpia.
+- `git diff --check`: correcto; solo muestra el aviso normal de conversion
+  LF/CRLF de Git.
+
+### Bloqueos y pendientes
+
+- Clarity puede registrar sesiones, interacciones y datos tecnicos del uso; la
+  necesidad de consentimiento, aviso de privacidad y configuracion de mascarado
+  debe revisarse antes de produccion junto con Google Analytics.
+- No se modificaron DNS, produccion, Shopify, `Readme.md` ni el tema Shopify.
+
+### Criterio de aceptacion
+
+Cumplido para codigo, build y preview local: Clarity funciona desde el layout
+comun y su solicitud externa comienza despues de la carga completa y el periodo
+idle, sin bloquear el renderizado inicial.
