@@ -42,12 +42,11 @@ Durante la pandemia quebramos y Print3x dejó de operar como emprendimiento. Est
 
 ## ToDos
 
+- [ ] desplegar
+
 - [x] colocar los trackers
     - [x] google Analytics
     - [x] clarity
-
-- [ ] desplegar
-
 - [x] colocar el llm.txt
 - [x] Crear el robots.txt
 - [x] pasar la skill de SEO
