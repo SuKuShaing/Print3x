@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import cloudflare from '@astrojs/cloudflare';
 
 const approvedSitemapPaths = new Set([
   '/',
@@ -34,6 +35,7 @@ const approvedSitemapPaths = new Set([
 
 export default defineConfig({
   output: 'static',
+  adapter: cloudflare(),
   site: 'https://www.print3x.cl',
   trailingSlash: 'never',
   build: {
