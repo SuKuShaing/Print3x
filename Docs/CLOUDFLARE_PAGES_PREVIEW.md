@@ -17,6 +17,11 @@
 
 `.nvmrc` fija Node `22.12.0` para herramientas locales compatibles con `package.json`.
 
+`astro.config.mjs` mantiene una salida estatica sin el adaptador de Cloudflare,
+porque este proyecto no usa SSR ni bindings de runtime. `wrangler.jsonc` queda
+disponible para un despliegue opcional mediante Wrangler; el flujo de Pages usa
+directamente la carpeta `dist` indicada arriba.
+
 ## Comportamiento de indexacion
 
 - `pnpm build` genera `dist/sitemap-index.xml` y `dist/sitemap-0.xml`, con las 28 rutas aprobadas y sin `lastmod` inventado.

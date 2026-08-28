@@ -1141,3 +1141,51 @@ de que la pagina alcanza `load` y el navegador dispone de un periodo idle.
 Cumplido para codigo, build y preview local: Clarity funciona desde el layout
 comun y su solicitud externa comienza despues de la carga completa y el periodo
 idle, sin bloquear el renderizado inicial.
+
+## Correccion Etapa 7 - Tarea 7.1: configuracion estatica para Cloudflare Pages
+
+**Estado:** configuracion corregida; despliegue de preview pendiente de autorizacion.
+**Fecha:** 2026-08-28
+
+### Causa
+
+- Cloudflare Pages y la verificacion local no podian leer `wrangler.jsonc` porque
+  `name` tenia el valor `Print3x`; Wrangler exige un nombre en minusculas con
+  caracteres alfanumericos y guiones.
+- Tras corregir el nombre, el adaptador `@astrojs/cloudflare@14.2.5` resulto
+  incompatible con `astro@7.1.6`: importaba `beginContentEntryCollection`, que
+  no existe en esa version.
+- El adaptador tambien preservaba la salida publica en `dist/client`, mientras
+  el proyecto es estatico y Pages esta configurado para publicar `dist`.
+
+### Cambio realizado
+
+- `wrangler.jsonc` ahora usa `"name": "print3x"`.
+- Se retiro `@astrojs/cloudflare` de `astro.config.mjs` y `package.json`. La
+  aplicacion no usa SSR, bindings ni APIs del runtime de Cloudflare, por lo que
+  la salida estatica no necesita ese adaptador.
+- Se conserva Wrangler como herramienta opcional y `wrangler.jsonc` como
+  configuracion valida para un despliegue directo de assets.
+
+### Verificacion independiente
+
+- Antes del cambio, `pnpm check` y `pnpm build` reprodujeron el error de Wrangler
+  reportado por Cloudflare.
+- Con el nombre corregido pero el adaptador activo, `pnpm check` pasaba y
+  `pnpm build` reproducia el error `MISSING_EXPORT` de compatibilidad.
+- `pnpm install --frozen-lockfile`: correcto.
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints en 49 archivos.
+- `pnpm build`: correcto; 38 paginas estaticas generadas, con `index.html`,
+  `404.html`, `robots.txt`, sitemap y assets en la raiz de `dist`.
+- `pnpm exec wrangler deploy --dry-run`: correcto; Wrangler acepta `print3x`
+  y lee los assets de `dist` sin publicar.
+- `git diff --check`: correcto; solo muestra avisos normales de conversion
+  LF/CRLF de Git.
+- No se modificaron DNS, produccion, Shopify, `Readme.md` ni el tema Shopify.
+
+### Criterio de aceptacion
+
+La configuracion de Wrangler deja de bloquear la lectura del proyecto y el
+build estatico produce la carpeta `dist` esperada por Pages. La publicacion de
+una preview real y la validacion de rutas limpias siguen pendientes en
+Cloudflare Pages.
