@@ -42,8 +42,9 @@ Durante la pandemia quebramos y Print3x dejó de operar como emprendimiento. Est
 
 ## ToDos
 
-- [ ] desplegar
+- [ ] Cambiar DNS
 
+- [x] desplegar
 - [x] colocar los trackers
     - [x] google Analytics
     - [x] clarity

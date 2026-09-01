@@ -34,7 +34,7 @@ const approvedSitemapPaths = new Set([
 
 export default defineConfig({
   output: 'static',
-  site: 'https://www.print3x.cl',
+  site: 'https://print3x.cl',
   trailingSlash: 'never',
   build: {
     format: 'file',
