@@ -42,8 +42,11 @@ Durante la pandemia quebramos y Print3x dejó de operar como emprendimiento. Est
 
 ## ToDos
 
-- [ ] Cambiar DNS
+- [ ] Despliegue suave
+- [ ] Color al navegador
 
+- [x] www → apex
+- [x] Cambiar DNS
 - [x] desplegar
 - [x] colocar los trackers
     - [x] google Analytics
