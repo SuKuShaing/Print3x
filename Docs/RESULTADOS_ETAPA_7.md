@@ -1189,3 +1189,46 @@ La configuracion de Wrangler deja de bloquear la lectura del proyecto y el
 build estatico produce la carpeta `dist` esperada por Pages. La publicacion de
 una preview real y la validacion de rutas limpias siguen pendientes en
 Cloudflare Pages.
+
+## Actualizacion Etapa 7 - Tarea 7.2: transicion nativa de acordeones
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+**Fecha:** 2026-09-01
+
+### Investigacion y decision
+
+- La documentacion de Chrome y MDN confirma que `::details-content` es el pseudo-elemento que representa el contenido desplegable.
+- La animacion entre `block-size: 0` y `block-size: auto` requiere `interpolate-size: allow-keywords`.
+- `content-visibility` debe incluirse en la transicion con `allow-discrete` para que el contenido permanezca visible durante el cierre.
+- La regla se limita a `.accordion details`; no se aplica al menu desktop/mobile del header, que usa `details` para otra interaccion y ya tiene sus propias transiciones.
+
+### Cambio realizado
+
+- `src/styles/components/accordion.css` incorpora `interpolate-size` bajo feature detection y anima el contenido nativo de los acordeones durante un segundo.
+- Se usa `overflow: clip` en `::details-content` para evitar que el contenido sobresalga mientras cambia de altura.
+- La transicion se activa solo con `prefers-reduced-motion: no-preference`; con movimiento reducido el acordeon conserva apertura y cierre instantaneos.
+- Los navegadores sin `::details-content` mantienen el comportamiento nativo sin animacion.
+
+### Archivos creados o modificados
+
+- `src/styles/components/accordion.css`
+- `Docs/RESULTADOS_ETAPA_7.md`
+- `Docs/ETAPAS_Y_TAREAS_MIGRACION.md`
+
+### Verificacion independiente
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints en 49 archivos.
+- `pnpm build`: correcto; 38 paginas estaticas generadas y sitemap creado.
+- `git diff --check`: correcto; solo muestra el aviso normal de conversion LF/CRLF de Git.
+- Preview local de `/products/filamento_pla_celeste`: `CSS.supports('selector(.accordion details::details-content)')` y `CSS.supports('interpolate-size: allow-keywords')` devuelven `true`.
+- Preview local: el acordeon cerrado computa `block-size: 0px` y `content-visibility: hidden`; al abrir pasa progresivamente por alturas intermedias hasta su altura natural y al cerrar vuelve a `0px` antes de ocultarse.
+- Preview local: el menu desktop conserva su transicion original y no contiene la transicion de proyecto `block-size 1s`; no se registra overflow ni error de consola.
+
+### Bloqueos y pendientes
+
+- `interpolate-size` mantiene disponibilidad limitada en algunos navegadores; esos navegadores conservan el disclosure funcional sin animacion.
+- No se modificaron DNS, produccion, Shopify, `Readme.md` ni el tema Shopify.
+
+### Criterio de aceptacion
+
+Cumplido para codigo, build y preview local: los acordeones existentes abren y cierran suavemente mediante CSS nativo, la animacion respeta movimiento reducido, los navegadores sin soporte siguen mostrando el contenido y los menus del header no fueron alterados.

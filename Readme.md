@@ -42,11 +42,24 @@ Durante la pandemia quebramos y Print3x dejó de operar como emprendimiento. Est
 
 ## ToDos
 
-- [ ] Verificar el redireccionamiento print3x.pages.dev a print3x.cl
+- [ ] slice del hero suave en el index
+- [ ] Color al navegador -
+      <meta name="theme-color" content="#0B0824" />
 
-- [ ] Despliegue suave
-- [ ] Color al navegador
+           <!-- Color al navegador en celulares -->
 
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#CE1870" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#941081" />
+
+- [ ] Firmar la web
+      <!-- Firma de quien hizo la web x Seba bb -->
+
+            <script>
+                  console.log("%cPagina web hecha por: Sebastián Sanhueza Tapia\n https://github.com/SuKuShaing", "margin-top: 1rem; background-color: #FF3CAC; background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%); padding: 1rem; color: white; border-radius: .5em; font-size: 1.5rem;")
+            </script>
+
+- [x] Despliegue suave
+- [x] Verificar el redireccionamiento print3x.pages.dev a print3x.cl → No se puede
 - [x] www → apex
 - [x] Cambiar DNS
 - [x] desplegar
