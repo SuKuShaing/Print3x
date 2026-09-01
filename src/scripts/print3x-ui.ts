@@ -142,6 +142,7 @@ function setupSliders(scope: ParentNode): void {
         slide.removeAttribute('data-p3x-slide-entering');
         slide.removeAttribute('data-p3x-slide-entered');
         slide.removeAttribute('data-p3x-slide-exiting');
+        slide.removeAttribute('data-p3x-slide-exited');
 
         if (mode === 'slideshow') slide.hidden = index !== activeIndex;
       });
@@ -167,7 +168,10 @@ function setupSliders(scope: ParentNode): void {
       nextSlide.addEventListener('transitionend', onTransitionEnd);
       transitionCleanupTimer = window.setTimeout(complete, SLIDE_TRANSITION_FALLBACK_MS);
       window.requestAnimationFrame(() => {
-        if (isTransitioning) nextSlide.setAttribute('data-p3x-slide-entered', '');
+        if (!isTransitioning) return;
+
+        previousSlide.setAttribute('data-p3x-slide-exited', '');
+        nextSlide.setAttribute('data-p3x-slide-entered', '');
       });
     };
 

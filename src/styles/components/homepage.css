@@ -36,6 +36,17 @@
   display: flex;
 }
 
+.homepage__slideshow[data-p3x-slider-transition='slide'] .homepage__slide[data-p3x-slide-exiting] {
+  position: relative;
+  transform: translateX(0);
+  transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 0;
+}
+
+.homepage__slideshow[data-p3x-slider-transition='slide'] .homepage__slide[data-p3x-slide-exiting][data-p3x-slide-exited] {
+  transform: translateX(-100%);
+}
+
 .homepage__slideshow[data-p3x-slider-transition='slide'] .homepage__slide[data-p3x-slide-entering] {
   inset: 0;
   position: absolute;

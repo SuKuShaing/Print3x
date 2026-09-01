@@ -1247,7 +1247,7 @@ Cumplido para codigo, build y preview local: los acordeones existentes abren y c
 
 - El hero del index declara `data-p3x-slider-transition="slide"`.
 - En modo slideshow, la nueva slice se mantiene visible sobre la anterior y entra desde `translateX(100%)` hasta `translateX(0)` durante `500ms`.
-- La slide anterior permanece en el flujo durante la animacion para conservar la altura del hero; al terminar se ocultan las demas y se limpian los atributos temporales.
+- La slide anterior permanece en el flujo durante la animacion para conservar la altura del hero, pero se desplaza completa a `translateX(-100%)` junto con su recuadro; al terminar se ocultan las demas y se limpian los atributos temporales.
 - La transicion se omite para navegacion por teclado y `prefers-reduced-motion`; los demas sliders no reciben este comportamiento.
 
 ### Archivos creados o modificados
@@ -1278,3 +1278,32 @@ Cumplido para codigo, build y preview local: los acordeones existentes abren y c
 ### Criterio de aceptacion
 
 Cumplido para codigo y preview local: las nuevas slices del hero ya no aparecen de golpe, sino que cubren la anterior entrando de derecha a izquierda; la altura, accesibilidad, movimiento reducido, teclado y otros sliders se conservan.
+
+## Correccion Etapa 7 - Tarea 7.2: salida del recuadro del hero
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+**Fecha:** 2026-09-01
+
+### Causa
+
+- `.banner__content` usa `z-index: 2` y el recuadro forma parte de ese contenido.
+- La primera version dejaba la slide anterior en el flujo sin desplazarla. Por eso su contenido podia seguir pintandose sobre la nueva slide, aunque la entrada ya funcionara.
+
+### Correccion realizada
+
+- La slide saliente conserva su lugar para mantener la altura del hero, pero ahora se mueve de `translateX(0)` a `translateX(-100%)` junto con todos sus hijos.
+- La slide saliente crea un nivel `z-index: 0` y la entrante permanece en `z-index: 1`, evitando que el recuadro anterior quede por encima.
+- Se sincronizan los atributos temporales de entrada y salida y se limpian al finalizar la transicion.
+
+### Verificacion independiente
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints en 49 archivos.
+- `pnpm build`: correcto; 38 paginas estaticas generadas y sitemap creado.
+- `git diff --check`: correcto; solo muestra avisos normales de conversion LF/CRLF de Git.
+- Preview local de `/`: durante la salida, la posicion de la slide anterior y la de `.homepage__slide-box` se desplazan juntas; a `1440px` pasaron por ejemplo de `x=0/55` a `x=-989/-934`, conservando su desplazamiento relativo.
+- Preview local de `/`: al finalizar, queda una sola slide visible y activa; movimiento reducido mantiene el cambio instantaneo y no hay overflow horizontal.
+- Preview local de `/`: no se registran errores ni warnings de consola.
+
+### Criterio de aceptacion
+
+Cumplido: la slide anterior y su recuadro salen juntos hacia la izquierda, mientras la nueva entra desde la derecha, sin dejar contenido de la slide anterior visible sobre el hero.

@@ -16,8 +16,8 @@ Root: `[data-p3x-slider]`.
 - Optional root values: `data-p3x-slider-mode="scroll"`,
   `data-p3x-slider-loop="false"`, `data-p3x-slider-keyboard="false"`,
   `data-p3x-slider-autoplay="5000"` in milliseconds and
-  `data-p3x-slider-transition="slide"` for a right-to-left entrance in
-  slideshow mode.
+  `data-p3x-slider-transition="slide"` for a right-to-left entrance and
+  leftward exit in slideshow mode.
 
 The default mode shows one slide at a time. Scroll mode keeps slides visible
 and scrolls the selected slide into view. Autoplay is opt-in and is disabled
