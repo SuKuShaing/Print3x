@@ -1,223 +1,273 @@
 ---
-import '../styles/tokens.css';
-import '../styles/base.css';
-import '../styles/components/accordion.css';
-import '../styles/components/banner.css';
-import '../styles/components/card.css';
-import '../styles/components/deferred-media.css';
-import '../styles/components/image-with-text.css';
-import '../styles/components/modal.css';
-import '../styles/components/slider.css';
-import '../styles/components/slideshow.css';
-import '../styles/components/media-placeholder.css';
-import '../styles/components/product.css';
-import '../styles/components/collection.css';
-import '../styles/components/header.css';
-import '../styles/components/footer.css';
-import '../styles/components/controlled-routes.css';
-import '../styles/components/homepage.css';
-import '../styles/components/editorial.css';
-import '../styles/components/premios.css';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import StructuredData from '../components/StructuredData.astro';
-import { siteMedia } from '../data/site-media';
-import type { Breadcrumb, SchemaNode } from '../data/structured-data';
-import type { ImageMetadata } from 'astro';
+import "../styles/tokens.css";
+import "../styles/base.css";
+import "../styles/components/accordion.css";
+import "../styles/components/banner.css";
+import "../styles/components/card.css";
+import "../styles/components/deferred-media.css";
+import "../styles/components/image-with-text.css";
+import "../styles/components/modal.css";
+import "../styles/components/slider.css";
+import "../styles/components/slideshow.css";
+import "../styles/components/media-placeholder.css";
+import "../styles/components/product.css";
+import "../styles/components/collection.css";
+import "../styles/components/header.css";
+import "../styles/components/footer.css";
+import "../styles/components/controlled-routes.css";
+import "../styles/components/homepage.css";
+import "../styles/components/editorial.css";
+import "../styles/components/premios.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import StructuredData from "../components/StructuredData.astro";
+import { siteMedia } from "../data/site-media";
+import type { Breadcrumb, SchemaNode } from "../data/structured-data";
+import type { ImageMetadata } from "astro";
 
 interface Props {
-  title: string;
-  description?: string;
-  noIndex?: boolean;
-  sourceUrl?: string;
-  sourceRetrieved?: string;
-  socialImage?: ImageMetadata;
-  socialTitle?: string;
-  socialDescription?: string;
-  pageType?: 'WebPage' | 'CollectionPage' | 'AboutPage';
-  mainEntityId?: string;
-  breadcrumbs?: readonly Breadcrumb[];
-  structuredData?: readonly SchemaNode[];
+    title: string;
+    description?: string;
+    noIndex?: boolean;
+    sourceUrl?: string;
+    sourceRetrieved?: string;
+    socialImage?: ImageMetadata;
+    socialTitle?: string;
+    socialDescription?: string;
+    pageType?: "WebPage" | "CollectionPage" | "AboutPage";
+    mainEntityId?: string;
+    breadcrumbs?: readonly Breadcrumb[];
+    structuredData?: readonly SchemaNode[];
 }
 
 const {
-  title,
-  description,
-  noIndex = false,
-  sourceUrl,
-  sourceRetrieved,
-  socialImage,
-  socialTitle,
-  socialDescription,
-  pageType = 'WebPage',
-  mainEntityId,
-  breadcrumbs = [],
-  structuredData = [],
+    title,
+    description,
+    noIndex = false,
+    sourceUrl,
+    sourceRetrieved,
+    socialImage,
+    socialTitle,
+    socialDescription,
+    pageType = "WebPage",
+    mainEntityId,
+    breadcrumbs = [],
+    structuredData = [],
 } = Astro.props;
-const canonicalPath = Astro.url.pathname === '/index.html'
-  ? '/'
-  : Astro.url.pathname.replace(/\.html$/, '');
+const canonicalPath =
+    Astro.url.pathname === "/index.html"
+        ? "/"
+        : Astro.url.pathname.replace(/\.html$/, "");
 const siteBase = Astro.site ?? Astro.url;
 const canonical = new URL(canonicalPath, siteBase).toString();
-const homeUrl = new URL('/', siteBase).toString();
+const homeUrl = new URL("/", siteBase).toString();
 const websiteId = `${homeUrl}#website`;
 const organizationId = `${homeUrl}#organization`;
 const webPageId = `${canonical}#webpage`;
 const resolvedSocialImage = socialImage ?? siteMedia.logo.src;
-const resolvedSocialImageUrl = new URL(resolvedSocialImage.src, siteBase).toString();
+const resolvedSocialImageUrl = new URL(
+    resolvedSocialImage.src,
+    siteBase,
+).toString();
 const resolvedSocialTitle = socialTitle ?? title;
 const resolvedSocialDescription = socialDescription ?? description;
 const schemaNodes: SchemaNode[] = [
-  {
-    '@type': 'Organization',
-    '@id': organizationId,
-    name: 'Print3x',
-    url: homeUrl,
-    logo: {
-      '@type': 'ImageObject',
-      url: new URL(siteMedia.logo.src.src, siteBase).toString(),
-      width: siteMedia.logo.width,
-      height: siteMedia.logo.height,
+    {
+        "@type": "Organization",
+        "@id": organizationId,
+        name: "Print3x",
+        url: homeUrl,
+        logo: {
+            "@type": "ImageObject",
+            url: new URL(siteMedia.logo.src.src, siteBase).toString(),
+            width: siteMedia.logo.width,
+            height: siteMedia.logo.height,
+        },
+        sameAs: [
+            "https://twitter.com/print3x",
+            "https://www.facebook.com/Print3x",
+            "https://www.instagram.com/print3x_company/",
+            "https://www.tiktok.com/@print3x_company",
+            "https://www.youtube.com/@print3x",
+        ],
     },
-    sameAs: [
-      'https://twitter.com/print3x',
-      'https://www.facebook.com/Print3x',
-      'https://www.instagram.com/print3x_company/',
-      'https://www.tiktok.com/@print3x_company',
-      'https://www.youtube.com/@print3x',
-    ],
-  },
-  {
-    '@type': 'WebSite',
-    '@id': websiteId,
-    name: 'Print3x',
-    url: homeUrl,
-    publisher: { '@id': organizationId },
-    inLanguage: 'es-CL',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${new URL('/search', siteBase).toString()}?q={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
+    {
+        "@type": "WebSite",
+        "@id": websiteId,
+        name: "Print3x",
+        url: homeUrl,
+        publisher: { "@id": organizationId },
+        inLanguage: "es-CL",
+        potentialAction: {
+            "@type": "SearchAction",
+            target: {
+                "@type": "EntryPoint",
+                urlTemplate: `${new URL("/search", siteBase).toString()}?q={search_term_string}`,
+            },
+            "query-input": "required name=search_term_string",
+        },
     },
-  },
-  {
-    '@type': pageType,
-    '@id': webPageId,
-    name: title,
-    url: canonical,
-    isPartOf: { '@id': websiteId },
-    inLanguage: 'es-CL',
-    ...(description ? { description } : {}),
-    ...(mainEntityId ? { mainEntity: { '@id': mainEntityId } } : {}),
-  },
-  ...(breadcrumbs.length > 0
-    ? [{
-        '@type': 'BreadcrumbList',
-        '@id': `${canonical}#breadcrumb`,
-        itemListElement: breadcrumbs.map((item, index) => ({
-          '@type': 'ListItem',
-          position: index + 1,
-          name: item.name,
-          item: item.url,
-        })),
-      }]
-    : []),
-  ...structuredData,
+    {
+        "@type": pageType,
+        "@id": webPageId,
+        name: title,
+        url: canonical,
+        isPartOf: { "@id": websiteId },
+        inLanguage: "es-CL",
+        ...(description ? { description } : {}),
+        ...(mainEntityId ? { mainEntity: { "@id": mainEntityId } } : {}),
+    },
+    ...(breadcrumbs.length > 0
+        ? [
+              {
+                  "@type": "BreadcrumbList",
+                  "@id": `${canonical}#breadcrumb`,
+                  itemListElement: breadcrumbs.map((item, index) => ({
+                      "@type": "ListItem",
+                      position: index + 1,
+                      name: item.name,
+                      item: item.url,
+                  })),
+              },
+          ]
+        : []),
+    ...structuredData,
 ];
 ---
 
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/Favicon.png" type="image/png" />
-    <meta name="theme-color" content="#ce1870" />
-    <meta name="robots" content={noIndex ? 'noindex, nofollow' : 'index, follow'} />
-    {description && <meta name="description" content={description} />}
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="es_CL" />
-    <meta property="og:site_name" content="Print3x" />
-    <meta property="og:title" content={resolvedSocialTitle} />
-    <meta property="og:url" content={canonical} />
-    {resolvedSocialDescription && <meta property="og:description" content={resolvedSocialDescription} />}
-    <meta property="og:image" content={resolvedSocialImageUrl} />
-    <meta property="og:image:alt" content={resolvedSocialTitle} />
-    <meta property="og:image:width" content={String(resolvedSocialImage.width)} />
-    <meta property="og:image:height" content={String(resolvedSocialImage.height)} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={resolvedSocialTitle} />
-    {resolvedSocialDescription && <meta name="twitter:description" content={resolvedSocialDescription} />}
-    <meta name="twitter:image" content={resolvedSocialImageUrl} />
-    {sourceUrl && <meta name="source" content={sourceUrl} />}
-    {sourceRetrieved && <meta name="source-retrieved" content={sourceRetrieved} />}
-    <StructuredData nodes={schemaNodes} />
-  </head>
-  <body>
-    <a class="skip-to-content-link visually-hidden" href="#MainContent">Ir al contenido principal</a>
-    <Header />
-    <main id="MainContent" role="main" tabindex="-1">
-      <slot />
-    </main>
-    <Footer />
-    <script src="../scripts/print3x-ui.ts"></script>
-    <script is:inline>
-      (() => {
-        const loadGoogleAnalytics = () => {
-          if (window.__print3xGoogleAnalyticsLoaded) return;
-
-          window.__print3xGoogleAnalyticsLoaded = true;
-          window.dataLayer = window.dataLayer || [];
-          window.gtag = function gtag() {
-            window.dataLayer.push(arguments);
-          };
-          window.gtag('js', new Date());
-          window.gtag('config', 'G-F5XTDB1B1S');
-
-          const script = document.createElement('script');
-          script.async = true;
-          script.src = 'https://www.googletagmanager.com/gtag/js?id=G-F5XTDB1B1S';
-          document.head.appendChild(script);
-        };
-
-        const loadClarity = () => {
-          if (window.__print3xClarityLoaded) return;
-
-          window.__print3xClarityLoaded = true;
-          window.clarity = window.clarity || function clarity() {
-            (window.clarity.q = window.clarity.q || []).push(arguments);
-          };
-
-          const script = document.createElement('script');
-          script.async = true;
-          script.src = 'https://www.clarity.ms/tag/y95dr45vtg';
-          document.head.appendChild(script);
-        };
-
-        const loadAnalytics = () => {
-          loadGoogleAnalytics();
-          loadClarity();
-        };
-
-        const scheduleAnalytics = () => {
-          if ('requestIdleCallback' in window) {
-            window.requestIdleCallback(loadAnalytics, { timeout: 2000 });
-          } else {
-            window.setTimeout(loadAnalytics, 0);
-          }
-        };
-
-        if (document.readyState === 'complete') {
-          scheduleAnalytics();
-        } else {
-          window.addEventListener('load', scheduleAnalytics, { once: true });
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{title}</title>
+        <link rel="canonical" href={canonical} />
+        <link rel="icon" href="/Favicon.png" type="image/png" />
+        <meta name="theme-color" content="#ce1870" />
+        <meta
+            name="robots"
+            content={noIndex ? "noindex, nofollow" : "index, follow"}
+        />
+        {description && <meta name="description" content={description} />}
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="es_CL" />
+        <meta property="og:site_name" content="Print3x" />
+        <meta property="og:title" content={resolvedSocialTitle} />
+        <meta property="og:url" content={canonical} />
+        {
+            resolvedSocialDescription && (
+                <meta
+                    property="og:description"
+                    content={resolvedSocialDescription}
+                />
+            )
         }
-      })();
-    </script>
-  </body>
+        <meta property="og:image" content={resolvedSocialImageUrl} />
+        <meta property="og:image:alt" content={resolvedSocialTitle} />
+        <meta
+            property="og:image:width"
+            content={String(resolvedSocialImage.width)}
+        />
+        <meta
+            property="og:image:height"
+            content={String(resolvedSocialImage.height)}
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={resolvedSocialTitle} />
+        {
+            resolvedSocialDescription && (
+                <meta
+                    name="twitter:description"
+                    content={resolvedSocialDescription}
+                />
+            )
+        }
+        <meta name="twitter:image" content={resolvedSocialImageUrl} />
+        {sourceUrl && <meta name="source" content={sourceUrl} />}
+        {
+            sourceRetrieved && (
+                <meta name="source-retrieved" content={sourceRetrieved} />
+            )
+        }
+        <StructuredData nodes={schemaNodes} />
+    </head>
+    <body>
+        <a class="skip-to-content-link visually-hidden" href="#MainContent"
+            >Ir al contenido principal</a
+        >
+        <Header />
+        <main id="MainContent" role="main" tabindex="-1">
+            <slot />
+        </main>
+        <Footer />
+        <script src="../scripts/print3x-ui.ts"></script>
+        <script is:inline>
+            (() => {
+                const loadGoogleAnalytics = () => {
+                    if (window.__print3xGoogleAnalyticsLoaded) return;
+
+                    window.__print3xGoogleAnalyticsLoaded = true;
+                    window.dataLayer = window.dataLayer || [];
+                    window.gtag = function gtag() {
+                        window.dataLayer.push(arguments);
+                    };
+                    window.gtag("js", new Date());
+                    window.gtag("config", "G-F5XTDB1B1S");
+
+                    const script = document.createElement("script");
+                    script.async = true;
+                    script.src =
+                        "https://www.googletagmanager.com/gtag/js?id=G-F5XTDB1B1S";
+                    document.head.appendChild(script);
+                };
+
+                const loadClarity = () => {
+                    if (window.__print3xClarityLoaded) return;
+
+                    window.__print3xClarityLoaded = true;
+                    window.clarity =
+                        window.clarity ||
+                        function clarity() {
+                            (window.clarity.q = window.clarity.q || []).push(
+                                arguments,
+                            );
+                        };
+
+                    const script = document.createElement("script");
+                    script.async = true;
+                    script.src = "https://www.clarity.ms/tag/y95dr45vtg";
+                    document.head.appendChild(script);
+                };
+
+                const loadAnalytics = () => {
+                    loadGoogleAnalytics();
+                    loadClarity();
+                };
+
+                const scheduleAnalytics = () => {
+                    if ("requestIdleCallback" in window) {
+                        window.requestIdleCallback(loadAnalytics, {
+                            timeout: 2000,
+                        });
+                    } else {
+                        window.setTimeout(loadAnalytics, 0);
+                    }
+                };
+
+                if (document.readyState === "complete") {
+                    scheduleAnalytics();
+                } else {
+                    window.addEventListener("load", scheduleAnalytics, {
+                        once: true,
+                    });
+                }
+            })();
+        </script>
+        <script>
+            console.log(
+                "%cPagina web hecha por: Sebastián Sanhueza Tapia\n https://sanhueza.pro/",
+                "margin-top: 1rem; background-color: #FF3CAC; background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%); padding: 1rem; color: white; border-radius: .5em; font-size: 1.5rem;",
+            );
+        </script>
+    </body>
 </html>
