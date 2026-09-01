@@ -43,14 +43,8 @@ Durante la pandemia quebramos y Print3x dejó de operar como emprendimiento. Est
 ## ToDos
 
 - [ ] slice del hero suave en el index
-- [ ] Color al navegador -
-      <meta name="theme-color" content="#0B0824" />
 
-               <!-- Color al navegador en celulares -->
-
-            <meta name="theme-color" media="(prefers-color-scheme: light)" content="#CE1870" />
-            <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#941081" />
-
+- [x] Color al navegador
 - [x] Firmar la web
 - [x] Despliegue suave
 - [x] Verificar el redireccionamiento print3x.pages.dev a print3x.cl → No se puede

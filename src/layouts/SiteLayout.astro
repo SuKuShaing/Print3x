@@ -143,7 +143,19 @@ const schemaNodes: SchemaNode[] = [
         <title>{title}</title>
         <link rel="canonical" href={canonical} />
         <link rel="icon" href="/Favicon.png" type="image/png" />
-        <meta name="theme-color" content="#ce1870" />
+
+        <!-- Color al navegador en celulares -->
+        <meta
+            name="theme-color"
+            media="(prefers-color-scheme: light)"
+            content="#CE1870"
+        />
+        <meta
+            name="theme-color"
+            media="(prefers-color-scheme: dark)"
+            content="#941081"
+        />
+
         <meta
             name="robots"
             content={noIndex ? "noindex, nofollow" : "index, follow"}
