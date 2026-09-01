@@ -42,6 +42,8 @@ Durante la pandemia quebramos y Print3x dejó de operar como emprendimiento. Est
 
 ## ToDos
 
+- [ ] Verificar el redireccionamiento print3x.pages.dev a print3x.cl
+
 - [ ] Despliegue suave
 - [ ] Color al navegador
 
