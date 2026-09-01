@@ -42,8 +42,7 @@ Durante la pandemia quebramos y Print3x dejó de operar como emprendimiento. Est
 
 ## ToDos
 
-- [ ] slice del hero suave en el index
-
+- [x] slice del hero suave en el index
 - [x] Color al navegador
 - [x] Firmar la web
 - [x] Despliegue suave

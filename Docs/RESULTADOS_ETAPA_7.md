@@ -1232,3 +1232,49 @@ Cloudflare Pages.
 ### Criterio de aceptacion
 
 Cumplido para codigo, build y preview local: los acordeones existentes abren y cierran suavemente mediante CSS nativo, la animacion respeta movimiento reducido, los navegadores sin soporte siguen mostrando el contenido y los menus del header no fueron alterados.
+
+## Actualizacion Etapa 7 - Tarea 7.2: transicion del hero del index
+
+**Estado:** completada; la etapa de despliegue sigue abierta.
+**Fecha:** 2026-09-01
+
+### Revision del commit indicado
+
+- El commit `6256fee` solo modifica la transicion nativa de acordeones `details`, su documentacion y archivos de despliegue relacionados.
+- No contiene cambios del slideshow del index; se conservo su implementacion como referencia y se agrego una transicion opt-in independiente.
+
+### Cambio realizado
+
+- El hero del index declara `data-p3x-slider-transition="slide"`.
+- En modo slideshow, la nueva slice se mantiene visible sobre la anterior y entra desde `translateX(100%)` hasta `translateX(0)` durante `500ms`.
+- La slide anterior permanece en el flujo durante la animacion para conservar la altura del hero; al terminar se ocultan las demas y se limpian los atributos temporales.
+- La transicion se omite para navegacion por teclado y `prefers-reduced-motion`; los demas sliders no reciben este comportamiento.
+
+### Archivos creados o modificados
+
+- `src/pages/index.astro`
+- `src/scripts/print3x-ui.ts`
+- `src/scripts/README.md`
+- `src/styles/components/homepage.css`
+- `Docs/ETAPAS_Y_TAREAS_MIGRACION.md`
+- `Docs/RESULTADOS_ETAPA_7.md`
+
+### Verificacion independiente
+
+- `pnpm check`: correcto; 0 errores, 0 warnings y 0 hints en 49 archivos.
+- `pnpm build`: correcto; 38 paginas estaticas generadas y sitemap creado.
+- `git diff --check`: correcto; solo muestra avisos normales de conversion LF/CRLF de Git.
+- Preview local de `/`: en `390px`, `768px`, `1024px` y `1440px`, la slice entrante conserva `hidden=false`, tiene una matriz `transform` intermedia y avanza desde la derecha; al finalizar queda una sola slide visible y activa.
+- Preview local de `/`: `body.scrollWidth` coincide con el ancho disponible en los cuatro viewports; no hay overflow horizontal.
+- Preview local de `/`: con `prefers-reduced-motion: reduce`, el cambio termina sin atributos de entrada o salida; con teclado, `ArrowRight` cambia de inmediato sin animacion.
+- Preview local de `/`: no se registran errores ni warnings de consola.
+
+### Bloqueos y pendientes
+
+- No hay bloqueos nuevos para esta tarea.
+- La preview real de Cloudflare Pages, la validacion de URLs limpias y el cambio de DNS siguen pendientes de autorizacion.
+- No se modificaron `Readme.md`, DNS, produccion, Shopify ni el tema Shopify.
+
+### Criterio de aceptacion
+
+Cumplido para codigo y preview local: las nuevas slices del hero ya no aparecen de golpe, sino que cubren la anterior entrando de derecha a izquierda; la altura, accesibilidad, movimiento reducido, teclado y otros sliders se conservan.

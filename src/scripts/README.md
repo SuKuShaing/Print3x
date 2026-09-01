@@ -14,14 +14,17 @@ Root: `[data-p3x-slider]`.
 - Pause/resume: `[data-p3x-slider-toggle]`.
 - Counter/live status: `[data-p3x-slider-status]`.
 - Optional root values: `data-p3x-slider-mode="scroll"`,
-  `data-p3x-slider-loop="false"`, `data-p3x-slider-keyboard="false"` and
-  `data-p3x-slider-autoplay="5000"` in milliseconds.
+  `data-p3x-slider-loop="false"`, `data-p3x-slider-keyboard="false"`,
+  `data-p3x-slider-autoplay="5000"` in milliseconds and
+  `data-p3x-slider-transition="slide"` for a right-to-left entrance in
+  slideshow mode.
 
 The default mode shows one slide at a time. Scroll mode keeps slides visible
 and scrolls the selected slide into view. Autoplay is opt-in and is disabled
 when `prefers-reduced-motion: reduce` is active. The script updates
 `aria-hidden`, `aria-current`, `aria-disabled`, `aria-pressed` and the state
-attributes it owns.
+attributes it owns. The optional slide transition is skipped for keyboard
+navigation and reduced motion.
 
 ## Gallery and modal
 

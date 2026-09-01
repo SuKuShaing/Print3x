@@ -17,6 +17,7 @@ const READY_ATTRIBUTES = {
 
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+const SLIDE_TRANSITION_FALLBACK_MS = 650;
 
 type SearchEntry = {
   title: string;
@@ -81,6 +82,7 @@ function setupSliders(scope: ParentNode): void {
     if (slides.length === 0) return;
 
     const mode = slider.dataset.p3xSliderMode === 'scroll' ? 'scroll' : 'slideshow';
+    const slideTransition = mode === 'slideshow' && slider.dataset.p3xSliderTransition === 'slide';
     const loop = slider.dataset.p3xSliderLoop !== 'false';
     const keyboardEnabled = slider.dataset.p3xSliderKeyboard !== 'false';
     const configuredAutoplay = Number.parseInt(slider.dataset.p3xSliderAutoplay ?? '', 10);
@@ -115,12 +117,58 @@ function setupSliders(scope: ParentNode): void {
 
     let paused = !autoplayEnabled;
     let timer: number | undefined;
+    let transitionCleanupTimer: number | undefined;
+    let isTransitioning = false;
 
     const clearTimer = () => {
       if (timer === undefined) return;
 
       window.clearTimeout(timer);
       timer = undefined;
+    };
+
+    const clearTransitionTimer = () => {
+      if (transitionCleanupTimer === undefined) return;
+
+      window.clearTimeout(transitionCleanupTimer);
+      transitionCleanupTimer = undefined;
+    };
+
+    const finishTransition = () => {
+      clearTransitionTimer();
+      isTransitioning = false;
+
+      slides.forEach((slide, index) => {
+        slide.removeAttribute('data-p3x-slide-entering');
+        slide.removeAttribute('data-p3x-slide-entered');
+        slide.removeAttribute('data-p3x-slide-exiting');
+
+        if (mode === 'slideshow') slide.hidden = index !== activeIndex;
+      });
+    };
+
+    const animateTransition = (previousIndex: number, nextIndex: number) => {
+      const previousSlide = slides[previousIndex];
+      const nextSlide = slides[nextIndex];
+      if (!previousSlide || !nextSlide) return;
+
+      isTransitioning = true;
+      previousSlide.setAttribute('data-p3x-slide-exiting', '');
+      nextSlide.setAttribute('data-p3x-slide-entering', '');
+
+      const complete = () => {
+        nextSlide.removeEventListener('transitionend', onTransitionEnd);
+        finishTransition();
+      };
+      const onTransitionEnd = (event: TransitionEvent) => {
+        if (event.target === nextSlide && event.propertyName === 'transform') complete();
+      };
+
+      nextSlide.addEventListener('transitionend', onTransitionEnd);
+      transitionCleanupTimer = window.setTimeout(complete, SLIDE_TRANSITION_FALLBACK_MS);
+      window.requestAnimationFrame(() => {
+        if (isTransitioning) nextSlide.setAttribute('data-p3x-slide-entered', '');
+      });
     };
 
     const updateControls = () => {
@@ -136,16 +184,24 @@ function setupSliders(scope: ParentNode): void {
       });
     };
 
-    const updateActiveSlide = (nextIndex: number, shouldScroll = true) => {
+    const updateActiveSlide = (nextIndex: number, shouldScroll = true, shouldAnimate = true) => {
+      const previousIndex = activeIndex;
+      const animate =
+        shouldAnimate &&
+        slideTransition &&
+        !prefersReducedMotion() &&
+        nextIndex !== previousIndex;
+
       activeIndex = nextIndex;
       slider.dataset.p3xSliderIndex = String(activeIndex);
 
       slides.forEach((slide, index) => {
         const active = index === activeIndex;
+        const exiting = animate && index === previousIndex;
         slide.toggleAttribute('data-p3x-slide-active', active);
         slide.setAttribute('aria-hidden', String(mode === 'slideshow' && !active));
 
-        if (mode === 'slideshow') slide.hidden = !active;
+        if (mode === 'slideshow') slide.hidden = !active && !exiting;
       });
 
       if (status) {
@@ -160,6 +216,9 @@ function setupSliders(scope: ParentNode): void {
         const behavior: ScrollBehavior = prefersReducedMotion() ? 'auto' : 'smooth';
         slides[activeIndex].scrollIntoView({ behavior, block: 'nearest', inline: 'nearest' });
       }
+
+      if (animate) animateTransition(previousIndex, activeIndex);
+      else finishTransition();
     };
 
     const scheduleNext = () => {
@@ -193,20 +252,23 @@ function setupSliders(scope: ParentNode): void {
       else scheduleNext();
     };
 
-    const move = (direction: -1 | 1) => {
+    const move = (direction: -1 | 1, shouldAnimate = true) => {
+      if (isTransitioning) return;
+
       let nextIndex = activeIndex + direction;
 
       if (nextIndex < 0) nextIndex = loop ? slides.length - 1 : 0;
       if (nextIndex >= slides.length) nextIndex = loop ? 0 : slides.length - 1;
 
-      if (nextIndex !== activeIndex) updateActiveSlide(nextIndex);
+      if (nextIndex !== activeIndex) updateActiveSlide(nextIndex, true, shouldAnimate);
       scheduleNext();
     };
 
-    const goTo = (targetIndex: number) => {
+    const goTo = (targetIndex: number, shouldAnimate = true) => {
+      if (isTransitioning) return;
       if (!Number.isInteger(targetIndex) || targetIndex < 0 || targetIndex >= slides.length) return;
 
-      updateActiveSlide(targetIndex);
+      updateActiveSlide(targetIndex, true, shouldAnimate);
       scheduleNext();
     };
 
@@ -254,16 +316,16 @@ function setupSliders(scope: ParentNode): void {
 
         if (event.key === 'ArrowLeft') {
           event.preventDefault();
-          move(-1);
+          move(-1, false);
         } else if (event.key === 'ArrowRight') {
           event.preventDefault();
-          move(1);
+          move(1, false);
         } else if (event.key === 'Home') {
           event.preventDefault();
-          goTo(0);
+          goTo(0, false);
         } else if (event.key === 'End') {
           event.preventDefault();
-          goTo(slides.length - 1);
+          goTo(slides.length - 1, false);
         }
       });
     }
